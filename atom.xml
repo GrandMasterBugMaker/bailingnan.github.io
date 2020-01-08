@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2019-12-22T17:45:51.201Z</updated>
+    <updated>2020-01-08T08:34:52.008Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io//atom.xml"/>
     <subtitle>DL/RecSys/Python/Java/INTJ</subtitle>
     <logo>https://bailingnan.github.io//images/avatar.png</logo>
     <icon>https://bailingnan.github.io//favicon.ico</icon>
-    <rights>All rights reserved 2019, 白凌南</rights>
+    <rights>All rights reserved 2020, 白凌南</rights>
     <entry>
         <title type="html"><![CDATA[Hello World!]]></title>
         <id>https://bailingnan.github.io//post/hello-world</id>
