@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1579694729396">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1579808455830">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -24,7 +24,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1579694729396" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1579808455830" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -39,8 +39,13 @@
 <ul>
 <li><a href="#11-linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%A6%82%E5%BF%B5">1.1 Linux文件权限概念</a></li>
 <li><a href="#12-linux%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE">1.2 Linux目录配置</a></li>
+<li><a href="#13-%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86">1.3 文件与目录管理</a></li>
 </ul>
 </li>
+<li><a href="#%E4%BA%8C-pip">二、pip</a></li>
+<li><a href="#%E4%B8%89-conda">三、conda</a></li>
+<li><a href="#%E5%9B%9B-vim">四、Vim</a></li>
+<li><a href="#%E4%BA%94-%E5%85%B6%E4%BB%96">五、其他</a></li>
 </ul>
 
           </div>
@@ -89,7 +94,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">Linux常用命令</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-01-22 / 12 min read
+          2020-01-22 / 20 min read
         </div>
         
         <div class="post-content yue">
@@ -118,13 +123,16 @@
 <p>FHS要求根目录中必须存在的目录:</p>
 <ul>
 <li>
-<p><code>/boot</code>:主要在放置开机会使用到的文件，包括 Linux 核心文件以及开机菜 单与开机所需配置文件等等Linux kernel 常用的文件名为：vmlinuz，如果 使用的是 grub2 这个开机管理程序， 则还会存在<code>/boot/grub2/</code>这个目录。</p>
+<p><code>/bin</code>:系统有很多放置可执行文件的目录，但<code>/bin</code>比较特殊。因为<code>/bin</code>放置的是在 单人维护模式下还能够被操作的指令。 在<code>/bin</code>下面的指令可以被root与一般帐号所使用，主要有：cat, chmod, chown, date, mv, mkdir, cp, bash等等常用的指令。</p>
 </li>
 <li>
-<p><code>/dev</code>:在 Linux 系统上，任何设备与周边设备都是以文件的型态存在于这个目录当中的。你只要通过存取这个目录下面的某个文件，就等于存取某个设备。比要重要的文件有<code>/dev/null</code>, <code>/dev/zero</code>, <code>/dev/tty</code>, <code>/dev/loop</code>, <code>/dev/sd</code>等等。</p>
+<p><code>/boot</code>:主要在放置开机会使用到的文件，包括 Linux 核心文件以及开机菜单与开机所需配置文件等等Linux kernel 常用的文件名为：vmlinuz，如果使用的是 grub2 这个开机管理程序， 则还会存在<code>/boot/grub2/</code>这个目录。</p>
 </li>
 <li>
-<p><code>/etc</code>:系统主要的配置文件几乎都放置在这个目录内，例如人员的帐号密码档、各种服务的启始档等等。一般来说，这个目录下的各文件属性是可以让一般使用者查阅的，但是只有 root 有权力修改。FHS建议不要放置可可执行文件 （binary）在这个目录中喔。比较重要的文件有： <code>/etc/modprobe.d/</code>, <code>/etc/passwd</code>, <code>/etc/fstab</code>, <code>/etc/issue</code>等等。另外 FHS 还规范几个重要的目录最好要存在 <code>/etc/</code>目录下：</p>
+<p><code>/dev</code>:存放硬件相关的文件。在 Linux 系统上，任何设备与周边设备都是以文件的型态存在于这个目录当中的。你只要通过存取这个目录下面的某个文件，就等于存取某个设备。比要重要的文件有<code>/dev/null</code>, <code>/dev/zero</code>, <code>/dev/tty</code>, <code>/dev/loop</code>, <code>/dev/sd</code>等等。</p>
+</li>
+<li>
+<p><code>/etc</code>:存放配置文件的目录。系统主要的配置文件几乎都放置在这个目录内，例如人员的帐号密码档、各种服务的启始档等等。一般来说，这个目录下的各文件属性是可以让一般使用者查阅的，但是只有 root 有权力修改。FHS建议不要放置可执行文件 （binary）在这个目录中喔。比较重要的文件有： <code>/etc/modprobe.d/</code>, <code>/etc/passwd</code>, <code>/etc/fstab</code>, <code>/etc/issue</code>等等。另外 FHS 还规范几个重要的目录最好要存在 <code>/etc/</code>目录下：</p>
 <ul>
 <li><code>/etc/opt</code>（必要）：这个目录在放置第三方协力软件 <code>/opt</code> 的相关配置文件。</li>
 <li><code>/etc/X11/</code>（建议）：与 X Window 有关的各种配置文件都在这里，尤其是 xorg.conf 这个 X Server 的配置文件。</li>
@@ -148,7 +156,7 @@
 <p><code>/run</code>:早期的 FHS 规定系统开机后所产生的各项信息应该要放置到 <code>/var/run</code> 目录下，新版的 FHS 则规范到 <code>/run</code> 下面。 由于 <code>/run</code> 可以使用内存来仿真，因此性能上会好很多！</p>
 </li>
 <li>
-<p><code>/sbin</code>:Linux 有非常多指令是用来设置系统环境的，这些指令只有 root 才能够利用 来“设置”系统，其他使用者最多只能用来“查询”而已。放在<code>/sbin</code>下面的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。至于某些服务器软件程序，一般则放置到<code>/usr/sbin/</code>当中。至于本机自行安装的软件所产生的系统可执行文件（system binary）， 则放置到<code>/usr/local/sbin/</code> 当中了。常见的指令包括：fdisk, fsck, ifconfig, mkfs等等。</p>
+<p><code>/sbin</code>:存放管理员root可以执行的命令。Linux 有非常多指令是用来设置系统环境的，这些指令只有 root 才能够利用 来“设置”系统，其他使用者最多只能用来“查询”而已。放在<code>/sbin</code>下面的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。至于某些服务器软件程序，一般则放置到<code>/usr/sbin/</code>当中。至于本机自行安装的软件所产生的系统可执行文件（system binary）， 则放置到<code>/usr/local/sbin/</code> 当中了。常见的指令包括：fdisk, fsck, ifconfig, mkfs等等。</p>
 </li>
 <li>
 <p><code>/srv</code>:srv 可以视为“service”的缩写，是一些网络服务启动之后，这些服务所需要取用的数据目录。 常见的服务例如 WWW, FTP 等等。举例来说，WWW 服务器需要的网页数据就可以放置在<code>/srv/www/</code>里面。 不过，系统的服务数据 如果尚未要提供给网际网络任何人浏览的话，默认还是建议放置到 <code>/var/lib</code>下面即可。</p>
@@ -219,6 +227,216 @@
 <li><code>/var/spool/</code>:这个目录通常放置一些伫列数据，所谓的“伫列”就是排队等待其他程序使用的数据啦！ 这些数据被使用后通常都会被删除。举例来说，系统收到新信会放置到<code>/var/spool/mail/</code>中， 但使用者收下该信件后该封信原则上就会 被删除。信件如果暂时寄不出去会被放到<code>/var/spool/mqueue/</code>中， 等到被送出后就被删除。如果是工作调度数据（crontab），就会被放置到<code>/var/spool/cron/</code>目录中！</li>
 </ul>
 </li>
+<li>
+<h2 id="13-文件与目录管理">1.3 文件与目录管理</h2>
+<ul>
+<li>
+<p>网络文件常常提到类似“./run.sh”之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。“./”代表“本目录”的意思，所以“./run.sh”代表“执行本目录下，名为run.sh的文件”。</p>
+</li>
+<li>
+<p>cd （change directory, 变换目录）</p>
+<ul>
+<li><code>cd ~dmtsai</code>: 代表去到 dmtsai 这个使用者的主文件夹，亦即 <code>/home/dmtsai</code></li>
+<li><code>cd ~</code>:表示回到自己的主文件夹，亦即是 <code>/root</code> 这个目录</li>
+<li><code>cd</code>:没有加上任何路径，也还是代表回到自己主文件夹的意思</li>
+<li><code>cd ..</code>:表示去到目前的上层目录</li>
+<li><code>cd -</code>:表示回到刚刚的那个目录</li>
+<li><code>cd ../postfix</code>:由<code>/var/spool/mail</code> 去到<code>/var/spool/postfix</code></li>
+</ul>
+</li>
+<li>
+<p>一登陆Linux系统后，每个帐号都会在自己帐号的主文件夹中(<code>/home</code>)。</p>
+</li>
+<li>
+<p>pwd （显示目前所在的目录）</p>
+<ul>
+<li><code>pwd [-P]</code>😛 ：显示出确实的路径，而非使用链接 （link） 路径。加上 <code>pwd -P</code> 的选项后，会不以链接文件的数据显示，而是显示正确的完整路径。</li>
+<li><code>pwd</code>:单纯显示出目前的工作目录。</li>
+</ul>
+</li>
+<li>
+<p>mkdir （创建新目录）</p>
+<ul>
+<li><code>mkdir [-mp] 目录名称</code>:
+<ul>
+<li><code>-m</code> ：设置文件的权限喔！直接设置，不需要看默认权限 （umask） 的脸色～</li>
+<li><code>-p</code> ：帮助你直接将所需要的目录（包含上层目录）递回创建起来！</li>
+<li>示例:
+<ul>
+<li><code>mkdir test1/test2/test3/test4</code>:错误。mkdir: cannot create directory ‘test1/test2/test3/test4’: No such file or directory</li>
+<li><code>mkdir -p test1/test2/test3/test4</code>:正确。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rmdir （删除“空”的目录）
+<ul>
+<li><code>rmdir [-p] 目录名称</code>:
+<ul>
+<li><code>-p</code> ：连同“上层”“空的”目录也一起删除。</li>
+</ul>
+</li>
+<li>示例:
+<ul>
+<li><code>rmdir test1</code>:rmdir: failed to remove ‘test1’: Directory not empty</li>
+<li><code>rmdir -p test1/test2/test3/test4</code>:利用 <code>-p</code> 这个选项，立刻就可以将 <code>test1/test2/test3/test4</code> 一次删除,包括test1</li>
+<li>如果要将非空目录下的东西都杀掉呢？！ 这个时候就必须使用<code>rm -r 目录名称</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>文件与目录的检视： ls</p>
+<ul>
+<li><code>ls [-aAdfFhilnrRSt] 文件名或目录名称</code>
+<ul>
+<li><code>-a</code> ：全部的文件，连同隐藏文件（ 开头为 . 的文件） 一起列出来（常用）</li>
+<li><code>-d</code> ：仅列出目录本身，而不是列出目录内的文件数据（常用）</li>
+<li><code>-l</code> ：长数据串行出，包含文件的属性与权限等等数据（常用）</li>
+<li>示例：
+<ul>
+<li><code>ls -al ~</code>: 将主文件夹下的所有文件列出来（含属性与隐藏文件）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>cp （复制文件或目录）</p>
+<ul>
+<li><code>cp [-adfilprsu] 来源文件（source） 目标文件（destination）</code></li>
+<li><code>cp [options] source1 source2 source3 .... directory</code>
+<ul>
+<li><code>-a</code> ：相当于 -dr --preserve=all 的意思，至于 dr 请参考下列说明；（常用）</li>
+<li><code>-i</code> ：若目标文件（destination）已经存在时，在覆盖时会先询问动作的进行（常用）</li>
+<li><code>-r</code> ：递回持续复制，用于目录的复制行为；（常用）</li>
+<li><code>-p</code> ：连同文件的属性（权限、用户、时间）一起复制过去，而非使用默认属性（备份常用）；</li>
+<li><code>--preserve=all</code> ：除了 -p 的权限相关参数外，还加入 SELinux 的属性, links, xattr 等也复制了。</li>
+<li>如果来源文件有两个以上，则最后一个目的文件一定要是“目录”才行！</li>
+<li>如果目标目录或者目标文件不存在，则相当于重命名。</li>
+<li>示例
+<ul>
+<li><code>cp ~/.bashrc /tmp/bashrc</code>:将主文件夹下的 .bashrc 复制到 <code>/tmp</code> 下，并更名为 bashrc</li>
+<li><code>cp -i ~/.bashrc /tmp/bashrc</code>:cp: overwrite <code>/tmp/bashrc'? n不覆盖，y为覆盖，重复作两次动作，由于</code>/tmp<code>下面已经存在 bashrc 了，加上</code>-i` 选项后，则在覆盖前会询问使用者是否确定！可以按下 n 或者 y 来二次确认</li>
+<li><code>cp /var/log/wtmp .</code>:复制到当前目录</li>
+<li><code>cp /etc/ /tmp</code>:复制 <code>/etc/</code> 这个目录下的所有内容到 <code>/tmp</code> 下面，cp: omitting directory <code>/etc</code>，如果是目录则不能直接复制，要加上 <code>-r</code> 的选项</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>rm （移除文件或目录）</p>
+<ul>
+<li><code>rm [-fir] 文件或目录</code>：
+<ul>
+<li><code>-f</code> ：就是 force 的意思，忽略不存在的文件，不会出现警告讯息；</li>
+<li><code>-r</code> ：递回删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
+<li><code>-rf</code>: 如子目录里面还有子目录时，那就要使用 -r 这个选项</li>
+<li><code>-rf/</code>: 会将系统文件全部删除，非常危险  <s>删库跑路</s></li>
+<li>示例：
+<ul>
+<li><code>rm bashrc*</code>:通过万用字符*的帮忙，将<code>/tmp</code>下面开头为bashrc的文件名通通删除</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>mv （移动文件与目录，或更名）</p>
+<ul>
+<li><code>mv [-fiu] source destination</code></li>
+<li><code>mv [options] source1 source2 source3 .... directory</code>
+<ul>
+<li><code>-f</code> ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
+<li><code>-i</code> ：若目标文件 （destination） 已经存在时，就会询问是否覆盖！</li>
+<li><code>-u</code> ：若目标文件已经存在，且 source 比较新，才会更新 （update）</li>
+<li>示例:
+<ul>
+<li>复制一文件，创建一目录，将文件移动到目录中：
+<ul>
+<li><code>cd /tmp</code></li>
+<li><code>cp ~/.bashrc bashrc</code></li>
+<li><code>mkdir mvtest</code></li>
+<li><code>mv bashrc mvtest</code></li>
+</ul>
+</li>
+<li>文件改名：
+<ul>
+<li><code>mv mvtest mvtest2</code></li>
+</ul>
+</li>
+<li>再创建两个文件，再全部移动到 <code>/tmp/mvtest2</code> 当中:
+<ul>
+<li><code>cp ~/.bashrc bashrc1</code></li>
+<li><code>cp ~/.bashrc bashrc2</code></li>
+<li><code>mv bashrc1 bashrc2 mvtest2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="二-pip">二、pip</h1>
+<ul>
+<li><code>pip install --upgrade pip</code>或<code>pip install -U pip</code>:升级pip自身</li>
+<li><code>pip list</code>：查看已经通过pip安装的包</li>
+<li><code>pip install &lt;包名&gt; --upgrade</code>或<code>pip install -U &lt;包名&gt;</code>:升级包</li>
+<li><code>pip install &lt;包名&gt; -i https://mirrors.aliyun.com/pypi/simple</code>:指定单次安装源</li>
+<li><code>pip install SomePackage==1.0.4</code>:指定版本</li>
+</ul>
+<h1 id="三-conda">三、conda</h1>
+<ul>
+<li><code>conda --version</code>:查看conda版本，验证是否安装</li>
+<li><code>conda update conda</code>:更新至最新版本，也会更新其它相关包</li>
+<li><code>conda update --all</code>:更新所有包</li>
+<li><code>conda update package_name</code>:更新指定的包</li>
+<li><code>conda create -n env_name package_name</code>:创建名为 env_name 的新环境，并在该环境下安装名为 package_name 的包，可以指定新环境的版本号，例如：<code>conda create -n python2 python=python2.7 numpy pandas</code>，创建了python2环境，python版本为2.7，同时还安装了numpy pandas包</li>
+<li><code>conda activate env_name</code>:切换至env_name环境</li>
+<li><code>conda deactivate</code>:退出环境</li>
+<li><code>conda info -e</code>:显示所有已经创建的环</li>
+<li><code>conda create -n new_env_name --clone old_env_name</code>:复制old_env_name为new_env_name</li>
+<li><code>conda remove -n env_name –-all</code>:删除环境</li>
+<li><code>conda list</code>:查看所有已经安装的包</li>
+<li><code>conda install -n env_name package_name</code>:在指定环境中安装包</li>
+<li><code>conda remove -n env_name package</code>:删除指定环境中的包</li>
+<li><code>rm -rf 虚拟环境所在路径</code>:删除空环境</li>
+</ul>
+<h1 id="四-vim">四、Vim</h1>
+<ul>
+<li><code>shift+g</code>:移至文件末尾</li>
+</ul>
+<h1 id="五-其他">五、其他</h1>
+<ul>
+<li><code>sudo nautilus /home</code>:打开图形化文件夹</li>
+<li><code>top</code>或<code>htop</code>：查看当前进程</li>
+<li><code>ifconfig</code>：查看IP地址</li>
+<li><code>kill 进程号</code>:终止进程</li>
+<li><code>kill -9 进程号</code>:强制终止进程</li>
+<li><code>tar -zxvf xxx.tar.gz</code>:解压缩</li>
+<li><code>chmod u+x file</code>:对文件 file 增加文件主可执行权限（u表示文件主）</li>
+<li><code>sudo apt-get install package</code>:安装包</li>
+<li><code>sudo apt-get install package --reinstall</code>:重新安装包</li>
+<li><code>sudo apt-get -f install</code>:修复安装</li>
+<li><code>sudo apt-get remove package</code>:删除包</li>
+<li><code>sudo apt-get remove package --purge</code>:删除包，包括删除配置文件等</li>
+<li><code>sudo apt-get update</code>:更新源</li>
+<li><code>sudo apt-get upgrade</code>:更新已安装的包</li>
+<li><code>sudo apt-get dist-upgrade</code>:`升级系统</li>
+<li><code>sudo apt-get autoclean</code>:清理旧版本软件缓存</li>
+<li><code>sudo dpkg -i package.deb</code>:所有deb文件的安装</li>
+<li><code>sudo dpkg -r package</code>：所有deb文件的卸载</li>
+<li><code>sudo dpkg -P package</code>:彻底的卸载，包括软件的配置文件</li>
 </ul>
 
         </div>
