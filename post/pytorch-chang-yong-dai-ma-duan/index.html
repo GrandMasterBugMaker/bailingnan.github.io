@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580145465612">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580301618829">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -24,7 +24,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580145465612" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580301618829" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -40,6 +40,7 @@
 <li><a href="#%E5%AF%BC%E5%85%A5%E5%8C%85%E5%92%8C%E7%89%88%E6%9C%AC%E6%9F%A5%E8%AF%A2">导入包和版本查询</a></li>
 <li><a href="#%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%80%A7">可复现性</a></li>
 <li><a href="#%E6%98%BE%E5%8D%A1%E8%AE%BE%E7%BD%AE">显卡设置</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E4%B8%BAcudnn-benchmark%E6%A8%A1%E5%BC%8F">设置为cuDNN benchmark模式</a></li>
 </ul>
 </li>
 <li><a href="#%E5%BC%A0%E9%87%8Ftensor%E5%A4%84%E7%90%86">张量(Tensor)处理</a>
@@ -133,7 +134,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">PyTorch常用代码段</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-01-27 / 16 min read
+          2020-01-27 / 17 min read
         </div>
         
         <div class="post-content yue">
@@ -142,19 +143,16 @@
 <pre><code class="language-Python">import torch
 import torch.nn as nn
 import torchvision
-print(torch.__version__)
-print(torch.version.cuda)
-print(torch.backends.cudnn.version())
-print(torch.cuda.get_device_name(0))
+print(torch.__version__)# PyTorch version
+print(torch.version.cuda)#Corresponding CUDA version
+print(torch.backends.cudnn.version())#Corresponding cuDNN version
+print(torch.cuda.get_device_name(0))#GPU type
 </code></pre>
 <h2 id="可复现性">可复现性</h2>
 <p>在硬件设备（CPU、GPU）不同时，完全的可复现性无法保证，即使随机种子相同。但是，在同一个设备上，应该保证可复现性。具体做法是，在程序开始的时候固定torch的随机种子，同时也把numpy的随机种子固定。</p>
 <pre><code class="language-Python">np.random.seed(0)
 torch.manual_seed(0)
 torch.cuda.manual_seed_all(0)
-
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
 </code></pre>
 <h2 id="显卡设置">显卡设置</h2>
 <p>如果只需要一张显卡</p>
@@ -173,6 +171,17 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 </code></pre>
 <p>也可以使用在命令行重置GPU的指令：</p>
 <pre><code>nvidia-smi --gpu-reset -i [gpu_id]
+</code></pre>
+<p>或在命令行可以先使用ps找到程序的PID，再使用kill结束该进程</p>
+<pre><code class="language-python">ps aux | grep python
+kill -9 [pid]
+</code></pre>
+<h2 id="设置为cudnn-benchmark模式">设置为cuDNN benchmark模式</h2>
+<p>Benchmark模式会提升计算速度，但是由于计算中有随机性，每次网络前馈结果略有差异。</p>
+<pre><code class="language-python">torch.backends.cudnn.benchmark = True
+</code></pre>
+<p>如果想要避免这种结果波动，设置</p>
+<pre><code class="language-python">torch.backends.cudnn.deterministic = True
 </code></pre>
 <h1 id="张量tensor处理">张量(Tensor)处理</h1>
 <h2 id="张量基本信息">张量基本信息</h2>
@@ -568,6 +577,13 @@ for epoch in range(start_epoch, num_epochs):
 </code></pre>
 <h1 id="其他注意事项">其他注意事项</h1>
 <ul>
+<li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
+</ul>
+<pre><code class="language-python">def forward(self, x):
+  ...
+  x = torch.nn.functional.dropout(x, p=0.5, training=self.training)
+</code></pre>
+<ul>
 <li>不要使用太大的线性层。因为nn.Linear(m,n)使用的是O(mn)的内存，线性层太大很容易超出现有显存。</li>
 <li>不要在太长的序列上使用RNN。因为RNN反向传播使用的是BPTT算法，其需要的内存和输入序列的长度呈线性关系。</li>
 <li>model(x) 前用 <code>model.train()</code> 和 <code>model.eval()</code> 切换网络状态。</li>
@@ -612,6 +628,7 @@ with torchsnooper.snoop():
 <ul>
 <li>模型可解释性，使用captum库</li>
 </ul>
+<!-- more -->
 
         </div>
 
