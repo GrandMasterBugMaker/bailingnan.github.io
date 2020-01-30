@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580409139651">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580409409661">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -24,7 +24,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580409139651" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580409409661" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -126,8 +126,8 @@
         <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">PyTorch常用代码段</h2>
       </a>
       <div class="post-abstract text-gray-700 font-light my-4">
-        <h1 id="1基本配置">1.基本配置</h1>
-<h2 id="导入包和版本查询">导入包和版本查询</h2>
+        <h2 id="1基本配置">1.基本配置</h2>
+<h3 id="导入包和版本查询">导入包和版本查询</h3>
 <pre><code class="language-Python">import torch
 import torch.nn as nn
 import torchvision
@@ -136,13 +136,13 @@ print(torch.version.cuda)#Corresponding CUDA version
 print(torch.backends.cudnn.version())#Corresponding cuDNN version
 print(torch.cuda.get_device_name(0))#GPU type
 </code></pre>
-<h2 id="可复现性">可复现性</h2>
+<h3 id="可复现性">可复现性</h3>
 <p>在硬件设备（CPU、GPU）不同时，完全的可复现性无法保证，即使随机种子相同。但是，在同一个设备上，应该保证可复现性。具体做法是，在程序开始的时候固定torch的随机种子，同时也把numpy的随机种子固定。</p>
 <pre><code class="language-Python">np.random.seed(0)
 torch.manual_seed(0)
 torch.cuda.manual_seed_all(0)
 </code></pre>
-<h2 id="显卡设置">显卡设置</h2>
+<h3 id="显卡设置">显卡设置</h3>
 <p>如果只需要一张显卡</p>
 <pre><code class="language-Python"># Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -164,21 +164,21 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 <pre><code class="language-python">ps aux | grep python
 kill -9 [pid]
 </code></pre>
-<h2 id="设置为cudnn-benchmark模式">设置为cuDNN benchmark模式</h2>
+<h3 id="设置为cudnn-benchmark模式">设置为cuDNN benchmark模式</h3>
 <p>Benchmark模式会提升计算速度，但是由于计算中有随机性，每次网络前馈结果略有差异。</p>
 <pre><code class="language-python">torch.backends.cudnn.benchmark = True
 </code></pre>
 <p>如果想要避免这种结果波动，设置</p>
 <pre><code class="language-python">torch.backends.cudnn.deterministic = True
 </code></pre>
-<h1 id="张量tensor处理">张量(Tensor)处理</h1>
-<h2 id="张量基本信息">张量基本信息</h2>
+<h2 id="张量tensor处理">张量(Tensor)处理</h2>
+<h3 id="张量基本信息">张量基本信息</h3>
 <pre><code class="language-Python">tensor = torch.randn(3,4,5)
 print(tensor.type())  # 数据类型
 print(tensor.size())  # 张量的shape，是个元组
 print(tensor.dim())   # 维度的数量
 </code></pre>
-<h2 id="命名变量">命名变量</h2>
+<h3 id="命名变量">命名变量</h3>
 <pre><code class="language-Python"># 在PyTorch 1.3之前，需要使用注释
 # Tensor[N, C, H, W]
 images = torch.randn(32, 3, 56, 56)
@@ -195,7 +195,7 @@ tensor = torch.rand(3,4,1,2,names=('C', 'N', 'H', 'W'))
 # 使用align_to可以对维度方便地排序
 tensor = tensor.align_to('N', 'C', 'H', 'W')
 </code></pre>
-<h2 id="数据类型转换">数据类型转换</h2>
+<h3 id="数据类型转换">数据类型转换</h3>
 <pre><code class="language-Python"># 设置默认类型，pytorch中的FloatTensor远远快于DoubleTensor
 torch.set_default_tensor_type(torch.FloatTensor)
 
@@ -205,28 +205,28 @@ tensor = tensor.cpu()
 tensor = tensor.float()
 tensor = tensor.long()
 </code></pre>
-<h2 id="torchtensor与npndarray转换">torch.Tensor与np.ndarray转换</h2>
+<h3 id="torchtensor与npndarray转换">torch.Tensor与np.ndarray转换</h3>
 <p>除了CharTensor，其他所有CPU上的张量都支持转换为numpy格式然后再转换回来。</p>
 <pre><code class="language-Python">ndarray = tensor.cpu().numpy()
 tensor = torch.from_numpy(ndarray).float()
 tensor = torch.from_numpy(ndarray.copy()).float() # If ndarray has negative stride.
 </code></pre>
-<h2 id="从只包含一个元素的张量中提取值">从只包含一个元素的张量中提取值</h2>
+<h3 id="从只包含一个元素的张量中提取值">从只包含一个元素的张量中提取值</h3>
 <p><code>value = torch.rand(1).item()</code></p>
-<h2 id="张量形变">张量形变</h2>
+<h3 id="张量形变">张量形变</h3>
 <pre><code class="language-Python"># 在将卷积层输入全连接层的情况下通常需要对张量做形变处理，
 # 相比torch.view，torch.reshape可以自动处理输入张量不连续的情况。
 tensor = torch.rand(2,3,4)
 shape = (6, 4)
 tensor = torch.reshape(tensor, shape)
 </code></pre>
-<h2 id="打乱顺序">打乱顺序</h2>
+<h3 id="复制张量">复制张量</h3>
 <pre><code class="language-Python"># Operation                 |  New/Shared memory | Still in computation graph |
 tensor.clone()            # |        New         |          Yes               |
 tensor.detach()           # |      Shared        |          No                |
 tensor.detach.clone()()   # |        New         |          No                |
 </code></pre>
-<h2 id="张量拼接">张量拼接</h2>
+<h3 id="张量拼接">张量拼接</h3>
 <pre><code class="language-Python">'''
 注意torch.cat和torch.stack的区别在于torch.cat沿着给定的维度拼接，
 而torch.stack会新增一维。例如当参数是3个10x5的张量，torch.cat的结果是30x5的张量，
@@ -235,7 +235,7 @@ tensor.detach.clone()()   # |        New         |          No                |
 tensor = torch.cat(list_of_tensors, dim=0)
 tensor = torch.stack(list_of_tensors, dim=0)
 </code></pre>
-<h2 id="将整数标签转为one-hot编码">将整数标签转为one-hot编码</h2>
+<h3 id="将整数标签转为one-hot编码">将整数标签转为one-hot编码</h3>
 <pre><code class="language-python"># pytorch的标记默认从0开始
 tensor = torch.tensor([0, 2, 1, 3])
 N = tensor.size(0)
@@ -243,22 +243,22 @@ num_classes = 4
 one_hot = torch.zeros(N, num_classes).long()
 one_hot.scatter_(dim=1, index=torch.unsqueeze(tensor, dim=1), src=torch.ones(N, num_classes).long())
 </code></pre>
-<h2 id="得到非零元素">得到非零元素</h2>
+<h3 id="得到非零元素">得到非零元素</h3>
 <pre><code class="language-python">torch.nonzero(tensor)               # index of non-zero elements,包含点坐标的列表向量
 torch.nonzero(tensor==0)            # index of zero elements
 torch.nonzero(tensor).size(0)       # number of non-zero elements
 torch.nonzero(tensor == 0).size(0)  # number of zero elements
 </code></pre>
-<h2 id="判断两个张量相等">判断两个张量相等</h2>
+<h3 id="判断两个张量相等">判断两个张量相等</h3>
 <pre><code class="language-Python">torch.allclose(tensor1, tensor2)  # float tensor
 torch.equal(tensor1, tensor2)     # int tensor
 </code></pre>
-<h2 id="张量扩展">张量扩展</h2>
+<h3 id="张量扩展">张量扩展</h3>
 <pre><code class="language-python"># Expand tensor of shape 64*512 to shape 64*512*7*7.
 tensor = torch.rand(64,512)
 torch.reshape(tensor, (64, 512, 1, 1)).expand(64, 512, 7, 7)
 </code></pre>
-<h2 id="矩阵乘法">矩阵乘法</h2>
+<h3 id="矩阵乘法">矩阵乘法</h3>
 <pre><code class="language-python"># Matrix multiplcation: (m*n) * (n*p) * -&gt; (m*p).
 result = torch.mm(tensor1, tensor2)
 
@@ -268,15 +268,15 @@ result = torch.bmm(tensor1, tensor2)
 # Element-wise multiplication.
 result = tensor1 * tensor2
 </code></pre>
-<h2 id="计算两组数据之间的两两欧式距离">计算两组数据之间的两两欧式距离</h2>
+<h3 id="计算两组数据之间的两两欧式距离">计算两组数据之间的两两欧式距离</h3>
 <p>利用broadcast机制</p>
 <pre><code class="language-python">dist = torch.sqrt(torch.sum((X1[:,None,:] - X2) ** 2, dim=2))
 </code></pre>
-<h1 id="模型定义和操作">模型定义和操作</h1>
-<h2 id="计算模型整体参数量">计算模型整体参数量</h2>
+<h2 id="模型定义和操作">模型定义和操作</h2>
+<h3 id="计算模型整体参数量">计算模型整体参数量</h3>
 <pre><code class="language-python">num_parameters = sum(torch.numel(parameter) for parameter in model.parameters())
 </code></pre>
-<h2 id="查看网络中的参数">查看网络中的参数</h2>
+<h3 id="查看网络中的参数">查看网络中的参数</h3>
 <p>可以通过model.state_dict()或者model.named_parameters()函数查看现在的全部可训练参数（包括通过继承得到的父类中的参数）</p>
 <pre><code class="language-python">params = list(model.named_parameters())
 (name, param) = params[28]
@@ -291,8 +291,8 @@ print('----------------------------------------------------')
 print(name1)
 print(param1.grad)
 </code></pre>
-<h2 id="类似-keras-的-modelsummary-输出模型信息使用pytorch-summary">类似 Keras 的 model.summary() 输出模型信息（使用pytorch-summary ）</h2>
-<h2 id="模型权重初始化">模型权重初始化</h2>
+<h3 id="类似-keras-的-modelsummary-输出模型信息使用pytorch-summary">类似 Keras 的 model.summary() 输出模型信息（使用pytorch-summary ）</h3>
+<h3 id="模型权重初始化">模型权重初始化</h3>
 <p>注意 model.modules() 和 model.children() 的区别：model.modules() 会迭代地遍历模型的所有子层，而 model.children() 只会遍历模型下的一层。</p>
 <pre><code class="language-python"># Common practise for initialization.
 for layer in model.modules():
@@ -312,7 +312,7 @@ for layer in model.modules():
 # Initialization with given tensor.
 layer.weight = torch.nn.Parameter(tensor)
 </code></pre>
-<h2 id="提取模型中的某一层">提取模型中的某一层</h2>
+<h3 id="提取模型中的某一层">提取模型中的某一层</h3>
 <p>modules()会返回模型中所有模块的迭代器，它能够访问到最内层，比如self.layer1.conv1这个模块，还有一个与它们相对应的是name_children()属性以及named_modules(),这两个不仅会返回模块的迭代器，还会返回网络层的名字。</p>
 <pre><code class="language-python"># 取模型中的前两层
 new_model = nn.Sequential(*list(model.children())[:2] 
@@ -321,12 +321,12 @@ for layer in model.named_modules():
     if isinstance(layer[1],nn.Conv2d):
          conv_model.add_module(layer[0],layer[1])
 </code></pre>
-<h2 id="部分层使用预训练模型">部分层使用预训练模型</h2>
+<h3 id="部分层使用预训练模型">部分层使用预训练模型</h3>
 <p>注意如果保存的模型是 torch.nn.DataParallel，则当前的模型也需要是</p>
 <pre><code class="language-python">model.load_state_dict(torch.load('model.pth'), strict=False)
 </code></pre>
-<h1 id="模型训练和测试">模型训练和测试</h1>
-<h2 id="自定义loss">自定义loss</h2>
+<h2 id="模型训练和测试">模型训练和测试</h2>
+<h3 id="自定义loss">自定义loss</h3>
 <p>继承torch.nn.Module类写自己的loss。</p>
 <pre><code class="language-python">class MyLoss(torch.nn.Moudle):
     def __init__(self):
@@ -336,7 +336,7 @@ for layer in model.named_modules():
         loss = torch.mean((x - y) ** 2)
         return loss
 </code></pre>
-<h2 id="标签平滑label-smoothing">标签平滑（label smoothing）</h2>
+<h3 id="标签平滑label-smoothing">标签平滑（label smoothing）</h3>
 <p>写一个label_smoothing.py的文件，然后在训练代码里引用，用LSR代替交叉熵损失即可。label_smoothing.py内容如下：</p>
 <pre><code class="language-python">import torch
 import torch.nn as nn
@@ -439,14 +439,14 @@ class LSR(nn.Module):
     loss.backward()
     optimizer.step()    
 </code></pre>
-<h2 id="l1-正则化">L1 正则化</h2>
+<h3 id="l1-正则化">L1 正则化</h3>
 <pre><code class="language-python">l1_regularization = torch.nn.L1Loss(reduction='sum')
 loss = ...  # Standard cross-entropy loss
 for param in model.parameters():
     loss += torch.sum(torch.abs(param))
 loss.backward()
 </code></pre>
-<h2 id="不对偏置项进行权重衰减weight-decay">不对偏置项进行权重衰减（weight decay）</h2>
+<h3 id="不对偏置项进行权重衰减weight-decay">不对偏置项进行权重衰减（weight decay）</h3>
 <p>pytorch里的weight decay相当于l2正则</p>
 <pre><code class="language-python">bias_list = (param for name, param in model.named_parameters() if name[-4:] == 'bias')
 others_list = (param for name, param in model.named_parameters() if name[-4:] != 'bias')
@@ -454,10 +454,10 @@ parameters = [{'parameters': bias_list, 'weight_decay': 0},
               {'parameters': others_list}]
 optimizer = torch.optim.SGD(parameters, lr=1e-2, momentum=0.9, weight_decay=1e-4)
 </code></pre>
-<h2 id="梯度裁剪gradient-clipping">梯度裁剪（gradient clipping）</h2>
+<h3 id="梯度裁剪gradient-clipping">梯度裁剪（gradient clipping）</h3>
 <pre><code class="language-python">torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=20)
 </code></pre>
-<h2 id="得到当前学习率">得到当前学习率</h2>
+<h3 id="得到当前学习率">得到当前学习率</h3>
 <pre><code class="language-python"># If there is one global learning rate (which is the common case).
 lr = next(iter(optimizer.param_groups))['lr']
 
@@ -469,7 +469,7 @@ for param_group in optimizer.param_groups:
 <p>另一种方法，在一个batch训练代码里，当前的lr是</p>
 <pre><code class="language-python">optimizer.param_groups[0]['lr']
 </code></pre>
-<h2 id="学习率衰减">学习率衰减</h2>
+<h3 id="学习率衰减">学习率衰减</h3>
 <pre><code class="language-python"># Reduce learning rate when validation accuarcy plateau.
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', patience=5, verbose=True)
 for t in range(0, 80):
@@ -493,7 +493,7 @@ for t in range(0, 10):
     train(...)
     val(...)
 </code></pre>
-<h2 id="优化器链式更新">优化器链式更新</h2>
+<h3 id="优化器链式更新">优化器链式更新</h3>
 <p>从1.4版本开始，<code>torch.optim.lr_scheduler</code> 支持链式更新（chaining），即用户可以定义两个 schedulers，并交替在训练中使用。</p>
 <pre><code class="language-python">import torch
 from torch.optim import SGD
@@ -508,7 +508,7 @@ for epoch in range(4):
     scheduler1.step()
     scheduler2.step()
 </code></pre>
-<h2 id="模型训练可视化">模型训练可视化</h2>
+<h3 id="模型训练可视化">模型训练可视化</h3>
 <p>PyTorch可以使用tensorboard来可视化训练过程。<br>
 安装和运行TensorBoard。</p>
 <pre><code class="language-python">pip install tensorboard
@@ -526,7 +526,7 @@ for n_iter in range(100):
     writer.add_scalar('Accuracy/train', np.random.random(), n_iter)
     writer.add_scalar('Accuracy/test', np.random.random(), n_iter)
 </code></pre>
-<h2 id="保存与加载断点">保存与加载断点</h2>
+<h3 id="保存与加载断点">保存与加载断点</h3>
 <p>注意为了能够恢复训练，我们需要同时保存模型和优化器的状态，以及当前的训练轮数。</p>
 <pre><code class="language-python">start_epoch = 0
 # Load checkpoint.
@@ -563,7 +563,7 @@ for epoch in range(start_epoch, num_epochs):
     if is_best:
         shutil.copy(model_path, best_model_path)
 </code></pre>
-<h1 id="其他注意事项">其他注意事项</h1>
+<h2 id="其他注意事项">其他注意事项</h2>
 <ul>
 <li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
 </ul>
