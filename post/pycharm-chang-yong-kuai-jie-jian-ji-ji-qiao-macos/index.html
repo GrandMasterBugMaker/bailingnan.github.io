@@ -34,7 +34,14 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            
+            <ul class="markdownIt-TOC">
+<li><a href="#mac%E9%94%AE%E7%9B%98%E7%AC%A6%E5%8F%B7%E5%92%8C%E4%BF%AE%E9%A5%B0%E9%94%AE%E8%AF%B4%E6%98%8E">Mac键盘符号和修饰键说明</a></li>
+<li><a href="#editing%E7%BC%96%E8%BE%91">Editing（编辑）</a></li>
+<li><a href="#searchreplace%E6%9F%A5%E8%AF%A2%E6%9B%BF%E6%8D%A2">Search/Replace（查询/替换）</a></li>
+<li><a href="#compile-and-run%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C">Compile and Run（编译和运行）</a></li>
+<li><a href="#navigation%E5%AF%BC%E8%88%AA">Navigation（导航）</a></li>
+</ul>
+
           </div>
         </div>
       
@@ -79,31 +86,105 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">Hello World!</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">Pycharm常用快捷键及技巧(macOS)</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2019-12-23 / 1 min read
+          2020-01-31 / 2 min read
         </div>
         
         <div class="post-content yue">
-          <p>New begin!</p>
+          <h1 id="mac键盘符号和修饰键说明">Mac键盘符号和修饰键说明</h1>
+<ul>
+<li><code>⌘</code>:Command</li>
+<li><code>⇧</code>:Shift</li>
+<li><code>⌥</code>:Option</li>
+<li><code>⌃</code>:Control</li>
+<li><code>↩︎</code>:Return/Enter</li>
+<li><code>⌫</code>:Delete</li>
+<li><code>⌦</code>:向前删除键（Fn+Delete）</li>
+<li><code>↑</code>:上箭头</li>
+<li><code>↓</code>:下箭头</li>
+<li><code>←</code>:左箭头</li>
+<li><code>→</code>:右箭头</li>
+<li><code>⇞</code>:Page Up（Fn+↑）</li>
+<li><code>⇟</code>:Page Down（Fn+↓）</li>
+<li><code>Home</code>:Fn + ←</li>
+<li><code>End</code>:Fn + →</li>
+<li><code>⇥</code>:右制表符（Tab键）</li>
+<li><code>⇤</code>:左制表符（Shift+Tab）</li>
+<li><code>⎋</code>:Escape (Esc)</li>
+<li>一直按住<code>fn</code>可调出F1~F10</li>
+</ul>
+<h1 id="editing编辑">Editing（编辑）</h1>
+<ul>
+<li><code>⌘Z</code>:撤销操作</li>
+<li><code>⌘Y</code>:删除整行</li>
+<li><code>⇧F6</code>:重命名文件</li>
+<li><code>⌘S</code>:保存所有</li>
+<li><code>⌦</code>:删除文件（Fn+Delete）</li>
+<li><code>⌘⌥L</code>:格式化代码</li>
+<li><code>⌘D</code>: 复制当前行或选定的块</li>
+<li><code>⌘/</code>:注释/取消注释与行注释</li>
+<li><code>⌘⌥/</code>:注释/取消注释与块注释</li>
+<li><code>⌘J</code>:插入自定义动态代码模板</li>
+<li><code>⌃Space</code>:基本的代码补全（补全任何类、方法、变量）</li>
+<li><code>⌃⇧Space</code>:智能代码补全（过滤器方法列表和变量的预期类型）</li>
+<li><code>⌘⇧↩</code>:自动结束代码，行末自动添加分号</li>
+<li><code>⌘P</code>:显示方法的参数信息</li>
+<li><code>⌃J</code>:快速查看文档</li>
+<li><code>⇧F1</code>:查看外部文档（在某些代码上会触发打开浏览器显示相关文档）</li>
+<li><code>⌘F1</code>:在错误或警告处显示具体描述信息</li>
+<li><code>⌘N, ⌃↩, ⌃N</code>:生成代码（getter、setter、构造函数、hashCode/equals,toString）</li>
+<li><code>⌥↑</code>:连续选中代码块</li>
+<li><code>⌥↓</code>:减少当前选中的代码块</li>
+<li><code>⌥↩</code>:显示意向动作和快速修复代码</li>
+<li><code>⌘⇧] / ⌘⇧[</code>:选择直到代码块结束/开始</li>
+<li><code>⌘+ / ⌘-</code>:展开 / 折叠代码块</li>
+<li><code>⌘⇧+</code>:展开所有代码块</li>
+<li><code>⌘⇧-</code>:折叠所有代码块</li>
+</ul>
+<h1 id="searchreplace查询替换">Search/Replace（查询/替换）</h1>
+<ul>
+<li><code>Double ⇧</code>:查询任何东西</li>
+<li><code>⌘F</code>:文件内查找</li>
+</ul>
+<h1 id="compile-and-run编译和运行">Compile and Run（编译和运行）</h1>
+<ul>
+<li><code>⌃⇧F10</code>:Run</li>
+<li><code>⌃⇧F9</code>:Debug</li>
+</ul>
+<h1 id="navigation导航">Navigation（导航）</h1>
+<ul>
+<li><code>⌘B</code>:进入光标所在的方法/变量的接口或是定义处</li>
+<li><code>⌘⌥B</code>:跳转到实现处，在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</li>
+<li><code>⌥ Space, ⌘Y</code>:快速打开光标所在方法、类的定义</li>
+<li><code>⌃⇧B</code>:跳转到类型声明处</li>
+<li><code>⌘U</code>:前往当前光标所在方法的父类的方法 / 接口定义</li>
+<li><code>⌃H</code>:显示当前类的层次结构</li>
+<li><code>⌘⇧H</code>:显示方法层次结构</li>
+<li><code>⌃⌥H</code>:显示调用层次结构</li>
+</ul>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://bailingnan.github.io/tag/YBcNevHsO">
+            <span class="flex-auto">Python</span>
+          </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling">
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan">
                 <h3 class="post-title">
-                  <i class="remixicon-arrow-left-line"></i>
-                  Linux常用命令
+                  PyTorch常用代码段
+                  <i class="remixicon-arrow-right-line"></i>
                 </h3>
               </a>
             </div>
-          
-
           
         </div>
 
