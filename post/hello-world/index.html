@@ -1,120 +1,112 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
- <head>
-     <meta charset="utf-8" />
-  <title>Hello World! | 白凌南</title>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-  <link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-   <script src="https://cdn.staticfile.org/highlight.js/9.15.9/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
- </head>
- <body>
-     <div class="sidebar animated fadeInDown">
-   <div class="logo-title">
-    <div class="title">
-     <img src="https://bailingnan.github.io//images/avatar.png?v=1580409072052" style="width:127px;" />
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DL/RecSys/Python/Java/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580409139651">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
-     <h3 title=""><a href="/">白凌南</a></h3>
-
-     <div class="description">
-      <p>DL/RecSys/Python/Java/INTJ</p>
-     </div>
-    </div>
-   </div>
-   <ul class="social-links">
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="白凌南 - Atom Feed" href="https://bailingnan.github.io//atom.xml">
 
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-   </ul>
-   <div class="footer">
-    <div class="by_farbox">
-   
-    </div>
-    
-
-    </div>
-   </div>
-  </div>
-  <div class="main">
-     <div class="page-top animated fadeInDown">
-    <div class="nav">
-    
-     <li><a  href="/">首页</a></li>
-
-     <li><a  href="/archives">归档</a></li>
-
-     <li><a  href="/tags">标签</a></li>
-
-     <li><a  href="/post/about">关于</a></li>
-
-    </div>
-    <div class="information">
-     <div class="back_btn">
-      <li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li>
-     </div>
-    </div>
-   </div>
-   <div class="autopagerize_page_element">
-    <div class="content">
-     <div class="post-page">
-      <div class="post animated fadeInDown">
-       <div class="post-title">
-        <h3><a>Hello World!</a></h3>
-       </div>
-       <div class="post-content">
-        <p>New begin!</p>
-
-       </div>
-       <div class="post-footer">
-        <div class="meta">
-         <div class="info">
-          <i class="fa fa-sun-o"></i>
-          <span class="date">2019-12-23</span>
-          <i class="fa fa-tag"></i>
-          
-         </div>
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580409139651" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            
+          </div>
         </div>
-       </div>
-      </div>
-      <div class="share">
-       <div class="evernote">
-        <a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a>
-       </div>
-       <div class="weibo">
-        <a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a>
-       </div>
-       <div class="twitter">
-        <a class="fa fa-twitter" href="http://twitter.com/home?status=,https://bailingnan.github.io/post/hello-world,;"></a>
-       </div>
-      </div>
-      <div class="pagination">
-       <ul class="clearfix">
+      
+    </div>
+  </div>
+</div>
 
-        <li class="pre pagbuttons"><a class="btn" role="navigation" href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling" title="Linux常用命令">上一篇</a></li>
-         
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Hello World!</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2019-12-23 / 1 min read
+        </div>
         
-       </ul>
-      </div>
+        <div class="post-content yue">
+          <p>New begin!</p>
+
+        </div>
+
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling">
+                <h3 class="post-title">
+                  <i class="remixicon-arrow-left-line"></i>
+                  Linux常用命令
+                </h3>
+              </a>
+            </div>
+          
+
+          
+        </div>
+
         
           
             <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -139,16 +131,111 @@
 </script>
 
           
+
           
         
-     </div>
+
+      </div>
     </div>
-   </div>
-  </div>
-  <script src="https://bailingnan.github.io//media/scripts/jquery.js"></script>
-  <script src="https://bailingnan.github.io//media/scripts/jquery-migrate-1.2.1.min.js"></script>
-  <script src="https://bailingnan.github.io//media/scripts/jquery.appear.js"></script>
+
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
 
 
- </body>
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
 </html>
