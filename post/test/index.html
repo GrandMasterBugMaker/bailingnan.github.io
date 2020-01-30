@@ -1,88 +1,148 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
- <head>
-     <meta charset="utf-8" />
-  <title>test | 白凌南</title>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-  <link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-   <script src="https://cdn.staticfile.org/highlight.js/9.15.9/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
- </head>
- <body>
-     <div class="sidebar animated fadeInDown">
-   <div class="logo-title">
-    <div class="title">
-     <img src="https://bailingnan.github.io//images/avatar.png?v=1580410052419" style="width:127px;" />
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DL/RecSys/Python/Java/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580410115718">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
-     <h3 title=""><a href="/">白凌南</a></h3>
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="白凌南 - Atom Feed" href="https://bailingnan.github.io//atom.xml">
 
-     <div class="description">
-      <p>DL/RecSys/Python/Java/INTJ</p>
-     </div>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580410115718" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE">1.基本配置</a>
+<ul>
+<li><a href="#%E5%AF%BC%E5%85%A5%E5%8C%85%E5%92%8C%E7%89%88%E6%9C%AC%E6%9F%A5%E8%AF%A2">导入包和版本查询</a></li>
+<li><a href="#%E5%8F%AF%E5%A4%8D%E7%8E%B0%E6%80%A7">可复现性</a></li>
+<li><a href="#%E6%98%BE%E5%8D%A1%E8%AE%BE%E7%BD%AE">显卡设置</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E4%B8%BAcudnn-benchmark%E6%A8%A1%E5%BC%8F">设置为cuDNN benchmark模式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%A0%E9%87%8Ftensor%E5%A4%84%E7%90%86">张量(Tensor)处理</a>
+<ul>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF">张量基本信息</a></li>
+<li><a href="#%E5%91%BD%E5%90%8D%E5%8F%98%E9%87%8F">命名变量</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">数据类型转换</a></li>
+<li><a href="#torchtensor%E4%B8%8Enpndarray%E8%BD%AC%E6%8D%A2">torch.Tensor与np.ndarray转换</a></li>
+<li><a href="#%E4%BB%8E%E5%8F%AA%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%A0%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E5%80%BC">从只包含一个元素的张量中提取值</a></li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%BD%A2%E5%8F%98">张量形变</a></li>
+<li><a href="#%E5%A4%8D%E5%88%B6%E5%BC%A0%E9%87%8F">复制张量</a></li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E6%8B%BC%E6%8E%A5">张量拼接</a></li>
+<li><a href="#%E5%B0%86%E6%95%B4%E6%95%B0%E6%A0%87%E7%AD%BE%E8%BD%AC%E4%B8%BAone-hot%E7%BC%96%E7%A0%81">将整数标签转为one-hot编码</a></li>
+<li><a href="#%E5%BE%97%E5%88%B0%E9%9D%9E%E9%9B%B6%E5%85%83%E7%B4%A0">得到非零元素</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E5%BC%A0%E9%87%8F%E7%9B%B8%E7%AD%89">判断两个张量相等</a></li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E6%89%A9%E5%B1%95">张量扩展</a></li>
+<li><a href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95">矩阵乘法</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E4%B8%A4%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%A4%E4%B8%A4%E6%AC%A7%E5%BC%8F%E8%B7%9D%E7%A6%BB">计算两组数据之间的两两欧式距离</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89%E5%92%8C%E6%93%8D%E4%BD%9C">模型定义和操作</a>
+<ul>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B%E6%95%B4%E4%BD%93%E5%8F%82%E6%95%B0%E9%87%8F">计算模型整体参数量</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0">查看网络中的参数</a></li>
+<li><a href="#%E7%B1%BB%E4%BC%BC-keras-%E7%9A%84-modelsummary-%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9E%8B%E4%BF%A1%E6%81%AF%E4%BD%BF%E7%94%A8pytorch-summary">类似 Keras 的 model.summary() 输出模型信息（使用pytorch-summary ）</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96">模型权重初始化</a></li>
+<li><a href="#%E6%8F%90%E5%8F%96%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E6%9F%90%E4%B8%80%E5%B1%82">提取模型中的某一层</a></li>
+<li><a href="#%E9%83%A8%E5%88%86%E5%B1%82%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">部分层使用预训练模型</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E6%B5%8B%E8%AF%95">模型训练和测试</a>
+<ul>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89loss">自定义loss</a></li>
+<li><a href="#%E6%A0%87%E7%AD%BE%E5%B9%B3%E6%BB%91label-smoothing">标签平滑（label smoothing）</a></li>
+<li><a href="#l1-%E6%AD%A3%E5%88%99%E5%8C%96">L1 正则化</a></li>
+<li><a href="#%E4%B8%8D%E5%AF%B9%E5%81%8F%E7%BD%AE%E9%A1%B9%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8Fweight-decay">不对偏置项进行权重衰减（weight decay）</a></li>
+<li><a href="#%E6%A2%AF%E5%BA%A6%E8%A3%81%E5%89%AAgradient-clipping">梯度裁剪（gradient clipping）</a></li>
+<li><a href="#%E5%BE%97%E5%88%B0%E5%BD%93%E5%89%8D%E5%AD%A6%E4%B9%A0%E7%8E%87">得到当前学习率</a></li>
+<li><a href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F">学习率衰减</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96%E5%99%A8%E9%93%BE%E5%BC%8F%E6%9B%B4%E6%96%B0">优化器链式更新</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%8F%AF%E8%A7%86%E5%8C%96">模型训练可视化</a></li>
+<li><a href="#%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD%E6%96%AD%E7%82%B9">保存与加载断点</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">其他注意事项</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
     </div>
-   </div>
-   <ul class="social-links">
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-   </ul>
-   <div class="footer">
-    <div class="by_farbox">
-   
-    </div>
-    
-
-    </div>
-   </div>
   </div>
-  <div class="main">
-     <div class="page-top animated fadeInDown">
-    <div class="nav">
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
     
-     <li><a  href="/">首页</a></li>
-
-     <li><a  href="/archives">归档</a></li>
-
-     <li><a  href="/tags">标签</a></li>
-
-     <li><a  href="/post/about">关于</a></li>
-
-    </div>
-    <div class="information">
-     <div class="back_btn">
-      <li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li>
-     </div>
-    </div>
-   </div>
-   <div class="autopagerize_page_element">
-    <div class="content">
-     <div class="post-page">
-      <div class="post animated fadeInDown">
-       <div class="post-title">
-        <h3><a>test</a></h3>
-       </div>
-       <div class="post-content">
-        <h2 id="1基本配置">1.基本配置</h2>
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">test</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-01-31 / 17 min read
+        </div>
+        
+        <div class="post-content yue">
+          <h2 id="1基本配置">1.基本配置</h2>
 <h3 id="导入包和版本查询">导入包和版本查询</h3>
 <pre><code class="language-Python">import torch
 import torch.nn as nn
@@ -574,37 +634,26 @@ with torchsnooper.snoop():
 </ol>
 <!-- more -->
 
-       </div>
-       <div class="post-footer">
-        <div class="meta">
-         <div class="info">
-          <i class="fa fa-sun-o"></i>
-          <span class="date">2020-01-31</span>
-          <i class="fa fa-tag"></i>
-          
-         </div>
         </div>
-       </div>
-      </div>
-      <div class="share">
-       <div class="evernote">
-        <a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a>
-       </div>
-       <div class="weibo">
-        <a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a>
-       </div>
-       <div class="twitter">
-        <a class="fa fa-twitter" href="http://twitter.com/home?status=,https://bailingnan.github.io/post/test,;"></a>
-       </div>
-      </div>
-      <div class="pagination">
-       <ul class="clearfix">
 
         
-        <li class="next pagbuttons"><a class="btn" role="navigation" href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos" title=" Pycharm常用快捷键及技巧(macOS)">下一篇</a></li>
-        
-       </ul>
-      </div>
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos">
+                <h3 class="post-title">
+                  Pycharm常用快捷键及技巧(macOS)
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
         
           
             <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -629,16 +678,111 @@ with torchsnooper.snoop():
 </script>
 
           
+
           
         
-     </div>
+
+      </div>
     </div>
-   </div>
-  </div>
-  <script src="https://bailingnan.github.io//media/scripts/jquery.js"></script>
-  <script src="https://bailingnan.github.io//media/scripts/jquery-migrate-1.2.1.min.js"></script>
-  <script src="https://bailingnan.github.io//media/scripts/jquery.appear.js"></script>
+
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
 
 
- </body>
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
 </html>
