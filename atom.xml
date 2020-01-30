@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-01-30T19:15:23.279Z</updated>
+    <updated>2020-01-30T19:16:14.648Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -454,9 +454,9 @@ for epoch in range(start_epoch, num_epochs):
         shutil.copy(model_path, best_model_path)
 </code></pre>
 <h1 id="其他注意事项">其他注意事项</h1>
-<ul>
+<ol>
 <li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
-</ul>
+</ol>
 <pre><code class="language-python">def forward(self, x):
   ...
   x = torch.nn.functional.dropout(x, p=0.5, training=self.training)
