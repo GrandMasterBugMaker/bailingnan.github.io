@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
  <head>
-    <meta charset="utf-8" />
-  <title>DL | 白凌南</title>
+     <meta charset="utf-8" />
+  <title>test | 白凌南</title>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -56,9 +56,9 @@
    </div>
   </div>
   <div class="main">
-      <div class="page-top animated fadeInDown">
+     <div class="page-top animated fadeInDown">
     <div class="nav">
-
+    
      <li><a  href="/">首页</a></li>
 
      <li><a  href="/archives">归档</a></li>
@@ -67,23 +67,22 @@
 
      <li><a  href="/post/about">关于</a></li>
 
-
     </div>
     <div class="information">
      <div class="back_btn">
-      <li><a class="fa fa-chevron-left" onclick="window.history.go(-1)" style="display:none;"> </a></li>
+      <li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li>
      </div>
     </div>
    </div>
    <div class="autopagerize_page_element">
     <div class="content">
-              
-     <div class="post animated fadeInDown">
-      <div class="post-title">
-       <h3><a href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan">PyTorch常用代码段</a></h3>
-      </div>
-      <div class="post-content">
-       <p><h2 id="1基本配置">1.基本配置</h2>
+     <div class="post-page">
+      <div class="post animated fadeInDown">
+       <div class="post-title">
+        <h3><a>test</a></h3>
+       </div>
+       <div class="post-content">
+        <h2 id="1基本配置">1.基本配置</h2>
 <h3 id="导入包和版本查询">导入包和版本查询</h3>
 <pre><code class="language-Python">import torch
 import torch.nn as nn
@@ -573,30 +572,65 @@ with torchsnooper.snoop():
 <ol start="19">
 <li>模型可解释性，使用captum库</li>
 </ol>
-</p>
-      </div>
-      <div class="post-footer">
-       <div class="meta">
-        <div class="info">
-         <i class="fa fa-sun-o"></i>
-         <span class="date">2020-01-27</span>
-         <i class="fa fa-tag"></i>
-         
-         <a class="tag" href="https://bailingnan.github.io/tag/kXu4iR4pX" title="DL">DL </a>
-         
-         <a class="tag" href="https://bailingnan.github.io/tag/0bvinX4U3" title="PyTorch">PyTorch </a>
-         
+<!-- more -->
+
+       </div>
+       <div class="post-footer">
+        <div class="meta">
+         <div class="info">
+          <i class="fa fa-sun-o"></i>
+          <span class="date">2020-01-31</span>
+          <i class="fa fa-tag"></i>
+          
+         </div>
         </div>
        </div>
       </div>
-     </div>
-     
-     <div class="pagination">
-      <ul class="clearfix">
-            
-        
+      <div class="share">
+       <div class="evernote">
+        <a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a>
+       </div>
+       <div class="weibo">
+        <a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a>
+       </div>
+       <div class="twitter">
+        <a class="fa fa-twitter" href="http://twitter.com/home?status=,https://bailingnan.github.io/post/test,;"></a>
+       </div>
+      </div>
+      <div class="pagination">
+       <ul class="clearfix">
 
-      </ul>
+        
+        <li class="next pagbuttons"><a class="btn" role="navigation" href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos" title=" Pycharm常用快捷键及技巧(macOS)">下一篇</a></li>
+        
+       </ul>
+      </div>
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+          
+        
      </div>
     </div>
    </div>
