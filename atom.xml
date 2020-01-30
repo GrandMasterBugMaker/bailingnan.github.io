@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-01-30T19:08:15.937Z</updated>
+    <updated>2020-01-30T19:12:10.029Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -11,90 +11,11 @@
     <icon>https://bailingnan.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 白凌南</rights>
     <entry>
-        <title type="html"><![CDATA[Pycharm常用快捷键及技巧(macOS)]]></title>
-        <id>https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos</id>
-        <link href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos">
-        </link>
-        <updated>2020-01-30T18:37:40.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="mac键盘符号和修饰键说明">Mac键盘符号和修饰键说明</h1>
-<ul>
-<li><code>⌘</code>:Command</li>
-<li><code>⇧</code>:Shift</li>
-<li><code>⌥</code>:Option</li>
-<li><code>⌃</code>:Control</li>
-<li><code>↩︎</code>:Return/Enter</li>
-<li><code>⌫</code>:Delete</li>
-<li><code>⌦</code>:向前删除键（Fn+Delete）</li>
-<li><code>↑</code>:上箭头</li>
-<li><code>↓</code>:下箭头</li>
-<li><code>←</code>:左箭头</li>
-<li><code>→</code>:右箭头</li>
-<li><code>⇞</code>:Page Up（Fn+↑）</li>
-<li><code>⇟</code>:Page Down（Fn+↓）</li>
-<li><code>Home</code>:Fn + ←</li>
-<li><code>End</code>:Fn + →</li>
-<li><code>⇥</code>:右制表符（Tab键）</li>
-<li><code>⇤</code>:左制表符（Shift+Tab）</li>
-<li><code>⎋</code>:Escape (Esc)</li>
-<li>一直按住<code>fn</code>可调出F1~F10</li>
-</ul>
-<h1 id="editing编辑">Editing（编辑）</h1>
-<ul>
-<li><code>⌘Z</code>:撤销操作</li>
-<li><code>⌘Y</code>:删除整行</li>
-<li><code>⇧F6</code>:重命名文件</li>
-<li><code>⌘S</code>:保存所有</li>
-<li><code>⌦</code>:删除文件（Fn+Delete）</li>
-<li><code>⌘⌥L</code>:格式化代码</li>
-<li><code>⌘D</code>: 复制当前行或选定的块</li>
-<li><code>⌘/</code>:注释/取消注释与行注释</li>
-<li><code>⌘⌥/</code>:注释/取消注释与块注释</li>
-<li><code>⌘J</code>:插入自定义动态代码模板</li>
-<li><code>⌃Space</code>:基本的代码补全（补全任何类、方法、变量）</li>
-<li><code>⌃⇧Space</code>:智能代码补全（过滤器方法列表和变量的预期类型）</li>
-<li><code>⌘⇧↩</code>:自动结束代码，行末自动添加分号</li>
-<li><code>⌘P</code>:显示方法的参数信息</li>
-<li><code>⌃J</code>:快速查看文档</li>
-<li><code>⇧F1</code>:查看外部文档（在某些代码上会触发打开浏览器显示相关文档）</li>
-<li><code>⌘F1</code>:在错误或警告处显示具体描述信息</li>
-<li><code>⌘N, ⌃↩, ⌃N</code>:生成代码（getter、setter、构造函数、hashCode/equals,toString）</li>
-<li><code>⌥↑</code>:连续选中代码块</li>
-<li><code>⌥↓</code>:减少当前选中的代码块</li>
-<li><code>⌥↩</code>:显示意向动作和快速修复代码</li>
-<li><code>⌘⇧] / ⌘⇧[</code>:选择直到代码块结束/开始</li>
-<li><code>⌘+ / ⌘-</code>:展开 / 折叠代码块</li>
-<li><code>⌘⇧+</code>:展开所有代码块</li>
-<li><code>⌘⇧-</code>:折叠所有代码块</li>
-</ul>
-<h1 id="searchreplace查询替换">Search/Replace（查询/替换）</h1>
-<ul>
-<li><code>Double ⇧</code>:查询任何东西</li>
-<li><code>⌘F</code>:文件内查找</li>
-</ul>
-<h1 id="compile-and-run编译和运行">Compile and Run（编译和运行）</h1>
-<ul>
-<li><code>⌃⇧F10</code>:Run</li>
-<li><code>⌃⇧F9</code>:Debug</li>
-</ul>
-<h1 id="navigation导航">Navigation（导航）</h1>
-<ul>
-<li><code>⌘B</code>:进入光标所在的方法/变量的接口或是定义处</li>
-<li><code>⌘⌥B</code>:跳转到实现处，在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</li>
-<li><code>⌥ Space, ⌘Y</code>:快速打开光标所在方法、类的定义</li>
-<li><code>⌃⇧B</code>:跳转到类型声明处</li>
-<li><code>⌘U</code>:前往当前光标所在方法的父类的方法 / 接口定义</li>
-<li><code>⌃H</code>:显示当前类的层次结构</li>
-<li><code>⌘⇧H</code>:显示方法层次结构</li>
-<li><code>⌃⌥H</code>:显示调用层次结构</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[PyTorch常用代码段]]></title>
         <id>https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan</id>
         <link href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan">
         </link>
-        <updated>2020-01-27T10:51:08.000Z</updated>
+        <updated>2020-01-30T19:09:37.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1基本配置">1.基本配置</h1>
 <h2 id="导入包和版本查询">导入包和版本查询</h2>
 <pre><code class="language-Python">import torch
@@ -182,14 +103,14 @@ tensor = torch.from_numpy(ndarray.copy()).float() # If ndarray has negative stri
 </code></pre>
 <h2 id="从只包含一个元素的张量中提取值">从只包含一个元素的张量中提取值</h2>
 <p><code>value = torch.rand(1).item()</code></p>
-<h3 id="张量形变">张量形变</h3>
+<h2 id="张量形变">张量形变</h2>
 <pre><code class="language-Python"># 在将卷积层输入全连接层的情况下通常需要对张量做形变处理，
 # 相比torch.view，torch.reshape可以自动处理输入张量不连续的情况。
 tensor = torch.rand(2,3,4)
 shape = (6, 4)
 tensor = torch.reshape(tensor, shape)
 </code></pre>
-<h2 id="复制张量">复制张量</h2>
+<h2 id="张量复制">张量复制</h2>
 <pre><code class="language-Python"># Operation                 |  New/Shared memory | Still in computation graph |
 tensor.clone()            # |        New         |          Yes               |
 tensor.detach()           # |      Shared        |          No                |

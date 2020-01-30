@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580411294130">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580411525771">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -33,7 +33,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580411294130" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580411525771" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -58,12 +58,9 @@
 <li><a href="#%E5%91%BD%E5%90%8D%E5%8F%98%E9%87%8F">命名变量</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">数据类型转换</a></li>
 <li><a href="#torchtensor%E4%B8%8Enpndarray%E8%BD%AC%E6%8D%A2">torch.Tensor与np.ndarray转换</a></li>
-<li><a href="#%E4%BB%8E%E5%8F%AA%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%A0%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E5%80%BC">从只包含一个元素的张量中提取值</a>
-<ul>
+<li><a href="#%E4%BB%8E%E5%8F%AA%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%BC%A0%E9%87%8F%E4%B8%AD%E6%8F%90%E5%8F%96%E5%80%BC">从只包含一个元素的张量中提取值</a></li>
 <li><a href="#%E5%BC%A0%E9%87%8F%E5%BD%A2%E5%8F%98">张量形变</a></li>
-</ul>
-</li>
-<li><a href="#%E5%A4%8D%E5%88%B6%E5%BC%A0%E9%87%8F">复制张量</a></li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%A4%8D%E5%88%B6">张量复制</a></li>
 <li><a href="#%E5%BC%A0%E9%87%8F%E6%8B%BC%E6%8E%A5">张量拼接</a></li>
 <li><a href="#%E5%B0%86%E6%95%B4%E6%95%B0%E6%A0%87%E7%AD%BE%E8%BD%AC%E4%B8%BAone-hot%E7%BC%96%E7%A0%81">将整数标签转为one-hot编码</a></li>
 <li><a href="#%E5%BE%97%E5%88%B0%E9%9D%9E%E9%9B%B6%E5%85%83%E7%B4%A0">得到非零元素</a></li>
@@ -146,7 +143,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">PyTorch常用代码段</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-01-27 / 17 min read
+          2020-01-31 / 17 min read
         </div>
         
         <div class="post-content yue">
@@ -237,14 +234,14 @@ tensor = torch.from_numpy(ndarray.copy()).float() # If ndarray has negative stri
 </code></pre>
 <h2 id="从只包含一个元素的张量中提取值">从只包含一个元素的张量中提取值</h2>
 <p><code>value = torch.rand(1).item()</code></p>
-<h3 id="张量形变">张量形变</h3>
+<h2 id="张量形变">张量形变</h2>
 <pre><code class="language-Python"># 在将卷积层输入全连接层的情况下通常需要对张量做形变处理，
 # 相比torch.view，torch.reshape可以自动处理输入张量不连续的情况。
 tensor = torch.rand(2,3,4)
 shape = (6, 4)
 tensor = torch.reshape(tensor, shape)
 </code></pre>
-<h2 id="复制张量">复制张量</h2>
+<h2 id="张量复制">张量复制</h2>
 <pre><code class="language-Python"># Operation                 |  New/Shared memory | Still in computation graph |
 tensor.clone()            # |        New         |          Yes               |
 tensor.detach()           # |      Shared        |          No                |
@@ -655,15 +652,6 @@ with torchsnooper.snoop():
 
 
         <div class="flex justify-between py-8">
-          
-            <div class="prev-post">
-              <a href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos">
-                <h3 class="post-title">
-                  <i class="remixicon-arrow-left-line"></i>
-                  Pycharm常用快捷键及技巧(macOS)
-                </h3>
-              </a>
-            </div>
           
 
           
