@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-01-29T12:40:22.067Z</updated>
+    <updated>2020-01-30T18:12:07.445Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -1302,6 +1302,7 @@ with torchsnooper.snoop():
 <li><code>pip install &lt;包名&gt; --upgrade</code>或<code>pip install -U &lt;包名&gt;</code>:升级包</li>
 <li><code>pip install &lt;包名&gt; -i https://mirrors.aliyun.com/pypi/simple</code>:指定单次安装源</li>
 <li><code>pip install SomePackage==1.0.4</code>:指定版本</li>
+<li><code>pip-review --auto/pip-review --local --interactive</code>:自动更新所有包</li>
 </ul>
 <h1 id="三-conda">三、conda</h1>
 <ul>
