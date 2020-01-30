@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580409525730">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580409863756">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -24,7 +24,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580409525730" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580409863756" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -564,14 +564,14 @@ for epoch in range(start_epoch, num_epochs):
         shutil.copy(model_path, best_model_path)
 </code></pre>
 <h2 id="其他注意事项">其他注意事项</h2>
-<ul>
+<ol>
 <li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
-</ul>
+</ol>
 <pre><code class="language-python">def forward(self, x):
   ...
   x = torch.nn.functional.dropout(x, p=0.5, training=self.training)
 </code></pre>
-<ul>
+<ol start="2">
 <li>不要使用太大的线性层。因为nn.Linear(m,n)使用的是O(mn)的内存，线性层太大很容易超出现有显存。</li>
 <li>不要在太长的序列上使用RNN。因为RNN反向传播使用的是BPTT算法，其需要的内存和输入序列的长度呈线性关系。</li>
 <li>model(x) 前用 <code>model.train()</code> 和 <code>model.eval()</code> 切换网络状态。</li>
@@ -583,16 +583,16 @@ for epoch in range(start_epoch, num_epochs):
 <li><code>torch.utils.data.DataLoader</code> 中尽量设置 <code>pin_memory=True</code>，对特别小的数据集如 MNIST 设置 <code>pin_memory=False</code> 反而更快一些。<code>num_workers</code> 的设置需要在实验中找到最快的取值。</li>
 <li>用 <code>del</code>及时删除不用的中间变量，节约 GPU 存储。</li>
 <li>使用 <code>inplace</code> 操作可节约 GPU 存储，如</li>
-</ul>
+</ol>
 <pre><code class="language-python">x = torch.nn.functional.relu(x, inplace=True)
 </code></pre>
-<ul>
+<ol start="13">
 <li>减少 CPU 和 GPU 之间的数据传输。例如如果你想知道一个 epoch 中每个 mini-batch 的 loss 和准确率，先将它们累积在 GPU 中等一个 epoch 结束之后一起传输回 CPU 会比每个 mini-batch 都进行一次 GPU 到 CPU 的传输更快。</li>
 <li>使用半精度浮点数 <code>half()</code>会有一定的速度提升，具体效率依赖于 GPU 型号。需要小心数值精度过低带来的稳定性问题。</li>
 <li>时常使用 <code>assert tensor.size() == (N, D, H, W)</code> 作为调试手段，确保张量维度和你设想中一致。</li>
 <li>除了标记 y 外，尽量少使用一维张量，使用 n*1 的二维张量代替，可以避免一些意想不到的一维张量计算结果。</li>
 <li>统计代码各部分耗时</li>
-</ul>
+</ol>
 <pre><code class="language-python">with torch.autograd.profiler.profile(enabled=True, use_cuda=False) as profile:
     ...
 print(profile)
@@ -600,9 +600,9 @@ print(profile)
 # 或者在命令行运行
 python -m torch.utils.bottleneck main.py
 </code></pre>
-<ul>
+<ol start="18">
 <li>使用TorchSnooper来调试PyTorch代码，程序在执行的时候，就会自动 print 出来每一行的执行结果的 tensor 的形状、数据类型、设备、是否需要梯度的信息。</li>
-</ul>
+</ol>
 <pre><code class="language-python"># pip install torchsnooper
 import torchsnooper
 
@@ -613,9 +613,9 @@ import torchsnooper
 with torchsnooper.snoop():
     原本的代码
 </code></pre>
-<ul>
+<ol start="19">
 <li>模型可解释性，使用captum库</li>
-</ul>
+</ol>
 
       </div>
       <div class="text-gray-400 text-sm font-light">2020-01-27 / 17 min read</div>
