@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-02-04T13:03:16.700Z</updated>
+    <updated>2020-02-04T13:09:52.660Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -676,7 +676,7 @@ kill -9 [pid]
 <p>如果想要避免这种结果波动，设置</p>
 <pre><code class="language-python">torch.backends.cudnn.deterministic = True
 </code></pre>
-<h1 id="张量tensor处理">张量(Tensor)处理</h1>
+<h1 id="2张量tensor处理">2.张量(Tensor)处理</h1>
 <h2 id="张量基本信息">张量基本信息</h2>
 <pre><code class="language-Python">tensor = torch.randn(3,4,5)
 print(tensor.type())  # 数据类型
@@ -777,7 +777,7 @@ result = tensor1 * tensor2
 <p>利用broadcast机制</p>
 <pre><code class="language-python">dist = torch.sqrt(torch.sum((X1[:,None,:] - X2) ** 2, dim=2))
 </code></pre>
-<h1 id="模型定义和操作">模型定义和操作</h1>
+<h1 id="3模型定义和操作">3.模型定义和操作</h1>
 <h2 id="计算模型整体参数量">计算模型整体参数量</h2>
 <pre><code class="language-python">num_parameters = sum(torch.numel(parameter) for parameter in model.parameters())
 </code></pre>
@@ -830,7 +830,7 @@ for layer in model.named_modules():
 <p>注意如果保存的模型是 torch.nn.DataParallel，则当前的模型也需要是</p>
 <pre><code class="language-python">model.load_state_dict(torch.load('model.pth'), strict=False)
 </code></pre>
-<h1 id="模型训练和测试">模型训练和测试</h1>
+<h1 id="4模型训练和测试">4.模型训练和测试</h1>
 <h2 id="自定义loss">自定义loss</h2>
 <p>继承torch.nn.Module类写自己的loss。</p>
 <pre><code class="language-python">class MyLoss(torch.nn.Moudle):
@@ -1068,7 +1068,7 @@ for epoch in range(start_epoch, num_epochs):
     if is_best:
         shutil.copy(model_path, best_model_path)
 </code></pre>
-<h1 id="其他注意事项">其他注意事项</h1>
+<h1 id="5其他注意事项">5.其他注意事项</h1>
 <ol>
 <li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
 </ol>

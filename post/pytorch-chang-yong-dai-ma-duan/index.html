@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580821393114">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1580821622981">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -33,7 +33,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580821393114" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1580821622981" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -52,7 +52,7 @@
 <li><a href="#%E8%AE%BE%E7%BD%AE%E4%B8%BAcudnn-benchmark%E6%A8%A1%E5%BC%8F">设置为cuDNN benchmark模式</a></li>
 </ul>
 </li>
-<li><a href="#%E5%BC%A0%E9%87%8Ftensor%E5%A4%84%E7%90%86">张量(Tensor)处理</a>
+<li><a href="#2%E5%BC%A0%E9%87%8Ftensor%E5%A4%84%E7%90%86">2.张量(Tensor)处理</a>
 <ul>
 <li><a href="#%E5%BC%A0%E9%87%8F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF">张量基本信息</a></li>
 <li><a href="#%E5%91%BD%E5%90%8D%E5%8F%98%E9%87%8F">命名变量</a></li>
@@ -70,7 +70,7 @@
 <li><a href="#%E8%AE%A1%E7%AE%97%E4%B8%A4%E7%BB%84%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%A4%E4%B8%A4%E6%AC%A7%E5%BC%8F%E8%B7%9D%E7%A6%BB">计算两组数据之间的两两欧式距离</a></li>
 </ul>
 </li>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89%E5%92%8C%E6%93%8D%E4%BD%9C">模型定义和操作</a>
+<li><a href="#3%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89%E5%92%8C%E6%93%8D%E4%BD%9C">3.模型定义和操作</a>
 <ul>
 <li><a href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B%E6%95%B4%E4%BD%93%E5%8F%82%E6%95%B0%E9%87%8F">计算模型整体参数量</a></li>
 <li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0">查看网络中的参数</a></li>
@@ -80,7 +80,7 @@
 <li><a href="#%E9%83%A8%E5%88%86%E5%B1%82%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">部分层使用预训练模型</a></li>
 </ul>
 </li>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E6%B5%8B%E8%AF%95">模型训练和测试</a>
+<li><a href="#4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E6%B5%8B%E8%AF%95">4.模型训练和测试</a>
 <ul>
 <li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89loss">自定义loss</a></li>
 <li><a href="#%E6%A0%87%E7%AD%BE%E5%B9%B3%E6%BB%91label-smoothing">标签平滑（label smoothing）</a></li>
@@ -94,7 +94,7 @@
 <li><a href="#%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD%E6%96%AD%E7%82%B9">保存与加载断点</a></li>
 </ul>
 </li>
-<li><a href="#%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">其他注意事项</a></li>
+<li><a href="#5%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">5.其他注意事项</a></li>
 </ul>
 
           </div>
@@ -192,7 +192,7 @@ kill -9 [pid]
 <p>如果想要避免这种结果波动，设置</p>
 <pre><code class="language-python">torch.backends.cudnn.deterministic = True
 </code></pre>
-<h1 id="张量tensor处理">张量(Tensor)处理</h1>
+<h1 id="2张量tensor处理">2.张量(Tensor)处理</h1>
 <h2 id="张量基本信息">张量基本信息</h2>
 <pre><code class="language-Python">tensor = torch.randn(3,4,5)
 print(tensor.type())  # 数据类型
@@ -293,7 +293,7 @@ result = tensor1 * tensor2
 <p>利用broadcast机制</p>
 <pre><code class="language-python">dist = torch.sqrt(torch.sum((X1[:,None,:] - X2) ** 2, dim=2))
 </code></pre>
-<h1 id="模型定义和操作">模型定义和操作</h1>
+<h1 id="3模型定义和操作">3.模型定义和操作</h1>
 <h2 id="计算模型整体参数量">计算模型整体参数量</h2>
 <pre><code class="language-python">num_parameters = sum(torch.numel(parameter) for parameter in model.parameters())
 </code></pre>
@@ -346,7 +346,7 @@ for layer in model.named_modules():
 <p>注意如果保存的模型是 torch.nn.DataParallel，则当前的模型也需要是</p>
 <pre><code class="language-python">model.load_state_dict(torch.load('model.pth'), strict=False)
 </code></pre>
-<h1 id="模型训练和测试">模型训练和测试</h1>
+<h1 id="4模型训练和测试">4.模型训练和测试</h1>
 <h2 id="自定义loss">自定义loss</h2>
 <p>继承torch.nn.Module类写自己的loss。</p>
 <pre><code class="language-python">class MyLoss(torch.nn.Moudle):
@@ -584,7 +584,7 @@ for epoch in range(start_epoch, num_epochs):
     if is_best:
         shutil.copy(model_path, best_model_path)
 </code></pre>
-<h1 id="其他注意事项">其他注意事项</h1>
+<h1 id="5其他注意事项">5.其他注意事项</h1>
 <ol>
 <li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
 </ol>
