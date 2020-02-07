@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-02-07T03:02:10.835Z</updated>
+    <updated>2020-02-07T09:34:35.440Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -34,7 +34,7 @@ acptum</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[matplotlib整理]]></title>
+        <title type="html"><![CDATA[Matplotlib笔记]]></title>
         <id>https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua</id>
         <link href="https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua">
         </link>
