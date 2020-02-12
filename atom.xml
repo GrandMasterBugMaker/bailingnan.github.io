@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-02-09T09:45:01.028Z</updated>
+    <updated>2020-02-12T09:49:00.687Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -10,6 +10,29 @@
     <logo>https://bailingnan.github.io/images/avatar.png</logo>
     <icon>https://bailingnan.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 白凌南</rights>
+    <entry>
+        <title type="html"><![CDATA[待安装包]]></title>
+        <id>https://bailingnan.github.io/post/dai-an-zhuang-bao</id>
+        <link href="https://bailingnan.github.io/post/dai-an-zhuang-bao">
+        </link>
+        <updated>2020-02-07T02:42:25.000Z</updated>
+        <content type="html"><![CDATA[<p>apex<br>
+dali<br>
+optuna<br>
+pip-review<br>
+autogluon<br>
+arthas<br>
+greys-anatomy<br>
+implicit<br>
+eli5<br>
+icecream<br>
+stackprinter<br>
+dlrm<br>
+buffalo<br>
+cupy<br>
+acptum</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Matplotlib笔记]]></title>
         <id>https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua</id>
