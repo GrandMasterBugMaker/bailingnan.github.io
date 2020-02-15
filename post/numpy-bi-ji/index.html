@@ -1,22 +1,191 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://bailingnan.github.io/</id>
-    <title>白凌南</title>
-    <updated>2020-02-15T14:59:33.634Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://bailingnan.github.io/"/>
-    <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
-    <subtitle>DL/RecSys/Python/Java/INTJ</subtitle>
-    <logo>https://bailingnan.github.io/images/avatar.png</logo>
-    <icon>https://bailingnan.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, 白凌南</rights>
-    <entry>
-        <title type="html"><![CDATA[Numpy笔记]]></title>
-        <id>https://bailingnan.github.io/post/numpy-bi-ji</id>
-        <link href="https://bailingnan.github.io/post/numpy-bi-ji">
-        </link>
-        <updated>2020-02-15T14:58:47.000Z</updated>
-        <content type="html"><![CDATA[<p>NumPy（Numerical Python的简称）是Python数值计算最重要的基础包。大多数提供科学计算的包都是用NumPy的数组作为构建基础。</p>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DL/RecSys/Python/Java/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1581778770265">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="白凌南 - Atom Feed" href="https://bailingnan.github.io//atom.xml">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157390001-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157390001-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1581778770265" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#41-numpy%E7%9A%84ndarray%E4%B8%80%E7%A7%8D%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1">4.1 NumPy的ndarray：一种多维数组对象</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BAndarray">创建ndarray</a></li>
+<li><a href="#ndarray%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">ndarray的数据类型</a></li>
+<li><a href="#numpy%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%90%E7%AE%97">NumPy数组的运算</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87">基本的索引和切片</a></li>
+<li><a href="#%E5%88%87%E7%89%87%E7%B4%A2%E5%BC%95">切片索引</a></li>
+<li><a href="#%E5%B8%83%E5%B0%94%E5%9E%8B%E7%B4%A2%E5%BC%95">布尔型索引</a></li>
+<li><a href="#%E8%8A%B1%E5%BC%8F%E7%B4%A2%E5%BC%95">花式索引</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E8%BD%AC%E7%BD%AE%E5%92%8C%E8%BD%B4%E5%AF%B9%E6%8D%A2">数组转置和轴对换</a></li>
+</ul>
+</li>
+<li><a href="#42-%E9%80%9A%E7%94%A8%E5%87%BD%E6%95%B0%E5%BF%AB%E9%80%9F%E7%9A%84%E5%85%83%E7%B4%A0%E7%BA%A7%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0">4.2 通用函数：快速的元素级数组函数</a></li>
+<li><a href="#43-%E5%88%A9%E7%94%A8%E6%95%B0%E7%BB%84%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">4.3 利用数组进行数据处理</a>
+<ul>
+<li><a href="#%E5%B0%86%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91%E8%A1%A8%E8%BF%B0%E4%B8%BA%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97">将条件逻辑表述为数组运算</a></li>
+<li><a href="#%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95">数学和统计方法</a></li>
+<li><a href="#%E7%94%A8%E4%BA%8E%E5%B8%83%E5%B0%94%E5%9E%8B%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95">用于布尔型数组的方法</a></li>
+<li><a href="#%E6%8E%92%E5%BA%8F">排序</a></li>
+<li><a href="#%E5%94%AF%E4%B8%80%E5%8C%96%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%AE%83%E7%9A%84%E9%9B%86%E5%90%88%E9%80%BB%E8%BE%91">唯一化以及其它的集合逻辑</a></li>
+</ul>
+</li>
+<li><a href="#44-%E7%94%A8%E4%BA%8E%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA">4.4 用于数组的文件输入输出</a></li>
+<li><a href="#45-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0">4.5 线性代数</a></li>
+<li><a href="#46-%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90">4.6 伪随机数生成</a></li>
+<li><a href="#47-%E7%A4%BA%E4%BE%8B%E9%9A%8F%E6%9C%BA%E6%BC%AB%E6%AD%A5">4.7 示例：随机漫步</a>
+<ul>
+<li><a href="#%E4%B8%80%E6%AC%A1%E6%A8%A1%E6%8B%9F%E5%A4%9A%E4%B8%AA%E9%9A%8F%E6%9C%BA%E6%BC%AB%E6%AD%A5">一次模拟多个随机漫步</a></li>
+</ul>
+</li>
+<li><a href="#48-%E7%BB%93%E8%AE%BA">4.8 结论</a></li>
+<li><a href="#49-numpy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8">4.9 Numpy高级应用</a></li>
+<li><a href="#a1-ndarray%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E7%90%86">A.1 ndarray对象的内部机理</a>
+<ul>
+<li><a href="#numpy%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BD%93%E7%B3%BB">NumPy数据类型体系</a></li>
+</ul>
+</li>
+<li><a href="#a2-%E9%AB%98%E7%BA%A7%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C">A.2 高级数组操作</a>
+<ul>
+<li><a href="#%E6%95%B0%E7%BB%84%E9%87%8D%E5%A1%91">数组重塑</a></li>
+<li><a href="#c%E5%92%8Cfortran%E9%A1%BA%E5%BA%8F">C和Fortran顺序</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%90%88%E5%B9%B6%E5%92%8C%E6%8B%86%E5%88%86">数组的合并和拆分</a></li>
+<li><a href="#%E5%A0%86%E5%8F%A0%E8%BE%85%E5%8A%A9%E7%B1%BBr_%E5%92%8Cc_">堆叠辅助类：r_和c_</a></li>
+<li><a href="#%E5%85%83%E7%B4%A0%E7%9A%84%E9%87%8D%E5%A4%8D%E6%93%8D%E4%BD%9Ctile%E5%92%8Crepeat">元素的重复操作：tile和repeat</a></li>
+<li><a href="#%E8%8A%B1%E5%BC%8F%E7%B4%A2%E5%BC%95%E7%9A%84%E7%AD%89%E4%BB%B7%E5%87%BD%E6%95%B0take%E5%92%8Cput">花式索引的等价函数：take和put</a></li>
+</ul>
+</li>
+<li><a href="#a3-%E5%B9%BF%E6%92%AD">A.3 广播</a>
+<ul>
+<li><a href="#%E6%B2%BF%E5%85%B6%E5%AE%83%E8%BD%B4%E5%90%91%E5%B9%BF%E6%92%AD">沿其它轴向广播</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E5%B9%BF%E6%92%AD%E8%AE%BE%E7%BD%AE%E6%95%B0%E7%BB%84%E7%9A%84%E5%80%BC">通过广播设置数组的值</a></li>
+</ul>
+</li>
+<li><a href="#a4-ufunc%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8">A.4 ufunc高级应用</a>
+<ul>
+<li><a href="#ufunc%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95">ufunc实例方法</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E6%96%B0%E7%9A%84ufunc">编写新的ufunc</a></li>
+</ul>
+</li>
+<li><a href="#a5-%E7%BB%93%E6%9E%84%E5%8C%96%E5%92%8C%E8%AE%B0%E5%BD%95%E5%BC%8F%E6%95%B0%E7%BB%84">A.5 结构化和记录式数组</a>
+<ul>
+<li><a href="#%E5%B5%8C%E5%A5%97dtype%E5%92%8C%E5%A4%9A%E7%BB%B4%E5%AD%97%E6%AE%B5">嵌套dtype和多维字段</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E7%BB%84">为什么要用结构化数组</a></li>
+</ul>
+</li>
+<li><a href="#a6-%E6%9B%B4%E5%A4%9A%E6%9C%89%E5%85%B3%E6%8E%92%E5%BA%8F%E7%9A%84%E8%AF%9D%E9%A2%98">A.6 更多有关排序的话题</a>
+<ul>
+<li><a href="#%E9%97%B4%E6%8E%A5%E6%8E%92%E5%BA%8Fargsort%E5%92%8Clexsort">间接排序：argsort和lexsort</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">其他排序算法</a></li>
+<li><a href="#%E9%83%A8%E5%88%86%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84">部分排序数组</a></li>
+<li><a href="#numpysearchsorted%E5%9C%A8%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0">numpy.searchsorted：在有序数组中查找元素</a></li>
+</ul>
+</li>
+<li><a href="#a7-%E7%94%A8numba%E7%BC%96%E5%86%99%E5%BF%AB%E9%80%9Fnumpy%E5%87%BD%E6%95%B0">A.7 用Numba编写快速NumPy函数</a>
+<ul>
+<li><a href="#%E7%94%A8numba%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89numpyufunc%E5%AF%B9%E8%B1%A1">用Numba创建自定义numpy.ufunc对象</a></li>
+</ul>
+</li>
+<li><a href="#a8-%E9%AB%98%E7%BA%A7%E6%95%B0%E7%BB%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA">A.8 高级数组输入输出</a>
+<ul>
+<li><a href="#%E5%86%85%E5%AD%98%E6%98%A0%E5%83%8F%E6%96%87%E4%BB%B6">内存映像文件</a></li>
+<li><a href="#hdf5%E5%8F%8A%E5%85%B6%E4%BB%96%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F">HDF5及其他数组存储方式</a></li>
+</ul>
+</li>
+<li><a href="#a9-%E6%80%A7%E8%83%BD%E5%BB%BA%E8%AE%AE">A.9 性能建议</a>
+<ul>
+<li><a href="#%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7">连续内存的重要性</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="remixicon-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Numpy笔记</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-02-15 / 102 min read
+        </div>
+        
+        <div class="post-content yue">
+          <p>NumPy（Numerical Python的简称）是Python数值计算最重要的基础包。大多数提供科学计算的包都是用NumPy的数组作为构建基础。</p>
 <p>NumPy的部分功能如下：</p>
 <ul>
 <li>ndarray，一个具有矢量算术运算和复杂广播能力的快速且节省空间的多维数组。</li>
@@ -2336,1500 +2505,160 @@ Out[234]:
   ALIGNED : True
   UPDATEIFCOPY : False
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[待安装包]]></title>
-        <id>https://bailingnan.github.io/post/dai-an-zhuang-bao</id>
-        <link href="https://bailingnan.github.io/post/dai-an-zhuang-bao">
-        </link>
-        <updated>2020-02-07T02:42:25.000Z</updated>
-        <content type="html"><![CDATA[<p>apex<br>
-dali<br>
-optuna<br>
-pip-review<br>
-autogluon<br>
-arthas<br>
-greys-anatomy<br>
-implicit<br>
-eli5<br>
-icecream<br>
-stackprinter<br>
-dlrm<br>
-buffalo<br>
-cupy<br>
-acptum</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Matplotlib笔记]]></title>
-        <id>https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua</id>
-        <link href="https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua">
-        </link>
-        <updated>2020-02-04T09:09:53.000Z</updated>
-        <content type="html"><![CDATA[<p>信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的idea等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python有许多库进行静态或动态的数据可视化，但我这里重要关注于matplotlib（http://matplotlib.org/）和基于它的库。</p>
-<p>matplotlib是一个用于创建出版质量图表的桌面绘图包（主要是2D方面）。该项目是由John Hunter于2002年启动的，其目的是为Python构建一个MATLAB式的绘图接口。matplotlib和IPython社区进行合作，简化了从IPython shell（包括现在的Jupyter notebook）进行交互式绘图。matplotlib支持各种操作系统上许多不同的GUI后端，而且还能将图片导出为各种常见的矢量（vector）和光栅（raster）图：PDF、SVG、JPG、PNG、BMP、GIF等。除了几张，本书中的大部分图都是用它生成的。</p>
-<p>随着时间的发展，matplotlib衍生出了多个数据可视化的工具集，它们使用matplotlib作为底层。其中之一是seaborn（http://seaborn.pydata.org/），本章后面会学习它。</p>
-<p>学习本章代码案例的最简单方法是在Jupyter notebook进行交互式绘图。在Jupyter notebook中执行下面的语句：</p>
-<pre><code class="language-python">%matplotlib notebook
-</code></pre>
-<h1 id="91-matplotlib-api入门">9.1 matplotlib API入门</h1>
-<p>matplotlib的通常引入约定是：</p>
-<pre><code class="language-python">In [11]: import matplotlib.pyplot as plt
-</code></pre>
-<p>在Jupyter中运行%matplotlib notebook（或在IPython中运行%matplotlib），就可以创建一个简单的图形。如果一切设置正确，会看到图9-1：</p>
-<pre><code class="language-python">In [12]: import numpy as np
 
-In [13]: data = np.arange(10)
+        </div>
 
-In [14]: data
-Out[14]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-
-In [15]: plt.plot(data)
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="http://upload-images.jianshu.io/upload_images/7178691-7032e333a6ecdd37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-1 简单的线图" loading="lazy"></figure>
-<p>虽然seaborn这样的库和pandas的内置绘图函数能够处理许多普通的绘图任务，但如果需要自定义一些高级功能的话就必须学习matplotlib API。</p>
-<blockquote>
-<p>笔记：虽然本书没有详细地讨论matplotlib的各种功能，但足以将你引入门。matplotlib的示例库和文档是学习高级特性的最好资源。</p>
-</blockquote>
-<h2 id="figure和subplot">Figure和Subplot</h2>
-<p>matplotlib的图像都位于Figure对象中。你可以用plt.figure创建一个新的Figure：</p>
-<pre><code class="language-python">In [16]: fig = plt.figure()
-</code></pre>
-<p>如果用的是IPython，这时会弹出一个空窗口，但在Jupyter中，必须再输入更多命令才能看到。plt.figure有一些选项，特别是figsize，它用于确保当图片保存到磁盘时具有一定的大小和纵横比。</p>
-<p>不能通过空Figure绘图。必须用add_subplot创建一个或多个subplot才行：</p>
-<pre><code class="language-python">In [17]: ax1 = fig.add_subplot(2, 2, 1)
-</code></pre>
-<p>这条代码的意思是：图像应该是2×2的（即最多4张图），且当前选中的是4个subplot中的第一个（编号从1开始）。如果再把后面两个subplot也创建出来，最终得到的图像如图9-2所示：</p>
-<pre><code class="language-python">In [18]: ax2 = fig.add_subplot(2, 2, 2)
-
-In [19]: ax3 = fig.add_subplot(2, 2, 3)
-</code></pre>
-<figure data-type="image" tabindex="2"><img src="http://upload-images.jianshu.io/upload_images/7178691-b8cff158e64eae74.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-2 带有三个subplot的Figure" loading="lazy"></figure>
-<blockquote>
-<p>提示：使用Jupyter notebook有一点不同，即每个小窗重新执行后，图形会被重置。因此，对于复杂的图形，，你必须将所有的绘图命令存在一个小窗里。</p>
-</blockquote>
-<p>这里，我们运行同一个小窗里的所有命令：</p>
-<pre><code class="language-python">fig = plt.figure()
-ax1 = fig.add_subplot(2, 2, 1)
-ax2 = fig.add_subplot(2, 2, 2)
-ax3 = fig.add_subplot(2, 2, 3)
-</code></pre>
-<p>如果这时执行一条绘图命令（如plt.plot([1.5, 3.5, -2, 1.6])），matplotlib就会在最后一个用过的subplot（如果没有则创建一个）上进行绘制，隐藏创建figure和subplot的过程。因此，如果我们执行下列命令，你就会得到如图9-3所示的结果：</p>
-<pre><code class="language-python">In [20]: plt.plot(np.random.randn(50).cumsum(), 'k--')
-</code></pre>
-<figure data-type="image" tabindex="3"><img src="http://upload-images.jianshu.io/upload_images/7178691-7bcbd5e56fdbbd92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-3 绘制一次之后的图像" loading="lazy"></figure>
-<p>&quot;k--&quot;是一个线型选项，用于告诉matplotlib绘制黑色虚线图。上面那些由fig.add_subplot所返回的对象是AxesSubplot对象，直接调用它们的实例方法就可以在其它空着的格子里面画图了，如图9-4所示：</p>
-<pre><code class="language-python">In [21]: ax1.hist(np.random.randn(100), bins=20, color='k', alpha=0.3)
-
-In [22]: ax2.scatter(np.arange(30), np.arange(30) + 3 * np.random.randn(30))
-</code></pre>
-<figure data-type="image" tabindex="4"><img src="http://upload-images.jianshu.io/upload_images/7178691-2297bcaf355db24c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-4 继续绘制两次之后的图像" loading="lazy"></figure>
-<p>你可以在matplotlib的文档中找到各种图表类型。</p>
-<p>创建包含subplot网格的figure是一个非常常见的任务，matplotlib有一个更为方便的方法plt.subplots，它可以创建一个新的Figure，并返回一个含有已创建的subplot对象的NumPy数组：</p>
-<pre><code class="language-python">In [24]: fig, axes = plt.subplots(2, 3)
-
-In [25]: axes
-Out[25]: 
-array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fb626374048&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fb62625db00&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fb6262f6c88&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fb6261a36a0&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fb626181860&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fb6260fd4e0&gt;]], dtype
-=object)
-</code></pre>
-<p>这是非常实用的，因为可以轻松地对axes数组进行索引，就好像是一个二维数组一样，例如axes[0,1]。你还可以通过sharex和sharey指定subplot应该具有相同的X轴或Y轴。在比较相同范围的数据时，这也是非常实用的，否则，matplotlib会自动缩放各图表的界限。有关该方法的更多信息，请参见表9-1。</p>
-<pre><code class="language-python">matplotlib.pyplot.subplots(nrows=1, ncols=1, sharex=False, sharey=False, squeeze=True, subplot_kw=None, gridspec_kw=None, **fig_kw)[source]
-</code></pre>
-<figure data-type="image" tabindex="5"><img src="http://upload-images.jianshu.io/upload_images/7178691-88bb55faca7d01ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表9-1 pyplot.subplots的选项" loading="lazy"></figure>
-<h2 id="调整subplot周围的间距">调整subplot周围的间距</h2>
-<p>默认情况下，matplotlib会在subplot外围留下一定的边距，并在subplot之间留下一定的间距。间距跟图像的高度和宽度有关，因此，如果你调整了图像大小（不管是编程还是手工），间距也会自动调整。利用Figure的subplots_adjust方法可以轻而易举地修改间距，此外，它也是个顶级函数：</p>
-<pre><code class="language-python">subplots_adjust(left=None, bottom=None, right=None, top=None,
-                wspace=None, hspace=None)
-</code></pre>
-<p>wspace和hspace用于控制宽度和高度的百分比，可以用作subplot之间的间距。下面是一个简单的例子，其中我将间距收缩到了0（如图9-5所示）：</p>
-<pre><code class="language-python">fig, axes = plt.subplots(2, 2, sharex=True, sharey=True)
-for i in range(2):
-    for j in range(2):
-        axes[i, j].hist(np.random.randn(500), bins=50, color='k', alpha=0.5)
-plt.subplots_adjust(wspace=0, hspace=0)
-</code></pre>
-<figure data-type="image" tabindex="6"><img src="http://upload-images.jianshu.io/upload_images/7178691-80be7ffc3dec88a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-5 各subplot之间没有间距" loading="lazy"></figure>
-<p>不难看出，其中的轴标签重叠了。matplotlib不会检查标签是否重叠，所以对于这种情况，你只能自己设定刻度位置和刻度标签。后面几节将会详细介绍该内容。</p>
-<h2 id="颜色-标记和线型">颜色、标记和线型</h2>
-<p>matplotlib的plot函数接受一组X和Y坐标，还可以接受一个表示颜色和线型的字符串缩写。例如，要根据x和y绘制绿色虚线，你可以执行如下代码：</p>
-<pre><code class="language-python">ax.plot(x, y, 'g--')
-</code></pre>
-<p>这种在一个字符串中指定颜色和线型的方式非常方便。在实际中，如果你是用代码绘图，你可能不想通过处理字符串来获得想要的格式。通过下面这种更为明确的方式也能得到同样的效果：</p>
-<pre><code class="language-python">ax.plot(x, y, linestyle='--', color='g')
-</code></pre>
-<p>常用的颜色可以使用颜色缩写，你也可以指定颜色码（例如，'#CECECE'）。你可以通过查看plot的文档字符串查看所有线型的合集（在IPython和Jupyter中使用plot?）。</p>
-<p>可选参数[fmt] 是一个字符串来定义图的基本属性如：颜色（color），点型（marker），线型（linestyle）。<br>
-具体形式  fmt = '[color][marker][line]'</p>
-<pre><code class="language-python">=============    ===============================
-    character        color
-    =============    ===============================
-    ``'b'``          blue 蓝
-    ``'g'``          green 绿
-    ``'r'``          red 红
-    ``'c'``          cyan 蓝绿
-    ``'m'``          magenta 洋红
-    ``'y'``          yellow 黄
-    ``'k'``          black 黑
-    ``'w'``          white 白
-    =============    ===============================
-=============    ===============================
-    character        description
-    =============    ===============================
-    ``'.'``          point marker点标记
-    ``','``          pixel marker像素标记（极小点）
-    ``'o'``          circle marker实心圈标记
-    ``'v'``          triangle_down marker倒三角标记
-    ``'^'``          triangle_up marker上三角标记
-    ``'&lt;'``          triangle_left marker
-    ``'&gt;'``          triangle_right marker
-    ``'1'``          tri_down marker
-    ``'2'``          tri_up marker
-    ``'3'``          tri_left marker
-    ``'4'``          tri_right marker
-    ``'s'``          square marker
-    ``'p'``          pentagon marker
-    ``'*'``          star marker
-    ``'h'``          hexagon1 marker
-    ``'H'``          hexagon2 marker
-    ``'+'``          plus marker十字标记
-    ``'x'``          x markerx标记
-    ``'D'``          diamond marker
-    ``'d'``          thin_diamond marker
-    ``'|'``          vline marker
-    ``'_'``          hline marker
-    =============    ===============================
-=============    ===============================
-    character        description
-    =============    ===============================
-    ``'-'``          solid line style 实线
-    ``'--'``         dashed line style 虚线
-    ``'-.'``         dash-dot line style 点画线
-    ``':'``          dotted line style 点线
-    ``''``           无线条
-    =============    ===============================
-</code></pre>
-<p>线图可以使用标记强调数据点。因为matplotlib可以创建连续线图，在点之间进行插值，因此有时可能不太容易看出真实数据点的位置。标记也可以放到格式字符串中，但标记类型和线型必须放在颜色后面（见图9-6）：</p>
-<pre><code class="language-python">In [30]: from numpy.random import randn
-
-In [31]: plt.plot(randn(30).cumsum(), 'ko--')
-</code></pre>
-<figure data-type="image" tabindex="7"><img src="http://upload-images.jianshu.io/upload_images/7178691-404d816f3e1d6621.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-6 带有标记的线型图示例" loading="lazy"></figure>
-<p>还可以将其写成更为明确的形式：</p>
-<pre><code class="language-python">plot(randn(30).cumsum(), color='k', linestyle='dashed', marker='o')
-</code></pre>
-<p>在线型图中，非实际数据点默认是按线性方式插值的。可以通过drawstyle选项修改（见图9-7）：</p>
-<pre><code class="language-python">In [33]: data = np.random.randn(30).cumsum()
-
-In [34]: plt.plot(data, 'k--', label='Default')
-Out[34]: [&lt;matplotlib.lines.Line2D at 0x7fb624d86160&gt;]
-
-In [35]: plt.plot(data, 'k-', drawstyle='steps-post', label='steps-post')
-Out[35]: [&lt;matplotlib.lines.Line2D at 0x7fb624d869e8&gt;]
-
-In [36]: plt.legend(loc='best')
-</code></pre>
-<figure data-type="image" tabindex="8"><img src="http://upload-images.jianshu.io/upload_images/7178691-3ec7642e1a592f08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-7 不同drawstyle选项的线型图" loading="lazy"></figure>
-<p>你可能注意到运行上面代码时有输出&lt;matplotlib.lines.Line2D at ...&gt;。matplotlib会返回引用了新添加的子组件的对象。大多数时候，你可以放心地忽略这些输出。这里，因为我们传递了label参数到plot，我们可以创建一个plot图例，指明每条使用plt.legend的线。</p>
-<blockquote>
-<p>笔记：你必须调用plt.legend（或使用ax.legend，如果引用了轴的话）来创建图例，无论你绘图时是否传递label标签选项。</p>
-</blockquote>
-<h2 id="刻度-标签和图例">刻度、标签和图例</h2>
-<p>对于大多数的图表装饰项，其主要实现方式有二：使用过程型的pyplot接口（例如，matplotlib.pyplot）以及更为面向对象的原生matplotlib API。</p>
-<p>pyplot接口的设计目的就是交互式使用，含有诸如xlim、xticks和xticklabels之类的方法。它们分别控制图表的范围、刻度位置、刻度标签等。其使用方式有以下两种：</p>
-<ul>
-<li>调用时不带参数，则返回当前的参数值（例如，plt.xlim()返回当前的X轴绘图范围）。</li>
-<li>调用时带参数，则设置参数值（例如，plt.xlim([0,10])会将X轴的范围设置为0到10）。</li>
-</ul>
-<p>所有这些方法都是对当前或最近创建的AxesSubplot起作用的。它们各自对应subplot对象上的两个方法，以xlim为例，就是ax.get_xlim和ax.set_xlim。我更喜欢使用subplot的实例方法（因为我喜欢明确的事情，而且在处理多个subplot时这样也更清楚一些）。当然你完全可以选择自己觉得方便的那个。</p>
-<h2 id="设置标题-轴标签-刻度以及刻度标签">设置标题、轴标签、刻度以及刻度标签</h2>
-<p>为了说明自定义轴，我将创建一个简单的图像并绘制一段随机漫步（如图9-8所示）：</p>
-<pre><code class="language-python">In [37]: fig = plt.figure()
-
-In [38]: ax = fig.add_subplot(1, 1, 1)
-
-In [39]: ax.plot(np.random.randn(1000).cumsum())
-</code></pre>
-<figure data-type="image" tabindex="9"><img src="http://upload-images.jianshu.io/upload_images/7178691-caf9300dacb61fa4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-8 用于演示xticks的简单线型图（带有标签）" loading="lazy"></figure>
-<p>要改变x轴刻度，最简单的办法是使用set_xticks和set_xticklabels。前者告诉matplotlib要将刻度放在数据范围中的哪些位置，默认情况下，这些位置也就是刻度标签。但我们可以通过set_xticklabels将任何其他的值用作标签：</p>
-<pre><code class="language-python">In [40]: ticks = ax.set_xticks([0, 250, 500, 750, 1000])
-
-In [41]: labels = ax.set_xticklabels(['one', 'two', 'three', 'four', 'five'],
-   ....:                             rotation=30, fontsize='small')
-</code></pre>
-<p>rotation选项设定x刻度标签倾斜30度。最后，再用set_xlabel为X轴设置一个名称，并用set_title设置一个标题（见图9-9的结果）：</p>
-<pre><code class="language-python">In [42]: ax.set_title('My first matplotlib plot')
-Out[42]: &lt;matplotlib.text.Text at 0x7fb624d055f8&gt;
-
-In [43]: ax.set_xlabel('Stages')
-</code></pre>
-<figure data-type="image" tabindex="10"><img src="http://upload-images.jianshu.io/upload_images/7178691-741f968323bd818f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-9 用于演示xticks的简单线型图" loading="lazy"></figure>
-<p>Y轴的修改方式与此类似，只需将上述代码中的x替换为y即可。轴的类有集合方法，可以批量设定绘图选项。前面的例子，也可以写为：</p>
-<pre><code class="language-python">props = {
-    'title': 'My first matplotlib plot',
-    'xlabel': 'Stages'
-}
-ax.set(**props)
-</code></pre>
-<h2 id="添加图例">添加图例</h2>
-<p>图例（legend）是另一种用于标识图表元素的重要工具。添加图例的方式有多种。最简单的是在添加subplot的时候传入label参数：</p>
-<pre><code class="language-python">In [44]: from numpy.random import randn
-
-In [45]: fig = plt.figure(); ax = fig.add_subplot(1, 1, 1)
-
-In [46]: ax.plot(randn(1000).cumsum(), 'k', label='one')
-Out[46]: [&lt;matplotlib.lines.Line2D at 0x7fb624bdf860&gt;]
-
-In [47]: ax.plot(randn(1000).cumsum(), 'k--', label='two')
-Out[47]: [&lt;matplotlib.lines.Line2D at 0x7fb624be90f0&gt;]
-
-In [48]: ax.plot(randn(1000).cumsum(), 'k.', label='three')
-Out[48]: [&lt;matplotlib.lines.Line2D at 0x7fb624be9160&gt;]
-</code></pre>
-<p>在此之后，你可以调用ax.legend()或plt.legend()来自动创建图例（结果见图9-10）：</p>
-<pre><code class="language-python">In [49]: ax.legend(loc='best')
-</code></pre>
-<figure data-type="image" tabindex="11"><img src="http://upload-images.jianshu.io/upload_images/7178691-651ff89750c0a89b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-10 带有三条线以及图例的简单线型图" loading="lazy"></figure>
-<p>legend方法有几个其它的loc位置参数选项。请查看文档字符串（使用ax.legend?）。</p>
-<p>loc告诉matplotlib要将图例放在哪。如果你不是吹毛求疵的话，&quot;best&quot;是不错的选择，因为它会选择最不碍事的位置。要从图例中去除一个或多个元素，不传入label或传入label='<em>nolegend</em>'即可。（中文第一版这里把best错写成了beat）</p>
-<h2 id="注解以及在subplot上绘图">注解以及在Subplot上绘图</h2>
-<p>除标准的绘图类型，你可能还希望绘制一些子集的注解，可能是文本、箭头或其他图形等。注解和文字可以通过text、arrow和annotate函数进行添加。text可以将文本绘制在图表的指定坐标(x,y)，还可以加上一些自定义格式：</p>
-<pre><code class="language-python">ax.text(x, y, 'Hello world!',
-        family='monospace', fontsize=10)
-</code></pre>
-<p>注解中可以既含有文本也含有箭头。例如，我们根据最近的标准普尔500指数价格（来自Yahoo!Finance）绘制一张曲线图，并标出2008年到2009年金融危机期间的一些重要日期。你可以在Jupyter notebook的一个小窗中试验这段代码（图9-11是结果）：</p>
-<pre><code class="language-python">from datetime import datetime
-
-fig = plt.figure()
-ax = fig.add_subplot(1, 1, 1)
-
-data = pd.read_csv('examples/spx.csv', index_col=0, parse_dates=True)
-spx = data['SPX']
-
-spx.plot(ax=ax, style='k-')
-
-crisis_data = [
-    (datetime(2007, 10, 11), 'Peak of bull market'),
-    (datetime(2008, 3, 12), 'Bear Stearns Fails'),
-    (datetime(2008, 9, 15), 'Lehman Bankruptcy')
-]
-
-for date, label in crisis_data:
-    ax.annotate(label, xy=(date, spx.asof(date) + 75),
-                xytext=(date, spx.asof(date) + 225),
-                arrowprops=dict(facecolor='black', headwidth=4, width=2,
-                                headlength=4),
-                horizontalalignment='left', verticalalignment='top')
-
-# Zoom in on 2007-2010
-ax.set_xlim(['1/1/2007', '1/1/2011'])
-ax.set_ylim([600, 1800])
-
-ax.set_title('Important dates in the 2008-2009 financial crisis')
-</code></pre>
-<figure data-type="image" tabindex="12"><img src="http://upload-images.jianshu.io/upload_images/7178691-3127eaa51f5e4c2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-11 2008-2009年金融危机期间的重要日期" loading="lazy"></figure>
-<p>这张图中有几个重要的点要强调：ax.annotate方法可以在指定的x和y坐标轴绘制标签。我们使用set_xlim和set_ylim人工设定起始和结束边界，而不使用matplotlib的默认方法。最后，用ax.set_title添加图标标题。</p>
-<p>更多有关注解的示例，请访问matplotlib的在线示例库。</p>
-<p>图形的绘制要麻烦一些。matplotlib有一些表示常见图形的对象。这些对象被称为块（patch）。其中有些（如Rectangle和Circle），可以在matplotlib.pyplot中找到，但完整集合位于matplotlib.patches。</p>
-<p>要在图表中添加一个图形，你需要创建一个块对象shp，然后通过ax.add_patch(shp)将其添加到subplot中（如图9-12所示）：</p>
-<pre><code class="language-python">fig = plt.figure()
-ax = fig.add_subplot(1, 1, 1)
-
-rect = plt.Rectangle((0.2, 0.75), 0.4, 0.15, color='k', alpha=0.3)
-circ = plt.Circle((0.7, 0.2), 0.15, color='b', alpha=0.3)
-pgon = plt.Polygon([[0.15, 0.15], [0.35, 0.4], [0.2, 0.6]],
-                   color='g', alpha=0.5)
-
-ax.add_patch(rect)
-ax.add_patch(circ)
-ax.add_patch(pgon)
-</code></pre>
-<figure data-type="image" tabindex="13"><img src="http://upload-images.jianshu.io/upload_images/7178691-1f8a3d7a3a02d7d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-12 由三个块图形组成的图" loading="lazy"></figure>
-<p>如果查看许多常见图表对象的具体实现代码，你就会发现它们其实就是由块patch组装而成的。</p>
-<h2 id="将图表保存到文件">将图表保存到文件</h2>
-<p>利用plt.savefig可以将当前图表保存到文件。该方法相当于Figure对象的实例方法savefig。例如，要将图表保存为SVG文件，你只需输入：</p>
-<pre><code class="language-python">plt.savefig('figpath.svg')
-</code></pre>
-<p>文件类型是通过文件扩展名推断出来的。因此，如果你使用的是.pdf，就会得到一个PDF文件。我在发布图片时最常用到两个重要的选项是dpi（控制“每英寸点数”分辨率）和bbox_inches（可以剪除当前图表周围的空白部分）。要得到一张带有最小白边且分辨率为400DPI的PNG图片，你可以：</p>
-<pre><code class="language-python">plt.savefig('figpath.png', dpi=400, bbox_inches='tight')
-</code></pre>
-<p>savefig并非一定要写入磁盘，也可以写入任何文件型的对象，比如BytesIO：</p>
-<pre><code class="language-python">from io import BytesIO
-buffer = BytesIO()
-plt.savefig(buffer)
-plot_data = buffer.getvalue()
-</code></pre>
-<p>表9-2列出了savefig的其它选项。</p>
-<figure data-type="image" tabindex="14"><img src="http://upload-images.jianshu.io/upload_images/7178691-4bee796bf7262423.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表9-2 Figure.savefig的选项" loading="lazy"></figure>
-<h2 id="matplotlib配置">matplotlib配置</h2>
-<p>matplotlib自带一些配色方案，以及为生成出版质量的图片而设定的默认配置信息。幸运的是，几乎所有默认行为都能通过一组全局参数进行自定义，它们可以管理图像大小、subplot边距、配色方案、字体大小、网格类型等。一种Python编程方式配置系统的方法是使用rc方法。例如，要将全局的图像默认大小设置为10×10，你可以执行：</p>
-<pre><code class="language-python">plt.rc('figure', figsize=(10, 10))
-</code></pre>
-<p>rc的第一个参数是希望自定义的对象，如'figure'、'axes'、'xtick'、'ytick'、'grid'、'legend'等。其后可以跟上一系列的关键字参数。一个简单的办法是将这些选项写成一个字典：</p>
-<pre><code class="language-python">font_options = {'family' : 'monospace',
-                'weight' : 'bold',
-                'size'   : 'small'}
-plt.rc('font', **font_options)
-</code></pre>
-<p>要了解全部的自定义选项，请查阅matplotlib的配置文件matplotlibrc（位于matplotlib/mpl-data目录中）。如果对该文件进行了自定义，并将其放在你自己的.matplotlibrc目录中，则每次使用matplotlib时就会加载该文件。</p>
-<p>下一节，我们会看到，seaborn包有若干内置的绘图主题或类型，它们使用了matplotlib的内部配置。</p>
-<h1 id="92-使用pandas和seaborn绘图">9.2 使用pandas和seaborn绘图</h1>
-<p>matplotlib实际上是一种比较低级的工具。要绘制一张图表，你组装一些基本组件就行：数据展示（即图表类型：线型图、柱状图、盒形图、散布图、等值线图等）、图例、标题、刻度标签以及其他注解型信息。</p>
-<p>在pandas中，我们有多列数据，还有行和列标签。pandas自身就有内置的方法，用于简化从DataFrame和Series绘制图形。另一个库seaborn（https://seaborn.pydata.org/），由Michael Waskom创建的静态图形库。Seaborn简化了许多常见可视类型的创建。</p>
-<blockquote>
-<p>提示：引入seaborn会修改matplotlib默认的颜色方案和绘图类型，以提高可读性和美观度。即使你不使用seaborn API，你可能也会引入seaborn，作为提高美观度和绘制常见matplotlib图形的简化方法。</p>
-</blockquote>
-<h2 id="线型图">线型图</h2>
-<p>Series和DataFrame都有一个用于生成各类图表的plot方法。默认情况下，它们所生成的是线型图（如图9-13所示）：</p>
-<pre><code class="language-python">In [60]: s = pd.Series(np.random.randn(10).cumsum(), index=np.arange(0, 100, 10))
-
-In [61]: s.plot()
-</code></pre>
-<figure data-type="image" tabindex="15"><img src="http://upload-images.jianshu.io/upload_images/7178691-f28e5ab2ac94c7a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-13 简单的Series图表示例" loading="lazy"></figure>
-<p>该Series对象的索引会被传给matplotlib，并用以绘制X轴。可以通过use_index=False禁用该功能。X轴的刻度和界限可以通过xticks和xlim选项进行调节，Y轴就用yticks和ylim。plot参数的完整列表请参见表9-3。我只会讲解其中几个，剩下的就留给读者自己去研究了。</p>
-<figure data-type="image" tabindex="16"><img src="http://upload-images.jianshu.io/upload_images/7178691-6d9fbf863c09370a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="17"><img src="http://upload-images.jianshu.io/upload_images/7178691-44e50562aeb5eb49.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表9-3 Series.plot方法的参数" loading="lazy"></figure>
-<p>pandas的大部分绘图方法都有一个可选的ax参数，它可以是一个matplotlib的subplot对象。这使你能够在网格布局中更为灵活地处理subplot的位置。</p>
-<p>DataFrame的plot方法会在一个subplot中为各列绘制一条线，并自动创建图例（如图9-14所示）：</p>
-<pre><code class="language-python">In [62]: df = pd.DataFrame(np.random.randn(10, 4).cumsum(0),
-   ....:                   columns=['A', 'B', 'C', 'D'],
-   ....:                   index=np.arange(0, 100, 10))
-
-In [63]: df.plot()
-</code></pre>
-<figure data-type="image" tabindex="18"><img src="http://upload-images.jianshu.io/upload_images/7178691-a1234d5e5ee41a40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-14 简单的DataFrame绘图" loading="lazy"></figure>
-<p>plot属性包含一批不同绘图类型的方法。例如，df.plot()等价于df.plot.line()。后面会学习这些方法。</p>
-<blockquote>
-<p>笔记：plot的其他关键字参数会被传给相应的matplotlib绘图函数，所以要更深入地自定义图表，就必须学习更多有关matplotlib API的知识。</p>
-</blockquote>
-<p>DataFrame还有一些用于对列进行灵活处理的选项，例如，是要将所有列都绘制到一个subplot中还是创建各自的subplot。详细信息请参见表9-4。</p>
-<figure data-type="image" tabindex="19"><img src="http://upload-images.jianshu.io/upload_images/7178691-96651ecaa90f1c68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表9-4 专用于DataFrame的plot参数" loading="lazy"></figure>
-<blockquote>
-<p>注意： 有关时间序列的绘图，请见第11章。</p>
-</blockquote>
-<h2 id="柱状图">柱状图</h2>
-<p>plot.bar()和plot.barh()分别绘制水平和垂直的柱状图。这时，Series和DataFrame的索引将会被用作X（bar）或Y（barh）刻度（如图9-15所示）：</p>
-<pre><code class="language-python">In [64]: fig, axes = plt.subplots(2, 1)
-
-In [65]: data = pd.Series(np.random.rand(16), index=list('abcdefghijklmnop'))
-
-In [66]: data.plot.bar(ax=axes[0], color='k', alpha=0.7)
-Out[66]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7fb62493d470&gt;
-
-In [67]: data.plot.barh(ax=axes[1], color='k', alpha=0.7)
-</code></pre>
-<figure data-type="image" tabindex="20"><img src="http://upload-images.jianshu.io/upload_images/7178691-cd54c7ccfa3f0687.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-15 水平和垂直的柱状图" loading="lazy"></figure>
-<p>color='k'和alpha=0.7设定了图形的颜色为黑色，并使用部分的填充透明度。对于DataFrame，柱状图会将每一行的值分为一组，并排显示，如图9-16所示：</p>
-<pre><code class="language-python">In [69]: df = pd.DataFrame(np.random.rand(6, 4),
-   ....:                   index=['one', 'two', 'three', 'four', 'five', 'six'],
-   ....:                   columns=pd.Index(['A', 'B', 'C', 'D'], name='Genus'))
-
-In [70]: df
-Out[70]: 
-Genus         A         B         C         D
-one    0.370670  0.602792  0.229159  0.486744
-two    0.420082  0.571653  0.049024  0.880592
-three  0.814568  0.277160  0.880316  0.431326
-four   0.374020  0.899420  0.460304  0.100843
-five   0.433270  0.125107  0.494675  0.961825
-six    0.601648  0.478576  0.205690  0.560547
-
-In [71]: df.plot.bar()
-</code></pre>
-<figure data-type="image" tabindex="21"><img src="http://upload-images.jianshu.io/upload_images/7178691-bfc141acb37d99b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-16 DataFrame的柱状图" loading="lazy"></figure>
-<p>注意，DataFrame各列的名称&quot;Genus&quot;被用作了图例的标题。</p>
-<p>设置stacked=True即可为DataFrame生成堆积柱状图，这样每行的值就会被堆积在一起（如图9-17所示）：</p>
-<pre><code class="language-python">In [73]: df.plot.barh(stacked=True, alpha=0.5)
-</code></pre>
-<figure data-type="image" tabindex="22"><img src="http://upload-images.jianshu.io/upload_images/7178691-c19e4246eb897978.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-17 DataFrame的堆积柱状图" loading="lazy"></figure>
-<blockquote>
-<p>笔记：柱状图有一个非常不错的用法：利用value_counts图形化显示Series中各值的出现频率，比如s.value_counts().plot.bar()。</p>
-</blockquote>
-<p>再以本书前面用过的那个有关小费的数据集为例，假设我们想要做一张堆积柱状图以展示每天各种聚会规模的数据点的百分比。我用read_csv将数据加载进来，然后根据日期和聚会规模创建一张交叉表：</p>
-<pre><code class="language-python">In [75]: tips = pd.read_csv('examples/tips.csv')
-
-In [76]: party_counts = pd.crosstab(tips['day'], tips['size'])
-
-In [77]: party_counts
-Out[77]: 
-size  1   2   3   4  5  6
-day                      
-Fri   1  16   1   1  0  0
-Sat   2  53  18  13  1  0
-Sun   0  39  15  18  3  1
-Thur  1  48   4   5  1  3
-
-# Not many 1- and 6-person parties
-In [78]: party_counts = party_counts.loc[:, 2:5]
-</code></pre>
-<p>然后进行规格化，使得各行的和为1，并生成图表（如图9-18所示）：</p>
-<pre><code class="language-python"># Normalize to sum to 1
-In [79]: party_pcts = party_counts.div(party_counts.sum(1), axis=0)
-
-In [80]: party_pcts
-Out[80]: 
-size         2         3         4         5
-day                                         
-Fri   0.888889  0.055556  0.055556  0.000000
-Sat   0.623529  0.211765  0.152941  0.011765
-Sun   0.520000  0.200000  0.240000  0.040000
-Thur  0.827586  0.068966  0.086207  0.017241
-
-In [81]: party_pcts.plot.bar()
-</code></pre>
-<figure data-type="image" tabindex="23"><img src="http://upload-images.jianshu.io/upload_images/7178691-2918f67936823834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-18 每天各种聚会规模的比例" loading="lazy"></figure>
-<p>于是，通过该数据集就可以看出，聚会规模在周末会变大。</p>
-<p>对于在绘制一个图形之前，需要进行合计的数据，使用seaborn可以减少工作量。用seaborn来看每天的小费比例（图9-19是结果）：</p>
-<pre><code class="language-python">In [83]: import seaborn as sns
-
-In [84]: tips['tip_pct'] = tips['tip'] / (tips['total_bill'] - tips['tip'])
-
-In [85]: tips.head()
-Out[85]: 
-   total_bill   tip smoker  day    time  size   tip_pct
-0       16.99  1.01     No  Sun  Dinner     2  0.063204
-1       10.34  1.66     No  Sun  Dinner     3  0.191244
-2       21.01  3.50     No  Sun  Dinner     3  0.199886
-3       23.68  3.31     No  Sun  Dinner     2  0.162494
-4       24.59  3.61     No  Sun  Dinner     4  0.172069
-
-In [86]: sns.barplot(x='tip_pct', y='day', data=tips, orient='h')
-</code></pre>
-<figure data-type="image" tabindex="24"><img src="http://upload-images.jianshu.io/upload_images/7178691-c33e8b3add99904b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-19 小费的每日比例，带有误差条" loading="lazy"></figure>
-<p>seaborn的绘制函数使用data参数，它可能是pandas的DataFrame。其它的参数是关于列的名字。因为一天的每个值有多次观察，柱状图的值是tip_pct的平均值。绘制在柱状图上的黑线代表95%置信区间（可以通过可选参数配置）。</p>
-<p>seaborn.barplot有颜色选项，使我们能够通过一个额外的值设置（见图9-20）：</p>
-<pre><code class="language-python">In [88]: sns.barplot(x='tip_pct', y='day', hue='time', data=tips, orient='h')
-</code></pre>
-<figure data-type="image" tabindex="25"><img src="http://upload-images.jianshu.io/upload_images/7178691-06abe2f070222115.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-20 根据天和时间的小费比例" loading="lazy"></figure>
-<p>注意，seaborn已经自动修改了图形的美观度：默认调色板，图形背景和网格线的颜色。你可以用seaborn.set在不同的图形外观之间切换：</p>
-<pre><code class="language-python">In [90]: sns.set(style=&quot;whitegrid&quot;)
-</code></pre>
-<h2 id="直方图和密度图">直方图和密度图</h2>
-<p>直方图（histogram）是一种可以对值频率进行离散化显示的柱状图。数据点被拆分到离散的、间隔均匀的面元中，绘制的是各面元中数据点的数量。再以前面那个小费数据为例，通过在Series使用plot.hist方法，我们可以生成一张“小费占消费总额百分比”的直方图（如图9-21所示）：</p>
-<pre><code class="language-python">In [92]: tips['tip_pct'].plot.hist(bins=50)
-</code></pre>
-<figure data-type="image" tabindex="26"><img src="http://upload-images.jianshu.io/upload_images/7178691-255279376f7649a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-21 小费百分比的直方图" loading="lazy"></figure>
-<p>与此相关的一种图表类型是密度图，它是通过计算“可能会产生观测数据的连续概率分布的估计”而产生的。一般的过程是将该分布近似为一组核（即诸如正态分布之类的较为简单的分布）。因此，密度图也被称作KDE（Kernel Density Estimate，核密度估计）图。使用plot.kde和标准混合正态分布估计即可生成一张密度图（见图9-22）：</p>
-<pre><code class="language-python">In [94]: tips['tip_pct'].plot.density()
-</code></pre>
-<figure data-type="image" tabindex="27"><img src="http://upload-images.jianshu.io/upload_images/7178691-ee929d033159516a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-22  小费百分比的密度图" loading="lazy"></figure>
-<p>seaborn的distplot方法绘制直方图和密度图更加简单，还可以同时画出直方图和连续密度估计图。作为例子，考虑一个双峰分布，由两个不同的标准正态分布组成（见图9-23）：</p>
-<pre><code class="language-python">In [96]: comp1 = np.random.normal(0, 1, size=200)
-
-In [97]: comp2 = np.random.normal(10, 2, size=200)
-
-In [98]: values = pd.Series(np.concatenate([comp1, comp2]))
-
-In [99]: sns.distplot(values, bins=100, color='k')
-</code></pre>
-<figure data-type="image" tabindex="28"><img src="http://upload-images.jianshu.io/upload_images/7178691-975f04d750c4efe2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-23 标准混合密度估计的标准直方图" loading="lazy"></figure>
-<h2 id="散布图或点图">散布图或点图</h2>
-<p>点图或散布图是观察两个一维数据序列之间的关系的有效手段。在下面这个例子中，我加载了来自statsmodels项目的macrodata数据集，选择了几个变量，然后计算对数差：</p>
-<pre><code class="language-python">In [100]: macro = pd.read_csv('examples/macrodata.csv')
-
-In [101]: data = macro[['cpi', 'm1', 'tbilrate', 'unemp']]
-
-In [102]: trans_data = np.log(data).diff().dropna()
-
-In [103]: trans_data[-5:]
-Out[103]: 
-          cpi        m1  tbilrate     unemp
-198 -0.007904  0.045361 -0.396881  0.105361
-199 -0.021979  0.066753 -2.277267  0.139762
-200  0.002340  0.010286  0.606136  0.160343
-201  0.008419  0.037461 -0.200671  0.127339
-202  0.008894  0.012202 -0.405465  0.042560
-</code></pre>
-<p>然后可以使用seaborn的regplot方法，它可以做一个散布图，并加上一条线性回归的线（见图9-24）：</p>
-<pre><code class="language-python">In [105]: sns.regplot('m1', 'unemp', data=trans_data)
-Out[105]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7fb613720be0&gt;
-
-In [106]: plt.title('Changes in log %s versus log %s' % ('m1', 'unemp'))
-</code></pre>
-<figure data-type="image" tabindex="29"><img src="http://upload-images.jianshu.io/upload_images/7178691-2133d20739478a80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-24 seaborn的回归/散布图" loading="lazy"></figure>
-<p>在探索式数据分析工作中，同时观察一组变量的散布图是很有意义的，这也被称为散布图矩阵（scatter plot matrix）。纯手工创建这样的图表很费工夫，所以seaborn提供了一个便捷的pairplot函数，它支持在对角线上放置每个变量的直方图或密度估计（见图9-25）：</p>
-<pre><code class="language-python">In [107]: sns.pairplot(trans_data, diag_kind='kde', plot_kws={'alpha': 0.2})
-</code></pre>
-<figure data-type="image" tabindex="30"><img src="http://upload-images.jianshu.io/upload_images/7178691-20aa530a44e06f61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-25 statsmodels macro data的散布图矩阵" loading="lazy"></figure>
-<p>你可能注意到了plot_kws参数。它可以让我们传递配置选项到非对角线元素上的图形使用。对于更详细的配置选项，可以查阅seaborn.pairplot文档字符串。</p>
-<p>##分面网格（facet grid）和类型数据<br>
-要是数据集有额外的分组维度呢？有多个分类变量的数据可视化的一种方法是使用小面网格。seaborn有一个有用的内置函数factorplot，可以简化制作多种分面图（见图9-26）：</p>
-<pre><code class="language-python"> In [108]: sns.factorplot(x='day', y='tip_pct', hue='time', col='smoker',
-   .....:                kind='bar', data=tips[tips.tip_pct &lt; 1])
-</code></pre>
-<figure data-type="image" tabindex="31"><img src="http://upload-images.jianshu.io/upload_images/7178691-737ba19a0cbdd46f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-26 按照天/时间/吸烟者的小费百分比" loading="lazy"></figure>
-<p>除了在分面中用不同的颜色按时间分组，我们还可以通过给每个时间值添加一行来扩展分面网格：</p>
-<pre><code class="language-python">In [109]: sns.factorplot(x='day', y='tip_pct', row='time',
-   .....:                col='smoker',
-   .....:                kind='bar', data=tips[tips.tip_pct &lt; 1])
-</code></pre>
-<figure data-type="image" tabindex="32"><img src="http://upload-images.jianshu.io/upload_images/7178691-4e52192441c609f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-27 按天的tip_pct，通过time/smoker分面" loading="lazy"></figure>
-<p>factorplot支持其它的绘图类型，你可能会用到。例如，盒图（它可以显示中位数，四分位数，和异常值）就是一个有用的可视化类型（见图9-28）：</p>
-<pre><code class="language-python">In [110]: sns.factorplot(x='tip_pct', y='day', kind='box',
-   .....:                data=tips[tips.tip_pct &lt; 0.5])
-</code></pre>
-<figure data-type="image" tabindex="33"><img src="http://upload-images.jianshu.io/upload_images/7178691-356fb27a7c658920.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图9-28 按天的tip_pct的盒图" loading="lazy"></figure>
-<p>使用更通用的seaborn.FacetGrid类，你可以创建自己的分面网格。请查阅seaborn的文档（https://seaborn.pydata.org/）。</p>
-<h1 id="93-其它的python可视化工具">9.3 其它的Python可视化工具</h1>
-<p>与其它开源库类似，Python创建图形的方式非常多（根本罗列不完）。自从2010年，许多开发工作都集中在创建交互式图形以便在Web上发布。利用工具如Boken（https://bokeh.pydata.org/en/latest/）和Plotly（https://github.com/plotly/plotly.py），现在可以创建动态交互图形，用于网页浏览器。</p>
-<p>对于创建用于打印或网页的静态图形，我建议默认使用matplotlib和附加的库，比如pandas和seaborn。对于其它数据可视化要求，学习其它的可用工具可能是有用的。我鼓励你探索绘图的生态系统，因为它将持续发展。</p>
-<h1 id="94-总结">9.4 总结</h1>
-<p>本章的目的是熟悉一些基本的数据可视化操作，使用pandas，matplotlib，和seaborn。如果视觉显示数据分析的结果对你的工作很重要，我鼓励你寻求更多的资源来了解更高效的数据可视化。这是一个活跃的研究领域，你可以通过在线和纸质的形式学习许多优秀的资源。</p>
-<p>下一章，我们将重点放在pandas的数据聚合和分组操作上。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Pycharm常用快捷键及技巧(macOS)]]></title>
-        <id>https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos</id>
-        <link href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos">
-        </link>
-        <updated>2020-01-31T16:42:34.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="mac键盘符号和修饰键说明">Mac键盘符号和修饰键说明</h1>
-<ul>
-<li><code>⌘</code>:Command</li>
-<li><code>⇧</code>:Shift</li>
-<li><code>⌥</code>:Option</li>
-<li><code>⌃</code>:Control</li>
-<li><code>↩︎</code>:Return/Enter</li>
-<li><code>⌫</code>:Delete</li>
-<li><code>⌦</code>:向前删除键（Fn+Delete）</li>
-<li><code>↑</code>:上箭头</li>
-<li><code>↓</code>:下箭头</li>
-<li><code>←</code>:左箭头</li>
-<li><code>→</code>:右箭头</li>
-<li><code>⇞</code>:Page Up（Fn+↑）</li>
-<li><code>⇟</code>:Page Down（Fn+↓）</li>
-<li><code>Home</code>:Fn + ←</li>
-<li><code>End</code>:Fn + →</li>
-<li><code>⇥</code>:右制表符（Tab键）</li>
-<li><code>⇤</code>:左制表符（Shift+Tab）</li>
-<li><code>⎋</code>:Escape (Esc)</li>
-<li>一直按住<code>fn</code>可调出F1~F10</li>
-</ul>
-<h1 id="editing编辑">Editing（编辑）</h1>
-<ul>
-<li><code>⌘Z</code>:撤销操作</li>
-<li><code>⌘Y</code>:删除整行</li>
-<li><code>⇧F6</code>:重命名文件</li>
-<li><code>⌘S</code>:保存所有</li>
-<li><code>⌦</code>:删除文件（Fn+Delete）</li>
-<li><code>⌘⌥L</code>:格式化代码</li>
-<li><code>Home</code>:Fn + ←，跳转到行首</li>
-<li><code>End</code>:Fn + →，跳转到行末</li>
-<li><code>⇧↑/⇧↓</code>:向上/向下选中行</li>
-<li><code>⌘D</code>: 复制当前行或选定的块</li>
-<li><code>⌘/</code>:注释/取消注释与行注释</li>
-<li><code>⌘⌥/</code>:注释/取消注释与块注释</li>
-<li><code>⌘J</code>:插入自定义动态代码模板</li>
-<li><code>⌃Space</code>:基本的代码补全（补全任何类、方法、变量）</li>
-<li><code>⌃⇧Space</code>:智能代码补全（过滤器方法列表和变量的预期类型）</li>
-<li><code>⇧↩</code>:开始新的一行</li>
-<li><code>⌘⇧U</code>:大小写切换,光标在行内任意位置都能另起一行，且不破坏当行结构</li>
-<li><code>⌘⇧↩</code>:自动结束代码，行末自动添加分号</li>
-<li><code>⌘P</code>:显示方法的参数信息</li>
-<li><code>⌃J</code>:快速查看文档</li>
-<li><code>⇧F1</code>:查看外部文档（在某些代码上会触发打开浏览器显示相关文档）</li>
-<li><code>⌘F1</code>:在错误或警告处显示具体描述信息</li>
-<li><code>⌘N, ⌃↩, ⌃N</code>:生成代码（getter、setter、构造函数、hashCode/equals,toString）</li>
-<li><code>⌥↑</code>:连续选中代码块</li>
-<li><code>⌥↓</code>:减少当前选中的代码块</li>
-<li><code>⌥↩</code>:显示意向动作和快速修复代码</li>
-<li><code>⌘⇧] / ⌘⇧[</code>:选择直到代码块结束/开始</li>
-<li><code>⌘+ / ⌘-</code>:展开 / 折叠代码块</li>
-<li><code>⌘⇧+</code>:展开所有代码块</li>
-<li><code>⌘⇧-</code>:折叠所有代码块</li>
-</ul>
-<h1 id="searchreplace查询替换">Search/Replace（查询/替换）</h1>
-<ul>
-<li><code>Double ⇧</code>:查询任何东西</li>
-<li><code>⌘F</code>:文件内查找</li>
-</ul>
-<h1 id="compile-and-run编译和运行">Compile and Run（编译和运行）</h1>
-<ul>
-<li><code>⌃⇧F10</code>:Run</li>
-<li><code>⌃⇧F9</code>:Debug</li>
-</ul>
-<h1 id="navigation导航">Navigation（导航）</h1>
-<ul>
-<li><code>⌘B</code>:进入光标所在的方法/变量的接口或是定义处</li>
-<li><code>⌘⌥B</code>:跳转到实现处，在某个调用的方法名上使用会跳到具体的实现处，可以跳过接口</li>
-<li><code>⌥ Space, ⌘Y</code>:快速打开光标所在方法、类的定义</li>
-<li><code>⌃⇧B</code>:跳转到类型声明处</li>
-<li><code>⌘U</code>:前往当前光标所在方法的父类的方法 / 接口定义</li>
-<li><code>⌃H</code>:显示当前类的层次结构</li>
-<li><code>⌘⇧H</code>:显示方法层次结构</li>
-<li><code>⌃⌥H</code>:显示调用层次结构</li>
-</ul>
-<h1 id="调试">调试</h1>
-<ul>
-<li><code>step over</code>:在单步执行时，在函数内遇到子函数时不会进入子函数内单步执行，而是将子函数整个执行完再停止，也就是把子函数整个作为一步。在不存在子函数的情况下是和step into效果一样的。简单的说就是，<strong>程序代码越过子函数，但子函数会执行，且不进入</strong>。</li>
-<li><code>step into</code>:在单步执行时，遇到子函数就进入并且继续单步执行，<strong>有的会跳到源代码里面去执行</strong>。</li>
-<li><code>step into my code</code>:在单步执行时，遇到子函数就进入并且继续单步执行，<strong>不会进入到源码中</strong>。</li>
-<li><code>step out</code>:假如进入了一个函数体中，你看了两行代码，不想看了，跳出当前函数体内，返回到调用此函数的地方，即使用此功能即可。</li>
-<li><code>Resume program</code>:继续恢复程序，直接运行到下一断点处。跳过不想看的地方，直接设置下一个断点，然后<code>Resume program</code>。</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[PyTorch常用代码段]]></title>
-        <id>https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan</id>
-        <link href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan">
-        </link>
-        <updated>2020-01-30T19:09:37.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1基本配置">1.基本配置</h1>
-<h2 id="导入包和版本查询">导入包和版本查询</h2>
-<pre><code class="language-Python">import torch
-import torch.nn as nn
-import torchvision
-print(torch.__version__)# PyTorch version
-print(torch.version.cuda)#Corresponding CUDA version
-print(torch.backends.cudnn.version())#Corresponding cuDNN version
-print(torch.cuda.get_device_name(0))#GPU type
-</code></pre>
-<h2 id="可复现性">可复现性</h2>
-<p>在硬件设备（CPU、GPU）不同时，完全的可复现性无法保证，即使随机种子相同。但是，在同一个设备上，应该保证可复现性。具体做法是，在程序开始的时候固定torch的随机种子，同时也把numpy的随机种子固定。</p>
-<pre><code class="language-Python">np.random.seed(0)
-torch.manual_seed(0)
-torch.cuda.manual_seed_all(0)
-</code></pre>
-<h2 id="显卡设置">显卡设置</h2>
-<p>如果只需要一张显卡</p>
-<pre><code class="language-Python"># Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-</code></pre>
-<p>如果需要指定多张显卡，比如0，1号显卡。</p>
-<pre><code class="language-Python">import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
-</code></pre>
-<p>也可以在命令行运行代码时设置显卡：</p>
-<pre><code>CUDA_VISIBLE_DEVICES=0,1 python train.py
-</code></pre>
-<p>清除显存:</p>
-<pre><code class="language-Python">torch.cuda.empty_cache()
-</code></pre>
-<p>也可以使用在命令行重置GPU的指令：</p>
-<pre><code>nvidia-smi --gpu-reset -i [gpu_id]
-</code></pre>
-<p>或在命令行可以先使用ps找到程序的PID，再使用kill结束该进程</p>
-<pre><code class="language-python">ps aux | grep python
-kill -9 [pid]
-</code></pre>
-<h2 id="设置为cudnn-benchmark模式">设置为cuDNN benchmark模式</h2>
-<p>Benchmark模式会提升计算速度，但是由于计算中有随机性，每次网络前馈结果略有差异。</p>
-<pre><code class="language-python">torch.backends.cudnn.benchmark = True
-</code></pre>
-<p>如果想要避免这种结果波动，设置</p>
-<pre><code class="language-python">torch.backends.cudnn.deterministic = True
-</code></pre>
-<h1 id="2张量tensor处理">2.张量(Tensor)处理</h1>
-<h2 id="张量基本信息">张量基本信息</h2>
-<pre><code class="language-Python">tensor = torch.randn(3,4,5)
-print(tensor.type())  # 数据类型
-print(tensor.size())  # 张量的shape，是个元组
-print(tensor.dim())   # 维度的数量
-</code></pre>
-<h2 id="命名变量">命名变量</h2>
-<pre><code class="language-Python"># 在PyTorch 1.3之前，需要使用注释
-# Tensor[N, C, H, W]
-images = torch.randn(32, 3, 56, 56)
-images.sum(dim=1)
-images.select(dim=1, index=0)
-
-# PyTorch 1.3之后
-NCHW = [‘N’, ‘C’, ‘H’, ‘W’]
-images = torch.randn(32, 3, 56, 56, names=NCHW)
-images.sum('C')
-images.select('C', index=0)
-# 也可以这么设置
-tensor = torch.rand(3,4,1,2,names=('C', 'N', 'H', 'W'))
-# 使用align_to可以对维度方便地排序
-tensor = tensor.align_to('N', 'C', 'H', 'W')
-</code></pre>
-<h2 id="数据类型转换">数据类型转换</h2>
-<pre><code class="language-Python"># 设置默认类型，pytorch中的FloatTensor远远快于DoubleTensor
-torch.set_default_tensor_type(torch.FloatTensor)
-
-# 类型转换
-tensor = tensor.cuda()
-tensor = tensor.cpu()
-tensor = tensor.float()
-tensor = tensor.long()
-</code></pre>
-<h2 id="torchtensor与npndarray转换">torch.Tensor与np.ndarray转换</h2>
-<p>除了CharTensor，其他所有CPU上的张量都支持转换为numpy格式然后再转换回来。</p>
-<pre><code class="language-Python">ndarray = tensor.cpu().numpy()
-tensor = torch.from_numpy(ndarray).float()
-tensor = torch.from_numpy(ndarray.copy()).float() # If ndarray has negative stride.
-</code></pre>
-<h2 id="从只包含一个元素的张量中提取值">从只包含一个元素的张量中提取值</h2>
-<p><code>value = torch.rand(1).item()</code></p>
-<h2 id="张量形变">张量形变</h2>
-<pre><code class="language-Python"># 在将卷积层输入全连接层的情况下通常需要对张量做形变处理，
-# 相比torch.view，torch.reshape可以自动处理输入张量不连续的情况。
-tensor = torch.rand(2,3,4)
-shape = (6, 4)
-tensor = torch.reshape(tensor, shape)
-</code></pre>
-<h2 id="张量复制">张量复制</h2>
-<pre><code class="language-Python"># Operation                 |  New/Shared memory | Still in computation graph |
-tensor.clone()            # |        New         |          Yes               |
-tensor.detach()           # |      Shared        |          No                |
-tensor.detach.clone()()   # |        New         |          No                |
-</code></pre>
-<h2 id="张量拼接">张量拼接</h2>
-<pre><code class="language-Python">'''
-注意torch.cat和torch.stack的区别在于torch.cat沿着给定的维度拼接，
-而torch.stack会新增一维。例如当参数是3个10x5的张量，torch.cat的结果是30x5的张量，
-而torch.stack的结果是3x10x5的张量。
-'''
-tensor = torch.cat(list_of_tensors, dim=0)
-tensor = torch.stack(list_of_tensors, dim=0)
-</code></pre>
-<h2 id="将整数标签转为one-hot编码">将整数标签转为one-hot编码</h2>
-<pre><code class="language-python"># pytorch的标记默认从0开始
-tensor = torch.tensor([0, 2, 1, 3])
-N = tensor.size(0)
-num_classes = 4
-one_hot = torch.zeros(N, num_classes).long()
-one_hot.scatter_(dim=1, index=torch.unsqueeze(tensor, dim=1), src=torch.ones(N, num_classes).long())
-</code></pre>
-<h2 id="得到非零元素">得到非零元素</h2>
-<pre><code class="language-python">torch.nonzero(tensor)               # index of non-zero elements,包含点坐标的列表向量
-torch.nonzero(tensor==0)            # index of zero elements
-torch.nonzero(tensor).size(0)       # number of non-zero elements
-torch.nonzero(tensor == 0).size(0)  # number of zero elements
-</code></pre>
-<h2 id="判断两个张量相等">判断两个张量相等</h2>
-<pre><code class="language-Python">torch.allclose(tensor1, tensor2)  # float tensor
-torch.equal(tensor1, tensor2)     # int tensor
-</code></pre>
-<h2 id="张量扩展">张量扩展</h2>
-<pre><code class="language-python"># Expand tensor of shape 64*512 to shape 64*512*7*7.
-tensor = torch.rand(64,512)
-torch.reshape(tensor, (64, 512, 1, 1)).expand(64, 512, 7, 7)
-</code></pre>
-<h2 id="矩阵乘法">矩阵乘法</h2>
-<pre><code class="language-python"># Matrix multiplcation: (m*n) * (n*p) * -&gt; (m*p).
-result = torch.mm(tensor1, tensor2)
-
-# Batch matrix multiplication: (b*m*n) * (b*n*p) -&gt; (b*m*p)
-result = torch.bmm(tensor1, tensor2)
-
-# Element-wise multiplication.
-result = tensor1 * tensor2
-</code></pre>
-<h2 id="计算两组数据之间的两两欧式距离">计算两组数据之间的两两欧式距离</h2>
-<p>利用broadcast机制</p>
-<pre><code class="language-python">dist = torch.sqrt(torch.sum((X1[:,None,:] - X2) ** 2, dim=2))
-</code></pre>
-<h1 id="3模型定义和操作">3.模型定义和操作</h1>
-<h2 id="计算模型整体参数量">计算模型整体参数量</h2>
-<pre><code class="language-python">num_parameters = sum(torch.numel(parameter) for parameter in model.parameters())
-</code></pre>
-<h2 id="查看网络中的参数">查看网络中的参数</h2>
-<p>可以通过model.state_dict()或者model.named_parameters()函数查看现在的全部可训练参数（包括通过继承得到的父类中的参数）</p>
-<pre><code class="language-python">params = list(model.named_parameters())
-(name, param) = params[28]
-print(name)
-print(param.grad)
-print('-------------------------------------------------')
-(name2, param2) = params[29]
-print(name2)
-print(param2.grad)
-print('----------------------------------------------------')
-(name1, param1) = params[30]
-print(name1)
-print(param1.grad)
-</code></pre>
-<h2 id="类似-keras-的-modelsummary-输出模型信息使用pytorch-summary">类似 Keras 的 model.summary() 输出模型信息（使用pytorch-summary ）</h2>
-<h2 id="模型权重初始化">模型权重初始化</h2>
-<p>注意 model.modules() 和 model.children() 的区别：model.modules() 会迭代地遍历模型的所有子层，而 model.children() 只会遍历模型下的一层。</p>
-<pre><code class="language-python"># Common practise for initialization.
-for layer in model.modules():
-    if isinstance(layer, torch.nn.Conv2d):
-        torch.nn.init.kaiming_normal_(layer.weight, mode='fan_out',
-                                      nonlinearity='relu')
-        if layer.bias is not None:
-            torch.nn.init.constant_(layer.bias, val=0.0)
-    elif isinstance(layer, torch.nn.BatchNorm2d):
-        torch.nn.init.constant_(layer.weight, val=1.0)
-        torch.nn.init.constant_(layer.bias, val=0.0)
-    elif isinstance(layer, torch.nn.Linear):
-        torch.nn.init.xavier_normal_(layer.weight)
-        if layer.bias is not None:
-            torch.nn.init.constant_(layer.bias, val=0.0)
-
-# Initialization with given tensor.
-layer.weight = torch.nn.Parameter(tensor)
-</code></pre>
-<h2 id="提取模型中的某一层">提取模型中的某一层</h2>
-<p>modules()会返回模型中所有模块的迭代器，它能够访问到最内层，比如self.layer1.conv1这个模块，还有一个与它们相对应的是name_children()属性以及named_modules(),这两个不仅会返回模块的迭代器，还会返回网络层的名字。</p>
-<pre><code class="language-python"># 取模型中的前两层
-new_model = nn.Sequential(*list(model.children())[:2] 
-# 如果希望提取出模型中的所有卷积层，可以像下面这样操作：
-for layer in model.named_modules():
-    if isinstance(layer[1],nn.Conv2d):
-         conv_model.add_module(layer[0],layer[1])
-</code></pre>
-<h2 id="部分层使用预训练模型">部分层使用预训练模型</h2>
-<p>注意如果保存的模型是 torch.nn.DataParallel，则当前的模型也需要是</p>
-<pre><code class="language-python">model.load_state_dict(torch.load('model.pth'), strict=False)
-</code></pre>
-<h1 id="4模型训练和测试">4.模型训练和测试</h1>
-<h2 id="自定义loss">自定义loss</h2>
-<p>继承torch.nn.Module类写自己的loss。</p>
-<pre><code class="language-python">class MyLoss(torch.nn.Moudle):
-    def __init__(self):
-        super(MyLoss, self).__init__()
         
-    def forward(self, x, y):
-        loss = torch.mean((x - y) ** 2)
-        return loss
-</code></pre>
-<h2 id="标签平滑label-smoothing">标签平滑（label smoothing）</h2>
-<p>写一个label_smoothing.py的文件，然后在训练代码里引用，用LSR代替交叉熵损失即可。label_smoothing.py内容如下：</p>
-<pre><code class="language-python">import torch
-import torch.nn as nn
-
-
-class LSR(nn.Module):
-
-    def __init__(self, e=0.1, reduction='mean'):
-        super().__init__()
-
-        self.log_softmax = nn.LogSoftmax(dim=1)
-        self.e = e
-        self.reduction = reduction
-    
-    def _one_hot(self, labels, classes, value=1):
-        &quot;&quot;&quot;
-            Convert labels to one hot vectors
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://bailingnan.github.io/tag/EEn1iICIN">
+            <span class="flex-auto">Data Science</span>
+          </a>
         
-        Args:
-            labels: torch tensor in format [label1, label2, label3, ...]
-            classes: int, number of classes
-            value: label value in one hot vector, default to 1
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/dai-an-zhuang-bao">
+                <h3 class="post-title">
+                  待安装包
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
         
-        Returns:
-            return one hot format labels in shape [batchsize, classes]
-        &quot;&quot;&quot;
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-        one_hot = torch.zeros(labels.size(0), classes)
+<div id="gitalk-container"></div>
 
-        #labels and value_added  size must match
-        labels = labels.view(labels.size(0), -1)
-        value_added = torch.Tensor(labels.size(0), 1).fill_(value)
+<script>
 
-        value_added = value_added.to(labels.device)
-        one_hot = one_hot.to(labels.device)
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
 
-        one_hot.scatter_add_(1, labels, value_added)
+  gitalk.render('gitalk-container')
 
-        return one_hot
+</script>
 
-    def _smooth_label(self, target, length, smooth_factor):
-        &quot;&quot;&quot;convert targets to one-hot format, and smooth
-        them.
-        Args:
-            target: target in form with [label1, label2, label_batchsize]
-            length: length of one-hot format(number of classes)
-            smooth_factor: smooth factor for label smooth
+          
+
+          
         
-        Returns:
-            smoothed labels in one hot format
-        &quot;&quot;&quot;
-        one_hot = self._one_hot(target, length, value=1 - smooth_factor)
-        one_hot += smooth_factor / (length - 1)
 
-        return one_hot.to(target.device)
+      </div>
+    </div>
 
-    def forward(self, x, target):
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
 
-        if x.size(0) != target.size(0):
-            raise ValueError('Expected input batchsize ({}) to match target batch_size({})'
-                    .format(x.size(0), target.size(0)))
+Prism.highlightAll()
 
-        if x.dim() &lt; 2:
-            raise ValueError('Expected input tensor to have least 2 dimensions(got {})'
-                    .format(x.size(0)))
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-        if x.dim() != 2:
-            raise ValueError('Only 2 dimension tensor are implemented, (got {})'
-                    .format(x.size()))
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
 
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
 
-        smoothed_target = self._smooth_label(target, x.size(1), self.e)
-        x = self.log_softmax(x)
-        loss = torch.sum(- x * smoothed_target, dim=1)
-
-        if self.reduction == 'none':
-            return loss
-        
-        elif self.reduction == 'sum':
-            return torch.sum(loss)
-        
-        elif self.reduction == 'mean':
-            return torch.mean(loss)
-        
-        else:
-            raise ValueError('unrecognized option, expect reduction to be one of none, mean, sum')
-</code></pre>
-<p>或者直接在训练文件里做label smoothing</p>
-<pre><code class="language-python">for images, labels in train_loader:
-    images, labels = images.cuda(), labels.cuda()
-    N = labels.size(0)
-    # C is the number of classes.
-    smoothed_labels = torch.full(size=(N, C), fill_value=0.1 / (C - 1)).cuda()
-    smoothed_labels.scatter_(dim=1, index=torch.unsqueeze(labels, dim=1), value=0.9)
-
-    score = model(images)
-    log_prob = torch.nn.functional.log_softmax(score, dim=1)
-    loss = -torch.sum(log_prob * smoothed_labels) / N
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()    
-</code></pre>
-<h2 id="l1-正则化">L1 正则化</h2>
-<pre><code class="language-python">l1_regularization = torch.nn.L1Loss(reduction='sum')
-loss = ...  # Standard cross-entropy loss
-for param in model.parameters():
-    loss += torch.sum(torch.abs(param))
-loss.backward()
-</code></pre>
-<h2 id="不对偏置项进行权重衰减weight-decay">不对偏置项进行权重衰减（weight decay）</h2>
-<p>pytorch里的weight decay相当于l2正则</p>
-<pre><code class="language-python">bias_list = (param for name, param in model.named_parameters() if name[-4:] == 'bias')
-others_list = (param for name, param in model.named_parameters() if name[-4:] != 'bias')
-parameters = [{'parameters': bias_list, 'weight_decay': 0},                
-              {'parameters': others_list}]
-optimizer = torch.optim.SGD(parameters, lr=1e-2, momentum=0.9, weight_decay=1e-4)
-</code></pre>
-<h2 id="梯度裁剪gradient-clipping">梯度裁剪（gradient clipping）</h2>
-<pre><code class="language-python">torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=20)
-</code></pre>
-<h2 id="得到当前学习率">得到当前学习率</h2>
-<pre><code class="language-python"># If there is one global learning rate (which is the common case).
-lr = next(iter(optimizer.param_groups))['lr']
-
-# If there are multiple learning rates for different layers.
-all_lr = []
-for param_group in optimizer.param_groups:
-    all_lr.append(param_group['lr'])
-</code></pre>
-<p>另一种方法，在一个batch训练代码里，当前的lr是</p>
-<pre><code class="language-python">optimizer.param_groups[0]['lr']
-</code></pre>
-<h2 id="学习率衰减">学习率衰减</h2>
-<pre><code class="language-python"># Reduce learning rate when validation accuarcy plateau.
-scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', patience=5, verbose=True)
-for t in range(0, 80):
-    train(...)
-    val(...)
-    scheduler.step(val_acc)
-
-# Cosine annealing learning rate.
-scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=80)
-# Reduce learning rate by 10 at given epochs.
-scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[50, 70], gamma=0.1)
-for t in range(0, 80):
-    scheduler.step()    
-    train(...)
-    val(...)
-
-# Learning rate warmup by 10 epochs.
-scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda t: t / 10)
-for t in range(0, 10):
-    scheduler.step()
-    train(...)
-    val(...)
-</code></pre>
-<h2 id="优化器链式更新">优化器链式更新</h2>
-<p>从1.4版本开始，<code>torch.optim.lr_scheduler</code> 支持链式更新（chaining），即用户可以定义两个 schedulers，并交替在训练中使用。</p>
-<pre><code class="language-python">import torch
-from torch.optim import SGD
-from torch.optim.lr_scheduler import ExponentialLR, StepLR
-model = [torch.nn.Parameter(torch.randn(2, 2, requires_grad=True))]
-optimizer = SGD(model, 0.1)
-scheduler1 = ExponentialLR(optimizer, gamma=0.9)
-scheduler2 = StepLR(optimizer, step_size=3, gamma=0.1)
-for epoch in range(4):
-    print(epoch, scheduler2.get_last_lr()[0])
-    optimizer.step()
-    scheduler1.step()
-    scheduler2.step()
-</code></pre>
-<h2 id="模型训练可视化">模型训练可视化</h2>
-<p>PyTorch可以使用tensorboard来可视化训练过程。<br>
-安装和运行TensorBoard。</p>
-<pre><code class="language-python">pip install tensorboard
-tensorboard --logdir=runs
-</code></pre>
-<p>使用SummaryWriter类来收集和可视化相应的数据，放了方便查看，可以使用不同的文件夹，比如'Loss/train'和'Loss/test'。</p>
-<pre><code class="language-python">from torch.utils.tensorboard import SummaryWriter
-import numpy as np
-
-writer = SummaryWriter()
-
-for n_iter in range(100):
-    writer.add_scalar('Loss/train', np.random.random(), n_iter)
-    writer.add_scalar('Loss/test', np.random.random(), n_iter)
-    writer.add_scalar('Accuracy/train', np.random.random(), n_iter)
-    writer.add_scalar('Accuracy/test', np.random.random(), n_iter)
-</code></pre>
-<h2 id="保存与加载断点">保存与加载断点</h2>
-<p>注意为了能够恢复训练，我们需要同时保存模型和优化器的状态，以及当前的训练轮数。</p>
-<pre><code class="language-python">start_epoch = 0
-# Load checkpoint.
-if resume: # resume为参数，第一次训练时设为0，中断再训练时设为1
-    model_path = os.path.join('model', 'best_checkpoint.pth.tar')
-    assert os.path.isfile(model_path)
-    checkpoint = torch.load(model_path)
-    best_acc = checkpoint['best_acc']
-    start_epoch = checkpoint['epoch']
-    model.load_state_dict(checkpoint['model'])
-    optimizer.load_state_dict(checkpoint['optimizer'])
-    print('Load checkpoint at epoch {}.'.format(start_epoch))
-    print('Best accuracy so far {}.'.format(best_acc))
-
-# Train the model
-for epoch in range(start_epoch, num_epochs): 
-    ... 
-
-    # Test the model
-    ...
-        
-    # save checkpoint
-    is_best = current_acc &gt; best_acc
-    best_acc = max(current_acc, best_acc)
-    checkpoint = {
-        'best_acc': best_acc,
-        'epoch': epoch + 1,
-        'model': model.state_dict(),
-        'optimizer': optimizer.state_dict(),
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
     }
-    model_path = os.path.join('model', 'checkpoint.pth.tar')
-    best_model_path = os.path.join('model', 'best_checkpoint.pth.tar')
-    torch.save(checkpoint, model_path)
-    if is_best:
-        shutil.copy(model_path, best_model_path)
-</code></pre>
-<h1 id="5其他注意事项">5.其他注意事项</h1>
-<ol>
-<li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
-</ol>
-<pre><code class="language-python">def forward(self, x):
-  ...
-  x = torch.nn.functional.dropout(x, p=0.5, training=self.training)
-</code></pre>
-<ol start="2">
-<li>不要使用太大的线性层。因为nn.Linear(m,n)使用的是O(mn)的内存，线性层太大很容易超出现有显存。</li>
-<li>不要在太长的序列上使用RNN。因为RNN反向传播使用的是BPTT算法，其需要的内存和输入序列的长度呈线性关系。</li>
-<li>model(x) 前用 <code>model.train()</code> 和 <code>model.eval()</code> 切换网络状态。</li>
-<li>不需要计算梯度的代码块用 with torch.no_grad() 包含起来。</li>
-<li><code>model.eval()</code> 和 <code>torch.no_grad()</code> 的区别在于，<code>model.eval()</code> 是将网络切换为测试状态，例如 BN 和dropout在训练和测试阶段使用不同的计算方法。<code>torch.no_grad()</code>是关闭 PyTorch 张量的自动求导机制，以减少存储使用和加速计算，得到的结果无法进行 <code>loss.backward()</code>。</li>
-<li><code>model.zero_grad()</code>会把整个模型的参数的梯度都归零, 而<code>optimizer.zero_grad()</code>只会把传入其中的参数的梯度归零。</li>
-<li>torch.nn.CrossEntropyLoss 的输入不需要经过 Softmax。torch.nn.CrossEntropyLoss 等价于 torch.nn.functional.log_softmax + torch.nn.NLLLoss。</li>
-<li><code>loss.backward()</code>前用 <code>optimizer.zero_grad()</code> 清除累积梯度。</li>
-<li><code>torch.utils.data.DataLoader</code> 中尽量设置 <code>pin_memory=True</code>，对特别小的数据集如 MNIST 设置 <code>pin_memory=False</code> 反而更快一些。<code>num_workers</code> 的设置需要在实验中找到最快的取值。</li>
-<li>用 <code>del</code>及时删除不用的中间变量，节约 GPU 存储。</li>
-<li>使用 <code>inplace</code> 操作可节约 GPU 存储，如</li>
-</ol>
-<pre><code class="language-python">x = torch.nn.functional.relu(x, inplace=True)
-</code></pre>
-<ol start="13">
-<li>减少 CPU 和 GPU 之间的数据传输。例如如果你想知道一个 epoch 中每个 mini-batch 的 loss 和准确率，先将它们累积在 GPU 中等一个 epoch 结束之后一起传输回 CPU 会比每个 mini-batch 都进行一次 GPU 到 CPU 的传输更快。</li>
-<li>使用半精度浮点数 <code>half()</code>会有一定的速度提升，具体效率依赖于 GPU 型号。需要小心数值精度过低带来的稳定性问题。</li>
-<li>时常使用 <code>assert tensor.size() == (N, D, H, W)</code> 作为调试手段，确保张量维度和你设想中一致。</li>
-<li>除了标记 y 外，尽量少使用一维张量，使用 n*1 的二维张量代替，可以避免一些意想不到的一维张量计算结果。</li>
-<li>统计代码各部分耗时</li>
-</ol>
-<pre><code class="language-python">with torch.autograd.profiler.profile(enabled=True, use_cuda=False) as profile:
-    ...
-print(profile)
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
 
-# 或者在命令行运行
-python -m torch.utils.bottleneck main.py
-</code></pre>
-<ol start="18">
-<li>使用TorchSnooper来调试PyTorch代码，程序在执行的时候，就会自动 print 出来每一行的执行结果的 tensor 的形状、数据类型、设备、是否需要梯度的信息。</li>
-</ol>
-<pre><code class="language-python"># pip install torchsnooper
-import torchsnooper
 
-# 对于函数，使用修饰器
-@torchsnooper.snoop()
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
 
-# 如果不是函数，使用 with 语句来激活 TorchSnooper，把训练的那个循环装进 with 语句中去。
-with torchsnooper.snoop():
-    原本的代码
-</code></pre>
-<ol start="19">
-<li>模型可解释性，使用captum库</li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Linux常用命令]]></title>
-        <id>https://bailingnan.github.io/post/linux-chang-yong-ming-ling</id>
-        <link href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling">
-        </link>
-        <updated>2020-01-22T08:16:23.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="一-linux文件与目录">一、Linux文件与目录</h1>
-<ul>
-<li>
-<h2 id="11-linux文件权限概念">1.1 Linux文件权限概念</h2>
-<ul>
-<li>切换至root身份:<code>su -</code></li>
-<li>离开root身份:<code>exit</code></li>
-<li>文件名第一个字符为.的文件为隐藏文件</li>
-</ul>
-</li>
-<li>
-<h2 id="12-linux目录配置">1.2 Linux目录配置</h2>
-</li>
-<li>
-<p>FHS针对目录树架构仅定义出三层目录下面应该放置什么数据而已，分别是下面这三个目录的定义：</p>
-<ul>
-<li><code>/</code>（root, 根目录）:与开机系统有关；</li>
-<li><code>/usr</code> （unix software resource）:与软件安装/执行有关；</li>
-<li><code>/var</code>（variable）:与系统运行过程有关。</li>
-</ul>
-</li>
-<li>
-<p>FHS要求根目录中必须存在的目录:</p>
-<ul>
-<li>
-<p><code>/bin</code>:系统有很多放置可执行文件的目录，但<code>/bin</code>比较特殊。因为<code>/bin</code>放置的是在 单人维护模式下还能够被操作的指令。 在<code>/bin</code>下面的指令可以被root与一般帐号所使用，主要有：cat, chmod, chown, date, mv, mkdir, cp, bash等等常用的指令。</p>
-</li>
-<li>
-<p><code>/boot</code>:主要在放置开机会使用到的文件，包括 Linux 核心文件以及开机菜单与开机所需配置文件等等Linux kernel 常用的文件名为：vmlinuz，如果使用的是 grub2 这个开机管理程序， 则还会存在<code>/boot/grub2/</code>这个目录。</p>
-</li>
-<li>
-<p><code>/dev</code>:存放硬件相关的文件。在 Linux 系统上，任何设备与周边设备都是以文件的型态存在于这个目录当中的。你只要通过存取这个目录下面的某个文件，就等于存取某个设备。比要重要的文件有<code>/dev/null</code>, <code>/dev/zero</code>, <code>/dev/tty</code>, <code>/dev/loop</code>, <code>/dev/sd</code>等等。</p>
-</li>
-<li>
-<p><code>/etc</code>:存放配置文件的目录。系统主要的配置文件几乎都放置在这个目录内，例如人员的帐号密码档、各种服务的启始档等等。一般来说，这个目录下的各文件属性是可以让一般使用者查阅的，但是只有 root 有权力修改。FHS建议不要放置可执行文件 （binary）在这个目录中喔。比较重要的文件有： <code>/etc/modprobe.d/</code>, <code>/etc/passwd</code>, <code>/etc/fstab</code>, <code>/etc/issue</code>等等。另外 FHS 还规范几个重要的目录最好要存在 <code>/etc/</code>目录下：</p>
-<ul>
-<li><code>/etc/opt</code>（必要）：这个目录在放置第三方协力软件 <code>/opt</code> 的相关配置文件。</li>
-<li><code>/etc/X11/</code>（建议）：与 X Window 有关的各种配置文件都在这里，尤其是 xorg.conf 这个 X Server 的配置文件。</li>
-<li><code>/etc/sgml/</code>（建议）：与 SGML 格式有关的各项配置文件。</li>
-<li><code>/etc/xml/</code>（建议）：与 XML 格式有关的各项配置文件。</li>
-</ul>
-</li>
-<li>
-<p><code>/lib</code>:系统的函数库非常的多，而<code>/lib</code>放置的则是在开机时会用到的函数库， 以及 在<code>/bin</code>或<code>/sbin</code>下面的指令会调用的函数库而已。 什么是函数库呢？你可以将 他想成是“外挂”，某些指令必须要有这些“外挂”才能够顺利完成程序的执行 之意。 另外 FSH 还要求下面的目录必须要存在：<code>/lib/modules/</code>：这个目录 主要放置可抽换式的核心相关模块（驱动程序）</p>
-</li>
-<li>
-<p><code>/media</code>:media是“媒体”的英文，顾名思义，这个<code>/media</code>下面放置的就是可移除的设备！ 包括软盘、光盘、DVD等等设备都暂时挂载于此。常见的文件名 有：<code>/media/floppy</code>, <code>/media/cdrom</code>等等。</p>
-</li>
-<li>
-<p><code>/mnt</code>:如果你想要暂时挂载某些额外的设备，一般建议你可以放置到这个目录中。 在古早时候，这个目录的用途与<code>/media</code>相同啦！只是有了<code>/media</code>之后，这个 目录就用来暂时挂载用了。</p>
-</li>
-<li>
-<p><code>/opt</code>:这个是给第三方协力软件放置的目录。什么是第三方协力软件啊？ 举例来说，KDE 这个桌面管理系统是一个独立的计划，不过他可以安装到 Linux 系统中，因此KDE的软件就建议放置到此目录下了。 另外，如果你想要自行安装额外的软件（非原本的 distribution 提供的），那么也能够将你的软件安装到这里来。 不过，以前的 Linux 系统中，我们还是习惯放置在<code>/usr/local</code>目录下呢！</p>
-</li>
-<li>
-<p><code>/run</code>:早期的 FHS 规定系统开机后所产生的各项信息应该要放置到 <code>/var/run</code> 目录下，新版的 FHS 则规范到 <code>/run</code> 下面。 由于 <code>/run</code> 可以使用内存来仿真，因此性能上会好很多！</p>
-</li>
-<li>
-<p><code>/sbin</code>:存放管理员root可以执行的命令。Linux 有非常多指令是用来设置系统环境的，这些指令只有 root 才能够利用 来“设置”系统，其他使用者最多只能用来“查询”而已。放在<code>/sbin</code>下面的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。至于某些服务器软件程序，一般则放置到<code>/usr/sbin/</code>当中。至于本机自行安装的软件所产生的系统可执行文件（system binary）， 则放置到<code>/usr/local/sbin/</code> 当中了。常见的指令包括：fdisk, fsck, ifconfig, mkfs等等。</p>
-</li>
-<li>
-<p><code>/srv</code>:srv 可以视为“service”的缩写，是一些网络服务启动之后，这些服务所需要取用的数据目录。 常见的服务例如 WWW, FTP 等等。举例来说，WWW 服务器需要的网页数据就可以放置在<code>/srv/www/</code>里面。 不过，系统的服务数据 如果尚未要提供给网际网络任何人浏览的话，默认还是建议放置到 <code>/var/lib</code>下面即可。</p>
-</li>
-<li>
-<p><code>tem</code>:这是让一般使用者或者是正在执行的程序暂时放置文件的地方。 这个目录是任何人都能够存取的，所以你需要定期的清理一下。当然，重要数据不可放置在此目录啊！ 因为FHS甚至建议在开机时，应该要将<code>/tmp</code>下的数据都删除唷!</p>
-</li>
-<li>
-<p><code>/var</code>:第二层 FHS 设置，主要为放置变动性的数据，后续介绍。</p>
-</li>
-<li>
-<p><code>/usr</code>:第二层 FHS 设置，后续介绍。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>FHS 建议根目录中可以存在的目录：</p>
-<ul>
-<li><code>/home</code>：这是系统默认的使用者主文件夹（home directory）。在你新增一个一般使 用者帐号时，默认的使用者主文件夹都会规范到这里来。</li>
-<li><code>/lib&lt;equal&gt;</code>:用来存放与 <code>/lib</code> 不同的格式的二进制函数库，例如支持 64 位的 <code>/lib64</code> 函数库等。</li>
-<li><code>/root</code>:系统管理员（root）的主文件夹。之所以放在这里，是因为如果进入单人维护模式而仅挂载根目录时， 该目录就能够拥有 root 的主文件夹，所以我们会 希望 root 的主文件夹与根目录放置在同一个分区中。</li>
-<li><code>/lost+found</code>:这个目录是使用标准的 ext2/ext3/ext4 文件系统格式才会产生的一个目录， 目的在于当文件系统发生错误时， 将一些遗失的片段放置到这个目录下。 不过如果使用的是 xfs 文件系统的话，就不会存在这个目录了！</li>
-<li><code>/proc</code>:这个目录本身是一个“虚拟文件系统（virtual filesystem）”喔！他放置的数据都是在内存当中， 例如系统核心、行程信息（process）、周边设备的状态及网络状态等等。因为这个目录下的数据都是在内存当中， 所以本身不占任何硬盘空间啊！比较重要的文件例如：<code>/proc/cpuinfo</code>, <code>/proc/dma</code>, <code>/proc/interrupts</code>, <code>/proc/ioports</code>, <code>/proc/net/*</code> 等等。</li>
-<li><code>/sys</code>:这个目录其实跟/proc非常类似，也是一个虚拟的文件系统，主要也是记录 核心与系统硬件信息较相关的信息。 包括目前已载入的核心模块与核心侦测到的硬件设备信息等等。这个目录同样不占硬盘容量喔！</li>
-</ul>
-</li>
-<li>
-<p>因为是所有系统默认的软件（distribution发布者提供的软件）都会放置到<code>/usr</code>下面，因此这个目录有点类似 Windows 系统的“C:\Windows\ （当中的一部份） + C:\Program files\”这两个目 录的综合体，系统刚安装完毕时，这个目录会占用最多的硬盘容量。一般来说，<code>/usr</code>的次目录 建议有下面这些：</p>
-</li>
-<li>
-<p>FHS 要求必须要存在的目录:</p>
-<ul>
-<li><code>/usr/bin/</code>:所有一般用户能够使用的指令都放在这里！<code>/usr/bin</code> 与 <code>/bin</code> 是一模一样了！另外，FHS 要求在此目录下不应该有子目录！</li>
-<li><code>/usr/lib/</code>:基本上，与 <code>/lib</code> 功能相同，所以 <code>/lib</code> 就是链接到此目录中的！</li>
-<li><code>/usr/local/</code>:系统管理员在本机自行安装自己下载的软件（非 distribution 默认提供者），建议安装到此目录， 这样会比较便于管理。举例来说，你的 distribution 提供的软件较旧，你想安装较新的软件但又不想移除旧版，此时你可以将新版软件安装于<code>/usr/local/</code>目录下，可与原先的旧版软件有分别啦！ 你可以自行到<code>/usr/local</code>去看看，该目录下也是具有bin, etc, include, lib...的次目录喔！</li>
-<li><code>/usr/sbin/</code>:非系统正常运行所需要的系统指令。最常见的就是某些网络服务器软件 的服务指令（daemon）啰！不过基本功能与 <code>/sbin</code> 也差不多， 因此目前 <code>/sbin</code> 就是链接到此目录中的。</li>
-<li><code>/usr/share/</code>:主要放置只读架构的数据文件，当然也包括共享文件。在这个目录下放置的数据几乎是不分硬件架构均可读取的数据，因为几乎都是文字文件嘛！在此目录下常见的还有这些次目录：
-<ul>
-<li><code>/usr/share/man</code>：线上说明文档。</li>
-<li><code>/usr/share/doc</code>：软件杂项的文件说明。</li>
-<li><code>/usr/share/zoneinfo</code>：与时区有关的时区文件。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>FHS 建议可以存在的目录：</p>
-<ul>
-<li><code>/usr/games/</code>:与游戏比较相关的数据放置处。</li>
-<li><code>/usr/include/</code>:c/c++等程序语言的文件开始（header）与包含档（include）放置处， 当我们以tarball方式 （*.tar.gz 的方式安装软件）安装某些数据时，会使用到里头的许多包含档喔！</li>
-<li><code>/usr/libexec/</code>:某些不被一般使用者惯用的可执行文件或脚本（script）等等，都会放 置在此目录中。例如大部分的 X 窗口下面的操作指令， 很多都是放在此目录下的。</li>
-<li><code>/usr/lib&lt;qual&gt;/</code>:与 <code>/lib&lt;qual&gt;/</code>功能相同，因此目前 <code>/lib&lt;qual&gt;</code> 就是链接到此目录中。</li>
-<li><code>/usr/src/</code>:一般源代码建议放置到这里，src有source的意思。至于核心源代码则建议放置到<code>/usr/src/linux/</code>目录下。</li>
-</ul>
-</li>
-<li>
-<p>如果<code>/usr</code>是安装时会占用较大硬盘容量的目录，那么<code>/var</code>就是在系统运行后才会渐渐占用硬盘容量的目录。 因为<code>/var</code>目录主要针对常态性变动的文件，包括高速缓存（cache）、登录文件 （log file）以及某些软件运行所产生的文件， 包括程序文件（lock file, run file），或者例如 MySQL数据库的文件等等。常见的次目录有：</p>
-</li>
-<li>
-<p>FHS 要求必须要存在的目录:</p>
-<ul>
-<li><code>/var/cache/</code>:应用程序本身运行过程中会产生的一些暂存盘；</li>
-<li><code>/var/lib/</code>:程序本身执行的过程中，需要使用到的数据文件放置的目录。在此目录下各自的软件应该要有各自的目录。举例来说，MySQL的数据库放置 到<code>/var/lib/mysql/</code>而rpm的数据库则放到<code>/var/lib/rpm</code>去！</li>
-<li><code>/var/lock/</code>:某些设备或者是文件资源一次只能被一个应用程序所使用，如果同时有两个程序使用该设备时，就可能产生一些错误的状况，因此就得要将该设备上锁（lock），以确保该设备只会给单一软件所使用。目前此目录也已经挪到 <code>/run/lock</code>中！</li>
-<li><code>/var/log/</code>:重要到不行！这是登录文件放置的目录！里面比较重要的文件 如<code>/var/log/messages</code>, <code>/var/log/wtmp</code>（记录登陆者的信息）等。</li>
-<li><code>/var/mail/</code>:放置个人电子邮件信箱的目录，不过这个目录也被放置到<code>/var/spool/mail/</code> 目录中！ 通常这两个目录是互为链接文件啦！</li>
-<li><code>/var/run/</code>:某些程序或者是服务启动后，会将他们的PID放置在这个目录下喔！至于 PID的意义我们会在后续章节提到的。与 <code>/run</code> 相同，这个目录链接到 <code>/run</code> 去了！</li>
-<li><code>/var/spool/</code>:这个目录通常放置一些伫列数据，所谓的“伫列”就是排队等待其他程序使用的数据啦！ 这些数据被使用后通常都会被删除。举例来说，系统收到新信会放置到<code>/var/spool/mail/</code>中， 但使用者收下该信件后该封信原则上就会 被删除。信件如果暂时寄不出去会被放到<code>/var/spool/mqueue/</code>中， 等到被送出后就被删除。如果是工作调度数据（crontab），就会被放置到<code>/var/spool/cron/</code>目录中！</li>
-</ul>
-</li>
-<li>
-<h2 id="13-文件与目录管理">1.3 文件与目录管理</h2>
-<ul>
-<li>
-<p>网络文件常常提到类似“./run.sh”之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。“./”代表“本目录”的意思，所以“./run.sh”代表“执行本目录下，名为run.sh的文件”。</p>
-</li>
-<li>
-<p>cd （change directory, 变换目录）</p>
-<ul>
-<li><code>cd ~dmtsai</code>: 代表去到 dmtsai 这个使用者的主文件夹，亦即 <code>/home/dmtsai</code></li>
-<li><code>cd ~</code>:表示回到自己的主文件夹，亦即是 <code>/root</code> 这个目录</li>
-<li><code>cd</code>:没有加上任何路径，也还是代表回到自己主文件夹的意思</li>
-<li><code>cd ..</code>:表示去到目前的上层目录</li>
-<li><code>cd -</code>:表示回到刚刚的那个目录</li>
-<li><code>cd ../postfix</code>:由<code>/var/spool/mail</code> 去到<code>/var/spool/postfix</code></li>
-</ul>
-</li>
-<li>
-<p>一登陆Linux系统后，每个帐号都会在自己帐号的主文件夹中(<code>/home</code>)。</p>
-</li>
-<li>
-<p>pwd （显示目前所在的目录）</p>
-<ul>
-<li><code>pwd [-P]</code>😛 ：显示出确实的路径，而非使用链接 （link） 路径。加上 <code>pwd -P</code> 的选项后，会不以链接文件的数据显示，而是显示正确的完整路径。</li>
-<li><code>pwd</code>:单纯显示出目前的工作目录。</li>
-</ul>
-</li>
-<li>
-<p>mkdir （创建新目录）</p>
-<ul>
-<li><code>mkdir [-mp] 目录名称</code>:
-<ul>
-<li><code>-m</code> ：设置文件的权限喔！直接设置，不需要看默认权限 （umask） 的脸色～</li>
-<li><code>-p</code> ：帮助你直接将所需要的目录（包含上层目录）递回创建起来！</li>
-<li>示例:
-<ul>
-<li><code>mkdir test1/test2/test3/test4</code>:错误。mkdir: cannot create directory ‘test1/test2/test3/test4’: No such file or directory</li>
-<li><code>mkdir -p test1/test2/test3/test4</code>:正确。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>rmdir （删除“空”的目录）
-<ul>
-<li><code>rmdir [-p] 目录名称</code>:
-<ul>
-<li><code>-p</code> ：连同“上层”“空的”目录也一起删除。</li>
-</ul>
-</li>
-<li>示例:
-<ul>
-<li><code>rmdir test1</code>:rmdir: failed to remove ‘test1’: Directory not empty</li>
-<li><code>rmdir -p test1/test2/test3/test4</code>:利用 <code>-p</code> 这个选项，立刻就可以将 <code>test1/test2/test3/test4</code> 一次删除,包括test1</li>
-<li>如果要将非空目录下的东西都杀掉呢？！ 这个时候就必须使用<code>rm -r 目录名称</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>文件与目录的检视： ls</p>
-<ul>
-<li><code>ls [-aAdfFhilnrRSt] 文件名或目录名称</code>
-<ul>
-<li><code>-a</code> ：全部的文件，连同隐藏文件（ 开头为 . 的文件） 一起列出来（常用）</li>
-<li><code>-d</code> ：仅列出目录本身，而不是列出目录内的文件数据（常用）</li>
-<li><code>-l</code> ：长数据串行出，包含文件的属性与权限等等数据（常用）</li>
-<li>示例：
-<ul>
-<li><code>ls -al ~</code>: 将主文件夹下的所有文件列出来（含属性与隐藏文件）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>cp （复制文件或目录）</p>
-<ul>
-<li><code>cp [-adfilprsu] 来源文件（source） 目标文件（destination）</code></li>
-<li><code>cp [options] source1 source2 source3 .... directory</code>
-<ul>
-<li><code>-a</code> ：相当于 -dr --preserve=all 的意思，至于 dr 请参考下列说明；（常用）</li>
-<li><code>-i</code> ：若目标文件（destination）已经存在时，在覆盖时会先询问动作的进行（常用）</li>
-<li><code>-r</code> ：递回持续复制，用于目录的复制行为；（常用）</li>
-<li><code>-p</code> ：连同文件的属性（权限、用户、时间）一起复制过去，而非使用默认属性（备份常用）；</li>
-<li><code>--preserve=all</code> ：除了 -p 的权限相关参数外，还加入 SELinux 的属性, links, xattr 等也复制了。</li>
-<li>如果来源文件有两个以上，则最后一个目的文件一定要是“目录”才行！</li>
-<li>如果目标目录或者目标文件不存在，则相当于重命名。</li>
-<li>示例
-<ul>
-<li><code>cp ~/.bashrc /tmp/bashrc</code>:将主文件夹下的 .bashrc 复制到 <code>/tmp</code> 下，并更名为 bashrc</li>
-<li><code>cp -i ~/.bashrc /tmp/bashrc</code>:cp: overwrite <code>/tmp/bashrc'? n不覆盖，y为覆盖，重复作两次动作，由于</code>/tmp<code>下面已经存在 bashrc 了，加上</code>-i` 选项后，则在覆盖前会询问使用者是否确定！可以按下 n 或者 y 来二次确认</li>
-<li><code>cp /var/log/wtmp .</code>:复制到当前目录</li>
-<li><code>cp /etc/ /tmp</code>:复制 <code>/etc/</code> 这个目录下的所有内容到 <code>/tmp</code> 下面，cp: omitting directory <code>/etc</code>，如果是目录则不能直接复制，要加上 <code>-r</code> 的选项</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>rm （移除文件或目录）</p>
-<ul>
-<li><code>rm [-fir] 文件或目录</code>：
-<ul>
-<li><code>-f</code> ：就是 force 的意思，忽略不存在的文件，不会出现警告讯息；</li>
-<li><code>-r</code> ：递回删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
-<li><code>-rf</code>: 如子目录里面还有子目录时，那就要使用 -r 这个选项</li>
-<li><code>-rf/</code>: 会将系统文件全部删除，非常危险  <s>删库跑路</s></li>
-<li>示例：
-<ul>
-<li><code>rm bashrc*</code>:通过万用字符*的帮忙，将<code>/tmp</code>下面开头为bashrc的文件名通通删除</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>mv （移动文件与目录，或更名）</p>
-<ul>
-<li><code>mv [-fiu] source destination</code></li>
-<li><code>mv [options] source1 source2 source3 .... directory</code>
-<ul>
-<li><code>-f</code> ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
-<li><code>-i</code> ：若目标文件 （destination） 已经存在时，就会询问是否覆盖！</li>
-<li><code>-u</code> ：若目标文件已经存在，且 source 比较新，才会更新 （update）</li>
-<li>示例:
-<ul>
-<li>复制一文件，创建一目录，将文件移动到目录中：
-<ul>
-<li><code>cd /tmp</code></li>
-<li><code>cp ~/.bashrc bashrc</code></li>
-<li><code>mkdir mvtest</code></li>
-<li><code>mv bashrc mvtest</code></li>
-</ul>
-</li>
-<li>文件改名：
-<ul>
-<li><code>mv mvtest mvtest2</code></li>
-</ul>
-</li>
-<li>再创建两个文件，再全部移动到 <code>/tmp/mvtest2</code> 当中:
-<ul>
-<li><code>cp ~/.bashrc bashrc1</code></li>
-<li><code>cp ~/.bashrc bashrc2</code></li>
-<li><code>mv bashrc1 bashrc2 mvtest2</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="二-pip">二、pip</h1>
-<ul>
-<li><code>pip install --upgrade pip</code>或<code>pip install -U pip</code>:升级pip自身</li>
-<li><code>pip list</code>：查看已经通过pip安装的包</li>
-<li><code>pip install &lt;包名&gt; --upgrade</code>或<code>pip install -U &lt;包名&gt;</code>:升级包</li>
-<li><code>pip install &lt;包名&gt; -i https://mirrors.aliyun.com/pypi/simple</code>:指定单次安装源</li>
-<li><code>pip install SomePackage==1.0.4</code>:指定版本</li>
-<li><code>pip-review --auto/pip-review --local --interactive</code>:自动更新所有包</li>
-</ul>
-<h1 id="三-conda">三、conda</h1>
-<ul>
-<li><code>conda --version</code>:查看conda版本，验证是否安装</li>
-<li><code>conda update conda</code>:更新至最新版本，也会更新其它相关包</li>
-<li><code>conda update --all</code>:更新所有包</li>
-<li><code>conda update package_name</code>:更新指定的包</li>
-<li><code>conda create -n env_name package_name</code>:创建名为 env_name 的新环境，并在该环境下安装名为 package_name 的包，可以指定新环境的版本号，例如：<code>conda create -n python2 python=python2.7 numpy pandas</code>，创建了python2环境，python版本为2.7，同时还安装了numpy pandas包</li>
-<li><code>conda activate env_name</code>:切换至env_name环境</li>
-<li><code>conda deactivate</code>:退出环境</li>
-<li><code>conda info -e</code>:显示所有已经创建的环</li>
-<li><code>conda create -n new_env_name --clone old_env_name</code>:复制old_env_name为new_env_name</li>
-<li><code>conda remove -n env_name –-all</code>:删除环境</li>
-<li><code>conda list</code>:查看所有已经安装的包</li>
-<li><code>conda install -n env_name package_name</code>:在指定环境中安装包</li>
-<li><code>conda remove -n env_name package</code>:删除指定环境中的包</li>
-<li><code>rm -rf 虚拟环境所在路径</code>:删除空环境</li>
-</ul>
-<h1 id="四-vim">四、Vim</h1>
-<ul>
-<li><code>shift+g</code>:移至文件末尾</li>
-</ul>
-<h1 id="五-其他">五、其他</h1>
-<ul>
-<li><code>sudo nautilus /home</code>:打开图形化文件夹</li>
-<li><code>top</code>或<code>htop</code>：查看当前进程</li>
-<li><code>ifconfig</code>：查看IP地址</li>
-<li><code>kill 进程号</code>:终止进程</li>
-<li><code>kill -9 进程号</code>:强制终止进程</li>
-<li><code>tar -zxvf xxx.tar.gz</code>:解压缩</li>
-<li><code>chmod u+x file</code>:对文件 file 增加文件主可执行权限（u表示文件主）</li>
-<li><code>sudo apt-get install package</code>:安装包</li>
-<li><code>sudo apt-get install package --reinstall</code>:重新安装包</li>
-<li><code>sudo apt-get -f install</code>:修复安装</li>
-<li><code>sudo apt-get remove package</code>:删除包</li>
-<li><code>sudo apt-get remove package --purge</code>:删除包，包括删除配置文件等</li>
-<li><code>sudo apt-get update</code>:更新源</li>
-<li><code>sudo apt-get upgrade</code>:更新已安装的包</li>
-<li><code>sudo apt-get dist-upgrade</code>:`升级系统</li>
-<li><code>sudo apt-get autoclean</code>:清理旧版本软件缓存</li>
-<li><code>sudo dpkg -i package.deb</code>:所有deb文件的安装</li>
-<li><code>sudo dpkg -r package</code>：所有deb文件的卸载</li>
-<li><code>sudo dpkg -P package</code>:彻底的卸载，包括软件的配置文件</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello World!]]></title>
-        <id>https://bailingnan.github.io/post/hello-world</id>
-        <link href="https://bailingnan.github.io/post/hello-world">
-        </link>
-        <updated>2019-12-22T17:10:09.000Z</updated>
-        <content type="html"><![CDATA[<p>New begin!</p>
-]]></content>
-    </entry>
-</feed>
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
