@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-02-15T14:59:33.634Z</updated>
+    <updated>2020-02-16T13:35:08.225Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -2358,7 +2358,20 @@ stackprinter<br>
 dlrm<br>
 buffalo<br>
 cupy<br>
-acptum</p>
+acptum<br>
+featuretools<br>
+boruta_py<br>
+Categorical-encoding<br>
+Tsfresh<br>
+Scikit-Optimize<br>
+Hyperopt<br>
+ray<br>
+ENAS-pytorch<br>
+MLBox<br>
+h2o<br>
+AutoKeras<br>
+TPOT<br>
+Auto-Sklearn</p>
 ]]></content>
     </entry>
     <entry>
