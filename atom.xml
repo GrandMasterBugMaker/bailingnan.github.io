@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-02-16T13:35:08.225Z</updated>
+    <updated>2020-02-22T08:54:50.823Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -11,9 +11,31 @@
     <icon>https://bailingnan.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 白凌南</rights>
     <entry>
+        <title type="html"><![CDATA[LeetCode26. 删除排序数组中的重复项]]></title>
+        <id>https://bailingnan.github.io/post/leetcode26-shan-chu-pai-xu-shu-zu-zhong-de-chong-fu-xiang/</id>
+        <link href="https://bailingnan.github.io/post/leetcode26-shan-chu-pai-xu-shu-zu-zhong-de-chong-fu-xiang/">
+        </link>
+        <updated>2020-02-22T08:23:59.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-python3">class Solution:
+    def removeDuplicates(self, nums: List[int]) -&gt; int:
+        cnt=len(set(nums))
+        j=0
+        for i in range(len(nums)):
+            if i!=0:
+                if(nums[i]==nums[i-1]):
+                    continue
+            nums[j]=nums[i]
+            j+=1
+        if(j&lt;len(nums)):
+            del(nums[j:len(nums)])
+        return j
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Numpy笔记]]></title>
-        <id>https://bailingnan.github.io/post/numpy-bi-ji</id>
-        <link href="https://bailingnan.github.io/post/numpy-bi-ji">
+        <id>https://bailingnan.github.io/post/numpy-bi-ji/</id>
+        <link href="https://bailingnan.github.io/post/numpy-bi-ji/">
         </link>
         <updated>2020-02-15T14:58:47.000Z</updated>
         <content type="html"><![CDATA[<p>NumPy（Numerical Python的简称）是Python数值计算最重要的基础包。大多数提供科学计算的包都是用NumPy的数组作为构建基础。</p>
@@ -2340,8 +2362,8 @@ Out[234]:
     </entry>
     <entry>
         <title type="html"><![CDATA[待安装包]]></title>
-        <id>https://bailingnan.github.io/post/dai-an-zhuang-bao</id>
-        <link href="https://bailingnan.github.io/post/dai-an-zhuang-bao">
+        <id>https://bailingnan.github.io/post/dai-an-zhuang-bao/</id>
+        <link href="https://bailingnan.github.io/post/dai-an-zhuang-bao/">
         </link>
         <updated>2020-02-07T02:42:25.000Z</updated>
         <content type="html"><![CDATA[<p>apex<br>
@@ -2376,8 +2398,8 @@ Auto-Sklearn</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Matplotlib笔记]]></title>
-        <id>https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua</id>
-        <link href="https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua">
+        <id>https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua/</id>
+        <link href="https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua/">
         </link>
         <updated>2020-02-04T09:09:53.000Z</updated>
         <content type="html"><![CDATA[<p>信息可视化（也叫绘图）是数据分析中最重要的工作之一。它可能是探索过程的一部分，例如，帮助我们找出异常值、必要的数据转换、得出有关模型的idea等。另外，做一个可交互的数据可视化也许是工作的最终目标。Python有许多库进行静态或动态的数据可视化，但我这里重要关注于matplotlib（http://matplotlib.org/）和基于它的库。</p>
@@ -2899,8 +2921,8 @@ In [106]: plt.title('Changes in log %s versus log %s' % ('m1', 'unemp'))
     </entry>
     <entry>
         <title type="html"><![CDATA[Pycharm常用快捷键及技巧(macOS)]]></title>
-        <id>https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos</id>
-        <link href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos">
+        <id>https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos/</id>
+        <link href="https://bailingnan.github.io/post/pycharm-chang-yong-kuai-jie-jian-ji-ji-qiao-macos/">
         </link>
         <updated>2020-01-31T16:42:34.000Z</updated>
         <content type="html"><![CDATA[<h1 id="mac键盘符号和修饰键说明">Mac键盘符号和修饰键说明</h1>
@@ -2991,8 +3013,8 @@ In [106]: plt.title('Changes in log %s versus log %s' % ('m1', 'unemp'))
     </entry>
     <entry>
         <title type="html"><![CDATA[PyTorch常用代码段]]></title>
-        <id>https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan</id>
-        <link href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan">
+        <id>https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan/</id>
+        <link href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan/">
         </link>
         <updated>2020-01-30T19:09:37.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1基本配置">1.基本配置</h1>
@@ -3489,8 +3511,8 @@ with torchsnooper.snoop():
     </entry>
     <entry>
         <title type="html"><![CDATA[Linux常用命令]]></title>
-        <id>https://bailingnan.github.io/post/linux-chang-yong-ming-ling</id>
-        <link href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling">
+        <id>https://bailingnan.github.io/post/linux-chang-yong-ming-ling/</id>
+        <link href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling/">
         </link>
         <updated>2020-01-22T08:16:23.000Z</updated>
         <content type="html"><![CDATA[<h1 id="一-linux文件与目录">一、Linux文件与目录</h1>
@@ -3838,8 +3860,8 @@ with torchsnooper.snoop():
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello World!]]></title>
-        <id>https://bailingnan.github.io/post/hello-world</id>
-        <link href="https://bailingnan.github.io/post/hello-world">
+        <id>https://bailingnan.github.io/post/hello-world/</id>
+        <link href="https://bailingnan.github.io/post/hello-world/">
         </link>
         <updated>2019-12-22T17:10:09.000Z</updated>
         <content type="html"><![CDATA[<p>New begin!</p>

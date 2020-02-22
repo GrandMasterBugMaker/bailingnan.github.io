@@ -40,41 +40,9 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            DL/RecSys/Python/Java/INTJ
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-                <a href="https://github.com/bailingnan" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="remixicon-github-line"></i>
-                </a>
-              
-            
-              
-            
-              
-                <a href="https://www.weibo.com/buggerking" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="remixicon-weibo-line"></i>
-                </a>
-              
-            
-              
-                <a href="https://www.zhihu.com/people/bailingnan" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="remixicon-zhihu-line"></i>
-                </a>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
+          <div class="toc-container hidden lg:block">
             
           </div>
         </div>
@@ -119,28 +87,81 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="remixicon-bookmark-line"></i> PyTorch
-        </h2>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">LeetCode26. 删除排序数组中的重复项</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-02-22 / 1 min read
+        </div>
         
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://bailingnan.github.io/post/pytorch-chang-yong-dai-ma-duan/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">PyTorch常用代码段</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://bailingnan.github.io//post-images/leetcode26-shan-chu-pai-xu-shu-zu-zhong-de-chong-fu-xiang.png" alt="">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-01-31 / 17 min read</div>
-    </div>
-  </section>
+        <div class="post-content yue">
+          <pre><code class="language-python3">class Solution:
+    def removeDuplicates(self, nums: List[int]) -&gt; int:
+        cnt=len(set(nums))
+        j=0
+        for i in range(len(nums)):
+            if i!=0:
+                if(nums[i]==nums[i-1]):
+                    continue
+            nums[j]=nums[i]
+            j+=1
+        if(j&lt;len(nums)):
+            del(nums[j:len(nums)])
+        return j
+</code></pre>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://bailingnan.github.io/tag/gKq5tvKcK/">
+            <span class="flex-auto">LeetCode</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/numpy-bi-ji/">
+                <h3 class="post-title">
+                  Numpy笔记
+                  <i class="remixicon-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
