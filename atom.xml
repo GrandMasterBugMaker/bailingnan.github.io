@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-02-22T08:54:50.823Z</updated>
+    <updated>2020-03-03T18:00:09.442Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -2366,7 +2366,16 @@ Out[234]:
         <link href="https://bailingnan.github.io/post/dai-an-zhuang-bao/">
         </link>
         <updated>2020-02-07T02:42:25.000Z</updated>
-        <content type="html"><![CDATA[<p>apex<br>
+        <content type="html"><![CDATA[<p>flake8<br>
+dvc<br>
+hiddenlayer<br>
+syncthing<br>
+ignite<br>
+pytorch-lightning<br>
+fastai<br>
+prefetch_generator<br>
+torchsummary<br>
+apex<br>
 dali<br>
 optuna<br>
 pip-review<br>
