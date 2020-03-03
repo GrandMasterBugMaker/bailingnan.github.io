@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-03T18:00:09.442Z</updated>
+    <updated>2020-03-03T18:20:03.997Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -2367,6 +2367,7 @@ Out[234]:
         </link>
         <updated>2020-02-07T02:42:25.000Z</updated>
         <content type="html"><![CDATA[<p>flake8<br>
+comet 监视训练<br>
 dvc<br>
 hiddenlayer<br>
 syncthing<br>
