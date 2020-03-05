@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-05T17:05:02.338Z</updated>
+    <updated>2020-03-05T19:56:25.900Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -2372,6 +2372,7 @@ pypy<br>
 numba<br>
 cupy<br>
 Cython<br>
+hyperparameter_hunter<br>
 torch-optimizer 拓展pytorch优化器<br>
 DeepSpeed 微软分布式训练工具<br>
 dvc<br>
