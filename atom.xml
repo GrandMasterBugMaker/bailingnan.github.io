@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-03T18:20:03.997Z</updated>
+    <updated>2020-03-05T17:05:02.338Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -2367,7 +2367,13 @@ Out[234]:
         </link>
         <updated>2020-02-07T02:42:25.000Z</updated>
         <content type="html"><![CDATA[<p>flake8<br>
-comet 监视训练<br>
+SpeedTorch<br>
+pypy<br>
+numba<br>
+cupy<br>
+Cython<br>
+torch-optimizer 拓展pytorch优化器<br>
+DeepSpeed 微软分布式训练工具<br>
 dvc<br>
 hiddenlayer<br>
 syncthing<br>
@@ -3809,6 +3815,12 @@ with torchsnooper.snoop():
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li>
+<p>find（指定目录查找文件）</p>
+<ul>
+<li><code>find path -option</code> <code>path</code>是你要查找的路径，<code>-option</code>是选项，例如 <code>-name</code>就是根据名称来找。</li>
 </ul>
 </li>
 </ul>
