@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1583751539560">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1583751891445">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -33,7 +33,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1583751539560" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1583751891445" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -99,7 +99,7 @@
         <div class="post-content yue">
           <h1 id="attention">Attention</h1>
 <p><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/v2-ed738b8b47696283cd773b0db603ae73_b.png" alt="" loading="lazy"><br>
-在哪里体现了Attention呢？答案是: [  x_{i}  ]，这个 Context Vector，上下文向量。<br>
+在哪里体现了Attention呢？答案是:c_{i}，这个 Context Vector，上下文向量。<br>
 区别于 Seq2Seq 直接把最后一个时序i的输出 h_{i} 作为上下文向量，而是将之前所有时序的输出通过加权求和得到的一个上下文向量。这个 c_{i} 包含着各个时序输出的权重信息，也就相当于告诉我们哪一段文字对于当前的 target word 是重要的，哪些是不重要的。这就相当于告诉我们的注意力应该放在哪里。<br>
 c_{i} 是 Attention 矩阵的一行，表示输入 x_{1} 到 x_{t} 分别对 decoder 第 i 时序这个 target word 所对应的的权重（注意力大小）。<br>
 \alpha_{ij} 是 Attention 矩阵的一个值，表示输入表示 x_{j} 对 decoder 第 i 时序的 target word 的权重。<br>
