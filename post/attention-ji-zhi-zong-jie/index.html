@@ -43,7 +43,10 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            
+            <ul class="markdownIt-TOC">
+<li><a href="#attention">Attention</a></li>
+</ul>
+
           </div>
         </div>
       
@@ -88,61 +91,19 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">待安装包</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">Attention机制总结</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-02-07 / 1 min read
+          2020-03-09 / 2 min read
         </div>
         
         <div class="post-content yue">
-          <p>flake8<br>
-SpeedTorch<br>
-ohmyzsh<br>
-pypy<br>
-<strong>tensorwatch</strong><br>
-<strong>swifter</strong><br>
-<strong>modin(加载数据和查询数据更快，统计方法pandas更快)</strong><br>
-<strong>numba</strong><br>
-<strong>cupy(1000万以上数据才更快)</strong><br>
-Cython<br>
-hyperparameter_hunter<br>
-<strong>torch-optimizer</strong> 拓展pytorch优化器<br>
-DeepSpeed 微软分布式训练工具<br>
-dvc<br>
-<strong>hiddenlayer</strong><br>
-syncthing<br>
-ignite<br>
-pytorch-lightning<br>
-fastai<br>
-prefetch_generator<br>
-torchsummary<br>
-apex<br>
-dali<br>
-optuna<br>
-pip-review<br>
-autogluon<br>
-arthas<br>
-greys-anatomy<br>
-implicit<br>
-eli5<br>
-icecream<br>
-stackprinter<br>
-dlrm<br>
-buffalo<br>
-cupy<br>
-acptum<br>
-featuretools<br>
-boruta_py<br>
-Categorical-encoding<br>
-Tsfresh<br>
-Scikit-Optimize<br>
-Hyperopt<br>
-ray<br>
-ENAS-pytorch<br>
-MLBox<br>
-h2o<br>
-AutoKeras<br>
-TPOT<br>
-Auto-Sklearn</p>
+          <h1 id="attention">Attention</h1>
+<p><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/v2-ed738b8b47696283cd773b0db603ae73_b.png" alt="" loading="lazy"><br>
+在哪里体现了Attention呢？答案是: [  x_{i}  ]，这个 Context Vector，上下文向量。<br>
+区别于 Seq2Seq 直接把最后一个时序i的输出 h_{i} 作为上下文向量，而是将之前所有时序的输出通过加权求和得到的一个上下文向量。这个 c_{i} 包含着各个时序输出的权重信息，也就相当于告诉我们哪一段文字对于当前的 target word 是重要的，哪些是不重要的。这就相当于告诉我们的注意力应该放在哪里。<br>
+c_{i} 是 Attention 矩阵的一行，表示输入 x_{1} 到 x_{t} 分别对 decoder 第 i 时序这个 target word 所对应的的权重（注意力大小）。<br>
+\alpha_{ij} 是 Attention 矩阵的一个值，表示输入表示 x_{j} 对 decoder 第 i 时序的 target word 的权重。<br>
+Attention 矩阵的计算方法如红框所示，由一个线性层和 softmax 层叠加得到。其输入是上一时刻 decoder 的状态 s_{i-1} 和 encoder 对第 j 个词的输出 h_{j} ， W_{a} 、 U_{a} 和 v_{a} 则是需要我们模型去学习的参数。其对应的物理意义就是：句子中某个词对应正准备翻译的词的权重（重要性），由词语本身（ h_{j} ）和前一个翻译的词（ s_{i-1} ）决定。</p>
 
         </div>
 
@@ -151,21 +112,12 @@ Auto-Sklearn</p>
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://bailingnan.github.io/post/numpy-bi-ji/">
-                <h3 class="post-title">
-                  <i class="remixicon-arrow-left-line"></i>
-                  Numpy笔记
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://bailingnan.github.io/post/li-yong-python-jin-xing-shu-ju-fen-xi-di-09-zhang-hui-tu-he-ke-shi-hua/">
+              <a href="https://bailingnan.github.io/post/leetcode26-shan-chu-pai-xu-shu-zu-zhong-de-chong-fu-xiang/">
                 <h3 class="post-title">
-                  Matplotlib笔记
+                  LeetCode26. 删除排序数组中的重复项
                   <i class="remixicon-arrow-right-line"></i>
                 </h3>
               </a>
