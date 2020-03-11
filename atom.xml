@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-09T11:05:27.535Z</updated>
+    <updated>2020-03-11T07:36:04.933Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -10,21 +10,6 @@
     <logo>https://bailingnan.github.io/images/avatar.png</logo>
     <icon>https://bailingnan.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 白凌南</rights>
-    <entry>
-        <title type="html"><![CDATA[Attention机制总结]]></title>
-        <id>https://bailingnan.github.io/post/attention-ji-zhi-zong-jie/</id>
-        <link href="https://bailingnan.github.io/post/attention-ji-zhi-zong-jie/">
-        </link>
-        <updated>2020-03-09T10:44:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="attention">Attention</h1>
-<p><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/v2-ed738b8b47696283cd773b0db603ae73_b.png" alt="" loading="lazy"><br>
-在哪里体现了Attention呢？答案是:c_{i}，这个 Context Vector，上下文向量。<br>
-区别于 Seq2Seq 直接把最后一个时序i的输出 h_{i} 作为上下文向量，而是将之前所有时序的输出通过加权求和得到的一个上下文向量。这个 c_{i} 包含着各个时序输出的权重信息，也就相当于告诉我们哪一段文字对于当前的 target word 是重要的，哪些是不重要的。这就相当于告诉我们的注意力应该放在哪里。<br>
-c_{i} 是 Attention 矩阵的一行，表示输入 x_{1} 到 x_{t} 分别对 decoder 第 i 时序这个 target word 所对应的的权重（注意力大小）。<br>
-\alpha_{ij} 是 Attention 矩阵的一个值，表示输入表示 x_{j} 对 decoder 第 i 时序的 target word 的权重。<br>
-Attention 矩阵的计算方法如红框所示，由一个线性层和 softmax 层叠加得到。其输入是上一时刻 decoder 的状态 s_{i-1} 和 encoder 对第 j 个词的输出 h_{j} ， W_{a} 、 U_{a} 和 v_{a} 则是需要我们模型去学习的参数。其对应的物理意义就是：句子中某个词对应正准备翻译的词的权重（重要性），由词语本身（ h_{j} ）和前一个翻译的词（ s_{i-1} ）决定。</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[LeetCode26. 删除排序数组中的重复项]]></title>
         <id>https://bailingnan.github.io/post/leetcode26-shan-chu-pai-xu-shu-zu-zhong-de-chong-fu-xiang/</id>
