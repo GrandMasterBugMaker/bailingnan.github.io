@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-11T07:36:04.933Z</updated>
+    <updated>2020-03-13T10:15:38.190Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -2370,6 +2370,11 @@ Out[234]:
 SpeedTorch<br>
 ohmyzsh<br>
 pypy<br>
+<strong>Neptune.ai</strong><br>
+<strong>nyaggle</strong><br>
+<strong>fastai</strong>有协同过滤<br>
+<strong>neptune-notebooks</strong><br>
+<strong>comet_ml</strong><br>
 <strong>tensorwatch</strong><br>
 <strong>swifter</strong><br>
 <strong>modin(加载数据和查询数据更快，统计方法pandas更快)</strong><br>
