@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-22T07:25:52.821Z</updated>
+    <updated>2020-03-27T18:18:34.851Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -25,7 +25,7 @@
 <li><code>Python</code>中的大多数对象，比如列表、字典、<code>NumPy</code>数组，和用户定义的类型（类），都是可变的。意味着这些对象或包含的值可以被修改。</li>
 <li>字符串和元组，是不可变的。</li>
 </ul>
-<pre><code class="language-python">a= 'abc'
+<pre><code class="language-Python">a= 'abc'
 b = a.replace('a', 'A')
 print(b)
 'Abc'
@@ -36,26 +36,424 @@ print(b)
 <ul>
 <li>变量可以连续赋值:</li>
 </ul>
-<pre><code class="language-python">a=b=c=1
+<pre><code class="language-Python">a=b=c=1
 </code></pre>
+<h3 id="拷贝">拷贝</h3>
+<ul>
+<li>简单的赋值只是将引用传给新对象，新旧对象除变量名外毫无区别</li>
+<li>由于 <code>Python</code> 内部引用计数的特性，对于不可变对象，浅拷贝和深拷贝的作用是一致的，就相当于复制了一份副本，原对象内部的不可变对象的改变，不会影响到复制对象</li>
+<li>浅拷贝的拷贝。其实是拷贝了原始元素的引用（内存地址），所以当拷贝可变对象时，原对象内可变对象的对应元素的改变，会在复制对象的对应元素上，有所体现</li>
+<li>深拷贝在遇到可变对象时，又在内部做了新建了一个副本。所以，不管它内部的元素如何变化，都不会影响到原来副本的可变对象</li>
+<li>如果对子对象修改，则浅拷贝后的结果也会跟着发生变化，而深拷贝则不会。他们的子对象还是指向统一对象（是引用）。<code>list</code>的<code>a=b[:]</code>相当于<code>copy()</code></li>
+<li>如果对父对象修改，则不管是浅拷贝还是深拷贝的结果，都不会跟着发生变化。</li>
+<li>不管对什么对象修改，指针引用后的结果都会跟着发生相同变化。<br>
+标准库中的<code>copy</code>模块提供了两个方法来实现拷贝.一个方法是<code>copy</code>,它返回和参数包含内容一样的对象.</li>
+</ul>
+<pre><code class="language-Python">import copy
+new_list = copy.copy(existing_list)
+</code></pre>
+<p>有些时候,你希望对象中的属性也被复制,可以使用<code>deepcopy</code>方法:</p>
+<pre><code class="language-Python">import copy
+new_list_of_dicts = copy.deepcopy(existing_list_of_dicts)
+</code></pre>
+<p>当你对一个对象赋值的时候(做为参数传递,或者做为返回值),<code>Python</code>和<code>Java</code>一样,总是传递原始对象的引用,而不是一个副本.其它一些语言当赋值的时候总是传递副本,<code>Python</code>从不猜测用户的需求 ,如果你想要一个副本,你必须显式的要求.<br>
+<code>Python</code>的行为很简单,迅速,而且一致.然而,如果你需要一个对象拷贝而并没有显式的写出来,会出现问题的,比如:</p>
+<pre><code class="language-Python">a = [1, 2, 3]
+b = a
+print(id(a)==id(b))
+True
+b.append(5)
+print(a,b) 
+[1, 2, 3, 5] [1, 2, 3, 5]
+</code></pre>
+<p>在这里,变量<code>a</code>和<code>b</code>都指向同一个对象(一个列表),所以,一旦你修改了二者之一,另外一个也会受到影响.无论怎样,都会修改原来的对象。</p>
+<pre><code class="language-Python">import copy
+c=copy.copy(a)
+print(id(c)==id(a))
+False
+c[1]=222
+print(c)
+[1,222,3,5]
+print(a)
+[1,2,3,5]
+a=[1,2,[3,4]]
+d=copy.copy(a)
+print(id(a)==id(d))
+False
+print(id(a[2])==id(d[2]))
+True
+a[0]=11
+print(a)
+[11,2,[3,4]]
+print(d)
+[1,2,[3,4]]
+# 只会复制值的第一层，而不会复制往下的几层数据。
+# 复杂的 object， 如 list 中套着 list 的情况，shallow copy 中的 子list，并未从原 object 真的「独立」出来。也就是说，如果你改变原 object 的子 list 中的一个元素，你的 copy 就会跟着一起变。这跟我们直觉上对「复制」的理解不同。
+a[2][0]=333
+print(d)
+[1,2,[333,4]]
+e=copy.deepcopy(a)
+print(e[2]==a[2])
+False
+</code></pre>
+<p>这种情况就不一样了，这是对<code>a</code>重新指向新的值那么其<code>id</code>就会变而此时<code>b</code>就不会变。</p>
+<pre><code class="language-Python">a = [1,2,3]
+b = a
+print(id(b))
+a = {1:2}
+print(id(a))
+print(id(b))
+print(b)
+输出：
+1998591409928
+1998589307016
+1998591409928
+[1, 2, 3]
+</code></pre>
+<p>再举一个例子：</p>
+<pre><code class="language-Python">import copy
+a=[1,[1,2],3]
+b=a
+b
+[1, [1, 2], 3]
+id(a)
+4549388120
+id(b)
+4549388120
+b[0]=3
+a
+[3, [1, 2], 3]
+c=copy.copy(a)
+id(c)
+4549389992
+id(a)
+4549388120
+c[0]=4
+a
+[3, [1, 2], 3]
+c
+[4, [1, 2], 3]
+c[1].append(3)
+a
+[3, [1, 2, 3], 3]
+c
+[4, [1, 2, 3], 3]
+id(a[2])
+140345184649736
+id(c[2])
+140345184649736
+id(c[1])
+4549388192
+id(a[1])
+4549388192
+d=copy.deepcopy(a)
+id(d)
+4549389632
+id(a)
+4549388120
+d[1].append(4)
+a
+[3, [1, 2, 3], 3]
+d
+[3, [1, 2, 3, 4], 3]
+</code></pre>
+<p><code>Python</code> 存储变量的方法跟其他 <code>OOP</code> 语言不同。它与其说是把值赋给变量，不如说是给变量建立了一个到具体值的 <code>reference</code>。<br>
+当在 <code>Python</code> 中 <code>a = something</code> 应该理解为给 <code>something</code> 贴上了一个标签 <code>a</code>。当再赋值给 <code>a</code> 的时候，就好像把 <code>a</code> 这个标签从原来的 <code>something</code> 上拿下来，贴到其他对象上，建立新的 <code>reference</code>。 这就解释了一些 <code>Python</code> 中可能遇到的诡异情况：</p>
+<pre><code class="language-Python">a = [1, 2, 3]
+b = a
+a = [4, 5, 6] # 赋新的值给 a
+a
+[4, 5, 6]
+b
+[1, 2, 3]
+# a 的值改变后，b 并没有随着 a 变
+a = [1, 2, 3]
+b = a
+a[0], a[1], a[2] = 4, 5, 6 # 改变原来 list 中的元素
+a
+[4, 5, 6]
+b
+[4, 5, 6]
+# a 的值改变后，b 随着 a 变了
+</code></pre>
+<p>上面两段代码中，<code>a</code> 的值都发生了变化。区别在于，第一段代码中是直接赋给了 <code>a</code> 新的值(从 <code>[1, 2, 3]</code> 变为 <code>[4, 5, 6]</code>)；而第二段则是把 <code>list</code> 中每个元素分别改变。<br>
+首次把 <code>[1, 2, 3]</code> 看成一个物品。<code>a = [1, 2, 3]</code> 就相当于给这个物品上贴上 <code>a</code> 这个标签。而 <code>b = a</code> 就是给这个物品又贴上了一个 <code>b</code> 的标签。<br>
+<code>a = [4, 5, 6]</code> 就相当于把 <code>a</code> 标签从 <code>[1 ,2, 3]</code> 上撕下来，贴到了 <code>[4, 5, 6]</code> 上。<br>
+在这个过程中，<code>[1, 2, 3]</code> 这个物品并没有消失。 <code>b</code>自始至终都好好的贴在 <code>[1, 2, 3]</code> 上，既然这个 <code>reference</code> 也没有改变过。 <code>b</code> 的值自然不变。<br>
+第二种情况：<br>
+<code>a[0], a[1], a[2] = 4, 5, 6</code>则是直接改变了 <code>[1, 2, 3]</code> 这个物品本身。把它内部的每一部分都重新改装了一下。内部改装完毕后，<code>[1, 2, 3]</code> 本身变成了 <code>[4, 5, 6]</code>。<br>
+而在此过程当中，<code>a</code> 和 <code>b</code> 都没有动，他们还贴在那个物品上。因此自然 <code>a</code>,<code>b</code> 的值都变成了 <code>[4, 5, 6]</code>。<br>
+搞明白这个之后就要问了，对于一个复杂对象的浅<code>copy</code>，在<code>copy</code>的时候到底发生了什么？<br>
+再看一段代码：</p>
+<pre><code class="language-Python">import copy
+origin = [1, 2, [3, 4]]
+#origin 里边有三个元素：1， 2，[3, 4]
+cop1 = copy.copy(origin)
+cop2 = copy.deepcopy(origin)
+cop1 == cop2
+True
+cop1 is cop2
+False 
+#cop1 和 cop2 看上去相同，但已不再是同一个object
+origin[2][0] = &quot;hey!&quot; 
+origin
+[1, 2, ['hey!', 4]]
+cop1
+[1, 2, ['hey!', 4]]
+cop2
+[1, 2, [3, 4]]
+#把origin内的子list [3, 4] 改掉了一个元素，观察 cop1 和 cop2
+</code></pre>
+<p><code>copy</code>对于一个复杂对象的子对象并不会完全复制，什么是复杂对象的子对象呢？就比如序列里的嵌套序列，字典里的嵌套序列等都是复杂对象的子对象。对于子对象，<code>Python</code>会把它当作一个公共镜像存储起来，所有对他的复制都被当成一个引用，所以说当其中一个引用将镜像改变了之后另一个引用使用镜像的时候镜像已经被改变了。<br>
+所以说看这里的<code>origin[2]</code>，也就是 <code>[3, 4]</code> 这个 <code>list</code>。根据 <code>shallow copy</code> 的定义，在 <code>cop1[2]</code> 指向的是同一个 <code>list [3, 4]</code>。那么，如果这里我们改变了这个 <code>list</code>，就会导致 <code>origin</code> 和 <code>cop1</code> 同时改变。这就是为什么上边 <code>origin[2][0] = “hey!”</code>之后，cop1 也随之变成了 <code>[1, 2, [‘hey!’, 4]]</code>。<br>
+<code>deepcopy</code>的时候会将复杂对象的每一层复制一个单独的个体出来。<br>
+这时候的 <code>origin[2]</code> 和 <code>cop2[2]</code> 虽然值都等于 <code>[3, 4]</code>，但已经不是同一个 <code>list了</code>。即我们寻常意义上的复制。<br>
+总结：</p>
+<pre><code class="language-Python">lst = [10, ['A']]
+
+# 指针引用: 不拷贝
+a = lst
+assert a is lst
+
+# 浅拷贝: 只拷贝 父对象，不会拷贝 子对象
+import copy
+b = copy.copy(lst)
+assert b is not lst and b == lst
+
+# 深拷贝: 拷贝 父对象 及 子对象
+c = copy.deepcopy(lst)
+assert c is not lst and c == lst
+
+# 修改 list 对象
+lst.append(5)
+lst[1].append('B')
+
+print(&quot;原始的list对象:  lst =  [10, ['A']]&quot;)
+print('修改后list对象:  lst = ', a, '\n')
+print('指针引用:  a = ', a)
+print('浅拷贝  :  b = ', b)
+print('深拷贝  :  c = ', c)
+原始的list对象:  lst =  [10, ['A']]
+修改后list对象:  lst =  [10, ['A', 'B'], 5] 
+
+指针引用:  a =  [10, ['A', 'B'], 5]
+浅拷贝  :  b =  [10, ['A', 'B']]
+深拷贝  :  c =  [10, ['A']]
+</code></pre>
+<p>即:</p>
+<ul>
+<li>如果对子对象修改，则浅拷贝后的结果也会跟着发生变化，而深拷贝则不会。<code>list</code>的<code>a=b[:]</code>相当于<code>copy()</code></li>
+<li>如果对父对象修改，则不管是浅拷贝还是深拷贝的结果，都不会跟着发生变化。</li>
+<li>不管对什么对象修改，指针引用后的结果都会跟着发生相同变化。<br>
+举例：</li>
+</ul>
+<pre><code class="language-Python">import copy
+base = ['a', 'b', 'c', 'd', 'e']
+# 切片
+bak1 = base[:]
+print(&quot;bak1: &quot;, bak1)
+# list工厂函数
+bak2 = list(base)
+print(&quot;bak2: &quot;, bak2)
+# Python list对象的copy方法
+bak3 = base.copy()
+print(&quot;bak3: &quot;, bak3)
+# copy模块的copy方法
+bak4 = copy.copy(base)
+print(&quot;bak4: &quot;, bak4)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">bak1:  ['a', 'b', 'c', 'd', 'e']
+bak2:  ['a', 'b', 'c', 'd', 'e']
+bak3:  ['a', 'b', 'c', 'd', 'e']
+bak4:  ['a', 'b', 'c', 'd', 'e']
+</code></pre>
+<p>上面的代码使用了四种方式来对数据进行拷贝，这些方法都可以用来拷贝数据，结果都一样。</p>
+<ul>
+<li>切片<br>
+需要拷贝的数据进行切片处理，返回的结果相当于拷贝了一份数据。</li>
+<li>工厂方法<br>
+使用 <code>Python</code> 的工厂函数 <code>list</code> 来拷贝数据。(<code>Python</code>的工厂函数是比较特殊的，即是类也是函数，关于工厂函数的理解可以另行扩展一下)<br>
+拷贝列表时使用 <code>list</code>，如果拷贝字符串则将上面的 <code>list</code> 换成 <code>str</code> ，以此类推。</li>
+<li>list对象的copy方法<br>
+<code>Python</code> 中的 <code>list</code> 实现了 <code>copy</code> 方法，在拷贝列表时可以直接使用。这里需要注意，比如 <code>str</code> 没有实现 <code>copy</code> 方法，拷贝字符串时使用其他方法拷贝。</li>
+<li><code>copy</code>模块的<code>copy</code>方法<br>
+在 <code>Python</code> 标准库中有一个 <code>copy</code> 模块，可以使用 <code>copy</code> 模块的 <code>copy()</code> 方法来拷贝数据，<code>copy</code> 模块可以拷贝所有类型的数据。</li>
+</ul>
+<pre><code class="language-Python">import copy
+son = ['Python', 'copy']
+base = ['a', 'b', 'c', 'd', 'e', son]
+bak1 = base[:]
+print(&quot;bak1: &quot;, bak1)
+bak2 = list(base)
+print(&quot;bak2: &quot;, bak2)
+bak3 = base.copy()
+print(&quot;bak3: &quot;, bak3)
+bak4 = copy.copy(base)
+print(&quot;bak4: &quot;, bak4)
+print('-' * 20, '分割线', '-' * 20)
+son[0] = 'PYTHON'
+son[1] = 'COPY'
+print('base: ', base)
+print(&quot;bak1: &quot;, bak1)
+print(&quot;bak2: &quot;, bak2)
+print(&quot;bak3: &quot;, bak3)
+print(&quot;bak4: &quot;, bak4)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">bak1:  ['a', 'b', 'c', 'd', 'e', ['Python', 'copy']]
+bak2:  ['a', 'b', 'c', 'd', 'e', ['Python', 'copy']]
+bak3:  ['a', 'b', 'c', 'd', 'e', ['Python', 'copy']]
+bak4:  ['a', 'b', 'c', 'd', 'e', ['Python', 'copy']]
+-------------------- 分割线 --------------------
+base:  ['a', 'b', 'c', 'd', 'e', ['PYTHON', 'COPY']]
+bak1:  ['a', 'b', 'c', 'd', 'e', ['PYTHON', 'COPY']]
+bak2:  ['a', 'b', 'c', 'd', 'e', ['PYTHON', 'COPY']]
+bak3:  ['a', 'b', 'c', 'd', 'e', ['PYTHON', 'COPY']]
+bak4:  ['a', 'b', 'c', 'd', 'e', ['PYTHON', 'COPY']]
+</code></pre>
+<p>在实际工作中，数据的嵌套层数是很多的，通常会嵌套好几层。上面就在 <code>base</code> 列表中嵌套了一个 <code>son</code> 子列表。<br>
+用上面的四种拷贝方法拷贝 <code>base</code> 列表，然后修改 <code>base</code> 列表中的子列表 <code>son</code> 。重新打印这几个列表，发现不仅 <code>base</code> 列表被修改了，拷贝的列表也全部被修改了。<br>
+现在的需求是拷贝一份数据，修改一份保留一份，如果两份数据都被修改，是不符合需求的。<br>
+上面的四种拷贝方法都被称为浅拷贝（相对深拷贝而言），浅拷贝 <code>Python</code> 中的可变对象，如果数据中嵌套了可变对象，修改嵌套的可变对象，所有拷贝的数据都会一起被修改。<br>
+在 <code>Python</code> 中，所有的数据都是对象，无论是数字，字符串，元组，列表，字典，还是函数，类，甚至是模块。<br>
+不可变对象：<br>
+<code>int</code>, <code>str</code>, <code>tuple</code> 等类型的数据是不可变对象，不可变对象的特性是数据不可被修改。</p>
+<pre><code class="language-Python">a = 'a'
+print(id(a))
+a = 'b'
+print(id(a))
+</code></pre>
+<p>运行结果：</p>
+<pre><code>1543912659912
+1543912658232
+</code></pre>
+<p>如果对不可变对象修改，其实不是修改变量对象，而是重新创建一个同名的变量对象。可以通过 <code>id</code> 函数来判断，<code>id</code> 不一样就证明已经不是同一个变量了。<br>
+可变对象：<br>
+<code>list</code>， <code>set</code>，<code>dict</code> 等类型的数据是可变对象，相对于不可变对象而言，可变对象的数据可以被修改，修改之后还是同一个<code>id</code>。</p>
+<pre><code class="language-Python">base = [1, 2, 3]
+print(id(base))
+base[0] = 100
+print(base)
+print(id(base))
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">2182371173000
+[100, 2, 3]
+2182371173000
+</code></pre>
+<p>对可变对象进行修改，修改后还是同一个对象，只是可变对象里面的元素指向了不同的数据，这种指向是通过引用的方式来实现的。<br>
+上面的代码是对列表进行修改，如果对元组这样修改，代码会报错，就是因为可变对象和不可变对象的区别。<br>
+在 <code>Python</code> 程序中，每个对象都会在内存中开辟一块空间来保存该对象，该对象在内存中所在位置的地址被称为引用。<br>
+在编写代码时，定义的变量名实际是定义指向对象的地址引用名。<br>
+我们定义一个列表时，变量名是列表的名字，这个名字指向内存中的一块空间。这个列表里有多个元素，表示这块内存空间中，保存着多个元素的引用。</p>
+<ol>
+<li>修改引用<br>
+当修改列表的元素时，其实是修改列表中的引用。</li>
+</ol>
+<pre><code class="language-Python">list_a = [1, 2, 3]
+list_a[2] = 30
+print('list_a: ', list_a)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">list_a:  [1, 2, 30]
+</code></pre>
+<p>修改 <code>list_a</code> 中的第三个元素，其实是修改第三个元素的引用（这块内存指向的对象）。<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323023647.png" alt="" loading="lazy"><br>
+2. 引用传递（拷贝）<br>
+当拷贝列表时，其实是拷贝列表中的引用。</p>
+<pre><code class="language-Python">list_b = [1, 2, 3]
+list_c = list_b.copy()
+print('list_c: ', list_c)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">list_c:  [1, 2, 3]
+</code></pre>
+<p>拷贝 <code>list_b</code> 到 <code>list_c</code>，其实是给 <code>list_c</code> 新开辟一块内存，然后拷贝一份 <code>list_b</code> 的引用给 <code>list_c</code> ，并不是将 <code>list_b</code>指向的对象拷贝一份。<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323023828.png" alt="" loading="lazy"><br>
+这里不是将 <code>list_b</code> 赋值给 <code>list_c</code>，那样的结果是 <code>list_b</code> 指向 <code>[1, 2, 3]</code> ，<code>list_c</code> 指向 <code>list_b</code>，是引用关系，而不是拷贝关系。上面列举拷贝的方法时，没有将赋值列为拷贝方法，因为赋值是引用的传递，而不是拷贝。</p>
+<ol>
+<li>拷贝后修改引用（数据无嵌套）</li>
+</ol>
+<pre><code class="language-Python">import copy
+list_b = [1, 2, 3]
+list_c = copy.copy(list_b)
+list_b[2] = 30
+print('list_b: ', list_b)
+print('list_c: ', list_c)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">list_b:  [1, 2, 30]
+list_c:  [1, 2, 3]
+</code></pre>
+<p>使用 <code>copy.copy()</code> 方法拷贝 <code>list_b</code> 到 <code>list_c</code>，然后修改 <code>list_b</code> 中的引用关系，这样， <code>list_c</code> 不会被修改。<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323024031.png" alt="" loading="lazy"><br>
+2. 嵌套列表的拷贝</p>
+<pre><code class="language-Python">import copy
+sub = [2, 3]
+list_d = [1, sub]
+list_e = copy.copy(list_d)
+print('list_d: ', list_d)
+print('list_e: ', list_e)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">list_d:  [1, [2, 3]]
+list_e:  [1, [2, 3]]
+</code></pre>
+<p>对于嵌套的列表，拷贝 <code>list_d</code> 到 <code>list_e</code>，也是拷贝一份 <code>list_d</code> 的引用给 <code>list_e</code> ，与不嵌套的相同。<br>
+这里需要特别注意，在浅拷贝嵌套的列表时，只会拷贝最上层的引用，对于子列表的引用，不会拷贝。<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323024211.png" alt="" loading="lazy"><br>
+3. 拷贝的列表随原列表一起被修改</p>
+<pre><code class="language-Python">import copy
+sub = [2, 3]
+list_d = [1, sub]
+list_e = copy.copy(list_d)
+list_d[1][1] = 30
+print('list_d: ', list_d)
+print('list_e: ', list_e)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">list_d:  [1, [2, 30]]
+list_e:  [1, [2, 30]]
+</code></pre>
+<p>拷贝 <code>list_d</code> 到 <code>list_e</code>，由于没有拷贝子列表的引用 ，当修改子列时， <code>list_d</code> 和 <code>list_e</code> 都引用了子列表 <code>sub</code>，所以 <code>list_d</code> 和 <code>list_e</code>都会被修改。如下图：<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323024334.png" alt="" loading="lazy"><br>
+拷贝数据后，修改其中一个，另一个也跟着被修改，原因就是浅拷贝中，只拷贝了最外层的引用。当修改内层的引用时，所有外层的引用不变，都会指向修改后的结果。<br>
+两份数据都被修改，这就是浅拷贝中存在的问题，需要使用深拷贝来解决。<br>
+4. 深拷贝保证数据不会被修改</p>
+<pre><code class="language-Python">import copy
+sub = [2, 3]
+list_d = [1, sub]
+list_f = copy.deepcopy(list_d)
+list_d[1][1] = 30
+print('list_d: ', list_d)
+print('list_e: ', list_f)
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-Python">list_d:  [1, [2, 30]]
+list_e:  [1, [2, 3]]
+</code></pre>
+<p>使用 <code>copy</code> 模块的 <code>deepcopy()</code> 方法，在拷贝数据时，会递归地拷贝数据中所有嵌套的引用。<br>
+使用 <code>deepcopy()</code> 拷贝 <code>list_d</code> 到 <code>list_f</code> ，然后修改 <code>list_d</code> 中子列表的引用，不会对 <code>list_f</code> 产生影响，所以 <code>list_f</code> 不会被修改。<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323024515.png" alt="" loading="lazy"></p>
 <h3 id="元组">元组</h3>
 <ul>
 <li>如果要定义一个空的tuple，可以写成()：</li>
 </ul>
-<pre><code class="language-python">t = ()
+<pre><code class="language-Python">t = ()
 print(t)
 ()
 </code></pre>
 <ul>
 <li>但是，要定义一个只有1个元素的<code>tuple</code>，如果这么定义：</li>
 </ul>
-<pre><code class="language-python">t = (1)
+<pre><code class="language-Python">t = (1)
 print(t)
 1
 </code></pre>
 <p>定义的不是<code>tuple</code>，是<code>1</code>这个数！这是因为括号()既可以表示<code>tuple</code>，又可以表示数学公式中的小括号，这就产生了歧义，因此，<code>Python</code>规定，这种情况下，按小括号进行计算，计算结果自然是1。<br>
 所以，只有1个元素的<code>tuple</code>定义时必须加一个逗号,，来消除歧义：</p>
-<pre><code class="language-python">t = (1,)
+<pre><code class="language-Python">t = (1,)
 print(t）
 (1,)
 </code></pre>
@@ -63,7 +461,7 @@ print(t）
 <ul>
 <li>如果元组中的某个对象是可变的，比如列表，可以在原位进行修改：</li>
 </ul>
-<pre><code class="language-python">tup = tuple(['foo', [1, 2], True])
+<pre><code class="language-Python">tup = tuple(['foo', [1, 2], True])
 tup[1].append(3)
 print(tup)
 ('foo', [1, 2, 3], True)
@@ -72,7 +470,7 @@ print(tup)
 <ul>
 <li>使用特殊的语法<code>*rest</code>，函数签名中以抓取任意长度列表的位置参数：</li>
 </ul>
-<pre><code class="language-python">values = 1, 2, 3, 4, 5
+<pre><code class="language-Python">values = 1, 2, 3, 4, 5
 a, b, *rest = values
 print(a, b)
 (1, 2)
@@ -82,13 +480,13 @@ print(rest)
 <ul>
 <li><code>rest</code>的部分是想要舍弃的部分:</li>
 </ul>
-<pre><code class="language-python">a, b, *_ = values
+<pre><code class="language-Python">a, b, *_ = values
 </code></pre>
 <h4 id="tuple方法"><code>tuple</code>方法</h4>
 <ul>
 <li>统计值出现频率：</li>
 </ul>
-<pre><code class="language-python">a = (1, 2, 2, 2, 3, 4, 2)
+<pre><code class="language-Python">a = (1, 2, 2, 2, 3, 4, 2)
 print(a.count(2))
 4
 </code></pre>
@@ -103,7 +501,7 @@ print(a.count(2))
 <ul>
 <li><code>insert</code>在特定的位置插入元素：</li>
 </ul>
-<pre><code class="language-python">b_list=['foo', 'bar', 'baz']
+<pre><code class="language-Python">b_list=['foo', 'bar', 'baz']
 b_list.insert(1, 'red')
 print(b_list)
 ['foo', 'red', 'peekaboo', 'baz', 'dwarf']
@@ -112,7 +510,7 @@ print(b_list)
 <ul>
 <li><code>insert</code>的逆运算是<code>pop</code>，它移除并返回指定位置的元素,<code>pop()</code>默认删除最后一个元素：</li>
 </ul>
-<pre><code class="language-python">print(b_list.pop(2))
+<pre><code class="language-Python">print(b_list.pop(2))
 'peekaboo'
 print(b_list)
 ['foo', 'red', 'baz', 'dwarf']
@@ -120,7 +518,7 @@ print(b_list)
 <ul>
 <li><code>remove</code>去除某个值，<code>remove</code>会先寻找第一个值并除去：</li>
 </ul>
-<pre><code class="language-python">b_list.append('foo')
+<pre><code class="language-Python">b_list.append('foo')
 print(b_list)
 ['foo', 'red', 'baz', 'dwarf', 'foo']
 b_list.remove('foo')
@@ -131,7 +529,7 @@ print(b_list)
 <ul>
 <li>可以用加号将两个列表串联起来,如果已经定义了一个列表，用<code>extend</code>方法可以追加多个元素：</li>
 </ul>
-<pre><code class="language-python">x = [4, None, 'foo']
+<pre><code class="language-Python">x = [4, None, 'foo']
 x.extend([7, 8, (2, 3)])
 print(x)
 [4, None, 'foo', 7, 8, (2, 3)]
@@ -139,7 +537,7 @@ print(x)
 <ul>
 <li>通过加法将列表串联的计算量较大，因为要新建一个列表，并且要复制对象。用<code>extend</code>追加元素，尤其是到一个大列表中，更为可取。因此：</li>
 </ul>
-<pre><code class="language-python">#快
+<pre><code class="language-Python">#快
 everything = []
 for chunk in list_of_lists:
     everything.extend(chunk)
@@ -149,7 +547,7 @@ for chunk in list_of_lists:
     everything = everything + chunk
 </code></pre>
 <p>考虑下列代码片段：</p>
-<pre><code class="language-python">list = [ [ ] ] * 5
+<pre><code class="language-Python">list = [ [ ] ] * 5
 list  # output?
 list[0].append(10)
 list  # output?
@@ -160,7 +558,7 @@ list  # output?
 </code></pre>
 <p>2,4,6,8行将输出什么结果？试解释。<br>
 输出的结果如下：</p>
-<pre><code class="language-python">[[], [], [], [], []]
+<pre><code class="language-Python">[[], [], [], [], []]
 [[10], [10], [10], [10], [10]]
 [[10, 20], [10, 20], [10, 20], [10, 20], [10, 20]]
 [[10, 20], [10, 20], [10, 20], [10, 20], [10, 20], 30]
@@ -169,17 +567,17 @@ list  # output?
 第一行的输出结果直觉上很容易理解，例如 <code>list = [ [ ] ] * 5</code> 就是简单的创造了5个空列表。然而，理解表达式<code>list=[ [ ] ] * 5</code>的关键一点是它不是创造一个包含五个独立列表的列表，而是它是一个创建了包含对同一个列表五次引用的列表。只有了解了这一点，我们才能更好的理解接下来的输出结果。<br>
 <code>list[0].append(10)</code> 将10附加在第一个列表上。<br>
 但由于所有5个列表是引用的同一个列表，所以这个结果将是：</p>
-<pre><code class="language-python">[[10], [10], [10], [10], [10]]
+<pre><code class="language-Python">[[10], [10], [10], [10], [10]]
 </code></pre>
 <p>同理，<code>list[1].append(20)</code>将20附加在第二个列表上。但同样由于5个列表是引用的同一个列表，所以输出结果现在是：</p>
-<pre><code class="language-python">[[10, 20], [10, 20], [10, 20], [10, 20], [10, 20]]
+<pre><code class="language-Python">[[10, 20], [10, 20], [10, 20], [10, 20], [10, 20]]
 </code></pre>
 <p>作为对比， <code>list.append(30)</code>是将整个新的元素附加在外列表上，因此产生的结果是： <code>[[10, 20], [10, 20], [10, 20], [10, 20], [10, 20], 30]</code>。</p>
 <h4 id="排序">排序</h4>
 <ul>
 <li><code>sort</code>函数将一个列表原地排序（不创建新的对象）</li>
 </ul>
-<pre><code class="language-python">a = [7, 2, 5, 1, 3]
+<pre><code class="language-Python">a = [7, 2, 5, 1, 3]
 a.sort()
 print(a)
 [1, 2, 3, 5, 7]
@@ -187,7 +585,7 @@ print(a)
 <ul>
 <li><code>sort</code>有一些选项，有时会很好用。其中之一是二级排序<code>key</code>，可以用这个<code>key</code>进行排序。例如，我们可以按长度对字符串进行排序：</li>
 </ul>
-<pre><code class="language-python">b = ['saw', 'small', 'He', 'foxes', 'six']
+<pre><code class="language-Python">b = ['saw', 'small', 'He', 'foxes', 'six']
 b.sort(key=len)
 print(b)
 ['He', 'saw', 'six', 'small', 'foxes']
@@ -196,7 +594,7 @@ print(b)
 <ul>
 <li><code>bisect</code>模块支持二分查找，和向已排序的列表插入值。<code>bisect.bisect</code>可以找到插入值后仍保证排序的位置，<code>bisect.insort</code>是向这个位置插入值:</li>
 </ul>
-<pre><code class="language-python">import bisect
+<pre><code class="language-Python">import bisect
 c = [1, 2, 2, 2, 3, 4, 7]
 print(bisect.bisect(c, 2))
 4
@@ -210,7 +608,7 @@ print(c)
 <ul>
 <li><code>zip</code>可以将多个列表、元组或其它序列成对组合成一个元组列表：</li>
 </ul>
-<pre><code class="language-python">seq1 = ['foo', 'bar', 'baz']
+<pre><code class="language-Python">seq1 = ['foo', 'bar', 'baz']
 seq2 = ['one', 'two', 'three']
 zipped = zip(seq1, seq2)
 print(list(zipped))
@@ -219,14 +617,14 @@ print(list(zipped))
 <ul>
 <li><code>zip</code>可以处理任意多的序列，元素的个数取决于最短的序列：</li>
 </ul>
-<pre><code class="language-python">seq3 = [False, True]
+<pre><code class="language-Python">seq3 = [False, True]
 print(list(zip(seq1, seq2, seq3)))
 [('foo', 'one', False), ('bar', 'two', True)]
 </code></pre>
 <ul>
 <li><code>zip</code>的常见用法之一是同时迭代多个序列，可能结合<code>enumerate</code>使用：</li>
 </ul>
-<pre><code class="language-python">for i, (a, b) in enumerate(zip(seq1, seq2)):
+<pre><code class="language-Python">for i, (a, b) in enumerate(zip(seq1, seq2)):
     print('{0}: {1}, {2}'.format(i, a, b))
 0: foo, one
 1: bar, two
@@ -235,18 +633,26 @@ print(list(zip(seq1, seq2, seq3)))
 <ul>
 <li>给出一个“被压缩的”序列，<code>zip</code>可以被用来解压序列。也可以当作把行的列表转换为列的列表。</li>
 </ul>
-<pre><code class="language-python">pitchers = [('Nolan', 'Ryan'), ('Roger', 'Clemens'),('Schilling', 'Curt')]
+<pre><code class="language-Python">pitchers = [('Nolan', 'Ryan'), ('Roger', 'Clemens'),('Schilling', 'Curt')]
 first_names, last_names = zip(*pitchers)
 print(first_names)
 ('Nolan', 'Roger', 'Schilling')
 print(last_names)
 ('Ryan', 'Clemens', 'Curt')
 </code></pre>
-<h4 id="reversed函数">reversed函数</h4>
+<h4 id="reversed函数"><code>reversed</code>函数</h4>
 <p><code>reversed</code>是一个生成器（后面详细介绍），只有实体化（即列表或<code>for</code>循环）之后才能创建翻转的序列。</p>
-<pre><code class="language-python">print(list(reversed(range(10))))
+<pre><code class="language-Python">print(list(reversed(range(10))))
 [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 </code></pre>
+<h4 id="列表拷贝">列表拷贝</h4>
+<ul>
+<li><code>b=a[:]</code>。</li>
+<li><code>b=list(a)</code>。</li>
+<li>使用<code>copy.copy()</code>函数，或<code>b=a.copy()</code>直接复制<code>list</code>，类似<code>a[:]</code>。</li>
+<li>使用<code>copy.deepcopy()</code>。<br>
+使用<code>b=a</code>是完全引用，除了名字没区别</li>
+</ul>
 <h4 id="常用函数-2">常用函数</h4>
 <ul>
 <li><code>max(list)</code>:返回列表元素最大值</li>
@@ -256,30 +662,64 @@ print(last_names)
 <li><code>list.index(obj)</code>:从列表中找出某个值第一个匹配项的索引位置</li>
 <li><code>list.reverse()</code>:反向列表中元素</li>
 </ul>
+<h4 id="串联函数">串联函数</h4>
+<pre><code class="language-Python">操作函数对象
+def f():
+    print('i\'m f')
+def g():
+    print('i\'m g')
+[f,g][1]()
+i'm g
+</code></pre>
 <h3 id="字典">字典</h3>
-<pre><code class="language-python">d = dict(name='Bob', age=20, score=88)
-```python
-`pickle.dumps()`方法把任意对象序列化成一个`bytes`，然后，就可以把这个`bytes`写入文件。或者用另一个方法`pickle.dump()`直接把对象序列化后写入一个`file-like Object`：
-```python
-f = open('dump.txt', 'wb')
+<ul>
+<li>多种构造方法:</li>
+</ul>
+<pre><code class="language-Python">a = dict(one=1, two=2, three=3)
+b = {'one':1, 'two':2, 'three':3}
+c = dict(zip(['one', 'two', 'three'], [1, 2, 3]))
+d = dict([('one', 1), ('two', 2), ('three', 3)])
+e = dict({'three':3, 'one':1, 'two':2})
+print(a)
+print(b)
+print(c)
+print(d)
+print(e)
+&gt;&gt;&gt;{'one': 1, 'two': 2, 'three': 3}
+&gt;&gt;&gt;{'one': 1, 'two': 2, 'three': 3}
+&gt;&gt;&gt;{'one': 1, 'two': 2, 'three': 3}
+&gt;&gt;&gt;{'one': 1, 'two': 2, 'three': 3}
+&gt;&gt;&gt;{'three': 3, 'one': 1, 'two': 2}
+print(a==b==c==d==e)
+&gt;&gt;&gt;True
+</code></pre>
+<p>特别注意这种构造方法：</p>
+<pre><code class="language-Python">t = {x:y for x in range(10) for y in range(10)}
+print(t)
+{0: 9, 1: 9, 2: 9, 3: 9, 4: 9, 5: 9, 6: 9, 7: 9, 8: 9, 9: 9}
+</code></pre>
+<pre><code class="language-Python">d = dict(name='Bob', age=20, score=88)
+</code></pre>
+<p><code>pickle.dumps()</code>方法把任意对象序列化成一个<code>bytes</code>，然后，就可以把这个<code>bytes</code>写入文件。或者用另一个方法<code>pickle.dump()</code>直接把对象序列化后写入一个<code>file-like Object</code>：</p>
+<pre><code class="language-Python">f = open('dump.txt', 'wb')
 pickle.dump(d, f)
 f.close()
 </code></pre>
 <p>当我们要把对象从磁盘读到内存时，可以先把内容读到一个<code>bytes</code>，然后用<code>pickle.loads()</code>方法反序列化出对象，也可以直接用<code>pickle.load()</code>方法从一个<code>file-like Object</code>中直接反序列化出对象。我们打开另一个<code>Python</code>命令行来反序列化刚才保存的对象：</p>
-<pre><code class="language-python">f = open('dump.txt', 'rb')
+<pre><code class="language-Python">f = open('dump.txt', 'rb')
 d = pickle.load(f)
 f.close()
 print(d)
 {'age': 20, 'score': 88, 'name': 'Bob'}
 </code></pre>
-<pre><code class="language-python">import json
+<pre><code class="language-Python">import json
 d = dict(name='Bob', age=20, score=88)
 json.dumps(d)
 '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
 </code></pre>
 <p><code>dumps()</code>方法返回一个<code>str</code>，内容就是标准的<code>JSON</code>。类似的，<code>dump()</code>方法可以直接把<code>JSON</code>写入一个<code>file-like Object</code>。<br>
 要把<code>JSON</code>反序列化为<code>Python</code>对象，用<code>loads()</code>或者对应的<code>load()</code>方法，前者把<code>JSON</code>的字符串反序列化，后者从<code>file-like Object</code>中读取字符串并反序列化：</p>
-<pre><code class="language-python">json_str = '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
+<pre><code class="language-Python">json_str = '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
 json.loads(json_str)
 {'age': 20, 'score': 88, 'name': 'Bob'}
 </code></pre>
@@ -287,7 +727,7 @@ json.loads(json_str)
 <ul>
 <li>用<code>del</code>关键字或<code>pop</code>方法（返回值的同时删除键）删除值：</li>
 </ul>
-<pre><code class="language-python">d1={'a': 'some value', 'b': [1, 2, 3, 4], 7: 'an integer',5: 'some value','dummy': 'another value'}
+<pre><code class="language-Python">d1={'a': 'some value', 'b': [1, 2, 3, 4], 7: 'an integer',5: 'some value','dummy': 'another value'}
 del d1[5]
 print(d1)
 {'a': 'some value',
@@ -307,24 +747,24 @@ print(d1)
 <ul>
 <li>用<code>update</code>方法可以将一个字典与另一个融合,<code>update</code>方法是原地改变字典，因此任何传递给<code>update</code>的键的旧的值都会被舍弃。</li>
 </ul>
-<pre><code class="language-python">d1.update({'b' : 'foo', 'c' : 12})
+<pre><code class="language-Python">d1.update({'b' : 'foo', 'c' : 12})
 print(d1)
 {'a': 'some value', 'b': 'foo', 7: 'an integer', 'c': 12}
 </code></pre>
 <h4 id="用序列创建字典">用序列创建字典</h4>
-<pre><code class="language-python">mapping = {}
+<pre><code class="language-Python">mapping = {}
 for key, value in zip(key_list, value_list):
     mapping[key] = value
 </code></pre>
 <ul>
 <li>因为字典本质上是2元元组的集合，<code>dict</code>可以接受2元元组的列表：</li>
 </ul>
-<pre><code class="language-python">mapping = dict(zip(range(5), reversed(range(5))))
+<pre><code class="language-Python">mapping = dict(zip(range(5), reversed(range(5))))
 print(mapping)
 {0: 4, 1: 3, 2: 2, 3: 1, 4: 0}
 </code></pre>
 <h4 id="默认值">默认值</h4>
-<pre><code class="language-python">if key in some_dict:
+<pre><code class="language-Python">if key in some_dict:
     value = some_dict[key]
 else:
     value = default_value
@@ -332,12 +772,12 @@ else:
 <ul>
 <li><code>dict</code>的方法<code>get</code>和<code>pop</code>可以取默认值进行返回，上面的<code>if-else</code>语句可以简写成下面：</li>
 </ul>
-<pre><code class="language-python">value = some_dict.get(key, default_value)
+<pre><code class="language-Python">value = some_dict.get(key, default_value)
 </code></pre>
 <ul>
 <li><code>get</code>默认会返回<code>None</code>，如果不存在键，<code>pop</code>会抛出一个例外。关于设定值，常见的情况是在字典的值是属于其它集合，如列表。例如，你可以通过首字母，将一个列表中的单词分类：</li>
 </ul>
-<pre><code class="language-python">words = ['apple', 'bat', 'bar', 'atom', 'book']
+<pre><code class="language-Python">words = ['apple', 'bat', 'bar', 'atom', 'book']
 by_letter = {}
 for word in words:
     letter = word[0]
@@ -351,20 +791,20 @@ print(by_letter)
 <ul>
 <li>使用<code>setdefault</code>方法：</li>
 </ul>
-<pre><code class="language-python">for word in words:
+<pre><code class="language-Python">for word in words:
     letter = word[0]
     by_letter.setdefault(letter, []).append(word)
 </code></pre>
 <ul>
 <li><code>collections</code>模块有一个很有用的类，<code>defaultdict</code>，它可以进一步简化上面。传递类型或函数以生成每个位置的默认值：</li>
 </ul>
-<pre><code class="language-python">from collections import defaultdict
+<pre><code class="language-Python">from collections import defaultdict
 by_letter = defaultdict(list)
 for word in words:
     by_letter[word[0]].append(word)
 </code></pre>
 <p>给定以下字典的子类，下面的代码能够运行么？为什么？</p>
-<pre><code class="language-python">class DefaultDict(dict):
+<pre><code class="language-Python">class DefaultDict(dict):
   def __missing__(self, key):
     return []
 d = DefaultDict()
@@ -376,7 +816,7 @@ d['florp'] = 127
 <ul>
 <li>字典的值可以是任意<code>Python</code>对象，而键通常是不可变的标量类型（整数、浮点型、字符串）或元组（元组中的对象必须是不可变的）。这被称为“可哈希性”。可以用<code>hash</code>函数检测一个对象是否是可哈希的（可被用作字典的键）：</li>
 </ul>
-<pre><code class="language-python">print(hash('string'))
+<pre><code class="language-Python">print(hash('string'))
 5023931463650008331
 print(hash((1, 2, (2, 3))))
 1097636502276347782
@@ -384,7 +824,7 @@ print(hash((1, 2, [2, 3]))) # fails because lists are mutable
 ---------------------------------------------------------------------------
 TypeError                                 
 Traceback (most recent call last)
-&lt;ipython-input-129-800cd14ba8be&gt; in &lt;module&gt;()
+&lt;iPython-input-129-800cd14ba8be&gt; in &lt;module&gt;()
 ----&gt; 1 hash((1, 2, [2, 3])) # fails because lists are mutable
 TypeError: unhashable type: 'list'
 </code></pre>
@@ -392,18 +832,18 @@ TypeError: unhashable type: 'list'
 <ul>
 <li>键：</li>
 </ul>
-<pre><code class="language-python">sorted(dict.keys())
+<pre><code class="language-Python">sorted(dict.keys())
 </code></pre>
 <ul>
 <li>值：</li>
 </ul>
-<pre><code class="language-python">sorted(dict.items(),key=lamda:item:item[1])
+<pre><code class="language-Python">sorted(dict.items(),key=lamda:item:item[1])
 </code></pre>
 <h3 id="集合">集合</h3>
 <ul>
 <li>集合是无序的不可重复的元素的集合。你可以把它当做字典，但是只有键没有值。可以用两种方式创建集合：通过<code>set</code>函数或使用尖括号<code>set</code>语句：</li>
 </ul>
-<pre><code class="language-python">print(set([2, 2, 2, 1, 3, 3]))
+<pre><code class="language-Python">print(set([2, 2, 2, 1, 3, 3]))
 {1, 2, 3}
 print({2, 2, 2, 1, 3, 3})
 {1, 2, 3}
@@ -413,7 +853,7 @@ print({2, 2, 2, 1, 3, 3})
 <li>通过<code>remove(key)</code>方法可以删除元素：</li>
 <li>合并是取两个集合中不重复的元素。可以用<code>union</code>方法，或者<code>|</code>运算符：</li>
 </ul>
-<pre><code class="language-python">a = {1, 2, 3, 4, 5}
+<pre><code class="language-Python">a = {1, 2, 3, 4, 5}
 b = {3, 4, 5, 6, 7, 8}
 print(a.union(b))
 {1, 2, 3, 4, 5, 6, 7, 8}
@@ -423,7 +863,7 @@ print(a | b)
 <ul>
 <li>交集的元素包含在两个集合中。可以用<code>intersection</code>或<code>&amp;</code>运算符：</li>
 </ul>
-<pre><code class="language-python">print(a.intersection(b))
+<pre><code class="language-Python">print(a.intersection(b))
 {3, 4, 5}
 print(a &amp; b)
 {3, 4, 5}
@@ -437,7 +877,7 @@ print(a &amp; b)
 <p>所有逻辑集合操作都有另外的原地实现方法，可以直接用结果替代集合的内容。对于大的集合，这么做效率更高：</p>
 </li>
 </ul>
-<pre><code class="language-python">c = a.copy()
+<pre><code class="language-Python">c = a.copy()
 c |= b
 print(c)
 {1, 2, 3, 4, 5, 6, 7, 8}
@@ -449,17 +889,17 @@ print(d)
 <ul>
 <li>检测一个集合是否是另一个集合的子集或父集：</li>
 </ul>
-<pre><code class="language-python">a_set = {1, 2, 3, 4, 5}
+<pre><code class="language-Python">a_set = {1, 2, 3, 4, 5}
 print({1, 2, 3}.issubset(a_set))
 True
 print(a_set.issuperset({1, 2, 3}))
 True
 </code></pre>
 <h3 id="列表-集合和字典推导式">列表、集合和字典推导式</h3>
-<pre><code class="language-python">[expr for val in collection if condition]
+<pre><code class="language-Python">[expr for val in collection if condition]
 </code></pre>
 <p>等同于：</p>
-<pre><code class="language-python">result = []
+<pre><code class="language-Python">result = []
 for val in collection:
     if condition:
         result.append(expr)
@@ -467,37 +907,37 @@ for val in collection:
 <ul>
 <li>字典:</li>
 </ul>
-<pre><code class="language-python">dict_comp = {key-expr : value-expr for value in collection if condition}
+<pre><code class="language-Python">dict_comp = {key-expr : value-expr for value in collection if condition}
 </code></pre>
 <ul>
 <li>集合</li>
 </ul>
-<pre><code class="language-python">set_comp = {expr for value in collection if condition}
+<pre><code class="language-Python">set_comp = {expr for value in collection if condition}
 </code></pre>
 <ul>
 <li><code>map</code>函数可以进一步简化：</li>
 </ul>
-<pre><code class="language-python">print(set(map(len, strings)))
+<pre><code class="language-Python">print(set(map(len, strings)))
 {1, 2, 3, 4, 6}
 </code></pre>
 <h4 id="嵌套列表推导式">嵌套列表推导式</h4>
-<pre><code class="language-python">all_data = [['John', 'Emily', 'Michael', 'Mary', 'Steven'],['Maria', 'Juan', 'Javier', 'Natalia', 'Pilar']]
+<pre><code class="language-Python">all_data = [['John', 'Emily', 'Michael', 'Mary', 'Steven'],['Maria', 'Juan', 'Javier', 'Natalia', 'Pilar']]
 names_of_interest = []
 for names in all_data:
     enough_es = [name for name in names if name.count('e') &gt;= 2]
     names_of_interest.extend(enough_es)
 </code></pre>
 <p>嵌套列表推导式：</p>
-<pre><code class="language-python">result = [name for names in all_data for name in names if name.count('e') &gt;= 2]
+<pre><code class="language-Python">result = [name for names in all_data for name in names if name.count('e') &gt;= 2]
 print(result)
 result=['Steven']
 </code></pre>
 <p>以下代码正常输出偶数：</p>
-<pre><code class="language-python">[x for x in range(1, 11) if x % 2 == 0]
+<pre><code class="language-Python">[x for x in range(1, 11) if x % 2 == 0]
 [2, 4, 6, 8, 10]
 </code></pre>
 <p>但是，我们不能在最后的<code>if</code>加上<code>else</code>：</p>
-<pre><code class="language-python">[x for x in range(1, 11) if x % 2 == 0 else 0]
+<pre><code class="language-Python">[x for x in range(1, 11) if x % 2 == 0 else 0]
   File &quot;&lt;stdin&gt;&quot;, line 1
     [x for x in range(1, 11) if x % 2 == 0 else 0]
                                               ^
@@ -505,38 +945,69 @@ SyntaxError: invalid syntax
 </code></pre>
 <p>这是因为跟在<code>for</code>后面的<code>if</code>是一个筛选条件，不能带<code>else</code>，否则如何筛选？<br>
 另一些童鞋发现把<code>if</code>写在<code>for</code>前面必须加<code>else</code>，否则报错：</p>
-<pre><code class="language-python">[x if x % 2 == 0 for x in range(1, 11)]
+<pre><code class="language-Python">[x if x % 2 == 0 for x in range(1, 11)]
   File &quot;&lt;stdin&gt;&quot;, line 1
     [x if x % 2 == 0 for x in range(1, 11)]
                        ^
 SyntaxError: invalid syntax
 </code></pre>
 <p>这是因为<code>for</code>前面的部分是一个表达式，它必须根据<code>x</code>计算出一个结果。因此，考察表达式：<code>x if x % 2 == 0</code>，它无法根据<code>x</code>计算出结果，因为缺少<code>else</code>，必须加上<code>else</code>:</p>
-<pre><code class="language-python">[x if x % 2 == 0 else -x for x in range(1, 11)]
+<pre><code class="language-Python">[x if x % 2 == 0 else -x for x in range(1, 11)]
 [-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]
 </code></pre>
 <p>上述for前面的表达式<code>x if x % 2 == 0 else -x</code>才能根据<code>x</code>计算出确定的结果。<br>
 可见，在一个列表生成式中，<code>for</code>前面的<code>if ... else</code>是表达式，而<code>for</code>后面的<code>if</code>是过滤条件，不能带<code>else</code>。</p>
-<pre><code class="language-python">print([[x for x in tup] for tup in some_tuples])
+<pre><code class="language-Python">print([[x for x in tup] for tup in some_tuples])
 [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 </code></pre>
 <h3 id="函数">函数</h3>
 <h4 id="参数">参数</h4>
 <ul>
-<li>对象作为参数传递给函数时，新的局域变量创建了对原始对象的引用，而不是复制。如果在函数里绑定一个新对象到一个变量，这个变动不会反映到上一层。因此可以改变可变参数的内容:</li>
+<li><code>Python</code>函数参数既不是传参也不是传引用。应该称其为传对象引用,如果是数字，字符串，元组则传值,如果是列表，字典则传址。对象作为参数传递给函数时，新的局域变量创建了对原始对象的引用，而不是复制。如果在函数里绑定一个新对象到一个变量，这个变动不会反映到上一层。因此可以改变可变参数的内容:</li>
 </ul>
-<pre><code class="language-python">def append_element(some_list, element):
+<pre><code class="language-Python">def append_element(some_list, element):
     some_list.append(element)
 data = [1, 2, 3]
 append_element(data, 4)
 print(data)
 [1, 2, 3, 4]
 </code></pre>
+<pre><code class="language-Python">def func(d):
+    d['a'] = 10
+    d['b'] = 20            
+    d = {'a': 1, 'b': 2}
+
+
+d = {}                    # 1
+func(d)                   # 2
+print(d)
+########打印结果########
+{'a': 10, 'b': 20}
+</code></pre>
+<p>想一想, 最后的结果为什么还是<code>{'a': 10, 'b': 20}</code>?<br>
+首先在全局创建一个空字典,并将<code>d</code>贴上:<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/v2-5d4d7a9c04d8feac54b3350d8c5b1435_1440w.jpg" alt="" loading="lazy"><br>
+将 <code>d</code> 传入到函数<code>func</code>中,在函数中局部的形参变量也为<code>d</code>,它同样贴在空字典对象上<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174500.png" alt="" loading="lazy"><br>
+在函数中前两句,为字典赋值.因为字典是可变的,这一操作对全局的 <code>d</code> 也会产生同样的影响.因为此时全局的<code>d</code>与函数内部的<code>d</code>贴向的是同一个对象<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174540.png" alt="" loading="lazy"><br>
+函数最后一句,本质上是将函数内部的<code>d</code>贴向另外一个字典对象,全局的<code>d</code>当然还是贴向原来的字典对象.<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174823.png" alt="" loading="lazy"><br>
+函数结束,函数内部的<code>d</code>被回收,而且最后打印结果如下所示<br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174908.png" alt="" loading="lazy"></p>
 <ul>
 <li>函数可以有一些位置参数(<code>positional</code>)和一些关键字参数(<code>keyword</code>)。关键字参数通常用于指定默认值或可选参数</li>
 </ul>
 <h4 id="默认参数">默认参数</h4>
-<pre><code class="language-python">def add_end(L=[]):
+<pre><code class="language-Python">i = 1
+def test(a=i):
+    print(a)
+
+i = 2
+test()  # 1
+</code></pre>
+<p>由于参数默认值是在函数定义时而不是函数执行时确定的，所以这段代码<code>test</code>方法的参数默认值时<code>1</code>而不是<code>2</code>。</p>
+<pre><code class="language-Python">def add_end(L=[]):
     L.append('END')
     return L
 print(add_end())
@@ -549,14 +1020,14 @@ print(add_end())
 <strong>定义默认参数要牢记一点：默认参数必须指向不变对象！</strong></li>
 <li>要修改上面的例子，我们可以用<code>None</code>这个不变对象来实现：</li>
 </ul>
-<pre><code class="language-python">def add_end(L=None):
+<pre><code class="language-Python">def add_end(L=None):
     if L is None:
         L = []
     L.append('END')
     return L
 </code></pre>
 <p>举例：</p>
-<pre><code class="language-python">def extendList(val, list=[]):
+<pre><code class="language-Python">def extendList(val, list=[]):
     list.append(val)
     return list
 
@@ -577,22 +1048,56 @@ list3 = [10, 'a']
 <code>extendList</code>的定义可以作如下修改。<br>
 尽管，创建一个新的列表，没有特定的列表参数。<br>
 下面这段代码可能能够产生想要的结果。</p>
-<pre><code class="language-python">def extendList(val, list=None):
+<pre><code class="language-Python">def extendList(val, list=None):
   if list is None:
     list = []
   list.append(val)
   return list
 </code></pre>
 <p>通过上面的修改，输出结果将变成：</p>
-<pre><code class="language-python">list1 = [10]
+<pre><code class="language-Python">list1 = [10]
 list2 = [123]
 list3 = ['a']
 </code></pre>
 <ul>
-<li>为什么要设计<code>str</code>、<code>None</code>这样的不变对象呢？因为不变对象一旦创建，对象内部的数据就不能修改，这样就减少了由于修改数据导致的错误。此外，由于对象不变，多任务环境下同时读取对象不需要加锁，同时读一点问题都没有。我们在编写程序时，如果可以设计一个不变对象，那就尽量设计成不变对象。</li>
+<li>为什么要设计<code>str</code>、<code>None</code>这样的不变对象呢？因为不变对象一旦创建，对象内部的数据就不能修改，这样就减少了由于修改数据导致的错误。此外，由于对象不变，多任务环境下同时读取对象不需要加锁，同时读一点问题都没有。我们在编写程序时，如果可以设计一个不变对象，那就尽量设计成不变对象。<br>
+默认参数的值应该是不可变的对象，比如<code>None</code>、<code>True</code>、<code>False</code>、数字或字符串。 特别的，千万不要像下面这样写代码：</li>
 </ul>
+<pre><code class="language-python">def spam(a, b=[]): # NO!
+    ...
+</code></pre>
+<p>如果你这么做了，当默认值在其他地方被修改后你将会遇到各种麻烦。这些修改会影响到下次调用这个函数时的默认值。比如：</p>
+<pre><code class="language-python">def spam(a, b=[]):
+    print(b)
+    return b
+x = spam(1)
+x
+[]
+x.append(99)
+x.append('Yow!')
+x
+[99, 'Yow!']
+spam(1) # Modified list gets returned!
+[99, 'Yow!']
+</code></pre>
+<p>这种结果应该不是你想要的。为了避免这种情况的发生，最好是将默认值设为<code>None</code>， 然后在函数里面检查它，前面的例子就是这样做的。<br>
+在测试<code>None</code>值时使用 <code>is</code> 操作符是很重要的，也是这种方案的关键点。 有时候大家会犯下下面这样的错误：</p>
+<pre><code class="language-python">def spam(a, b=None):
+    if not b: # NO! Use 'b is None' instead
+        b = []
+</code></pre>
+<p>这么写的问题在于尽管<code>None</code>值确实是被当成<code>False</code>， 但是还有其他的对象(比如长度为<code>0</code>的字符串、列表、元组、字典等)都会被当做<code>False</code>。 因此，上面的代码会误将一些其他输入也当成是没有输入。比如：</p>
+<pre><code class="language-python">spam(1) # OK
+x = []
+spam(1, x) # Silent error. x value overwritten by default
+spam(1, 0) # Silent error. 0 ignored
+spam(1, '') # Silent error. '' ignored
+</code></pre>
+<p>最后一个问题比较微妙，那就是一个函数需要测试某个可选参数是否被使用者传递进来。 这时候需要小心的是你不能用某个默认值比如<code>None</code>、 <code>0</code>或者<code>False</code>值来测试用户提供的值(因为这些值都是合法的值，是可能被用户传递进来的)。 因此，你需要其他的解决方案了。<br>
+为了解决这个问题，你可以创建一个独一无二的私有对象实例，就像上面的<code>_no_value</code>变量那样。 在函数里面，你可以通过检查被传递参数值跟这个实例是否一样来判断。 这里的思路是用户不可能去传递这个<code>_no_value</code>实例作为输入。 因此，这里通过检查这个值就能确定某个参数是否被传递进来了。<br>
+这里对 <code>object()</code> 的使用看上去有点不太常见。<code>object</code> 是<code>python</code>中所有类的基类。 你可以创建 <code>object</code> 类的实例，但是这些实例没什么实际用处，因为它并没有任何有用的方法， 也没有任何实例数据(因为它没有任何的实例字典，你甚至都不能设置任何属性值)。 你唯一能做的就是测试同一性。这个刚好符合我的要求，因为我在函数中就只是需要一个同一性的测试而已。</p>
 <h4 id="可变参数">可变参数</h4>
-<pre><code class="language-python">def calc(*numbers):
+<pre><code class="language-Python">def calc(*numbers):
     sum = 0
     for n in numbers:
         sum = sum + n * n
@@ -600,7 +1105,7 @@ list3 = ['a']
 </code></pre>
 <p>定义可变参数和定义一个<code>list</code>或<code>tuple</code>参数相比，仅仅在参数前面加了一个<code>*</code>号。在函数内部，参数<code>numbers</code>接收到的是一个<code>tuple</code>，因此，函数代码完全不变。但是，调用该函数时，可以传入任意个参数，包括<code>0</code>个参数。<br>
 如果已经有一个<code>list</code>或者<code>tuple</code>：</p>
-<pre><code class="language-python">nums = [1, 2, 3]
+<pre><code class="language-Python">nums = [1, 2, 3]
 print(calc(*nums))
 14
 </code></pre>
@@ -608,26 +1113,26 @@ print(calc(*nums))
 <ul>
 <li>关键字参数允许你传入<code>0</code>个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个<code>dict</code>。</li>
 </ul>
-<pre><code class="language-python">def person(name, age, **kw):
+<pre><code class="language-Python">def person(name, age, **kw):
     print('name:', name, 'age:', age, 'other:', kw)
 </code></pre>
 <ul>
 <li>函数<code>person</code>除了必选参数<code>name</code>和<code>age</code>外，还接受关键字参数<code>kw</code>。在调用该函数时，可以只传入必选参数：</li>
 </ul>
-<pre><code class="language-python">person('Michael', 30)
+<pre><code class="language-Python">person('Michael', 30)
 name: Michael age: 30 other: {}
 </code></pre>
 <ul>
 <li>也可以传入任意个数的关键字参数：</li>
 </ul>
-<pre><code class="language-python">person('Bob', 35, city='Beijing')
+<pre><code class="language-Python">person('Bob', 35, city='Beijing')
 name: Bob age: 35 other: {'city': 'Beijing'}
 person('Adam', 45, gender='M', job='Engineer')
 name: Adam age: 45 other: {'gender': 'M', 'job': 'Engineer'}
 </code></pre>
 <p>关键字参数可以扩展函数的功能。比如，在<code>person</code>函数里，我们保证能接收到<code>name</code>和<code>age</code>这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。<br>
 和可变参数类似，也可以先组装出一个<code>dict</code>，然后，把该<code>dict</code>转换为关键字参数传进去：</p>
-<pre><code class="language-python">extra = {'city': 'Beijing', 'job': 'Engineer'}
+<pre><code class="language-Python">extra = {'city': 'Beijing', 'job': 'Engineer'}
 person('Jack', 24, city=extra['city'], job=extra['job'])
 name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 </code></pre>
@@ -642,7 +1147,7 @@ name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 <li>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过<code>kw</code>检查。<br>
 仍以<code>person()</code>函数为例，我们希望检查是否有<code>city</code>和<code>job</code>参数：</li>
 </ul>
-<pre><code class="language-python">def person(name, age, **kw):
+<pre><code class="language-Python">def person(name, age, **kw):
     if 'city' in kw:
         # 有city参数
         pass
@@ -654,26 +1159,26 @@ name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 <ul>
 <li>如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收<code>city</code>和<code>job</code>作为关键字参数。这种方式定义的函数如下：</li>
 </ul>
-<pre><code class="language-python">def person(name, age, *, city, job):
+<pre><code class="language-Python">def person(name, age, *, city, job):
     print(name, age, city, job)
 </code></pre>
 <ul>
 <li>和关键字参数<code>**kw不同</code>，命名关键字参数需要一个特殊分隔符<code>*</code>，<code>*</code>后面的参数被视为命名关键字参数。<br>
 调用方式如下：</li>
 </ul>
-<pre><code class="language-python">person('Jack', 24, city='Beijing', job='Engineer')
+<pre><code class="language-Python">person('Jack', 24, city='Beijing', job='Engineer')
 Jack 24 Beijing Engineer
 </code></pre>
 <ul>
 <li>如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了：</li>
 </ul>
-<pre><code class="language-python">def person(name, age, *args, city, job):
+<pre><code class="language-Python">def person(name, age, *args, city, job):
     print(name, age, args, city, job)
 </code></pre>
 <ul>
 <li>命名关键字参数必须传入参数名，这和位置参数不同。如果没有传入参数名，调用将报错：</li>
 </ul>
-<pre><code class="language-python">person('Jack', 24, 'Beijing', 'Engineer')
+<pre><code class="language-Python">person('Jack', 24, 'Beijing', 'Engineer')
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 TypeError: person() takes 2 positional arguments but 4 were given
@@ -682,40 +1187,40 @@ TypeError: person() takes 2 positional arguments but 4 were given
 <li>由于调用时缺少参数名<code>city</code>和<code>job</code>，<code>Python</code>解释器把这4个参数均视为位置参数，但<code>person()</code>函数仅接受2个位置参数。<br>
 命名关键字参数可以有缺省值，从而简化调用：</li>
 </ul>
-<pre><code class="language-python">def person(name, age, *, city='Beijing', job):
+<pre><code class="language-Python">def person(name, age, *, city='Beijing', job):
     print(name, age, city, job)
 </code></pre>
 <ul>
 <li>由于命名关键字参数<code>city</code>具有默认值，调用时，可不传入<code>city</code>参数：</li>
 </ul>
-<pre><code class="language-python">person('Jack', 24, job='Engineer')
+<pre><code class="language-Python">person('Jack', 24, job='Engineer')
 Jack 24 Beijing Engineer
 </code></pre>
 <ul>
 <li>使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个<code>*</code>作为特殊分隔符。如果缺少<code>*</code>，<code>Python</code>解释器将无法识别位置参数和命名关键字参数：</li>
 </ul>
-<pre><code class="language-python">def person(name, age, city, job):
+<pre><code class="language-Python">def person(name, age, city, job):
     # 缺少 *，city和job被视为位置参数
     pass
 </code></pre>
 <h4 id="强制位置参数">强制位置参数</h4>
 <p><code>Python3.8</code> 新增了一个函数形参语法<code>/</code>用来指明函数形参必须使用指定位置参数，不能使用关键字参数的形式。<br>
 在以下的例子中，形参 <code>a</code> 和 <code>b</code> 必须使用指定位置参数，<code>c</code> 或 <code>d</code> 可以是位置形参或关键字形参，而 <code>e</code> 或 <code>f</code> 要求为关键字形参:</p>
-<pre><code class="language-python">def f(a, b, /, c, d, *, e, f):
+<pre><code class="language-Python">def f(a, b, /, c, d, *, e, f):
     print(a, b, c, d, e, f)
 </code></pre>
 <p>以下使用方法是正确的:</p>
-<pre><code class="language-python">f(10, 20, 30, d=40, e=50, f=60)
+<pre><code class="language-Python">f(10, 20, 30, d=40, e=50, f=60)
 </code></pre>
 <p>以下使用方法会发生错误:</p>
-<pre><code class="language-python">f(10, b=20, c=30, d=40, e=50, f=60)   # b 不能使用关键字参数的形式
+<pre><code class="language-Python">f(10, b=20, c=30, d=40, e=50, f=60)   # b 不能使用关键字参数的形式
 f(10, 20, 30, 40, 50, f=60)           # e 必须使用关键字参数的形式
 </code></pre>
 <h4 id="参数组合">参数组合</h4>
 <ul>
 <li>在<code>Python</code>中定义函数，可以用<strong>必选参数</strong>、<strong>默认参数</strong>、<strong>可变参数</strong>、<strong>关键字参数</strong>和<strong>命名关键字参数</strong>，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：<strong>必选参数</strong>、<strong>默认参数</strong>、<strong>可变参数</strong>、<strong>命名关键字参数</strong>和<strong>关键字参数</strong>。</li>
 </ul>
-<pre><code class="language-python">def f1(a, b, c=0, *args, **kw):
+<pre><code class="language-Python">def f1(a, b, c=0, *args, **kw):
     print('a =', a, 'b =', b, 'c =', c, 'args =', args, 'kw =', kw)
 
 def f2(a, b, c=0, *, d, **kw):
@@ -724,7 +1229,7 @@ def f2(a, b, c=0, *, d, **kw):
 <ul>
 <li>在函数调用的时候，<code>Python</code>解释器自动按照参数位置和参数名把对应的参数传进去。</li>
 </ul>
-<pre><code class="language-python">f1(1, 2)
+<pre><code class="language-Python">f1(1, 2)
 a = 1 b = 2 c = 0 args = () kw = {}
 f1(1, 2, c=3)
 a = 1 b = 2 c = 3 args = () kw = {}
@@ -738,7 +1243,7 @@ a = 1 b = 2 c = 0 d = 99 kw = {'ext': None}
 <ul>
 <li>通过一个<code>tuple</code>和<code>dict</code>，你也可以调用上述函数：</li>
 </ul>
-<pre><code class="language-python">args = (1, 2, 3, 4)
+<pre><code class="language-Python">args = (1, 2, 3, 4)
 kw = {'d': 99, 'x': '#'}
 f1(*args, **kw)
 a = 1 b = 2 c = 3 args = (4,) kw = {'d': 99, 'x': '#'}
@@ -750,27 +1255,120 @@ a = 1 b = 2 c = 3 d = 88 kw = {'x': '#'}
 <ul>
 <li>所以，对于任意函数，都可以通过类似<code>func(*args, **kw)</code>的形式调用它，无论它的参数是如何定义的。<br>
 <strong>虽然可以组合多达5种参数，但不要同时使用太多的组合，否则函数接口的可理解性很差。</strong></li>
+<li>示例：<br>
+<code>Python</code>五类参数：位置参数，关键字参数，默认参数，可变位置或关键字参数的使用。</li>
 </ul>
+<pre><code class="language-Python">def f(a,*b,c=10,**d):
+  print(f'a:{a},b:{b},c:{c},d:{d}')
+</code></pre>
+<p>默认参数<code>c</code>不能位于可变关键字参数<code>d</code>后.<br>
+调用<code>f</code>:</p>
+<pre><code class="language-Python">f(1,2,5,width=10,height=20)
+a:1,b:(2, 5),c:10,d:{'width': 10, 'height': 20}
+</code></pre>
+<p>可变位置参数<code>b</code>实参后被解析为元组<code>(2,5)</code>;而<code>c</code>取得默认值10; <code>d</code>被解析为字典.</p>
+<p>再次调用<code>f</code>:</p>
+<pre><code class="language-Python">f(a=1,c=12)
+a:1,b:(),c:12,d:{}
+</code></pre>
+<p><code>a=1</code>传入时<code>a</code>就是关键字参数，<code>b</code>,<code>d</code>都未传值，<code>c</code>被传入12，而非默认值。<br>
+注意观察参数<code>a</code>, 既可以<code>f(1)</code>,也可以<code>f(a=1)</code> 其可读性比第一种更好，建议使用<code>f(a=1)</code>。如果要强制使用<code>f(a=1)</code>，需要在前面添加一个星号:</p>
+<pre><code class="language-Python">def f(*,a,*b):
+  print(f'a:{a},b:{b}')
+</code></pre>
+<p>此时<code>f(1)</code>调用，将会报错：<code>TypeError: f() takes 0 positional arguments but 1 was given</code><br>
+只能<code>f(a=1)</code>才能<code>OK</code>.</p>
+<p>说明前面的<code>*</code>发挥作用，它变为只能传入关键字参数，那么如何查看这个参数的类型呢？借助<code>Python</code>的<code>inspect</code>模块：</p>
+<pre><code class="language-Python">for name,val in signature(f).parameters.items():
+    print(name,val.kind)
+a KEYWORD_ONLY
+b VAR_KEYWORD
+</code></pre>
+<p>可看到参数<code>a</code>的类型为<code>KEYWORD_ONLY</code>，也就是仅仅为关键字参数。<br>
+但是，如果<code>f</code>定义为：</p>
+<pre><code class="language-Python">def f(a,*b):
+  print(f'a:{a},b:{b}')
+</code></pre>
+<p>查看参数类型：</p>
+<p>In [24]: for name,val in signature(f).parameters.items():<br>
+...:     print(name,val.kind)<br>
+...:<br>
+a POSITIONAL_OR_KEYWORD<br>
+b VAR_POSITIONAL<br>
+可以看到参数a既可以是位置参数也可是关键字参数。</p>
 <h4 id="匿名lambda函数">匿名(lambda)函数</h4>
 <ul>
 <li><code>lambda</code> 函数拥有自己的命名空间，且不能访问自己参数列表之外或全局命名空间里的参数。</li>
 <li>虽然<code>lambda</code>函数看起来只能写一行，却不等同于<code>C</code>或<code>C++</code>的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。</li>
 </ul>
-<pre><code class="language-python">strings = ['foo', 'card', 'bar', 'aaaa', 'abab']
+<pre><code class="language-Python">strings = ['foo', 'card', 'bar', 'aaaa', 'abab']
 strings.sort(key=lambda x: len(set(list(x))))
 print(strings)
 ['aaaa', 'foo', 'abab', 'bar', 'card']
 </code></pre>
+<p>先看下下面代码的效果：</p>
+<pre><code class="language-python">x = 10
+a = lambda y: x + y
+x = 20
+b = lambda y: x + y
+print(a(10),b(10))
+</code></pre>
+<p>现在我问你，<code>a(10)</code>和<code>b(10)</code>返回的结果是什么？如果你认为结果是<code>20</code>和<code>30</code>，那么你就错了：</p>
+<pre><code class="language-python">a(10)
+30
+b(10)
+30
+</code></pre>
+<p>这其中的奥妙在于<code>lambda</code>表达式中的<code>x</code>是一个自由变量， 在运行时绑定值，而不是定义时就绑定，这跟函数的默认值参数定义是不同的。 因此，在调用这个lambda表达式的时候，<code>x</code>的值是执行时的值。例如：</p>
+<pre><code class="language-python">x = 15
+a(10)
+25
+x = 3
+a(10)
+13
+</code></pre>
+<p>如果你想让某个匿名函数在定义时就捕获到值，可以将那个参数值定义成默认参数即可，就像下面这样：</p>
+<pre><code class="language-python">x = 10
+a = lambda y, x=x: x + y
+x = 20
+b = lambda y, x=x: x + y
+a(10)
+20
+b(10)
+30
+&gt;&gt;&gt;
+在这里列出来的问题是新手很容易犯的错误，有些新手可能会不恰当的使用`lambda`表达式。 比如，通过在一个循环或列表推导中创建一个`lambda`表达式列表，并期望函数能在定义时就记住每次的迭代值。例如：
+```python
+funcs = [lambda x: x+n for n in range(5)]
+for f in funcs:
+    print(f(0))
+4
+4
+4
+4
+4
+</code></pre>
+<p>但是实际效果是运行是<code>n</code>的值为迭代的最后一个值。现在我们用另一种方式修改一下：</p>
+<pre><code class="language-python">funcs = [lambda x, n=n: x+n for n in range(5)]
+for f in funcs:
+    print(f(0))
+0
+1
+2
+3
+4
+</code></pre>
+<p>通过使用函数默认值参数形式，<code>lambda</code>函数在定义时就能绑定到值。</p>
 <h4 id="柯里化部分参数应用">柯里化：部分参数应用</h4>
 <ul>
 <li>柯里化（currying）是一个有趣的计算机科学术语，它指的是通过“部分参数应用”（partial argument application）从现有函数派生出新函数的技术。例如，假设我们有一个执行两数相加的简单函数:</li>
 </ul>
-<pre><code class="language-python">def add_numbers(x, y):
+<pre><code class="language-Python">def add_numbers(x, y):
     return x + y
 add_five = lambda y: add_numbers(5, y)
 </code></pre>
 <p><code>add_numbers</code>的第二个参数称为“柯里化的”（curried）。这里没什么特别花哨的东西，因为我们其实就只是定义了一个可以调用现有函数的新函数而已。内置的<code>functools</code>模块可以用<code>partial</code>函数将此过程简化：</p>
-<pre><code class="language-python">from functools import partial
+<pre><code class="language-Python">from functools import partial
 add_five = partial(add_numbers, 5)
 </code></pre>
 <h4 id="生成器">生成器</h4>
@@ -778,7 +1376,7 @@ add_five = partial(add_numbers, 5)
 <li>能以一种一致的方式对序列进行迭代（比如列表中的对象或文件中的行）是<code>Python</code>的一个重要特点。这是通过一种叫做迭代器协议(<code>iterator protocol</code>，它是一种使对象可迭代的通用方式)的方式实现的，一个原生的使对象可迭代的方法。</li>
 <li>生成器(<code>generator</code>)是构造新的可迭代对象的一种简单方式。一般的函数执行之后只会返回单个值，而生成器则是以延迟的方式返回一个值序列，即每返回一个值之后暂停，直到下一个值被请求时再继续。要创建一个生成器，只需将函数中的<code>return</code>替换为<code>yeild</code>即可：</li>
 </ul>
-<pre><code class="language-python">def squares(n=10):
+<pre><code class="language-Python">def squares(n=10):
     print('Generating squares from 1 to {0}'.format(n ** 2))
     for i in range(1, n + 1):
         yield i ** 2
@@ -786,31 +1384,65 @@ add_five = partial(add_numbers, 5)
 <ul>
 <li>调用该生成器时，没有任何代码会被立即执行：</li>
 </ul>
-<pre><code class="language-python">gen = squares()
+<pre><code class="language-Python">gen = squares()
 print(gen)
 &lt;generator object squares at 0x7fbbd5ab4570&gt;
 </code></pre>
 <p>直到你从该生成器中请求元素时，它才会开始执行其代码：</p>
-<pre><code class="language-python">for x in gen:
+<pre><code class="language-Python">for x in gen:
     print(x, end=' ')
 Generating squares from 1 to 100
 1 4 9 16 25 36 49 64 81 100
 </code></pre>
+<p>在一个对象上实现迭代最简单的方式是使用一个生成器函数。使用<code>Node</code>类来表示树形数据结构。你可能想实现一个以深度优先方式遍历树形节点的生成器。 下面是代码示例：</p>
+<pre><code class="language-python">class Node:
+    def __init__(self, value):
+        self._value = value
+        self._children = []
+
+    def __repr__(self):
+        return 'Node({!r})'.format(self._value)
+
+    def add_child(self, node):
+        self._children.append(node)
+
+    def __iter__(self):
+        return iter(self._children)
+
+    def depth_first(self):
+        yield self
+        for c in self:
+            yield from c.depth_first()
+# Example
+if __name__ == '__main__':
+    root = Node(0)
+    child1 = Node(1)
+    child2 = Node(2)
+    root.add_child(child1)
+    root.add_child(child2)
+    child1.add_child(Node(3))
+    child1.add_child(Node(4))
+    child2.add_child(Node(5))
+
+    for ch in root.depth_first():
+        print(ch)
+    # Outputs Node(0), Node(1), Node(3), Node(4), Node(2), Node(5)
+</code></pre>
+<p>在这段代码中，<code>depth_first()</code> 方法简单直观。 它首先返回自己本身并迭代每一个子节点并通过调用子节点的 <code>depth_first()</code> 方法(使用 <code>yield from</code> 语句)返回对应元素。</p>
 <h4 id="生成器表达式">生成器表达式</h4>
-<pre><code class="language-python">另一种更简洁的构造生成器的方法是使用生成器表达式(`generator expression`)。这是一种类似于列表、字典、集合推导式的生成器。其创建方式为，把列表推导式两端的方括号改成圆括号：
-```python
-gen = (x ** 2 for x in range(100))
+<p>另一种更简洁的构造生成器的方法是使用生成器表达式(<code>generator expression</code>)。这是一种类似于列表、字典、集合推导式的生成器。其创建方式为，把列表推导式两端的方括号改成圆括号：</p>
+<pre><code class="language-Python">gen = (x ** 2 for x in range(100))
 print(gen)
 &lt;generator object &lt;genexpr&gt; at 0x7fbbd5ab29e8&gt;
 </code></pre>
 <p>它跟下面这个冗长得多的生成器是完全等价的：</p>
-<pre><code class="language-python">def _make_gen():
+<pre><code class="language-Python">def _make_gen():
     for x in range(100):
         yield x ** 2
 gen = _make_gen()
 </code></pre>
 <p>生成器表达式也可以取代列表推导式，作为函数参数：</p>
-<pre><code class="language-python">print(sum(x ** 2 for x in range(100)))
+<pre><code class="language-Python">print(sum(x ** 2 for x in range(100)))
 328350
 print(dict((i, i **2) for i in range(5)))
 {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
@@ -820,7 +1452,7 @@ print(dict((i, i **2) for i in range(5)))
 <li>可以被<code>next()</code>函数调用并不断返回下一个值的对象称为迭代器：<code>Iterator</code>。<br>
 可以使用<code>isinstance()</code>判断一个对象是否是<code>Iterator</code>对象：</li>
 </ul>
-<pre><code class="language-python">from collections.abc import Iterator
+<pre><code class="language-Python">from collections.abc import Iterator
 isinstance((x for x in range(10)), Iterator)
 True
 isinstance([], Iterator)
@@ -832,7 +1464,7 @@ False
 </code></pre>
 <p>生成器都是<code>Iterator</code>对象，但<code>list</code>、<code>dict</code>、<code>str</code>虽然是<code>Iterable</code>，却不是<code>Iterator</code>。</p>
 <p>把<code>list</code>、<code>dict</code>、<code>str</code>等<code>Iterable</code>变成<code>Iterator</code>可以使用<code>iter()</code>函数：</p>
-<pre><code class="language-python">isinstance(iter([]), Iterator)
+<pre><code class="language-Python">isinstance(iter([]), Iterator)
 True
 isinstance(iter('abc'), Iterator)
 True
@@ -844,9 +1476,9 @@ True
 <p>把一个类作为一个迭代器使用需要在类中实现两个方法 <code>__iter__()</code> 与 <code>__next__()</code> 。<br>
 如果你已经了解的面向对象编程，就知道类都有一个构造函数，<code>Python</code> 的构造函数为 <code>__init__()</code>, 它会在对象初始化的时候执行。<br>
 <code>__iter__()</code> 方法返回一个特殊的迭代器对象， 这个迭代器对象实现了 <code>__next__()</code> 方法并通过 <code>StopIteration</code> 异常标识迭代的完成。<br>
-<code>__next__()</code> 方法（Python 2 里是 <code>next()</code>）会返回下一个迭代器对象。<br>
+<code>__next__()</code> 方法(<code>Python 2</code> 里是 <code>next()</code>)会返回下一个迭代器对象。<br>
 创建一个返回数字的迭代器，初始值为 1，逐步递增 1：</p>
-<pre><code class="language-python">class MyNumbers:
+<pre><code class="language-Python">class MyNumbers:
   def __iter__(self):
     self.a = 1
     return self
@@ -910,19 +1542,37 @@ for x in myiter:
 19
 20
 </code></pre>
+<h5 id="通过字符串调用对象方法">通过字符串调用对象方法</h5>
+<p>最简单的情况，可以使用 <code>getattr()</code> ：</p>
+<pre><code class="language-python">import math
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return 'Point({!r:},{!r:})'.format(self.x, self.y)
+
+    def distance(self, x, y):
+        return math.hypot(self.x - x, self.y - y)
+
+p = Point(2, 3)
+d = getattr(p, 'distance')(0, 0)  # Calls p.distance(0, 0)
+</code></pre>
+<p>调用一个方法实际上是两部独立操作，第一步是查找属性，第二步是函数调用。 因此，为了调用某个方法，你可以首先通过 <code>getattr()</code> 来查找到这个属性，然后再去以函数方式调用它即可。</p>
 <h4 id="函数式编程">函数式编程</h4>
 <h5 id="高阶函数">高阶函数</h5>
 <h6 id="map函数"><code>map</code>函数</h6>
 <ul>
 <li><code>map()</code> 会根据提供的函数对指定序列做映射。第一个参数 <code>function</code> 以参数序列中的每一个元素调用 <code>function</code> 函数，返回包含每次 <code>function</code> 函数返回值的新列表。</li>
 </ul>
-<pre><code class="language-python">map(function, iterable, ...)
+<pre><code class="language-Python">map(function, iterable, ...)
 </code></pre>
 <ul>
 <li><code>function</code>:函数</li>
 <li><code>iterable</code>:一个或多个序列</li>
 </ul>
-<pre><code class="language-python">def square(x) :            # 计算平方数
+<pre><code class="language-Python">def square(x) :            # 计算平方数
     return x ** 2
 print(map(square, [1,2,3,4,5]))   # 计算列表各个元素的平方
 [1, 4, 9, 16, 25]
@@ -936,17 +1586,17 @@ print(map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10]))
 <ul>
 <li><code>reduce</code>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算，其效果就是:</li>
 </ul>
-<pre><code class="language-python">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+<pre><code class="language-Python">reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
 </code></pre>
 <p>如果要把序列<code>[1, 3, 5, 7, 9]</code>变换成整数13579，reduce就可以派上用场：</p>
-<pre><code class="language-python">from functools import reduce
+<pre><code class="language-Python">from functools import reduce
 def fn(x, y):
     return x * 10 + y
 print(reduce(fn, [1, 3, 5, 7, 9]))
 13579
 </code></pre>
 <p>考虑到字符串<code>str</code>也是一个序列，对上面的例子稍加改动，配合<code>map()</code>，我们就可以写出把<code>str</code>转换为<code>int</code>的函数：</p>
-<pre><code class="language-python">from functools import reduce
+<pre><code class="language-Python">from functools import reduce
 DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
 def char2num(s):
     return DIGITS[s]
@@ -984,21 +1634,21 @@ for n in primes():
 <ul>
 <li><code>sorted</code>函数可以从任意序列的元素返回一个新的排好序的列表：</li>
 </ul>
-<pre><code class="language-python">print(sorted([7, 1, 2, 6, 0, 3, 2]))
+<pre><code class="language-Python">print(sorted([7, 1, 2, 6, 0, 3, 2]))
 [0, 1, 2, 2, 3, 6, 7]
 print(sorted('horse race'))
 [' ', 'a', 'c', 'e', 'e', 'h', 'o', 'r', 'r', 's']
 </code></pre>
 <p><code>sorted()</code>函数也是一个高阶函数，它还可以接收一个<code>key</code>函数来实现自定义的排序，例如按绝对值大小排序：</p>
-<pre><code class="language-python">sorted([36, 5, -12, 9, -21], key=abs)
+<pre><code class="language-Python">sorted([36, 5, -12, 9, -21], key=abs)
 [5, 9, -12, -21, 36]
 </code></pre>
 <p>进行反向排序，不必改动<code>key</code>函数，可以传入第三个参数<code>reverse=True</code>：</p>
-<pre><code class="language-python">sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
+<pre><code class="language-Python">sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
 ['Zoo', 'Credit', 'bob', 'about']
 </code></pre>
 <h5 id="返回函数">返回函数</h5>
-<pre><code class="language-python">def lazy_sum(*args):
+<pre><code class="language-Python">def lazy_sum(*args):
     def sum():
         ax = 0
         for n in args:
@@ -1007,12 +1657,12 @@ print(sorted('horse race'))
     return sum
 </code></pre>
 <p>调用<code>lazy_sum()</code>时，返回的并不是求和结果，而是求和函数：</p>
-<pre><code class="language-python">f = lazy_sum(1, 3, 5, 7, 9)
+<pre><code class="language-Python">f = lazy_sum(1, 3, 5, 7, 9)
 f
 &lt;function lazy_sum.&lt;locals&gt;.sum at 0x101c6ed90&gt;
 </code></pre>
 <p>调用函数<code>f</code>时，才真正计算求和的结果：</p>
-<pre><code class="language-python">f()
+<pre><code class="language-Python">f()
 25
 </code></pre>
 <p>函数<code>lazy_sum</code>中又定义了函数<code>sum</code>，并且，内部函数<code>sum</code>可以引用外部函数<code>lazy_sum</code>的参数和局部变量，当<code>lazy_sum</code>返回函数<code>sum</code>时，相关参数和变量都保存在返回的函数中，这种称为“闭包(Closure)”的程序结构拥有极大的威力。</p>
@@ -1020,7 +1670,7 @@ f
 <ul>
 <li>返回的函数在其定义内部引用了局部变量<code>args</code>，所以，当一个函数返回了一个函数后，其内部的局部变量还被新函数引用，所以，闭包用起来简单，实现起来可不容易。</li>
 </ul>
-<pre><code class="language-python">def count():
+<pre><code class="language-Python">def count():
     fs = []
     for i in range(1, 4):
         def f():
@@ -1032,7 +1682,7 @@ f1, f2, f3 = count()
 </code></pre>
 <p>在上面的例子中，每次循环，都创建了一个新的函数，然后，把创建的3个函数都返回了。<br>
 你可能认为调用<code>f1()</code>，<code>f2()</code>和<code>f3()</code>结果应该是1，4，9，但实际结果是：</p>
-<pre><code class="language-python">f1()
+<pre><code class="language-Python">f1()
 9
 f2()
 9
@@ -1043,7 +1693,7 @@ f3()
 另一个需要注意的问题是，返回的函数并没有立刻执行，而是直到调用了<code>f()</code>才执行。<br>
 <strong>返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。</strong><br>
 如果一定要引用循环变量怎么办？方法是再创建一个函数，用该函数的参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变：</p>
-<pre><code class="language-python">def count():
+<pre><code class="language-Python">def count():
     def f(j):
         def g():
             return j*j
@@ -1053,7 +1703,7 @@ f3()
         fs.append(f(i)) # f(i)立刻被执行，因此i的当前值被传入f()
     return fs
 </code></pre>
-<pre><code class="language-python"> f1, f2, f3 = count()
+<pre><code class="language-Python"> f1, f2, f3 = count()
 f1()
 1
 f2()
@@ -1061,8 +1711,8 @@ f2()
 f3()
 9
 </code></pre>
-<pre><code class="language-python">下面这段代码的输出结果将是什么？请解释。
-```python
+<pre><code class="language-Python">下面这段代码的输出结果将是什么？请解释。
+```Python
 def multipliers():
   return [lambda x : i * x for i in range(4)]
 print [m(2) for m in multipliers()]
@@ -1073,25 +1723,57 @@ print [m(2) for m in multipliers()]
 因此，每次返回的函数乘以传递过来的值3，因为上段代码传过来的值是2，它们最终返回的都是6(3*2)。碰巧的是，《The Hitchhiker’s Guide to Python》也指出，在与<code>lambdas</code>函数相关也有一个被广泛被误解的知识点，不过跟这个<code>case</code>不一样。由<code>lambda</code>表达式创造的函数没有什么特殊的地方，它其实是和def创造的函数式一样的。<br>
 下面是解决这一问题的一些方法。<br>
 一种解决方法就是用<code>Python</code>生成器。</p>
-<pre><code class="language-python">def multipliers():
+<pre><code class="language-Python">def multipliers():
   for i in range(4): yield lambda x : i * x
 </code></pre>
 <p>另外一个解决方案就是创造一个闭包，利用默认函数立即绑定。</p>
-<pre><code class="language-python">def multipliers():
+<pre><code class="language-Python">def multipliers():
   return [lambda x, i=i : i * x for i in range(4)]
 </code></pre>
 <p>还有种替代的方案是，使用偏函数：</p>
-<pre><code class="language-python">from functools import partial
+<pre><code class="language-Python">from functools import partial
 from operator import mul
 def multipliers():
   return [partial(mul, i) for i in range(4)]
 </code></pre>
+<p>通常来讲，闭包的内部变量对于外界来讲是完全隐藏的。 但是，你可以通过编写访问函数并将其作为函数属性绑定到闭包上来实现这个目的。例如：</p>
+<pre><code class="language-python">def sample():
+    n = 0
+    # Closure function
+    def func():
+        print('n=', n)
+
+    # Accessor methods for n
+    def get_n():
+        return n
+
+    def set_n(value):
+        nonlocal n
+        n = value
+
+    # Attach as function attributes
+    func.get_n = get_n
+    func.set_n = set_n
+    return func
+</code></pre>
+<p>下面是使用的例子:</p>
+<pre><code class="language-python">f = sample()
+f()
+n= 0
+f.set_n(10)
+f()
+n= 10
+f.get_n()
+10
+</code></pre>
+<p>讨论<br>
+为了说明清楚它如何工作的，有两点需要解释一下。首先，<code>nonlocal</code> 声明可以让我们编写函数来修改内部变量的值。</p>
 <h5 id="装饰器">装饰器</h5>
 <ul>
 <li>在代码运行期间动态增加功能的方式，称之为“装饰器”(<code>Decorator</code>)。<br>
 本质上，<code>decorator</code>就是一个返回函数的高阶函数。所以，我们要定义一个能打印日志的<code>decorator</code>，可以定义如下：</li>
 </ul>
-<pre><code class="language-python">def log(func):
+<pre><code class="language-Python">def log(func):
     def wrapper(*args, **kw):
         print('call %s():' % func.__name__)
         return func(*args, **kw)
@@ -1106,7 +1788,7 @@ call now():
 <p>由于<code>log()</code>是一个<code>decorator</code>，返回一个函数，所以，原来的<code>now()</code>函数仍然存在，只是现在同名的<code>now</code>变量指向了新的函数，于是调用<code>now()</code>将执行新函数，即在<code>log()</code>函数中返回的<code>wrapper()</code>函数。<br>
 <code>wrapper()</code>函数的参数定义是<code>(*args, **kw)</code>，因此，<code>wrapper()</code>函数可以接受任意参数的调用。在<code>wrapper()</code>函数内，首先打印日志，再紧接着调用原始函数。<br>
 如果<code>decorator</code>本身需要传入参数，那就需要编写一个返回<code>decorator</code>的高阶函数，写出来会更复杂。比如，要自定义<code>log</code>的文本：</p>
-<pre><code class="language-python">def log(text):
+<pre><code class="language-Python">def log(text):
     def decorator(func):
         def wrapper(*args, **kw):
             print('%s %s():' % (text, func.__name__))
@@ -1121,11 +1803,11 @@ execute now():
 2015-3-25
 </code></pre>
 <p>和两层嵌套的decorator相比，3层嵌套的效果是这样的：</p>
-<pre><code class="language-python">now = log('execute')(now)
+<pre><code class="language-Python">now = log('execute')(now)
 </code></pre>
 <p>首先执行<code>log('execute')</code>，返回的是<code>decorator</code>函数，再调用返回的函数，参数是<code>now</code>函数，返回值最终是<code>wrapper</code>函数。</p>
 <p>以上两种<code>decorator</code>的定义都没有问题，但还差最后一步。因为我们讲了函数也是对象，它有<code>__name__</code>等属性，但你去看经过<code>decorator</code>装饰之后的函数，它们的<code>__name__</code>已经从原来的<code>'now'</code>变成了<code>'wrapper'</code>：</p>
-<pre><code class="language-python">now.__name__
+<pre><code class="language-Python">now.__name__
 'wrapper'
 </code></pre>
 <p>因为返回的那个<code>wrapper()</code>函数名字就是<code>'wrapper'</code>，所以，需要把原始函数的<code>__name__</code>等属性复制到<code>wrapper()</code>函数中，否则，有些依赖函数签名的代码执行就会出错。</p>
@@ -1153,7 +1835,7 @@ def log(text):
 <code>decorator</code>可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。</p>
 <h6 id="property"><code>@property</code></h6>
 <p><code>Python</code>内置的<code>@property</code>装饰器就是负责把一个方法变成属性调用的：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
 
     @property
     def score(self):
@@ -1168,7 +1850,7 @@ def log(text):
         self._score = value
 </code></pre>
 <p>把一个<code>getter</code>方法变成属性，只需要加上<code>@property</code>就可以了，此时，<code>@property</code>本身又创建了另一个装饰器<code>@score.setter</code>，负责把一个<code>setter</code>方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</p>
-<pre><code class="language-python">s = Student()
+<pre><code class="language-Python">s = Student()
 s.score = 60 # OK，实际转化为s.set_score(60)
 s.score # OK，实际转化为s.get_score()
 60
@@ -1177,9 +1859,9 @@ Traceback (most recent call last):
   ...
 ValueError: score must between 0 ~ 100!
 </code></pre>
-<p>注意到这个神奇的<code>@property</code>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过<code>getter</code>和<code>setter</code>方法来实现的。</p>
-<p>还可以定义只读属性，只定义<code>getter</code>方法，不定义<code>setter</code>方法就是一个只读属性：</p>
-<pre><code class="language-python">class Student(object):
+<p>注意到这个神奇的<code>@property</code>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过<code>getter</code>和<code>setter</code>方法来实现的。<br>
+还可以定义只读属性，只定义<code>getter</code>方法，不定义<code>setter</code>方法就是一个只读属性：</p>
+<pre><code class="language-Python">class Student(object):
 
     @property
     def birth(self):
@@ -1193,11 +1875,307 @@ ValueError: score must between 0 ~ 100!
     def age(self):
         return 2015 - self._birth
 </code></pre>
-<p>上面的<code>birth</code>是可读写属性，而<code>age</code>就是一个只读属性，因为<code>age</code>可以根据<code>birth</code>和当前时间计算出来。</p>
+<p>上面的<code>birth</code>是可读写属性，而<code>age</code>就是一个只读属性，因为<code>age</code>可以根据<code>birth</code>和当前时间计算出来。<br>
+自定义某个属性的一种简单方法是将它定义为一个<code>property</code>。 例如，下面的代码定义了一个<code>property</code>，增加对一个属性简单的类型检查：</p>
+<pre><code class="language-python">class Person:
+    def __init__(self, first_name):
+        self.first_name = first_name
+
+    # Getter function
+    @property
+    def first_name(self):
+        return self._first_name
+
+    # Setter function
+    @first_name.setter
+    def first_name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+        self._first_name = value
+
+    # Deleter function (optional)
+    @first_name.deleter
+    def first_name(self):
+        raise AttributeError(&quot;Can't delete attribute&quot;)
+</code></pre>
+<p>上述代码中有三个相关联的方法，这三个方法的名字都必须一样。 第一个方法是一个 <code>getter</code> 函数，它使得 <code>first_name</code> 成为一个属性。 其他两个方法给 <code>first_name</code> 属性添加了 <code>setter</code> 和 <code>deleter</code> 函数。 需要强调的是只有在 <code>first_name</code> 属性被创建后， 后面的两个装饰器 <code>@first_name.setter</code> 和 <code>@first_name.deleter</code> 才能被定义。<br>
+<code>property</code>的一个关键特征是它看上去跟普通的<code>attribute</code>没什么两样， 但是访问它的时候会自动触发 <code>getter</code> 、<code>setter</code> 和 <code>deleter</code> 方法。例如：</p>
+<pre><code class="language-python">a = Person('Guido')
+a.first_name # Calls the getter
+'Guido'
+a.first_name = 42 # Calls the setter
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    File &quot;prop.py&quot;, line 14, in first_name
+        raise TypeError('Expected a string')
+TypeError: Expected a string
+del a.first_name
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+AttributeError: can`t delete attribute
+</code></pre>
+<p>在实现一个<code>property</code>的时候，底层数据(如果有的话)仍然需要存储在某个地方。 因此，在<code>get</code>和<code>set</code>方法中，你会看到对 <code>_first_name</code> 属性的操作，这也是实际数据保存的地方。 另外，你可能还会问为什么 <code>__init__()</code> 方法中设置了 <code>self.first_name</code> 而不是 <code>self._first_name</code> 。 在这个例子中，我们创建一个<code>property</code>的目的就是在设置<code>attribute</code>的时候进行检查。 因此，你可能想在初始化的时候也进行这种类型检查。通过设置 <code>self.first_name</code> ，自动调用 <code>setter</code> 方法， 这个方法里面会进行参数的检查，否则就是直接访问 <code>self._first_name</code> 了。<br>
+还能在已存在的<code>get</code>和<code>set</code>方法基础上定义<code>property</code>。例如：</p>
+<pre><code class="language-python">class Person:
+    def __init__(self, first_name):
+        self.set_first_name(first_name)
+
+    # Getter function
+    def get_first_name(self):
+        return self._first_name
+
+    # Setter function
+    def set_first_name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+        self._first_name = value
+
+    # Deleter function (optional)
+    def del_first_name(self):
+        raise AttributeError(&quot;Can't delete attribute&quot;)
+
+    # Make a property from existing get/set methods
+    name = property(get_first_name, set_first_name, del_first_name)
+</code></pre>
+<p>一个<code>property</code>属性其实就是一系列相关绑定方法的集合。如果你去查看拥有<code>property</code>的类， 就会发现<code>property</code>本身的<code>fget</code>、<code>fset</code>和<code>fdel</code>属性就是类里面的普通方法。比如：</p>
+<pre><code class="language-python">Person.first_name.fget
+&lt;function Person.first_name at 0x1006a60e0&gt;
+Person.first_name.fset
+&lt;function Person.first_name at 0x1006a6170&gt;
+Person.first_name.fdel
+&lt;function Person.first_name at 0x1006a62e0&gt;
+</code></pre>
+<p>通常来讲，你不会直接取调用<code>fget</code>或者<code>fset</code>，它们会在访问<code>property</code>的时候自动被触发。<br>
+只有当你确实需要对<code>attribute</code>执行其他额外的操作的时候才应该使用到<code>property</code>。 有时候一些从其他编程语言(比如<code>Java</code>)过来的程序员总认为所有访问都应该通过<code>getter</code>和<code>setter</code>， 所以他们认为代码应该像下面这样写：</p>
+<pre><code class="language-python">class Person:
+    def __init__(self, first_name):
+        self.first_name = first_name
+
+    @property
+    def first_name(self):
+        return self._first_name
+
+    @first_name.setter
+    def first_name(self, value):
+        self._first_name = value
+</code></pre>
+<p>不要写这种没有做任何其他额外操作的<code>property</code>。 首先，它会让你的代码变得很臃肿，并且还会迷惑阅读者。 其次，它还会让你的程序运行起来变慢很多。 最后，这样的设计并没有带来任何的好处。 特别是当你以后想给普通<code>attribute</code>访问添加额外的处理逻辑的时候， 你可以将它变成一个<code>property</code>而无需改变原来的代码。 因为访问<code>attribute</code>的代码还是保持原样。<br>
+<code>Properties</code>还是一种定义动态计算<code>attribute</code>的方法。 这种类型的<code>attributes</code>并不会被实际的存储，而是在需要的时候计算出来。比如：</p>
+<pre><code class="language-python">import math
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    @property
+    def area(self):
+        return math.pi * self.radius ** 2
+
+    @property
+    def diameter(self):
+        return self.radius * 2
+
+    @property
+    def perimeter(self):
+        return 2 * math.pi * self.radius
+</code></pre>
+<p>在这里，我们通过使用<code>properties</code>，将所有的访问接口形式统一起来， 对半径、直径、周长和面积的访问都是通过属性访问，就跟访问简单的<code>attribute</code>是一样的。 如果不这样做的话，那么就要在代码中混合使用简单属性访问和方法调用。 下面是使用的实例：</p>
+<pre><code class="language-python">c = Circle(4.0)
+c.radius
+4.0
+c.area  # Notice lack of ()
+50.26548245743669
+c.perimeter  # Notice lack of ()
+25.132741228718345
+</code></pre>
+<p>尽管<code>properties</code>可以实现优雅的编程接口，但有些时候你还是会想直接使用<code>getter</code>和<code>setter</code>函数。例如：</p>
+<pre><code class="language-python">p = Person('Guido')
+p.get_first_name()
+'Guido'
+p.set_first_name('Larry')
+</code></pre>
+<p>这种情况的出现通常是因为<code>Python</code>代码被集成到一个大型基础平台架构或程序中。 例如，有可能是一个<code>Python</code>类准备加入到一个基于远程过程调用的大型分布式系统中。 这种情况下，直接使用<code>get/set</code>方法(普通方法调用)而不是<code>property</code>或许会更容易兼容。<br>
+最后一点，不要像下面这样写有大量重复代码的<code>property</code>定义：</p>
+<pre><code class="language-python">class Person:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    @property
+    def first_name(self):
+        return self._first_name
+
+    @first_name.setter
+    def first_name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+        self._first_name = value
+
+    # Repeated property code, but for a different name (bad!)
+    @property
+    def last_name(self):
+        return self._last_name
+
+    @last_name.setter
+    def last_name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+        self._last_name = value
+</code></pre>
+<p>重复代码会导致臃肿、易出错和丑陋的程序。好消息是，通过使用装饰器或闭包，有很多种更好的方法来完成同样的事情。<br>
+在子类中，扩展定义在父类中的<code>property</code>的功能。考虑如下的代码，它定义了一个<code>property</code>：</p>
+<pre><code class="language-python">class Person:
+    def __init__(self, name):
+        self.name = name
+
+    # Getter function
+    @property
+    def name(self):
+        return self._name
+
+    # Setter function
+    @name.setter
+    def name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+        self._name = value
+
+    # Deleter function
+    @name.deleter
+    def name(self):
+        raise AttributeError(&quot;Can't delete attribute&quot;)
+</code></pre>
+<p>下面是一个示例类，它继承自<code>Person</code>并扩展了 <code>name</code> 属性的功能：</p>
+<pre><code class="language-python">class SubPerson(Person):
+    @property
+    def name(self):
+        print('Getting name')
+        return super().name
+
+    @name.setter
+    def name(self, value):
+        print('Setting name to', value)
+        super(SubPerson, SubPerson).name.__set__(self, value)
+
+    @name.deleter
+    def name(self):
+        print('Deleting name')
+        super(SubPerson, SubPerson).name.__delete__(self)
+</code></pre>
+<p>接下来使用这个新类：</p>
+<pre><code class="language-python">s = SubPerson('Guido')
+Setting name to Guido
+s.name
+Getting name
+'Guido'
+s.name = 'Larry'
+Setting name to Larry
+s.name = 42
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    File &quot;example.py&quot;, line 16, in name
+        raise TypeError('Expected a string')
+TypeError: Expected a string
+</code></pre>
+<p>如果你仅仅只想扩展<code>property</code>的某一个方法，那么可以像下面这样写：</p>
+<pre><code class="language-python">class SubPerson(Person):
+    @Person.name.getter
+    def name(self):
+        print('Getting name')
+        return super().name
+</code></pre>
+<p>或者，你只想修改<code>setter</code>方法，就这么写：</p>
+<pre><code class="language-python">class SubPerson(Person):
+    @Person.name.setter
+    def name(self, value):
+        print('Setting name to', value)
+        super(SubPerson, SubPerson).name.__set__(self, value)
+</code></pre>
+<p>在子类中扩展一个<code>property</code>可能会引起很多不易察觉的问题， 因为一个<code>property</code>其实是 <code>getter</code>、<code>setter</code> 和 <code>deleter</code> 方法的集合，而不是单个方法。 因此，当你扩展一个<code>property</code>的时候，你需要先确定你是否要重新定义所有的方法还是说只修改其中某一个。<br>
+在第一个例子中，所有的<code>property</code>方法都被重新定义。 在每一个方法中，使用了 <code>super()</code> 来调用父类的实现。 在 <code>setter</code> 函数中使用 <code>super(SubPerson, SubPerson).name.__set__(self, value)</code> 的语句是没有错的。 为了委托给之前定义的<code>setter</code>方法，需要将控制权传递给之前定义的<code>name</code>属性的 <code>__set__()</code> 方法。 不过，获取这个方法的唯一途径是使用类变量而不是实例变量来访问它。 这也是为什么我们要使用 <code>super(SubPerson, SubPerson)</code> 的原因。</p>
+<p>如果你只想重定义其中一个方法，那只使用 <code>@property</code> 本身是不够的。比如，下面的代码就无法工作：</p>
+<pre><code class="language-python">class SubPerson(Person):
+    @property  # Doesn't work
+    def name(self):
+        print('Getting name')
+        return super().name
+</code></pre>
+<p>如果你试着运行会发现<code>setter</code>函数整个消失了：</p>
+<pre><code class="language-python">s = SubPerson('Guido')
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    File &quot;example.py&quot;, line 5, in __init__
+        self.name = name
+AttributeError: can't set attribute
+</code></pre>
+<p>你应该像之前说过的那样修改代码：</p>
+<pre><code class="language-python">class SubPerson(Person):
+    @Person.name.getter
+    def name(self):
+        print('Getting name')
+        return super().name
+</code></pre>
+<p>这么写后，<code>property</code>之前已经定义过的方法会被复制过来，而<code>getter</code>函数被替换。然后它就能按照期望的工作了：</p>
+<pre><code class="language-python">s = SubPerson('Guido')
+s.name
+Getting name
+'Guido'
+s.name = 'Larry'
+s.name
+Getting name
+'Larry'
+s.name = 42
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    File &quot;example.py&quot;, line 16, in name
+        raise TypeError('Expected a string')
+TypeError: Expected a string
+</code></pre>
+<p>在这个特别的解决方案中，我们没办法使用更加通用的方式去替换硬编码的 <code>Person</code> 类名。 如果你不知道到底是哪个基类定义了<code>property</code>， 那你只能通过重新定义所有<code>property</code>并使用 <code>super()</code> 来将控制权传递给前面的实现。<br>
+值得注意的是上面演示的第一种技术还可以被用来扩展一个描述器。比如：</p>
+<pre><code class="language-python"># A descriptor
+class String:
+    def __init__(self, name):
+        self.name = name
+
+    def __get__(self, instance, cls):
+        if instance is None:
+            return self
+        return instance.__dict__[self.name]
+
+    def __set__(self, instance, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+        instance.__dict__[self.name] = value
+
+# A class with a descriptor
+class Person:
+    name = String('name')
+
+    def __init__(self, name):
+        self.name = name
+
+# Extending a descriptor with a property
+class SubPerson(Person):
+    @property
+    def name(self):
+        print('Getting name')
+        return super().name
+
+    @name.setter
+    def name(self, value):
+        print('Setting name to', value)
+        super(SubPerson, SubPerson).name.__set__(self, value)
+
+    @name.deleter
+    def name(self):
+        print('Deleting name')
+        super(SubPerson, SubPerson).name.__delete__(self)
+</code></pre>
+<p>最后值得注意的是，读到这里时，你应该会发现子类化 <code>setter</code> 和 <code>deleter</code> 方法其实是很简单的。</p>
 <h6 id="classmethod"><code>@classmethod</code></h6>
 <p><code>@classmethod</code>对应的函数不需要实例化，不需要 <code>self</code> 参数，但第一个参数需要是表示自身类的 <code>cls</code> 参数，可以来调用类的属性，类的方法，实例化对象等。<br>
 <code>@classmethod</code>因为持有<code>cls</code>参数，可以来调用类的属性，类的方法，实例化对象等，避免硬编码。</p>
-<pre><code class="language-python">class A(object):
+<pre><code class="language-Python">class A(object):
     bar = 1
     def func1(self):  
         print ('foo') 
@@ -1213,7 +2191,7 @@ A.func2()               # 不需要实例化
 <p>将类中的方法装饰为静态方法，即类不需要创建实例的情况下，可以通过类名直接引用。到达将函数功能与实例解绑的效果。<br>
 <code>@staticmethod</code>不需要表示自身对象的<code>self</code>和自身类的<code>cls</code>参数，就跟使用函数一样。<br>
 如果在<code>@staticmethod</code>中要调用到这个类的一些属性方法，只能直接<code>类名.属性名</code>或<code>类名.方法名</code>。</p>
-<pre><code class="language-python">class TestClass:
+<pre><code class="language-Python">class TestClass:
     name = &quot;test&quot;
     def __init__(self, name):
         self.name = name
@@ -1227,7 +2205,7 @@ print &quot;类名直接引用静态方法&quot;
 print TestClass.fun(None, 2, 3) # 参数个数必须与定义中的个数保持一致，否则报错
 </code></pre>
 <h6 id="dataclass"><code>@dataclass</code></h6>
-<pre><code class="language-python">class MyClass:
+<pre><code class="language-Python">class MyClass:
     def __init__(self, var_a, var_b):
         self.var_a = var_a
         self.var_b = var_b
@@ -1256,13 +2234,13 @@ int2('1010101')
 <li>简单总结<code>functools.partial</code>的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单。<br>
 注意到上面的新的<code>int2</code>函数，仅仅是把<code>base</code>参数重新设定默认值为2，但也可以在函数调用时传入其他值：</li>
 </ul>
-<pre><code class="language-python">int2('1000000', base=10)
+<pre><code class="language-Python">int2('1000000', base=10)
 1000000
 </code></pre>
 <ul>
 <li>最后，创建偏函数时，实际上可以接收函数对象、<code>*args</code>和<code>**kw</code>这3个参数，当传入：</li>
 </ul>
-<pre><code class="language-python">int2 = functools.partial(int, base=2)
+<pre><code class="language-Python">int2 = functools.partial(int, base=2)
 </code></pre>
 <p>实际上固定了<code>int()</code>函数的关键字参数<code>base</code>，也就是：</p>
 <pre><code>int2('10010')
@@ -1272,13 +2250,13 @@ int2('1010101')
 int('10010', **kw)
 </code></pre>
 <p>当传入：</p>
-<pre><code class="language-python">max2 = functools.partial(max, 10)
+<pre><code class="language-Python">max2 = functools.partial(max, 10)
 </code></pre>
 <p>实际上会把10作为*args的一部分自动加到左边，也就是：</p>
-<pre><code class="language-python">max2(5, 6, 7)
+<pre><code class="language-Python">max2(5, 6, 7)
 </code></pre>
 <p>相当于：</p>
-<pre><code class="language-python">args = (10, 5, 6, 7)
+<pre><code class="language-Python">args = (10, 5, 6, 7)
 max(*args)
 </code></pre>
 <p>结果为10。<br>
@@ -1287,7 +2265,7 @@ max(*args)
 <ul>
 <li>标准库<code>itertools</code>模块中有一组用于许多常见数据算法的生成器。例如，<code>groupby</code>可以接受任何序列和一个函数。它根据函数的返回值对序列中的连续元素进行分组。下面是一个例子：</li>
 </ul>
-<pre><code class="language-python">import itertools
+<pre><code class="language-Python">import itertools
 first_letter = lambda x: x[0]
 names = ['Alan', 'Adam', 'Wes', 'Will', 'Albert', 'Steven']
 for letter, names in itertools.groupby(names, first_letter):
@@ -1302,24 +2280,24 @@ S ['Steven']
 <img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/687474703a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f373137383639312d313131383233643837363761313034642e706e673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f77.png" alt="" loading="lazy"></li>
 </ul>
 <h3 id="字符串">字符串</h3>
-<pre><code class="language-python"> a= 'ABC'
+<pre><code class="language-Python"> a= 'ABC'
 </code></pre>
 <p>在内存中创建了一个<code>'ABC'</code>的字符串；<br>
 在内存中创建了一个名为<code>a</code>的变量，并把它指向<code>'ABC'</code>。<br>
 也可以把一个变量<code>a</code>赋值给另一个变量<code>b</code>，这个操作实际上是把变量<code>b</code>指向变量<code>a</code>所指向的数据，例如下面的代码：</p>
-<pre><code class="language-python">a = 'ABC'
+<pre><code class="language-Python">a = 'ABC'
 b = a
 a = 'XYZ'
 print(b)
 'ABC`
 </code></pre>
 <h4 id="分割">分割</h4>
-<pre><code class="language-python">s = 'python'
+<pre><code class="language-Python">s = 'Python'
 list(s)
 ['p', 'y', 't', 'h', 'o', 'n']
 </code></pre>
 <h4 id="模板化或格式化">模板化或格式化</h4>
-<pre><code class="language-python">template = '{0:.2f} {1:s} are worth US${2:d}'
+<pre><code class="language-Python">template = '{0:.2f} {1:s} are worth US${2:d}'
 </code></pre>
 <ul>
 <li><code>{0:.2f}</code>表示格式化第一个参数为带有两位小数的浮点数。</li>
@@ -1327,54 +2305,160 @@ list(s)
 <li><code>{2:d}</code>表示格式化第三个参数为一个整数。<br>
 在括号中的数字用于指向传入对象在 <code>format()</code> 中的位置，如下所示：</li>
 </ul>
-<pre><code class="language-python">print('{0} 和 {1}'.format('Google', 'Runoob'))
+<pre><code class="language-Python">print('{0} 和 {1}'.format('Google', 'Runoob'))
 Google 和 Runoob
 print('{1} 和 {0}'.format('Google', 'Runoob'))
 Runoob 和 Google
 </code></pre>
 <p>如果在<code>format()</code> 中使用了关键字参数, 那么它们的值会指向使用该名字的参数。</p>
-<pre><code class="language-python">print('{name}网址： {site}'.format(name='菜鸟教程', site='www.runoob.com'))
+<pre><code class="language-Python">print('{name}网址： {site}'.format(name='菜鸟教程', site='www.runoob.com'))
 菜鸟教程网址： www.runoob.com
 </code></pre>
 <p>位置及关键字参数可以任意的结合:</p>
-<pre><code class="language-python">print('站点列表 {0}, {1}, 和 {other}。'.format('Google', 'Runoob', other='Taobao'))
+<pre><code class="language-Python">print('站点列表 {0}, {1}, 和 {other}。'.format('Google', 'Runoob', other='Taobao'))
 站点列表 Google, Runoob, 和 Taobao。
 </code></pre>
 <p>可选项 : 和格式标识符可以跟着字段名。 这就允许对值进行更好的格式化。 下面的例子将 <code>Pi</code> 保留到小数点后三位：</p>
-<pre><code class="language-python">import math
+<pre><code class="language-Python">import math
 print('常量 PI 的值近似为 {0:.3f}。'.format(math.pi))
 常量 PI 的值近似为 3.142。
 </code></pre>
 <p>如果你有一个很长的格式化字符串, 而你不想将它们分开, 那么在格式化时通过变量名而非位置会是很好的事情。<br>
 最简单的就是传入一个字典, 然后使用方括号 <code>[]</code> 来访问键值 :</p>
-<pre><code class="language-python">table = {'Google': 1, 'Runoob': 2, 'Taobao': 3}
+<pre><code class="language-Python">table = {'Google': 1, 'Runoob': 2, 'Taobao': 3}
 print('Runoob: {0[Runoob]:d}; Google: {0[Google]:d}; Taobao: {0[Taobao]:d}'.format(table))
 Runoob: 2; Google: 1; Taobao: 3
 </code></pre>
 <p>也可以通过在 <code>table</code> 变量前使用 <code>**</code> 来实现相同的功能：</p>
-<pre><code class="language-python">table = {'Google': 1, 'Runoob': 2, 'Taobao': 3}
+<pre><code class="language-Python">table = {'Google': 1, 'Runoob': 2, 'Taobao': 3}
 print('Runoob: {Runoob:d}; Google: {Google:d}; Taobao: {Taobao:d}'.format(**table))
 Runoob: 2; Google: 1; Taobao: 3
 </code></pre>
 <h4 id="常用操作">常用操作</h4>
 <ul>
-<li><code>str.join(iterable)</code>:返回一个由 <code>iterable</code> 中的字符串拼接而成的字符串。比<code>+</code>效率要高。</li>
+<li><code>str.join(iterable)</code>:返回一个由 <code>iterable</code> 中的字符串拼接而成的字符串。比<code>+</code>效率要高。<br>
+如果你想要合并的字符串是在一个序列或者 <code>iterable</code> 中，那么最快的方式就是使用 <code>join()</code> 方法。比如：</li>
+</ul>
+<pre><code class="language-python">parts = ['Is', 'Chicago', 'Not', 'Chicago?']
+' '.join(parts)
+'Is Chicago Not Chicago?'
+','.join(parts)
+'Is,Chicago,Not,Chicago?'
+''.join(parts)
+'IsChicagoNotChicago?'
+</code></pre>
+<p>初看起来，这种语法看上去会比较怪，但是 <code>join()</code> 被指定为字符串的一个方法。 这样做的部分原因是你想去连接的对象可能来自各种不同的数据序列(比如列表，元组，字典，文件，集合或生成器等)， 如果在所有这些对象上都定义一个 <code>join()</code> 方法明显是冗余的。 因此你只需要指定你想要的分割字符串并调用他的 <code>join()</code> 方法去将文本片段组合起来。<br>
+如果你仅仅只是合并少数几个字符串，使用加号<code>(+)</code>通常已经足够了：</p>
+<pre><code class="language-python">a = 'Is Chicago'
+b = 'Not Chicago?'
+a + ' ' + b
+'Is Chicago Not Chicago?'
+</code></pre>
+<p>加号<code>(+)</code>操作符在作为一些复杂字符串格式化的替代方案的时候通常也工作的很好，比如：</p>
+<pre><code class="language-python">print('{} {}'.format(a,b))
+Is Chicago Not Chicago?
+print(a + ' ' + b)
+Is Chicago Not Chicago?
+</code></pre>
+<p>如果你想在源码中将两个字面字符串合并起来，你只需要简单的将它们放到一起，不需要用加号<code>(+)</code>。比如：</p>
+<pre><code class="language-python">a = 'Hello' 'World'
+a
+'HelloWorld'
+</code></pre>
+<p>字符串合并可能看上去并不需要用一整节来讨论。 但是不应该小看这个问题，程序员通常在字符串格式化的时候因为选择不当而给应用程序带来严重性能损失。<br>
+最重要的需要引起注意的是，当我们使用加号<code>(+)</code>操作符去连接大量的字符串的时候是非常低效率的， 因为加号连接会引起内存复制以及垃圾回收操作。 特别的，你永远都不应像下面这样写字符串连接代码：</p>
+<pre><code class="language-python">s = ''
+for p in parts:
+    s += p
+</code></pre>
+<p>这种写法会比使用 <code>join()</code> 方法运行的要慢一些，因为每一次执行<code>+=</code>操作的时候会创建一个新的字符串对象。 你最好是先收集所有的字符串片段然后再将它们连接起来。<br>
+一个相对比较聪明的技巧是利用生成器表达式转换数据为字符串的同时合并字符串，比如：</p>
+<pre><code class="language-python">data = ['ACME', 50, 91.1]
+','.join(str(d) for d in data)
+'ACME,50,91.1'
+</code></pre>
+<p>同样还得注意不必要的字符串连接操作。有时候程序员在没有必要做连接操作的时候仍然多此一举。比如在打印的时候：</p>
+<pre><code class="language-python">print(a + ':' + b + ':' + c) # Ugly
+print(':'.join([a, b, c])) # Still ugly
+print(a, b, c, sep=':') # Better
+</code></pre>
+<p>当混合使用<code>I/O</code>操作和字符串连接操作的时候，有时候需要仔细研究你的程序。 比如，考虑下面的两端代码片段：</p>
+<pre><code class="language-python"># Version 1 (string concatenation)
+f.write(chunk1 + chunk2)
+# Version 2 (separate I/O operations)
+f.write(chunk1)
+f.write(chunk2)
+</code></pre>
+<p>如果两个字符串很小，那么第一个版本性能会更好些，因为<code>I/O</code>系统调用天生就慢。 另外一方面，如果两个字符串很大，那么第二个版本可能会更加高效， 因为它避免了创建一个很大的临时结果并且要复制大量的内存块数据。 还是那句话，有时候是需要根据你的应用程序特点来决定应该使用哪种方案。<br>
+最后谈一下，如果你准备编写构建大量小字符串的输出代码， 你最好考虑下使用生成器函数，利用yield语句产生输出片段。比如：</p>
+<pre><code class="language-python">def sample():
+    yield 'Is'
+    yield 'Chicago'
+    yield 'Not'
+    yield 'Chicago?'
+</code></pre>
+<p>这种方法一个有趣的方面是它并没有对输出片段到底要怎样组织做出假设。 例如，你可以简单的使用 <code>join()</code> 方法将这些片段合并起来：</p>
+<pre><code class="language-python">text = ''.join(sample())
+</code></pre>
+<p>或者你也可以将字符串片段重定向到<code>I/O</code>：</p>
+<pre><code class="language-python">for part in sample():
+    f.write(part)
+</code></pre>
+<p>再或者你还可以写出一些结合<code>I/O</code>操作的混合方案：</p>
+<pre><code class="language-python">def combine(source, maxsize):
+    parts = []
+    size = 0
+    for part in source:
+        parts.append(part)
+        size += len(part)
+        if size &gt; maxsize:
+            yield ''.join(parts)
+            parts = []
+            size = 0
+    yield ''.join(parts)
+# 结合文件操作
+with open('filename', 'w') as f:
+    for part in combine(sample(), 32768):
+        f.write(part)
+</code></pre>
+<p>这里的关键点在于原始的生成器函数并不需要知道使用细节，它只负责生成字符串片段就行了。</p>
+<ul>
 <li><code>eval(str)</code>:用来计算在字符串中的有效<code>Python</code>表达式,并返回一个对象</li>
 <li><code>str.center(width[, fillchar])</code>:返回长度为 <code>width</code> 的字符串，原字符串在其正中。 使用指定的 <code>fillchar</code> 填充两边的空位（默认使用 <code>ASCII</code> 空格符）。 如果 <code>width</code> 小于等于 <code>len(s)</code> 则返回原字符串的副本。</li>
 <li><code>str.count(str, beg= 0,end=len(string))</code>:返回 <code>str</code> 在 <code>string</code> 里面出现的次数，如果 <code>beg</code> 或者 <code>end</code>指定则返回指定范围内 <code>str</code> 出现的次数</li>
 <li><code>str.find(str, beg=0, end=len(string))</code>:检测 <code>str</code> 是否包含在字符串中，如果指定范围 <code>beg</code> 和 <code>end</code> ，则检查是否包含在指定范围内，如果包含返回开始的索引值，否则返回<code>-1</code></li>
 <li><code>str.upper()</code>:转换字符串中的小写字母为大写</li>
 <li><code>str.lower()</code>:转换字符串中所有大写字符为小写</li>
-<li><code>str.replace(old, new [, max])</code>:将字符串中的 <code>str1</code> 替换成 <code>str2</code>,如果<code>max</code>指定，则替换不超过<code>max</code>次。</li>
+<li><code>str.replace(old, new [, max])</code>:将字符串中的 <code>str1</code> 替换成 <code>str2</code>,如果<code>max</code>指定，则替换不超过<code>max</code>次。<br>
+想处理中间的空格,使用 <code>replace()</code> 方法。示例如下：</li>
+</ul>
+<pre><code class="language-python">s.replace(' ', '')
+'helloworld'
+</code></pre>
+<ul>
 <li><code>str.split(str=&quot;&quot;, num=string.count(str))</code>:<code>num=string.count(str))</code> 以<code>str</code>为分隔符截取字符串，如果<code>num</code>有指定值，则仅截取<code>num+1</code>个子字符串</li>
 <li><code>str.strip([chars])</code>:截掉字符串两边的空格或指定字符。</li>
+<li>匹配的是字面字符串，那么你通常只需要调用基本字符串方法就行， 比如 <code>str.find()</code> , <code>str.endswith()</code> , <code>str.startswith()</code> 或者类似的方法：</li>
 </ul>
+<pre><code class="language-python">text = 'yeah, but no, but yeah, but no, but yeah'
+# Exact match
+text == 'yeah'
+False
+# Match at start or end
+text.startswith('yeah')
+True
+text.endswith('no')
+False
+# Search for the location of the first occurrence
+text.find('no')
+10
+</code></pre>
 <h3 id="运算符">运算符</h3>
 <h4 id="和is"><code>==</code>和<code>is</code></h4>
 <ul>
 <li>要判断两个引用是否指向同一个对象，可以使用<code>is</code>方法:</li>
 </ul>
-<pre><code class="language-python">a = [1, 2, 3]
+<pre><code class="language-Python">a = [1, 2, 3]
 b = a
 c = list(a)
 print(a is b)
@@ -1385,10 +2469,14 @@ True
 print(a == c)
 True
 </code></pre>
+<p><code>is</code> 用于判断两个变量引用对象是否为同一个， <code>==</code> 用于判断引用变量的值是否相等。<br>
+<code>a is b</code> 相当于 <code>id(a)==id(b)</code>.<br>
+如果 <code>a=10;b=a;</code> 则此时 <code>a</code> 和 <code>b</code> 的内存地址一样的;<br>
+但当 <code>a=[1,2,3]</code>; 另 <code>b=a[:]</code> 时，虽然 <code>a</code> 和 <code>b</code> 的值一样，但内存地址不一样。</p>
 <h4 id="any和all"><code>any()</code>和<code>all()</code></h4>
 <p><code>any()</code>, <code>all()</code>很好理解，就是字面意思，即参数中任何一个为 <code>true</code> 或者全部为 <code>true</code> 则返回 <code>true</code>。</p>
 <h4 id="十进制转二进制">十进制转二进制</h4>
-<pre><code class="language-python">bin(10)
+<pre><code class="language-Python">bin(10)
 '0b1010'
 </code></pre>
 <h2 id="模块">模块</h2>
@@ -1397,8 +2485,8 @@ True
 <li>每个模块有各自独立的符号表，在模块内部为所有的函数当作全局符号表来使用。所以，模块的作者可以放心大胆的在模块内部使用这些全局变量，而不用担心把其他用户的全局变量搞混。在当前目录下存在与要引入模块同名的文件，就会把要引入的模块屏蔽掉。</li>
 <li>导入<code>sys</code>模块后，我们就有了变量<code>sys</code>指向该模块，利用<code>sys</code>这个变量，就可以访问<code>sys</code>模块的所有功能。<br>
 <code>sys</code>模块有一个<code>argv</code>变量，用<code>list</code>存储了命令行的所有参数。<code>argv</code>至少有一个元素，因为第一个参数永远是该``.py文件的名称，例如：<br>
-运行<code>python3 hello.py</code>获得的<code>sys.argv</code>就是<code>['hello.py']</code>；<br>
-运行<code>python3 hello.py Michael</code>获得的<code>sys.argv</code>就是<code>['hello.py', 'Michael]</code>。<br>
+运行<code>Python3 hello.py</code>获得的<code>sys.argv</code>就是<code>['hello.py']</code>；<br>
+运行<code>Python3 hello.py Michael</code>获得的<code>sys.argv</code>就是<code>['hello.py', 'Michael]</code>。<br>
 注意当使用 <code>from package import item</code> 这种形式的时候，对应的 <code>item</code> 既可以是包里面的子模块（子包），或者包里面定义的其他名称，比如函数，类或者变量。<br>
 <code>import</code> 语法会首先把 <code>item</code> 当作一个包定义的名称，如果没找到，再试图按照一个模块去导入。如果还没找到，抛出一个 <code>:exc:ImportError</code> 异常。<br>
 反之，如果使用形如 <code>import item.subitem.subsubitem</code> 这种导入形式，除了最后一项，都必须是包，而最后一项则可以是模块或者是包，但是不可以是类，函数或者变量的名字。</li>
@@ -1407,22 +2495,22 @@ True
 <li>搜索路径是由一系列目录名组成的，<code>Python</code>解释器就依次从这些目录中去寻找所引入的模块。<br>
 搜索路径是在<code>Python</code>编译或安装的时候确定的，安装新的库应该也会修改。搜索路径被存储在<code>sys</code>模块中的<code>path</code>变量，做一个简单的实验，在交互式解释器中，输入以下代码：</li>
 </ul>
-<pre><code class="language-python">import sys
+<pre><code class="language-Python">import sys
 sys.path
-['', '/usr/lib/python3.4', '/usr/lib/python3.4/plat-x86_64-linux-gnu', '/usr/lib/python3.4/lib-dynload', '/usr/local/lib/python3.4/dist-packages', '/usr/lib/python3/dist-packages']
+['', '/usr/lib/Python3.4', '/usr/lib/Python3.4/plat-x86_64-linux-gnu', '/usr/lib/Python3.4/lib-dynload', '/usr/local/lib/Python3.4/dist-packages', '/usr/lib/Python3/dist-packages']
 </code></pre>
-<p><code>sys.path</code> 输出是一个列表，其中第一项是空串<code>''</code>，代表当前目录（若是从一个脚本中打印出来的话，可以更清楚地看出是哪个目录），亦即我们执行<code>python</code>解释器的目录（对于脚本的话就是运行的脚本所在的目录）。<br>
+<p><code>sys.path</code> 输出是一个列表，其中第一项是空串<code>''</code>，代表当前目录（若是从一个脚本中打印出来的话，可以更清楚地看出是哪个目录），亦即我们执行<code>Python</code>解释器的目录（对于脚本的话就是运行的脚本所在的目录）。<br>
 因此若在当前目录下存在与要引入模块同名的文件，就会把要引入的模块屏蔽掉。<br>
 了解了搜索路径的概念，就可以在脚本中修改<code>sys.path</code>来引入一些不在搜索路径中的模块。<br>
 如果我们要添加自己的搜索目录，有两种方法：<br>
 一是直接修改<code>sys.path</code>，添加要搜索的目录：</p>
-<pre><code class="language-python">import sys
+<pre><code class="language-Python">import sys
 sys.path.append('/Users/michael/my_py_scripts')
 </code></pre>
 <p>这种方法是在运行时修改，运行结束后失效。<br>
 第二种方法是设置环境变量<code>PYTHONPATH</code>，该环境变量的内容会被自动添加到模块搜索路径中。设置方式与设置<code>Path</code>环境变量类似。注意只需要添加你自己的搜索路径，<code>Python</code>自己本身的搜索路径不受影响。<br>
 现在，在解释器的当前目录或者 <code>sys.path</code>中的一个目录里面来创建一个<code>fibo.py</code>的文件，代码如下：</p>
-<pre><code class="language-python"># 斐波那契(fibonacci)数列模块
+<pre><code class="language-Python"># 斐波那契(fibonacci)数列模块
 def fib(n):    # 定义到 n 的斐波那契数列
     a, b = 0, 1
     while b &lt; n:
@@ -1439,20 +2527,20 @@ def fib2(n): # 返回到 n 的斐波那契数列
     return result
 </code></pre>
 <p>然后进入<code>Python</code>解释器，使用下面的命令导入这个模块：</p>
-<pre><code class="language-python">import fibo
+<pre><code class="language-Python">import fibo
 </code></pre>
 <p>这样做并没有把直接定义在<code>fibo</code>中的函数名称写入到当前符号表里，只是把模块<code>fibo</code>的名字写到了那里。</p>
 <h3 id="name属性"><code>name</code>属性</h3>
 <p>一个模块被另一个程序第一次引入时，其主程序将运行。如果我们想在模块被引入时，模块中的某一程序块不执行，我们可以用<code>__name__</code>属性来使该程序块仅在该模块自身运行时执行。</p>
-<pre><code class="language-python3"># Filename: using_name.py
+<pre><code class="language-Python3"># Filename: using_name.py
 if __name__ == '__main__':
    print('程序自身在运行')
 else:
    print('我来自另一模块')
 </code></pre>
-<pre><code class="language-shell">$ python using_name.py
+<pre><code class="language-shell">$ Python using_name.py
 程序自身在运行
-$ python
+$ Python
 &gt;&gt;&gt; import using_name
 我来自另一模块
 </code></pre>
@@ -1461,11 +2549,11 @@ $ python
 <ul>
 <li>如果包定义文件 <code>__init__.py</code> 存在一个叫做 <code>__all__</code> 的列表变量，那么在使用 <code>from package import *</code> 的时候就把这个列表中的所有名字作为包内容导入。</li>
 </ul>
-<pre><code class="language-python">__all__ = [&quot;echo&quot;, &quot;surround&quot;, &quot;reverse&quot;]
+<pre><code class="language-Python">__all__ = [&quot;echo&quot;, &quot;surround&quot;, &quot;reverse&quot;]
 </code></pre>
 <p>如果 <code>__all__</code>真的没有定义，那么使用<code>from sound.effects import *</code>这种语法的时候，就不会导入包 <code>sound.effects</code> 里的任何子模块。他只是把包<code>sound.effects</code>和它里面定义的所有内容导入进来（可能运行<code>__init__.py</code>里定义的初始化代码）。<br>
 这会把 <code>__init__.py</code> 里面定义的所有名字导入进来。并且他不会破坏掉我们在这句话之前导入的所有明确指定的模块。看下这部分代码:</p>
-<pre><code class="language-python">import sound.effects.echo
+<pre><code class="language-Python">import sound.effects.echo
 import sound.effects.surround
 from sound.effects import *
 </code></pre>
@@ -1473,7 +2561,7 @@ from sound.effects import *
 <h2 id="oop">OOP</h2>
 <h3 id="访问限制">访问限制</h3>
 <p>如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线<code>__</code>，在<code>Python</code>中，实例的变量名如果以<code>__</code>开头，就变成了一个私有变量(<code>private</code>)，只有内部可以访问，外部不能访问:</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
 
     def __init__(self, name, score):
         self.__name = name
@@ -1483,7 +2571,7 @@ from sound.effects import *
         print('%s: %s' % (self.__name, self.__score))
 </code></pre>
 <p>改完后，对于外部代码来说，没什么变动，但是已经无法从外部访问<code>实例变量.__name</code>和<code>实例变量.__score</code>了：</p>
-<pre><code class="language-python">bart = Student('Bart Simpson', 59)
+<pre><code class="language-Python">bart = Student('Bart Simpson', 59)
 bart.__name
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
@@ -1491,7 +2579,7 @@ AttributeError: 'Student' object has no attribute '__name'
 </code></pre>
 <p>这样就确保了外部代码不能随意修改对象内部的状态，这样通过访问限制的保护，代码更加健壮。</p>
 <p>外部代码要获取<code>name</code>和<code>score</code>,修改属性,可以给<code>Student</code>类增加<code>get_name</code>和<code>get_score</code>这样的方法：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     ...
 
     def get_name(self):
@@ -1503,7 +2591,7 @@ AttributeError: 'Student' object has no attribute '__name'
         self.__score = score
 </code></pre>
 <p>那种直接通过<code>bart.score = 99</code>也可以修改啊，为什么要定义一个方法大费周折？因为在方法中，可以对参数做检查，避免传入无效的参数：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     ...
 
     def set_score(self, score):
@@ -1515,13 +2603,13 @@ AttributeError: 'Student' object has no attribute '__name'
 <p>在<code>Python</code>中，变量名类似<code>__xxx__</code>的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是<code>private</code>变量，所以，不能用<code>__name__</code>、<code>__score__</code>这样的变量名。<br>
 下划线开头的实例变量名，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。<br>
 双下划线开头的实例变量是不是一定不能从外部访问呢？其实也不是。不能直接访问<code>__name</code>是因为<code>Python</code>解释器对外把<code>__name</code>变量改成了<code>_Student__name</code>，所以，仍然可以通过<code>_Student__name来访问__name</code>变量：</p>
-<pre><code class="language-python">bart._Student__name
+<pre><code class="language-Python">bart._Student__name
 'Bart Simpson'
 </code></pre>
 <p>但是强烈建议你不要这么干，因为不同版本的<code>Python</code>解释器可能会把<code>__name</code>改成不同的变量名。<br>
 总的来说就是，<code>Python</code>本身没有任何机制阻止你干坏事，一切全靠自觉。<br>
 最后注意下面的这种错误写法：</p>
-<pre><code class="language-python">bart = Student('Bart Simpson', 59)
+<pre><code class="language-Python">bart = Student('Bart Simpson', 59)
 bart.get_name()
 'Bart Simpson'
 bart.__name = 'New Name' # 设置__name变量！
@@ -1529,11 +2617,35 @@ bart.__name
 'New Name'
 </code></pre>
 <p>表面上看，外部代码“成功”地设置了<code>__name</code>变量，但实际上这个<code>__name</code>变量和<code>class</code>内部的<code>__name</code>变量不是一个变量！内部的<code>__name</code>变量已经被<code>Python</code>解释器自动改成了<code>_Student__name</code>，而外部代码给<code>bart</code>新增了一个<code>__name</code>变量。不信试试：</p>
-<pre><code class="language-python">bart.get_name() # get_name()内部返回self.__name
+<pre><code class="language-Python">bart.get_name() # get_name()内部返回self.__name
 'Bart Simpson'
 </code></pre>
+<p>你还可能会遇到在类定义中使用两个下划线<code>(__)</code>开头的命名。比如：</p>
+<pre><code class="language-python">class B:
+    def __init__(self):
+        self.__private = 0
+
+    def __private_method(self):
+        pass
+
+    def public_method(self):
+        pass
+        self.__private_method()
+</code></pre>
+<p>使用双下划线开始会导致访问名称变成其他形式。 比如，在前面的类<code>B</code>中，私有属性会被分别重命名为 <code>_B__private</code> 和 <code>_B__private_method</code> 。 这时候你可能会问这样重命名的目的是什么，答案就是继承——这种属性通过继承是无法被覆盖的。比如：</p>
+<pre><code class="language-python">class C(B):
+    def __init__(self):
+        super().__init__()
+        self.__private = 1 # Does not override B.__private
+
+    # Does not override B.__private_method()
+    def __private_method(self):
+        pass
+</code></pre>
+<p>这里，私有名称 <code>__private</code> 和 <code>__private_method</code> 被重命名为 <code>_C__private</code> 和 <code>_C__private_method</code> ，这个跟父类<code>B</code>中的名称是完全不同的。<br>
+大多数而言，你应该让你的非公共名称以单下划线开头。但是，如果你清楚你的代码会涉及到子类， 并且有些内部属性应该在子类中隐藏起来，那么才考虑使用双下划线方案。</p>
 <h3 id="继承和多态">继承和多态</h3>
-<pre><code class="language-python">#类定义
+<pre><code class="language-Python">#类定义
 class people:
     #定义基本属性
     name = ''
@@ -1559,7 +2671,7 @@ class student(people):
     def speak(self):
         print(&quot;%s 说: 我 %d 岁了，我在读 %d 年级&quot;%(self.name,self.age,self.grade))
 </code></pre>
-<pre><code class="language-python">class Animal(object):
+<pre><code class="language-Python">class Animal(object):
     def run(self):
         print('Animal is running...')
 class Dog(Animal):
@@ -1567,7 +2679,7 @@ class Dog(Animal):
         print('Dog is running...')
 </code></pre>
 <p>子类和父类都存在相同的<code>run()</code>方法时，我们说，子类的<code>run()</code>覆盖了父类的<code>run()</code>，在代码运行的时候，总是会调用子类的<code>run()</code>。这样，我们就获得了继承的另一个好处：多态。]</p>
-<pre><code class="language-python">a = list() # a是list类型
+<pre><code class="language-Python">a = list() # a是list类型
 b = Animal() # b是Animal类型
 c = Dog() # c是Dog类型
 isinstance(a, list)
@@ -1578,17 +2690,17 @@ isinstance(c, Dog)
 True
 </code></pre>
 <p>看来<code>a</code>、<code>b</code>、<code>c</code>确实对应着<code>list</code>、<code>Animal</code>、<code>Dog</code>这3种类型。</p>
-<pre><code class="language-python">isinstance(c, Animal)
+<pre><code class="language-Python">isinstance(c, Animal)
 True
 </code></pre>
 <p>看来<code>c</code>不仅仅是<code>Dog</code>，<code>c</code>还是<code>Animal</code>！因为<code>Dog</code>是从<code>Animal</code>继承下来的，当我们创建了一个<code>Dog</code>的实例<code>c</code>时，我们认为<code>c</code>的数据类型是<code>Dog</code>没错，但<code>c</code>同时也是<code>Animal</code>也没错，<code>Dog</code>本来就是<code>Animal</code>的一种！<br>
 所以，在继承关系中，如果一个实例的数据类型是某个子类，那它的数据类型也可以被看做是父类。</p>
-<pre><code class="language-python">def run_twice(animal):
+<pre><code class="language-Python">def run_twice(animal):
     animal.run()
     animal.run()
 </code></pre>
 <p>传入<code>Dog</code>的实例时，<code>run_twice()</code>就打印出：</p>
-<pre><code class="language-python">run_twice(Dog())
+<pre><code class="language-Python">run_twice(Dog())
 Dog is running...
 Dog is running...
 </code></pre>
@@ -1598,14 +2710,14 @@ Dog is running...
 对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。<br>
 对于静态语言（例如Java）来说，如果需要传入<code>Animal</code>类型，则传入的对象必须是<code>Animal</code>类型或者它的子类，否则，将无法调用<code>run()</code>方法。<br>
 对于<code>Python</code>这样的动态语言来说，则不一定需要传入<code>Animal</code>类型。我们只需要保证传入的对象有一个<code>run()</code>方法就可以了：</p>
-<pre><code class="language-python">class Timer(object):
+<pre><code class="language-Python">class Timer(object):
     def run(self):
         print('Start...')
 </code></pre>
 <p>这就是动态语言的“鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。<br>
 <code>Python</code>的<code>“file-like object“</code>就是一种鸭子类型。对真正的文件对象，它有一个<code>read()</code>方法，返回其内容。但是，许多对象，只要有<code>read()</code>方法，都被视为<code>“file-like object“</code>。许多函数接收的参数就是<code>“file-like object“</code>，你不一定要传入真正的文件对象，完全可以传入任何实现了<code>read()</code>方法的对象。<br>
 下面这段代码的输出结果将是什么？请解释。</p>
-<pre><code class="language-python">class Parent(object):
+<pre><code class="language-Python">class Parent(object):
     x = 1
 
 class Child1(Parent):
@@ -1631,7 +2743,7 @@ print Parent.x, Child1.x, Child2.x
 <h3 id="获取对象信息">获取对象信息</h3>
 <h4 id="使用type">使用<code>type()</code></h4>
 <p>判断对象类型，使用<code>type()</code>函数：</p>
-<pre><code class="language-python">type(123)
+<pre><code class="language-Python">type(123)
 &lt;class 'int'&gt;
 type('str')
 &lt;class 'str'&gt;
@@ -1655,7 +2767,7 @@ True
 </code></pre>
 <h4 id="使用isinstance">使用<code>isinstance()</code></h4>
 <p>判断<code>class</code>的类型，可以使用<code>isinstance()</code>函数。</p>
-<pre><code class="language-python">isinstance([1, 2, 3], (list, tuple))
+<pre><code class="language-Python">isinstance([1, 2, 3], (list, tuple))
 True
 isinstance((1, 2, 3), (list, tuple))
 True
@@ -1663,17 +2775,17 @@ True
 <p><strong>总是优先使用isinstance()判断类型，可以将指定类型及其子类“一网打尽”。</strong></p>
 <h4 id="使用dir">使用dir()</h4>
 <p>如果要获得一个对象的所有属性和方法，可以使用<code>dir()</code>函数，它返回一个包含字符串的<code>list</code>，比如，获得一个<code>str</code>对象的所有属性和方法：</p>
-<pre><code class="language-python">dir('ABC')
+<pre><code class="language-Python">dir('ABC')
 ['__add__', '__class__',..., '__subclasshook__', 'capitalize', 'casefold',..., 'zfill']
 </code></pre>
 <p>类似<code>__xxx__</code>的属性和方法在<code>Python</code>中都是有特殊用途的，比如<code>__len__</code>方法返回长度。在<code>Python</code>中，如果你调用<code>len()</code>函数试图获取一个对象的长度，实际上，在<code>len()</code>函数内部，它自动去调用该对象的<code>__len__()</code>方法，所以，下面的代码是等价的：</p>
-<pre><code class="language-python">len('ABC')
+<pre><code class="language-Python">len('ABC')
 3
 'ABC'.__len__()
 3
 </code></pre>
 <p>我们自己写的类，如果也想用<code>len(myObj)</code>的话，就自己写一个<code>__len__()</code>方法：</p>
-<pre><code class="language-python">class MyDog(object):
+<pre><code class="language-Python">class MyDog(object):
     def __len__(self):
         return 100
 dog = MyDog()
@@ -1681,11 +2793,11 @@ len(dog)
 100
 </code></pre>
 <p>剩下的都是普通属性或方法，比如<code>lower()</code>返回小写的字符串：</p>
-<pre><code class="language-python">'ABC'.lower()
+<pre><code class="language-Python">'ABC'.lower()
 'abc'
 </code></pre>
 <p>仅仅把属性和方法列出来是不够的，配合<code>getattr()</code>、<code>setattr()</code>以及<code>hasattr()</code>，我们可以直接操作一个对象的状态：</p>
-<pre><code class="language-python">class MyObject(object):
+<pre><code class="language-Python">class MyObject(object):
     def __init__(self):
         self.x = 9
     def power(self):
@@ -1693,7 +2805,7 @@ len(dog)
 obj = MyObject()
 </code></pre>
 <p>紧接着，可以测试该对象的属性：</p>
-<pre><code class="language-python">hasattr(obj, 'x') # 有属性'x'吗？
+<pre><code class="language-Python">hasattr(obj, 'x') # 有属性'x'吗？
 True
 obj.x
 9
@@ -1708,7 +2820,7 @@ obj.y # 获取属性'y'
 19
 </code></pre>
 <p>如果试图获取不存在的属性，会抛出<code>AttributeError</code>的错误：</p>
-<pre><code class="language-python">getattr(obj, 'z') # 获取属性'z'
+<pre><code class="language-Python">getattr(obj, 'z') # 获取属性'z'
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 AttributeError: 'MyObject' object has no attribute 'z'
@@ -1718,7 +2830,7 @@ AttributeError: 'MyObject' object has no attribute 'z'
 404
 </code></pre>
 <p>也可以获得对象的方法：</p>
-<pre><code class="language-python">hasattr(obj, 'power') # 有属性'power'吗？
+<pre><code class="language-Python">hasattr(obj, 'power') # 有属性'power'吗？
 True
 getattr(obj, 'power') # 获取属性'power'
 &lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;
@@ -1736,7 +2848,7 @@ fn() # 调用fn()与调用obj.power()是一样的
 </code></pre>
 <h4 id="实例属性和类属性">实例属性和类属性</h4>
 <p>给实例绑定属性的方法是通过实例变量，或者通过<code>self</code>变量：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     def __init__(self, name):
         self.name = name
 
@@ -1744,11 +2856,11 @@ s = Student('Bob')
 s.score = 90
 </code></pre>
 <p>直接在<code>class</code>中定义属性，这种属性是类属性，归<code>Student</code>类所有：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     name = 'Student'
 </code></pre>
 <p>当我们定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。来测试一下：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     name = 'Student'
 s = Student() # 创建实例s
 print(s.name) # 打印name属性，因为实例并没有name属性，所以会继续查找class的name属性
@@ -1770,7 +2882,7 @@ Student
 不要对实例属性和类属性使用相同的名字，否则将产生难以发现的错误。</p>
 <h4 id="使用__slots__">使用<code>__slots__</code></h4>
 <p>给实例绑定一个方法：</p>
-<pre><code class="language-python">def set_age(self, age): # 定义一个函数作为实例方法
+<pre><code class="language-Python">def set_age(self, age): # 定义一个函数作为实例方法
     self.age = age
 from types import MethodType
 s.set_age = MethodType(set_age, s) # 给实例绑定一个方法
@@ -1779,14 +2891,14 @@ s.age # 测试结果
 25
 </code></pre>
 <p>但是，给一个实例绑定的方法，对另一个实例是不起作用的：</p>
-<pre><code class="language-python">s2 = Student() # 创建新的实例
+<pre><code class="language-Python">s2 = Student() # 创建新的实例
 s2.set_age(25) # 尝试调用方法
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 AttributeError: 'Student' object has no attribute 'set_age'
 </code></pre>
 <p>为了给所有实例都绑定方法，可以给class绑定方法：</p>
-<pre><code class="language-python">def set_score(self, score):
+<pre><code class="language-Python">def set_score(self, score):
     self.score = score
 Student.set_score = set_score
 </code></pre>
@@ -1794,9 +2906,9 @@ Student.set_score = set_score
 通常情况下，上面的<code>set_score</code>方法可以直接定义在<code>class</code>中，但动态绑定允许我们在程序运行的过程中动态给<code>class</code>加上功能，这在静态语言中很难实现。<br>
 限制实例的属性怎么办？比如，只允许对<code>Student</code>实例添加<code>name</code>和<code>age</code>属性。<br>
 为了达到限制的目的，<code>Python</code>允许在定义<code>class</code>的时候，定义一个特殊的<code>__slots__</code>变量，来限制该<code>class</code>实例能添加的属性：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
-```python
+```Python
 s = Student() # 创建新的实例
 s.name = 'Michael' # 绑定属性'name'
 s.age = 25 # 绑定属性'age'
@@ -1807,7 +2919,7 @@ AttributeError: 'Student' object has no attribute 'score'
 </code></pre>
 <p>由于<code>'score'</code>没有被放到_<code>_slots__</code>中，所以不能绑定<code>score</code>属性，试图绑定<code>score</code>将得到<code>AttributeError</code>的错误。</p>
 <p>使用<code>__slots__</code>要注意，<code>__slots__</code>定义的属性仅对当前类实例起作用，对继承的子类是不起作用的：</p>
-<pre><code class="language-python">class GraduateStudent(Student):
+<pre><code class="language-Python">class GraduateStudent(Student):
     pass
 g = GraduateStudent()
 g.score = 9999
@@ -1815,7 +2927,7 @@ g.score = 9999
 <p>除非在子类中也定义<code>__slots__</code>，这样，子类实例允许定义的属性就是自身的<code>__slots__</code>加上父类的<code>__slots__</code>。</p>
 <h4 id="多重继承">多重继承</h4>
 <figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200318023741.png" alt="" loading="lazy"></figure>
-<pre><code class="language-python">class Animal(object):
+<pre><code class="language-Python">class Animal(object):
     pass
 # 大类:
 class Mammal(Animal):
@@ -1833,7 +2945,7 @@ class Ostrich(Bird):
     pass
 </code></pre>
 <p>现在，我们要给动物再加上<code>Runnable</code>和<code>Flyable</code>的功能，只需要先定义好<code>Runnable</code>和<code>Flyable</code>的类：</p>
-<pre><code class="language-python">class Runnable(object):
+<pre><code class="language-Python">class Runnable(object):
     def run(self):
         print('Running...')
 
@@ -1842,40 +2954,40 @@ class Flyable(object):
         print('Flying...')
 </code></pre>
 <p>对于需要<code>Runnable</code>功能的动物，就多继承一个<code>Runnable</code>，例如<code>Dog</code>：</p>
-<pre><code class="language-python">class Dog(Mammal, Runnable):
+<pre><code class="language-Python">class Dog(Mammal, Runnable):
     pass
 </code></pre>
 <p>对于需要<code>Flyable</code>功能的动物，就多继承一个<code>Flyable</code>，例如<code>Bat</code>：</p>
-<pre><code class="language-python">class Bat(Mammal, Flyable):
+<pre><code class="language-Python">class Bat(Mammal, Flyable):
     pass
 </code></pre>
 <p>通过多重继承，一个子类就可以同时获得多个父类的所有功能。<br>
 在设计类的继承关系时，通常，主线都是单一继承下来的，例如，<code>Ostrich</code>继承自<code>Bird</code>。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让<code>Ostrich</code>除了继承自<code>Bird</code>外，再同时继承<code>Runnable</code>。这种设计通常称之为<code>MixIn</code>。</p>
 <p>为了更好地看出继承关系，我们把<code>Runnable</code>和<code>Flyable</code>改为<code>RunnableMixIn</code>和<code>FlyableMixIn</code>。类似的，你还可以定义出肉食动物<code>CarnivorousMixIn</code>和植食动物<code>HerbivoresMixIn</code>，让某个动物同时拥有好几个<code>MixIn</code>：</p>
-<pre><code class="language-python">class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
+<pre><code class="language-Python">class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
     pass
 </code></pre>
 <p><code>MixIn</code>的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个<code>MixIn</code>的功能，而不是设计多层次的复杂的继承关系。</p>
 <p><code>Python</code>自带的很多库也使用了<code>MixIn</code>。举个例子，<code>Python</code>自带了<code>TCPServer</code>和<code>UDPServer</code>这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由<code>ForkingMixIn</code>和<code>ThreadingMixIn</code>提供。通过组合，我们就可以创造出合适的服务来。</p>
 <p>比如，编写一个多进程模式的<code>TCP</code>服务，定义如下：</p>
-<pre><code class="language-python">class MyTCPServer(TCPServer, ForkingMixIn):
+<pre><code class="language-Python">class MyTCPServer(TCPServer, ForkingMixIn):
     pass
 </code></pre>
 <p>编写一个多线程模式的<code>UDP</code>服务，定义如下：</p>
-<pre><code class="language-python">class MyUDPServer(UDPServer, ThreadingMixIn):
+<pre><code class="language-Python">class MyUDPServer(UDPServer, ThreadingMixIn):
     pass
 </code></pre>
 <p>如果你打算搞一个更先进的协程模型，可以编写一个<code>CoroutineMixIn</code>：</p>
-<pre><code class="language-python">class MyTCPServer(TCPServer, CoroutineMixIn):
+<pre><code class="language-Python">class MyTCPServer(TCPServer, CoroutineMixIn):
     pass
 </code></pre>
 <p>这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。<br>
 由于<code>Python</code>允许使用多重继承，因此，<code>MixIn</code>就是一种常见的设计。<br>
 只允许单一继承的语言（如<code>Java</code>）不能使用<code>MixIn</code>的设计。</p>
 <ul>
-<li>若是父类中有相同的方法名，而在子类使用时未指定，<code>python</code>从左至右搜索 即方法在子类中未找到时，从左到右查找父类中是否包含方法。</li>
+<li>若是父类中有相同的方法名，而在子类使用时未指定，<code>Python</code>从左至右搜索 即方法在子类中未找到时，从左到右查找父类中是否包含方法。</li>
 </ul>
-<pre><code class="language-python">#类定义
+<pre><code class="language-Python">#类定义
 class people:
     #定义基本属性
     name = ''
@@ -1926,7 +3038,7 @@ test.speak()   #方法名同，默认调用的是在括号中排前地父类的�
 <li><code>super()</code><br>
 如果你的父类方法的功能不能满足你的需求，你可以在子类重写你父类的方法，实例如下：</li>
 </ul>
-<pre><code class="language-python">class Parent:        # 定义父类
+<pre><code class="language-Python">class Parent:        # 定义父类
    def myMethod(self):
       print ('调用父类方法')
  
@@ -1941,12 +3053,158 @@ super(Child,c).myMethod() #用子类对象调用父类已被覆盖的方法
 调用父类方法
 </code></pre>
 <p>如果重写了<code>__init__</code>时，要继承父类的构造方法，可以使用 <code>super</code> 关键字：</p>
-<pre><code class="language-python">super(子类，self).__init__(参数1，参数2，....)
+<pre><code class="language-Python">super(子类，self).__init__(参数1，参数2，....)
 </code></pre>
+<p>为了调用父类(超类)的一个方法，可以使用 <code>super()</code> 函数，比如：</p>
+<pre><code class="language-python">class A:
+    def spam(self):
+        print('A.spam')
+class B(A):
+    def spam(self):
+        print('B.spam')
+        super().spam()  # Call parent spam()
+</code></pre>
+<p><code>super()</code> 函数的一个常见用法是在 <code>__init__()</code> 方法中确保父类被正确的初始化了：</p>
+<pre><code class="language-python">class A:
+    def __init__(self):
+        self.x = 0
+class B(A):
+    def __init__(self):
+        super().__init__()
+        self.y = 1
+</code></pre>
+<p><code>super()</code> 的另外一个常见用法出现在覆盖<code>Python</code>特殊方法的代码中，比如：</p>
+<pre><code class="language-python">class Proxy:
+    def __init__(self, obj):
+        self._obj = obj
+
+    # Delegate attribute lookup to internal obj
+    def __getattr__(self, name):
+        return getattr(self._obj, name)
+
+    # Delegate attribute assignment
+    def __setattr__(self, name, value):
+        if name.startswith('_'):
+            super().__setattr__(name, value) # Call original __setattr__
+        else:
+            setattr(self._obj, name, value)
+</code></pre>
+<p>在上面代码中，<code>__setattr__()</code> 的实现包含一个名字检查。 如果某个属性名以下划线<code>(_)</code>开头，就通过 <code>super()</code> 调用原始的 <code>__setattr__()</code> ， 否则的话就委派给内部的代理对象 <code>self._obj</code> 去处理。 这看上去有点意思，因为就算没有显式的指明某个类的父类， <code>super()</code> 仍然可以有效的工作。<br>
+实际上，大家对于在<code>Python</code>中如何正确使用 <code>super()</code> 函数普遍知之甚少。 你有时候会看到像下面这样直接调用父类的一个方法：</p>
+<pre><code class="language-python">class Base:
+    def __init__(self):
+        print('Base.__init__')
+
+class A(Base):
+    def __init__(self):
+        Base.__init__(self)
+        print('A.__init__')
+</code></pre>
+<p>尽管对于大部分代码而言这么做没什么问题，但是在更复杂的涉及到多继承的代码中就有可能导致很奇怪的问题发生。 比如，考虑如下的情况：</p>
+<pre><code class="language-python">class Base:
+    def __init__(self):
+        print('Base.__init__')
+class A(Base):
+    def __init__(self):
+        Base.__init__(self)
+        print('A.__init__')
+
+class B(Base):
+    def __init__(self):
+        Base.__init__(self)
+        print('B.__init__')
+
+class C(A,B):
+    def __init__(self):
+        A.__init__(self)
+        B.__init__(self)
+        print('C.__init__')
+</code></pre>
+<p>如果你运行这段代码就会发现 <code>Base.__init__()</code> 被调用两次，如下所示：</p>
+<pre><code>c = C()
+Base.__init__
+A.__init__
+Base.__init__
+B.__init__
+C.__init__
+</code></pre>
+<p>可能两次调用 <code>Base.__init__()</code> 没什么坏处，但有时候却不是。 另一方面，假设你在代码中换成使用 <code>super()</code> ，结果就很完美了：</p>
+<pre><code class="language-python">class Base:
+    def __init__(self):
+        print('Base.__init__')
+
+class A(Base):
+    def __init__(self):
+        super().__init__()
+        print('A.__init__')
+
+class B(Base):
+    def __init__(self):
+        super().__init__()
+        print('B.__init__')
+
+class C(A,B):
+    def __init__(self):
+        super().__init__()  # Only one call to super() here
+        print('C.__init__')
+</code></pre>
+<p>运行这个新版本后，你会发现每个 <code>__init__()</code> 方法只会被调用一次了：</p>
+<pre><code class="language-python">c = C()
+Base.__init__
+B.__init__
+A.__init__
+C.__init__
+</code></pre>
+<p>为了弄清它的原理，我们需要花点时间解释下<code>Python</code>是如何实现继承的。 对于你定义的每一个类，<code>Python</code>会计算出一个所谓的方法解析顺序(<code>MRO</code>)列表。 这个<code>MRO</code>列表就是一个简单的所有基类的线性顺序表。例如：</p>
+<pre><code class="language-python">C.__mro__
+(&lt;class '__main__.C'&gt;, &lt;class '__main__.A'&gt;, &lt;class '__main__.B'&gt;,
+&lt;class '__main__.Base'&gt;, &lt;class 'object'&gt;)
+</code></pre>
+<p>为了实现继承，<code>Python</code>会在<code>MRO</code>列表上从左到右开始查找基类，直到找到第一个匹配这个属性的类为止。</p>
+<p>而这个<code>MRO</code>列表的构造是通过一个<code>C3</code>线性化算法来实现的。 我们不去深究这个算法的数学原理，它实际上就是合并所有父类的<code>MRO</code>列表并遵循如下三条准则：</p>
+<ol>
+<li>子类会先于父类被检查</li>
+<li>多个父类会根据它们在列表中的顺序被检查</li>
+<li>如果对下一个类存在两个合法的选择，选择第一个父类</li>
+<li>老实说，你所要知道的就是<code>MRO</code>列表中的类顺序会让你定义的任意类层级关系变得有意义。</li>
+</ol>
+<p>当你使用 <code>super()</code> 函数时，<code>Python</code>会在<code>MRO</code>列表上继续搜索下一个类。 只要每个重定义的方法统一使用 <code>super()</code> 并只调用它一次， 那么控制流最终会遍历完整个<code>MRO</code>列表，每个方法也只会被调用一次。 这也是为什么在第二个例子中你不会调用两次 <code>Base.__init__()</code> 的原因。</p>
+<p><code>super()</code> 有个令人吃惊的地方是它并不一定去查找某个类在<code>MRO</code>中下一个直接父类， 你甚至可以在一个没有直接父类的类中使用它。例如，考虑如下这个类：</p>
+<pre><code class="language-python">class A:
+    def spam(self):
+        print('A.spam')
+        super().spam()
+</code></pre>
+<p>如果你试着直接使用这个类就会出错：</p>
+<pre><code class="language-python">a = A()
+a.spam()
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    File &quot;&lt;stdin&gt;&quot;, line 4, in spam
+AttributeError: 'super' object has no attribute 'spam'
+</code></pre>
+<p>但是，如果你使用多继承的话看看会发生什么：</p>
+<pre><code class="language-python">class B:
+    def spam(self):
+        print('B.spam')
+class C(A,B):
+    pass
+c = C()
+c.spam()
+A.spam
+B.spam
+</code></pre>
+<p>你可以看到在类A中使用 <code>super().spam()</code> 实际上调用的是跟类<code>A</code>毫无关系的类<code>B</code>中的 <code>spam()</code> 方法。 这个用类<code>C</code>的<code>MRO</code>列表就可以完全解释清楚了：</p>
+<pre><code class="language-python">C.__mro__
+(&lt;class '__main__.C'&gt;, &lt;class '__main__.A'&gt;, &lt;class '__main__.B'&gt;,
+&lt;class 'object'&gt;)
+</code></pre>
+<p>在定义混入类的时候这样使用 <code>super()</code> 是很普遍的。</p>
+<p>然而，由于 <code>super()</code> 可能会调用不是你想要的方法，你应该遵循一些通用原则。 首先，确保在继承体系中所有相同名字的方法拥有可兼容的参数签名(比如相同的参数个数和参数名称)。 这样可以确保 <code>super()</code> 调用一个非直接父类方法时不会出错。 其次，最好确保最顶层的类提供了这个方法的实现，这样的话在<code>MRO</code>上面的查找链肯定可以找到某个确定的方法。</p>
 <h4 id="定制类">定制类</h4>
 <h5 id="__str__"><code>__str__</code></h5>
 <p>我们先定义一个<code>Student</code>类，打印一个实例：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     def __init__(self, name):
         self.name = name
 print(Student('Michael'))
@@ -1954,7 +3212,7 @@ print(Student('Michael'))
 </code></pre>
 <p>打印出一堆<code>&lt;__main__.Student object at 0x109afb190&gt;</code>，不好看。<br>
 怎么才能打印得好看呢？只需要定义好<code>__str__()</code>方法，返回一个好看的字符串就可以了：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     def __init__(self, name):
         self.name = name
     def __str__(self):
@@ -1964,13 +3222,13 @@ Student object (name: Michael)
 </code></pre>
 <p>这样打印出来的实例，不但好看，而且容易看出实例内部重要的数据。<br>
 但是细心的朋友会发现直接敲变量不用<code>print</code>，打印出来的实例还是不好看：</p>
-<pre><code class="language-python">s = Student('Michael')
+<pre><code class="language-Python">s = Student('Michael')
 s
 &lt;__main__.Student object at 0x109afb310&gt;
 </code></pre>
 <p>这是因为直接显示变量调用的不是<code>__str__()</code>，而是<code>__repr__()</code>，两者的区别是<code>__str__()</code>返回用户看到的字符串，而<code>__repr__()</code>返回程序开发者看到的字符串，也就是说，<code>__repr__()</code>是为调试服务的。</p>
 <p>解决办法是再定义一个<code>__repr__()</code>。但是通常<code>__str__()</code>和<code>__repr__()</code>代码都是一样的，所以，有个偷懒的写法：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     def __init__(self, name):
         self.name = name
     def __str__(self):
@@ -1980,7 +3238,7 @@ s
 <h5 id="__iter__"><code>__iter__</code></h5>
 <p>如果一个类想被用于<code>for ... in</code>循环，类似<code>list</code>或<code>tuple</code>那样，就必须实现一个<code>__iter__()</code>方法，该方法返回一个迭代对象，然后，<code>Python</code>的<code>for</code>循环就会不断调用该迭代对象的<code>__next__()</code>方法拿到循环的下一个值，直到遇到<code>StopIteration</code>错误时退出循环。<br>
 我们以斐波那契数列为例，写一个<code>Fib</code>类，可以作用于<code>for</code>循环：</p>
-<pre><code class="language-python">class Fib(object):
+<pre><code class="language-Python">class Fib(object):
     def __init__(self):
         self.a, self.b = 0, 1 # 初始化两个计数器a，b
     def __iter__(self):
@@ -1992,7 +3250,7 @@ s
         return self.a # 返回下一个值
 </code></pre>
 <p>现在，试试把<code>Fib</code>实例作用于<code>for</code>循环：</p>
-<pre><code class="language-python">for n in Fib():
+<pre><code class="language-Python">for n in Fib():
     print(n)
 1
 1
@@ -2005,7 +3263,7 @@ s
 </code></pre>
 <h5 id="__getitem__"><code>__getitem__</code></h5>
 <p><code>Fib</code>实例虽然能作用于<code>for</code>循环，看起来和<code>list</code>有点像，但是，把它当成<code>list</code>来使用还是不行,要表现得像<code>list</code>那样按照下标取出元素，需要实现<code>__getitem__()</code>方法：</p>
-<pre><code class="language-python">class Fib(object):
+<pre><code class="language-Python">class Fib(object):
     def __getitem__(self, n):
         a, b = 1, 1
         for x in range(n):
@@ -2054,12 +3312,12 @@ f[:10]
 总之，通过上面的方法，我们自己定义的类表现得和<code>Python</code>自带的<code>list</code>、<code>tuple</code>、<code>dict</code>没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口。</p>
 <h5 id="__getattr__"><code>__getattr__</code></h5>
 <p>正常情况下，当我们调用类的方法或属性时，如果不存在，就会报错。比如定义<code>Student</code>类：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     def __init__(self):
         self.name = 'Michael'
 </code></pre>
 <p>调用<code>name</code>属性，没问题，但是，调用不存在的<code>score</code>属性，就有问题了：</p>
-<pre><code class="language-python">s = Student()
+<pre><code class="language-Python">s = Student()
 print(s.name)
 Michael
 print(s.score)
@@ -2068,7 +3326,7 @@ AttributeError: 'Student' object has no attribute 'score'
 </code></pre>
 <p>错误信息很清楚地告诉我们，没有找到<code>score</code>这个<code>attribute</code>。</p>
 <p>要避免这个错误，除了可以加上一个<code>score</code>属性外，<code>Python</code>还有另一个机制，那就是写一个<code>__getattr__()</code>方法，动态返回一个属性。修改如下：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
 
     def __init__(self):
         self.name = 'Michael'
@@ -2085,12 +3343,12 @@ AttributeError: 'Student' object has no attribute 'score'
             return lambda: 25
 </code></pre>
 <p>只是调用方式要变为：</p>
-<pre><code class="language-python">s.age()
+<pre><code class="language-Python">s.age()
 25
 </code></pre>
 <p>注意，只有在没有找到属性的情况下，才调用<code>__getattr__</code>，已有的属性，比如<code>name</code>，不会在_<code>_getattr__</code>中查找。<br>
 此外，注意到任意调用如<code>s.abc</code>都会返回<code>None</code>，这是因为我们定义的<code>__getattr__</code>默认返回就是<code>None</code>。要让<code>class</code>只响应特定的几个属性，我们就要按照约定，抛出<code>AttributeError</code>的错误：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
 
     def __getattr__(self, attr):
         if attr=='age':
@@ -2101,14 +3359,14 @@ AttributeError: 'Student' object has no attribute 'score'
 <h5 id="__call__"><code>__call__</code></h5>
 <p>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用<code>instance.method()</code>来调用。能不能直接在实例本身上调用呢？在<code>Python</code>中，答案是肯定的。<br>
 任何类，只需要定义一个<code>__call__()</code>方法，就可以直接对实例进行调用。请看示例：</p>
-<pre><code class="language-python">class Student(object):
+<pre><code class="language-Python">class Student(object):
     def __init__(self, name):
         self.name = name
 
     def __call__(self):
         print('My name is %s.' % self.name)
 调用方式如下：
-```python
+```Python
 s = Student('Michael')
 s() # self参数不要传入
 My name is Michael.
@@ -2117,17 +3375,91 @@ My name is Michael.
 如果你把对象看成函数，那么函数本身其实也可以在运行期动态创建出来，因为类的实例都是运行期创建出来的，这么一来，我们就模糊了对象和函数的界限。<br>
 那么，怎么判断一个变量是对象还是函数呢？其实，更多的时候，我们需要判断一个对象是否能被调用，能被调用的对象就是一个<code>Callable</code>对象，比如函数和我们上面定义的带有<code>__call__()</code>的类实例。<br>
 通过<code>callable()</code>函数，我们就可以判断一个对象是否是“可调用”对象。</p>
+<h5 id="实现比较操作">实现比较操作</h5>
+<p><code>Python</code>类对每个比较操作都需要实现一个特殊方法来支持。 例如为了支持<code>&gt;=</code>操作符，你需要定义一个 <code>__ge__()</code> 方法。 尽管定义一个方法没什么问题，但如果要你实现所有可能的比较方法那就有点烦人了。</p>
+<p>装饰器 <code>functools.total_ordering</code> 就是用来简化这个处理的。 使用它来装饰一个类，你只需定义一个 <code>__eq__()</code> 方法， 外加其他方法(<code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, or <code>__ge__</code>)中的一个即可。 然后装饰器会自动为你填充其它比较方法。<br>
+作为例子，我们构建一些房子，然后给它们增加一些房间，最后通过房子大小来比较它们：</p>
+<pre><code class="language-python">from functools import total_ordering
+
+class Room:
+    def __init__(self, name, length, width):
+        self.name = name
+        self.length = length
+        self.width = width
+        self.square_feet = self.length * self.width
+
+@total_ordering
+class House:
+    def __init__(self, name, style):
+        self.name = name
+        self.style = style
+        self.rooms = list()
+
+    @property
+    def living_space_footage(self):
+        return sum(r.square_feet for r in self.rooms)
+
+    def add_room(self, room):
+        self.rooms.append(room)
+
+    def __str__(self):
+        return '{}: {} square foot {}'.format(self.name,
+                self.living_space_footage,
+                self.style)
+
+    def __eq__(self, other):
+        return self.living_space_footage == other.living_space_footage
+
+    def __lt__(self, other):
+        return self.living_space_footage &lt; other.living_space_footage
+</code></pre>
+<p>这里我们只是给<code>House</code>类定义了两个方法：<code>__eq__()</code> 和 <code>__lt__()</code> ，它就能支持所有的比较操作：</p>
+<pre><code class="language-python"># Build a few houses, and add rooms to them
+h1 = House('h1', 'Cape')
+h1.add_room(Room('Master Bedroom', 14, 21))
+h1.add_room(Room('Living Room', 18, 20))
+h1.add_room(Room('Kitchen', 12, 16))
+h1.add_room(Room('Office', 12, 12))
+h2 = House('h2', 'Ranch')
+h2.add_room(Room('Master Bedroom', 14, 21))
+h2.add_room(Room('Living Room', 18, 20))
+h2.add_room(Room('Kitchen', 12, 16))
+h3 = House('h3', 'Split')
+h3.add_room(Room('Master Bedroom', 14, 21))
+h3.add_room(Room('Living Room', 18, 20))
+h3.add_room(Room('Office', 12, 16))
+h3.add_room(Room('Kitchen', 15, 17))
+houses = [h1, h2, h3]
+print('Is h1 bigger than h2?', h1 &gt; h2) # prints True
+print('Is h2 smaller than h3?', h2 &lt; h3) # prints True
+print('Is h2 greater than or equal to h1?', h2 &gt;= h1) # Prints False
+print('Which one is biggest?', max(houses)) # Prints 'h3: 1101-square-foot Split'
+print('Which is smallest?', min(houses)) # Prints 'h2: 846-square-foot Ranch'
+</code></pre>
+<p>其实 <code>total_ordering</code> 装饰器也没那么神秘。 它就是定义了一个从每个比较支持方法到所有需要定义的其他方法的一个映射而已。 比如你定义了 <code>__le__()</code> 方法，那么它就被用来构建所有其他的需要定义的那些特殊方法。 实际上就是在类里面像下面这样定义了一些特殊方法：</p>
+<pre><code class="language-python">class House:
+    def __eq__(self, other):
+        pass
+    def __lt__(self, other):
+        pass
+    # Methods created by @total_ordering
+    __le__ = lambda self, other: self &lt; other or self == other
+    __gt__ = lambda self, other: not (self &lt; other or self == other)
+    __ge__ = lambda self, other: not (self &lt; other)
+    __ne__ = lambda self, other: not self == other
+</code></pre>
+<p>当然，你自己去写也很容易，但是使用 <code>@total_ordering</code> 可以简化代码，何乐而不为呢。</p>
 <h4 id="枚举类">枚举类</h4>
-<pre><code class="language-python">from enum import Enum
+<pre><code class="language-Python">from enum import Enum
 Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
 </code></pre>
 <p>这样我们就获得了<code>Month</code>类型的枚举类，可以直接使用<code>Month.Jan</code>来引用一个常量，或者枚举它的所有成员：</p>
-<pre><code class="language-python">for name, member in Month.__members__.items():
+<pre><code class="language-Python">for name, member in Month.__members__.items():
     print(name, '=&gt;', member, ',', member.value)
 </code></pre>
 <p><code>value</code>属性则是自动赋给成员的<code>int</code>常量，默认从1开始计数。<br>
 如果需要更精确地控制枚举类型，可以从<code>Enum</code>派生出自定义类：</p>
-<pre><code class="language-python">from enum import Enum, unique
+<pre><code class="language-Python">from enum import Enum, unique
 @unique
 class Weekday(Enum):
     Sun = 0 # Sun的value被设定为0
@@ -2140,7 +3472,7 @@ class Weekday(Enum):
 </code></pre>
 <p><code>@unique</code>装饰器可以帮助我们检查保证没有重复值。<br>
 访问这些枚举类型可以有若干种方法：</p>
-<pre><code class="language-python">day1 = Weekday.Mon
+<pre><code class="language-Python">day1 = Weekday.Mon
 print(day1)
 Weekday.Mon
 print(Weekday.Tue)
@@ -2175,12 +3507,12 @@ Sat =&gt; Weekday.Sat
 <h4 id="使用元类">使用元类</h4>
 <p>动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。<br>
 比方说我们要定义一个<code>Hello</code>的<code>class</code>，就写一个<code>hello.py</code>模块：</p>
-<pre><code class="language-python">class Hello(object):
+<pre><code class="language-Python">class Hello(object):
     def hello(self, name='world'):
         print('Hello, %s.' % name)
 </code></pre>
 <p>当<code>Python</code>解释器载入<code>hello</code>模块时，就会依次执行该模块的所有语句，执行结果就是动态创建出一个<code>Hello</code>的<code>class</code>对象，测试如下：</p>
-<pre><code class="language-python">from hello import Hello
+<pre><code class="language-Python">from hello import Hello
 h = Hello()
 h.hello()
 Hello, world.
@@ -2192,7 +3524,7 @@ print(type(h))
 <p><code>type()</code>函数可以查看一个类型或变量的类型，<code>Hello</code>是一个<code>class</code>，它的类型就是<code>type</code>，而<code>h</code>是一个实例，它的类型就是<code>class Hello</code>。</p>
 <p>我们说<code>class</code>的定义是运行时动态创建的，而创建<code>class</code>的方法就是使用<code>type()</code>函数。</p>
 <p><code>type()</code>函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过<code>type()</code>函数创建出Hello类，而无需通过<code>class Hello(object)</code>...的定义：</p>
-<pre><code class="language-python">def fn(self, name='world'): # 先定义函数
+<pre><code class="language-Python">def fn(self, name='world'): # 先定义函数
     print('Hello, %s.' % name)
 Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
 h = Hello()
@@ -2219,13 +3551,13 @@ class的方法名称与函数绑定，这里我们把函数<code>fn</code>绑定
 <p><code>metaclass</code>是Python面向对象里最难理解，也是最难使用的魔术代码。正常情况下，你不会碰到需要使用<code>metaclass</code>的情况，所以，以下内容看不懂也没关系，因为基本上你不会用到。<br>
 我们先看一个简单的例子，这个<code>metaclass</code>可以给我们自定义的<code>MyList</code>增加一个<code>add</code>方法：</p>
 <p>定义<code>ListMetaclass</code>，按照默认习惯，<code>metaclass</code>的类名总是以<code>Metaclass</code>结尾，以便清楚地表示这是一个<code>metaclass</code>：</p>
-<pre><code class="language-python"># metaclass是类的模板，所以必须从`type`类型派生：
+<pre><code class="language-Python"># metaclass是类的模板，所以必须从`type`类型派生：
 class ListMetaclass(type):
     def __new__(cls, name, bases, attrs):
         attrs['add'] = lambda self, value: self.append(value)
         return type.__new__(cls, name, bases, attrs)
 有了`ListMetaclass`，我们在定义类的时候还要指示使用`ListMetaclass`来定制类，传入关键字参数`metaclass`：
-```python
+```Python
 class MyList(list, metaclass=ListMetaclass):
     pass
 </code></pre>
@@ -2236,13 +3568,13 @@ class MyList(list, metaclass=ListMetaclass):
 类继承的父类集合；<br>
 类的方法集合。<br>
 测试一下MyList是否可以调用add()方法：</p>
-<pre><code class="language-python">L = MyList()
+<pre><code class="language-Python">L = MyList()
 L.add(1)
 L
 [1]
 </code></pre>
 <p>而普通的list没有<code>add()</code>方法：</p>
-<pre><code class="language-python">L2 = list()
+<pre><code class="language-Python">L2 = list()
 L2.add(1)
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
@@ -2266,14 +3598,14 @@ AttributeError: 'list' object has no attribute 'add'
 <img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200320015425.png" alt="" loading="lazy"><br>
 <code>Python</code> 中只有模块(<code>module</code>)，类(<code>class</code>)以及函数(<code>def</code>、<code>lambda</code>)才会引入新的作用域，其它的代码块(如 <code>if</code>/<code>elif</code>/<code>else</code>/、<code>try</code>/<code>except</code>、<code>for</code>/<code>while</code>等）是不会引入新的作用域的，也就是说这些语句内定义的变量，外部也可以访问，如下代码：</li>
 </ul>
-<pre><code class="language-python">if True:
+<pre><code class="language-Python">if True:
     msg = 'I am from Runoob'
 msg
 'I am from Runoob'
 </code></pre>
 <p>实例中 <code>msg</code> 变量定义在 <code>if</code> 语句块中，但外部还是可以访问的。<br>
 如果将 msg 定义在函数中，则它就是局部变量，外部不能访问：</p>
-<pre><code class="language-python">def test():
+<pre><code class="language-Python">def test():
     msg_inner = 'I am from Runoob'
 msg_inner
 Traceback (most recent call last):
@@ -2282,7 +3614,7 @@ NameError: name 'msg_inner' is not defined
 </code></pre>
 <p>从报错的信息上看，说明了 <code>msg_inner</code> 未定义，无法使用，因为它是局部变量，只有在函数内可以使用。</p>
 <h4 id="global-和-nonlocal关键字"><code>global</code> 和 <code>nonlocal</code>关键字</h4>
-<pre><code class="language-python">num = 1
+<pre><code class="language-Python">num = 1
 def fun1():
     global num  # 需要使用 global 关键字声明
     print(num) 
@@ -2295,7 +3627,7 @@ print(num)
 123
 </code></pre>
 <p>如果要修改嵌套作用域(<code>enclosing</code> 作用域，外层非全局作用域)中的变量则需要 <code>nonlocal</code> 关键字了，如下实例：</p>
-<pre><code class="language-python">def outer():
+<pre><code class="language-Python">def outer():
     num = 10
     def inner():
         nonlocal num   # nonlocal关键字声明
@@ -2308,7 +3640,7 @@ outer()
 100
 </code></pre>
 <p>另外有一种特殊情况，假设下面这段代码被运行：</p>
-<pre><code class="language-python">a = 10
+<pre><code class="language-Python">a = 10
 def test():
     a = a + 1
     print(a)
@@ -2322,7 +3654,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
 </code></pre>
 <p>错误信息为局部作用域引用错误，因为 <code>test</code> 函数中的 <code>a</code> 使用的是局部，未定义，无法修改。<br>
 修改 <code>a</code> 为全局变量，通过函数参数传递，可以正常执行输出结果为：</p>
-<pre><code class="language-python">a = 10
+<pre><code class="language-Python">a = 10
 def test(a):
     a = a + 1
     print(a)
@@ -2330,14 +3662,14 @@ test(a)
 11
 </code></pre>
 <h2 id="错误和异常处理">错误和异常处理</h2>
-<pre><code class="language-python">def attempt_float(x):
+<pre><code class="language-Python">def attempt_float(x):
     try:
         return float(x)
     except ValueError:
         return x
 </code></pre>
 <p>某些情况下，你可能不想抑制异常，你想无论<code>try</code>部分的代码是否成功，都执行一段代码。可以使用<code>finally</code>：</p>
-<pre><code class="language-python">f = open(path, 'w')
+<pre><code class="language-Python">f = open(path, 'w')
 
 try:
     write_to_file(f)
@@ -2345,7 +3677,7 @@ finally:
     f.close()
 </code></pre>
 <p>这里，文件处理<code>f</code>总会被关闭。相似的，你可以用<code>else</code>让只在<code>try</code>部分成功的情况下，才执行代码：</p>
-<pre><code class="language-python">f = open(path, 'w')
+<pre><code class="language-Python">f = open(path, 'w')
 try:
     write_to_file(f)
 except:
@@ -2358,7 +3690,7 @@ finally:
 <ul>
 <li>可以有多个<code>except</code>来捕获不同类型的错误：</li>
 </ul>
-<pre><code class="language-python">try:
+<pre><code class="language-Python">try:
     print('try...')
     r = 10 / int('a')
     print('result:', r)
@@ -2373,7 +3705,7 @@ print('END')
 <ul>
 <li>Python的错误其实也是<code>class</code>，所有的错误类型都继承自<code>BaseException</code>，所以在使用<code>except</code>时需要注意的是，它不但捕获该类型的错误，还把其子类也“一网打尽”。比如：</li>
 </ul>
-<pre><code class="language-python">try:
+<pre><code class="language-Python">try:
     foo()
 except ValueError as e:
     print('ValueError')
@@ -2382,7 +3714,7 @@ except UnicodeError as e:
 第二个`except`永远也捕获不到`UnicodeError`，因为`UnicodeError`是`ValueError`的子类，如果有，也被第一个`except`给捕获了。
 </code></pre>
 <p>使用<code>try...except</code>捕获错误还有一个巨大的好处，就是可以跨越多层调用，比如函数<code>main()</code>调用<code>foo()</code>，<code>foo()</code>调用<code>bar()</code>，结果<code>bar()</code>出错了，这时，只要<code>main()</code>捕获到了，就可以处理：</p>
-<pre><code class="language-python">def foo(s):
+<pre><code class="language-Python">def foo(s):
     return 10 / int(s)
 
 def bar(s):
@@ -2397,7 +3729,7 @@ def main():
         print('finally...')
 </code></pre>
 <p>也就是说，不需要在每个可能出错的地方去捕获错误，只要在合适的层次去捕获错误就可以了。这样一来，就大大减少了写<code>try...except...finally</code>的麻烦。</p>
-<pre><code class="language-python">def foo(s):
+<pre><code class="language-Python">def foo(s):
     n = int(s)
     if n==0:
         raise ValueError('invalid value: %s' % s)
@@ -2414,7 +3746,7 @@ bar()
 <p>在<code>bar()</code>函数中，我们明明已经捕获了错误，但是，打印一个<code>ValueError!</code>后，又把错误通过<code>raise</code>语句抛出去。<br>
 这种错误处理方式相当常见。捕获错误目的只是记录一下，便于后续追踪。但是，由于当前函数不知道应该怎么处理该错误，所以，最恰当的方式是继续往上抛，让顶层调用者去处理。</p>
 <p><code>raise</code>语句如果不带参数，就会把当前错误原样抛出。此外，在<code>except</code>中<code>raise</code>一个<code>Error</code>，还可以把一种类型的错误转化成另一种类型：</p>
-<pre><code class="language-python">try:
+<pre><code class="language-Python">try:
     10 / 0
 except ZeroDivisionError:
     raise ValueError('input error!')
@@ -2424,7 +3756,7 @@ except ZeroDivisionError:
 <li><code>Python</code> 使用 <code>raise</code> 语句抛出一个指定的异常。<br>
 <code>raise</code>语法格式如下：</li>
 </ul>
-<pre><code class="language-python">raise [Exception [, args [, traceback]]]
+<pre><code class="language-Python">raise [Exception [, args [, traceback]]]
 </code></pre>
 <p>以下实例如果 x 大于 5 就触发异常:</p>
 <pre><code>x = 10
@@ -2432,14 +3764,14 @@ if x &gt; 5:
     raise Exception('x 不能大于 5。x 的值为: {}'.format(x))
 </code></pre>
 <p>执行以上代码会触发异常：</p>
-<pre><code class="language-python">Traceback (most recent call last):
+<pre><code class="language-Python">Traceback (most recent call last):
   File &quot;test.py&quot;, line 3, in &lt;module&gt;
     raise Exception('x 不能大于 5。x 的值为: {}'.format(x))
 Exception: x 不能大于 5。x 的值为: 10
 </code></pre>
 <p><code>raise</code> 唯一的一个参数指定了要被抛出的异常。它必须是一个异常的实例或者是异常的类（也就是 <code>Exception</code> 的子类）。<br>
 如果你只想知道这是否抛出了一个异常，并不想去处理它，那么一个简单的 <code>raise</code> 语句就可以再次把它抛出。</p>
-<pre><code class="language-python">try:
+<pre><code class="language-Python">try:
     raise NameError('HiThere')
 except NameError:
     print('An exception flew by!')
@@ -2453,7 +3785,7 @@ NameError: HiThere
 <ul>
 <li>凡是用<code>print()</code>来辅助查看的地方，都可以用断言<code>(assert)</code>来替代：</li>
 </ul>
-<pre><code class="language-python">def foo(s):
+<pre><code class="language-Python">def foo(s):
     n = int(s)
     assert n != 0, 'n is zero!'
     return 10 / n
@@ -2462,7 +3794,7 @@ def main():
 </code></pre>
 <p><code>assert</code>的意思是，表达式<code>n != 0</code>应该是<code>True</code>，否则，根据程序运行的逻辑，后面的代码肯定会出错。<br>
 如果断言失败，<code>assert</code>语句本身就会抛出<code>AssertionError</code>：</p>
-<pre><code class="language-shell">$ python err.py
+<pre><code class="language-shell">$ Python err.py
 Traceback (most recent call last):
   ...
 AssertionError: n is zero!
@@ -2471,14 +3803,14 @@ AssertionError: n is zero!
 <li><code>logging</code><br>
 把<code>print()</code>替换为<code>logging</code>是第3种方式，和<code>assert</code>比，<code>logging</code>不会抛出错误，而且可以输出到文件：</li>
 </ul>
-<pre><code class="language-python">import logging
+<pre><code class="language-Python">import logging
 logging.basicConfig(level=logging.INFO)
 s = '0'
 n = int(s)
 logging.info('n = %d' % n)
 print(10 / n)
 </code></pre>
-<pre><code class="language-shell">$ python err.py
+<pre><code class="language-shell">$ Python err.py
 INFO:root:n = 0
 Traceback (most recent call last):
   File &quot;err.py&quot;, line 8, in &lt;module&gt;
@@ -2491,19 +3823,19 @@ ZeroDivisionError: division by zero
 <ul>
 <li>为了打开一个文件以便读写，可以使用内置的<code>open</code>函数以及一个相对或绝对的文件路径：</li>
 </ul>
-<pre><code class="language-python">path = 'examples/segismundo.txt'
+<pre><code class="language-Python">path = 'examples/segismundo.txt'
 f = open(path)
 </code></pre>
 <ul>
 <li>默认情况下，文件是以只读模式<code>('r')</code>打开的。然后，我们就可以像处理列表那样来处理这个文件句柄<code>f</code>了，比如对行进行迭代：</li>
 </ul>
-<pre><code class="language-python">for line in f:
+<pre><code class="language-Python">for line in f:
     pass
 </code></pre>
 <ul>
 <li>如果使用<code>open</code>创建文件对象，一定要用<code>close</code>关闭它。关闭文件可以返回操作系统资源：</li>
 </ul>
-<pre><code class="language-python">f.close()
+<pre><code class="language-Python">f.close()
 </code></pre>
 <ul>
 <li>用<code>with</code>语句可以可以更容易地清理打开的文件,这样可以在退出代码块时，自动关闭文件：</li>
@@ -2516,12 +3848,12 @@ f = open(path)
 <img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317211525.png" alt="" loading="lazy"></li>
 <li>向文件写入，可以使用文件的<code>write</code>或<code>writelines</code>方法。例如，我们可以创建一个无空行版的<code>prof_mod.py</code>：</li>
 </ul>
-<pre><code class="language-python">with open('tmp.txt', 'w') as handle:
+<pre><code class="language-Python">with open('tmp.txt', 'w') as handle:
     handle.writelines(x for x in open(path) if len(x) &gt; 1)
 with open('tmp.txt') as f:
     lines = f.readlines()
 </code></pre>
-<pre><code class="language-python">with open('/Users/michael/test.txt', 'w') as f:
+<pre><code class="language-Python">with open('/Users/michael/test.txt', 'w') as f:
     f.write('Hello, world!')
 </code></pre>
 <p>要写入特定编码的文本文件，请给<code>open()</code>函数传入<code>encoding</code>参数，将字符串自动转换成指定编码。<br>
@@ -2536,17 +3868,17 @@ with open('tmp.txt') as f:
 <ul>
 <li>查看当前目录的绝对路径:</li>
 </ul>
-<pre><code class="language-python">os.path.abspath('.')
+<pre><code class="language-Python">os.path.abspath('.')
 '/Users/michael'
 - 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:
-````python
+````Python
 os.path.join('/Users/michael', 'testdir')
 '/Users/michael/testdir'
 </code></pre>
 <ul>
 <li>创建一个目录:</li>
 </ul>
-<pre><code class="language-python">os.mkdir('/Users/michael/testdir')
+<pre><code class="language-Python">os.mkdir('/Users/michael/testdir')
 </code></pre>
 <ul>
 <li>删掉一个目录:</li>
@@ -2560,12 +3892,12 @@ os.path.join('/Users/michael', 'testdir')
 </blockquote>
 </blockquote>
 </blockquote>
-<pre><code class="language-python">os.path.split('/Users/michael/testdir/file.txt')
+<pre><code class="language-Python">os.path.split('/Users/michael/testdir/file.txt')
 
 ('/Users/michael/testdir', 'file.txt')
 </code></pre>
 <p><code>os.path.splitext()</code>可以直接让你得到文件扩展名，很多时候非常方便：</p>
-<pre><code class="language-python">os.path.splitext('/path/to/file.txt')
+<pre><code class="language-Python">os.path.splitext('/path/to/file.txt')
 ('/path/to/file', '.txt')
 </code></pre>
 <p>这些合并、拆分路径的函数并不要求目录和文件要真实存在，它们只对字符串进行操作。<br>
@@ -2578,35 +3910,35 @@ os.path.join('/Users/michael', 'testdir')
 <ul>
 <li>删掉文件:</li>
 </ul>
-<pre><code class="language-python">os.remove('test.py')
+<pre><code class="language-Python">os.remove('test.py')
 </code></pre>
 <p><code>shutil</code>模块提供了<code>copyfile()</code>的函数，你还可以在<code>shutil</code>模块中找到很多实用函数，它们可以看做是<code>os</code>模块的补充。</p>
 <h3 id="序列化">序列化</h3>
 <p><code>pickle.dumps()</code>方法把任意对象序列化成一个<code>bytes</code>，然后，就可以把这个<code>bytes</code>写入文件。或者用另一个方法<code>pickle.dump()</code>直接把对象序列化后写入一个<code>file-like Object</code>：</p>
-<pre><code class="language-python">f = open('dump.txt', 'wb')
+<pre><code class="language-Python">f = open('dump.txt', 'wb')
 pickle.dump(d, f)
 f.close()
 </code></pre>
 <p>当我们要把对象从磁盘读到内存时，可以先把内容读到一个<code>bytes</code>，然后用<code>pickle.loads()</code>方法反序列化出对象，也可以直接用<code>pickle.load()</code>方法从一个<code>file-like Object</code>中直接反序列化出对象。我们打开另一个Python命令行来反序列化刚才保存的对象：</p>
-<pre><code class="language-python">f = open('dump.txt', 'rb')
+<pre><code class="language-Python">f = open('dump.txt', 'rb')
 d = pickle.load(f)
 f.close()
 d
 {'age': 20, 'score': 88, 'name': 'Bob'}
 </code></pre>
-<pre><code class="language-python">import json
+<pre><code class="language-Python">import json
 d = dict(name='Bob', age=20, score=88)
 json.dumps(d)
 '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
 </code></pre>
 <p><code>dumps()</code>方法返回一个<code>str</code>，内容就是标准的<code>JSON</code>。类似的，<code>dump()</code>方法可以直接把<code>JSON</code>写入一个<code>file-like Object</code>。</p>
 <p>要把<code>JSON</code>反序列化为<code>Python</code>对象，用<code>loads()</code>或者对应的<code>load()</code>方法，前者把<code>JSON</code>的字符串反序列化，后者从<code>file-like Object</code>中读取字符串并反序列化：</p>
-<pre><code class="language-python"> json_str = '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
+<pre><code class="language-Python"> json_str = '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
 &gt;&gt;&gt; json.loads(json_str)
 {'age': 20, 'score': 88, 'name': 'Bob'}
 </code></pre>
 <p><code>Python</code>的<code>dict</code>对象可以直接序列化为<code>JSON</code>的<code>{}</code>，不过，很多时候，我们更喜欢用<code>class</code>表示对象，比如定义<code>Student</code>类，然后序列化：</p>
-<pre><code class="language-python">import json
+<pre><code class="language-Python">import json
 class Student(object):
     def __init__(self, name, age, score):
         self.name = name
@@ -2616,14 +3948,14 @@ s = Student('Bob', 20, 88)
 print(json.dumps(s))
 </code></pre>
 <p>运行代码，毫不留情地得到一个<code>TypeError</code>：</p>
-<pre><code class="language-python">Traceback (most recent call last):
+<pre><code class="language-Python">Traceback (most recent call last):
   ...
 TypeError: &lt;__main__.Student object at 0x10603cc50&gt; is not JSON serializable
 </code></pre>
 <p>错误的原因是<code>Student</code>对象不是一个可序列化为<code>JSON</code>的对象。<br>
 前面的代码之所以无法把<code>Student</code>类实例序列化为<code>JSON</code>，是因为默认情况下，<code>dumps()</code>方法不知道如何将<code>Student</code>实例变为一个<code>JSON</code>的<code>{}</code>对象。<br>
 可选参数<code>default</code>就是把任意一个对象变成一个可序列为<code>JSON</code>的对象，我们只需要为<code>Student</code>专门写一个转换函数，再把函数传进去即可：</p>
-<pre><code class="language-python">def student2dict(std):
+<pre><code class="language-Python">def student2dict(std):
     return {
         'name': std.name,
         'age': std.age,
@@ -2631,19 +3963,19 @@ TypeError: &lt;__main__.Student object at 0x10603cc50&gt; is not JSON serializab
     }
 </code></pre>
 <p>这样，<code>Student</code>实例首先被<code>student2dict()</code>函数转换成<code>dict</code>，然后再被顺利序列化为<code>JSON</code>：</p>
-<pre><code class="language-python">print(json.dumps(s, default=student2dict))
+<pre><code class="language-Python">print(json.dumps(s, default=student2dict))
 {&quot;age&quot;: 20, &quot;name&quot;: &quot;Bob&quot;, &quot;score&quot;: 88}
 </code></pre>
 <p>不过，下次如果遇到一个<code>Teacher</code>类的实例，照样无法序列化为<code>JSON</code>。我们可以偷个懒，把任意<code>class</code>的实例变为<code>dict</code>：</p>
-<pre><code class="language-python">print(json.dumps(s, default=lambda obj: obj.__dict__))
+<pre><code class="language-Python">print(json.dumps(s, default=lambda obj: obj.__dict__))
 </code></pre>
 <p>因为通常<code>class</code>的实例都有一个<code>__dict__</code>属性，它就是一个<code>dict</code>，用来存储实例变量。也有少数例外，比如定义了<code>__slots__</code>的<code>class</code>。<br>
 同样的道理，如果我们要把<code>JSON</code>反序列化为一个<code>Student</code>对象实例，<code>loads()</code>方法首先转换出一个<code>dict</code>对象，然后，我们传入的<code>object_hook</code>函数负责把<code>dict</code>转换为<code>Student</code>实例：</p>
-<pre><code class="language-python">def dict2student(d):
+<pre><code class="language-Python">def dict2student(d):
     return Student(d['name'], d['age'], d['score'])
 </code></pre>
 <p>运行结果如下：</p>
-<pre><code class="language-python">json_str = '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
+<pre><code class="language-Python">json_str = '{&quot;age&quot;: 20, &quot;score&quot;: 88, &quot;name&quot;: &quot;Bob&quot;}'
 print(json.loads(json_str, object_hook=dict2student))
 &lt;__main__.Student object at 0x10cd3c190&gt;
 </code></pre>
@@ -2651,7 +3983,7 @@ print(json.loads(json_str, object_hook=dict2student))
 <h2 id="标准库">标准库</h2>
 <h3 id="collections"><code>collections</code></h3>
 <h4 id="namedtuple"><code>namedtuple</code></h4>
-<pre><code class="language-python">from collections import namedtuple
+<pre><code class="language-Python">from collections import namedtuple
 Point = namedtuple('Point', ['x', 'y'])
 p = Point(1, 2)
 p.x
@@ -2663,7 +3995,7 @@ p.y
 这样一来，我们用<code>namedtuple</code>可以很方便地定义一种数据类型，它具备<code>tuple</code>的不变性，又可以根据属性来引用，使用十分方便。</p>
 <h4 id="deque"><code>deque</code></h4>
 <p><code>deque</code>是为了高效实现插入和删除操作的双向列表，适合用于队列和栈：</p>
-<pre><code class="language-python">from collections import deque
+<pre><code class="language-Python">from collections import deque
 q = deque(['a', 'b', 'c'])
 q.append('x')
 q.appendleft('y')
@@ -2677,11 +4009,11 @@ q.count(x)
 q.remove(value)
 #逆序排列
 q.reverse()
-`deque`除了实现`list`的`append()`和`pop()`外，还支持`appendleft()`和`popleft()`，这样就可以非常高效地往头部添加或删除元素。
-#### `defaultdict`
-使用`dict`时，如果引用的`Key`不存在，就会抛出`KeyError`。如果希望`key`不存在时，返回一个默认值，就可以用`defaultdict`：
-```python
-from collections import defaultdict
+</code></pre>
+<p><code>deque</code>除了实现<code>list</code>的<code>append()</code>和<code>pop()</code>外，还支持<code>appendleft()</code>和<code>popleft()</code>，这样就可以非常高效地往头部添加或删除元素。</p>
+<h4 id="defaultdict"><code>defaultdict</code></h4>
+<p>使用<code>dict</code>时，如果引用的<code>Key</code>不存在，就会抛出<code>KeyError</code>。如果希望<code>key</code>不存在时，返回一个默认值，就可以用<code>defaultdict</code>：</p>
+<pre><code class="language-Python">from collections import defaultdict
 dd = defaultdict(lambda: 'N/A')
 dd['key1'] = 'abc'
 dd['key1'] # key1存在
@@ -2689,11 +4021,72 @@ dd['key1'] # key1存在
 dd['key2'] # key2不存在，返回默认值
 'N/A'
 </code></pre>
+<pre><code class="language-Python">from collections import deque
+
+dlist=deque([1,'a'])
+dlist.append('b') # 在末尾加数据
+dlist.appendleft(0) # 在最前端插入数据
+print(dlist)
+# 输出 :  deque([0, 1, 'a', 'b'])
+
+dlist.pop() # 删除末尾的数据
+dlist.popleft() # 删除最前端的数据
+print(dlist)
+# 输出 :  deque([1, 'a'])
+
+dlist.extend(['b','c']) # 在末尾追加list 数据
+dlist.extendleft([-1,0])# 在前端插入list 数据
+print(dlist)
+# 输出 : deque([0, -1, 1, 'a', 'b', 'c'])
+
+print(dlist.index('a')) # 找出 a 的索引位置
+# 输出 :  3
+
+dlist.insert(2, 555) # 在索引2 的位置插入555
+print(dlist)
+# 输出 :  deque([0, -1, 555, 1, 'a', 'b', 'c'])
+
+print(dlist.count('a')) # 查找 ‘a’ 的数量
+
+dlist.remove(1) # 删除第一个匹配值
+dlist.reverse()  # 反向
+print(dlist)
+# 输出 :  deque(['c', 'b', 'a', 555, -1, 0])
+
+
+dlist.rotate(-2) # 将左端的元素移动到右端
+print(dlist)
+# 输出 :  deque(['a', 555, -1, 0, 'c', 'b'])
+
+dlist.rotate(2) # 将右端的元素移动到左端
+print(dlist)
+# 输出 :  deque(['c', 'b', 'a', 555, -1, 0])
+
+dl1=dlist # 赋值 dlist 值变化，dl1的值也会修改
+dl2=dlist.copy() # 拷贝 dlist, 拷贝后对dl修改不影响dlist的值
+dlist.pop() # 删除最后一个数据, dl1的值也被修改
+print(dl1) # 输出： deque(['c', 'b', 'a', 555, -1])
+print(dl2) # 输出： deque(['c', 'b', 'a', 555, -1, 0])
+</code></pre>
+<ul>
+<li>合并字典<br>
+这是一般的字典合并写法</li>
+</ul>
+<pre><code class="language-Python">dic1 = {'x': 1, 'y': 2 }
+dic2 = {'y': 3, 'z': 4 }
+merged1 = {**dic1, **dic2} # {'x': 1, 'y': 3, 'z': 4}
+</code></pre>
+<p>修改<code>merged[‘x’]=10</code>，<code>dic1</code>中的<code>x</code>值不变，<code>merged</code>是重新生成的一个新字典。<br>
+但是，<code>ChainMap</code>却不同，它在内部创建了一个容纳这些字典的列表。因此使用<code>ChainMap</code>合并字典，修改<code>merged[‘x’]=10</code>后，<code>dic1</code>中的<code>x</code>值改变，如下所示：</p>
+<pre><code class="language-Python">from collections import ChainMap
+merged2 = ChainMap(dic1,dic2)
+print(merged2) # ChainMap({'x': 1, 'y': 2}, {'y': 3, 'z': 4})
+</code></pre>
 <p>默认值是调用函数返回的，而函数在创建<code>defaultdict</code>对象时传入。除了在<code>Key</code>不存在时返回默认值，<code>defaultdict</code>的其他行为跟<code>dict</code>是完全一样的。</p>
 <h4 id="ordereddict"><code>OrderedDict</code></h4>
 <p>使用<code>dict</code>时，<code>Key</code>是无序的。在对<code>dict</code>做迭代时，我们无法确定<code>Key</code>的顺序。<br>
 如果要保持<code>Key</code>的顺序，可以用<code>OrderedDict</code>：</p>
-<pre><code class="language-python">from collections import OrderedDict
+<pre><code class="language-Python">from collections import OrderedDict
 d = dict([('a', 1), ('b', 2), ('c', 3)])
 d # dict的Key是无序的
 {'a': 1, 'c': 3, 'b': 2}
@@ -2702,7 +4095,7 @@ od # OrderedDict的Key是有序的
 OrderedDict([('a', 1), ('b', 2), ('c', 3)])
 </code></pre>
 <p>注意，<code>OrderedDict的Key</code>会按照插入的顺序排列，不是<code>Key</code>本身排序：</p>
-<pre><code class="language-python">od = OrderedDict()
+<pre><code class="language-Python">od = OrderedDict()
 od['z'] = 1
 od['y'] = 2
 od['x'] = 3
@@ -2710,7 +4103,7 @@ list(od.keys()) # 按照插入的Key的顺序返回
 ['z', 'y', 'x']
 </code></pre>
 <p><code>OrderedDict</code>可以实现一个<code>FIFO</code>（先进先出）的<code>dict</code>，当容量超出限制时，先删除最早添加的<code>Key</code>：</p>
-<pre><code class="language-python">from collections import OrderedDict
+<pre><code class="language-Python">from collections import OrderedDict
 class LastUpdatedOrderedDict(OrderedDict):
     def __init__(self, capacity):
         super(LastUpdatedOrderedDict, self).__init__()
@@ -2731,7 +4124,7 @@ class LastUpdatedOrderedDict(OrderedDict):
 <p><code>ChainMap</code>可以把一组<code>dict</code>串起来并组成一个逻辑上的<code>dict</code>。<code>ChainMap</code>本身也是一个<code>dict</code>，但是查找的时候，会按照顺序在内部的<code>dict</code>依次查找。<br>
 什么时候使用<code>ChainMap</code>最合适？举个例子：应用程序往往都需要传入参数，参数可以通过命令行传入，可以通过环境变量传入，还可以有默认参数。我们可以用<code>ChainMap</code>实现参数的优先级查找，即先查命令行参数，如果没有传入，再查环境变量，如果没有，就使用默认参数。<br>
 下面的代码演示了如何查找user和color这两个参数：</p>
-<pre><code class="language-python">from collections import ChainMap
+<pre><code class="language-Python">from collections import ChainMap
 import os, argparse
 # 构造缺省参数:
 defaults = {
@@ -2751,23 +4144,114 @@ print('color=%s' % combined['color'])
 print('user=%s' % combined['user'])
 </code></pre>
 <p>没有任何参数时，打印出默认参数：</p>
-<pre><code class="language-shell">$ python3 use_chainmap.py 
+<pre><code class="language-shell">$ Python3 use_chainmap.py 
 color=red
 user=guest
 </code></pre>
 <p>当传入命令行参数时，优先使用命令行参数：</p>
-<pre><code class="language-shell">$ python3 use_chainmap.py -u bob
+<pre><code class="language-shell">$ Python3 use_chainmap.py -u bob
 color=red
 user=bob
 </code></pre>
 <p>同时传入命令行参数和环境变量，命令行参数的优先级较高：</p>
-<pre><code class="language-shell">$ user=admin color=green python3 use_chainmap.py -u bob
+<pre><code class="language-shell">$ user=admin color=green Python3 use_chainmap.py -u bob
 color=green
 user=bob
 </code></pre>
+<pre><code class="language-Python">from collections import ChainMap
+m1 = {'Type': 'admin', 'codeID': '00001'}
+m2 = {'name': 'woodname','codeID': '00002'}
+m = ChainMap(m1, m2)
+print(m)
+# 输出：
+# ChainMap({'Type': 'admin', 'codeID': '00001'}, {'name': 'woodname', 'codeID': '00002'})
+print(m.maps)
+# 输出：[{'Type': 'admin', 'codeID': '00001'}, {'name': 'woodname', 'codeID': '00002'}]
+for i in m.items():
+    print(i)
+# 输出：
+# ('name', 'woodname')
+# ('codeID', '00001')
+# ('Type', 'admin')
+print(m['name']) # 读取元素的值
+print(m['codeID']) # 注意，当key重复时以最前一个为准
+print(m.get('Type'))
+# 输出：
+# woodname
+# 00001
+# admin
+# 新增map
+m3 = {'data': '888'}
+m=m.new_child(m3) # 将 m3 加入m
+print(m)
+# 输出：
+# ChainMap({'data': '888'}, {'Type': 'admin', 'codeID': '00001'}, {'name': 'woodname', 'codeID': '00002'})
+print(m.parents) # m 的父亲
+# 输出：ChainMap({'Type': 'admin', 'codeID': '00001'}, {'name': 'woodname', 'codeID': '00002'})
+print(m.parents.parents)
+# 输出 ： ChainMap({'name': 'woodname', 'codeID': '00002'})
+</code></pre>
+<pre><code class="language-Python">a = {'a': 'A', 'c': 'C'}
+b = {'b': 'B', 'c': 'D'}
+m = collections.ChainMap(a, b)
+print('c = {}'.format(m['c']))
+c = C
+</code></pre>
+<p>可以通过 <code>maps</code> 属性将结果以列表形式返回。由于列表是可变的，所以可以对这个列表重新排序，或者添加新的值。</p>
+<pre><code class="language-Python">a = {'a': 'A', 'c': 'C'}
+b = {'b': 'B', 'c': 'D'}
+m = collections.ChainMap(a, b)
+print(m.maps)    # [{'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'}]
+print('c = {}\n'.format(m['c']))    # c = C
+# reverse the list
+m.maps = list(reversed(m.maps))
+print(m.maps)    # [{'b': 'B', 'c': 'D'}, {'a': 'A', 'c': 'C'}]
+print('c = {}'.format(m['c']))    # c = D
+</code></pre>
+<p><code>ChainMap</code> 不会给子映射创建一个单独的空间，所以对子映射修改时，结果也会反馈到 <code>ChainMap</code> 上。</p>
+<pre><code class="language-Python">a = {'a': 'A', 'c': 'C'}
+b = {'b': 'B', 'c': 'D'}
+m = collections.ChainMap(a, b)
+print('Before: {}'.format(m['c']))    # Before: C
+a['c'] = 'E'
+print('After : {}'.format(m['c']))    # After : E
+</code></pre>
+<p>也可以通过 <code>ChainMap</code> 直接设置值，实际上只修改了第一个字典中的值。</p>
+<pre><code class="language-Python">a = {'a': 'A', 'c': 'C'}
+b = {'b': 'B', 'c': 'D'}
+m = collections.ChainMap(a, b)
+print('Before:', m)    # Before: ChainMap({'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'})
+m['c'] = 'E'
+print('After :', m)    # After : ChainMap({'a': 'A', 'c': 'E'}, {'b': 'B', 'c': 'D'})
+print('a:', a)    # a: {'a': 'A', 'c': 'E'}
+</code></pre>
+<p><code>ChainMap</code>提供了一个简单的方法，用于在<code>maps</code>列表的前面创建一个新实例，这样做的好处是可以避免修改现有的底层数据结构。</p>
+<pre><code class="language-Python">a = {'a': 'A', 'c': 'C'}
+b = {'b': 'B', 'c': 'D'}
+m1 = collections.ChainMap(a, b)
+m2 = m1.new_child()
+print(m1)    # ChainMap({'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'})
+print(m2)    # ChainMap({}, {'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'})
+m2['c'] = 'E'
+print(m1)    # ChainMap({'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'})
+print(m2)    # ChainMap({'c': 'E'}, {'a': 'A', 'c': 'C'}, {'b': 'B', 'c': 'D'})
+</code></pre>
+<p>这种堆叠行为使得将<code>ChainMap</code> 实例用作模板或应用程序上下文变得非常方便。具体来说，在一次迭代中很容易添加或更新值，然后丢弃下一次迭代的更改。<br>
+对于新上下文已知或预先构建的情况，也可以将映射传递给<code>new_child()</code>。</p>
+<pre><code class="language-Python">a = {'a': 'A', 'c': 'C'}
+b = {'b': 'B', 'c': 'D'}
+c = {'c': 'E'}
+m1 = collections.ChainMap(a, b)
+m2 = m1.new_child(c)
+print('m1[&quot;c&quot;] = {}'.format(m1['c']))    # m1[&quot;c&quot;] = C
+print('m2[&quot;c&quot;] = {}'.format(m2['c']))    # m2[&quot;c&quot;] = E
+</code></pre>
+<p>这相当于：</p>
+<pre><code class="language-Python">m2 = collections.ChainMap(c, *m1.maps)
+</code></pre>
 <h4 id="counter"><code>Counter</code></h4>
 <p><code>Counter</code>是一个简单的计数器，例如，统计字符出现的个数：</p>
-<pre><code class="language-python">from collections import Counter
+<pre><code class="language-Python">from collections import Counter
 c = Counter()
 for ch in 'programming':
 c[ch] = c[ch] + 1
@@ -2781,17 +4265,17 @@ Counter({'r': 2, 'o': 2, 'g': 2, 'm': 2, 'l': 2, 'p': 1, 'a': 1, 'i': 1, 'n': 1,
 <ul>
 <li><code>elements()</code>:返回一个迭代器，其中每个元素将重复出现计数值所指定次。 元素会按首次出现的顺序返回。 如果一个元素的计数值小于一，<code>elements()</code> 将会忽略它。</li>
 </ul>
-<pre><code class="language-python">c = Counter(a=4, b=2, c=0, d=-2)
+<pre><code class="language-Python">c = Counter(a=4, b=2, c=0, d=-2)
 sorted(c.elements())
 ['a', 'a', 'a', 'a', 'b', 'b']
 </code></pre>
 <ul>
 <li><code>most_common([n])</code>:返回一个列表，其中包含<code>n</code> 个最常见的元素及出现次数，按常见程度由高到低排序。 如果 <code>n</code> 被省略或为 <code>None</code>，<code>most_common()</code> 将返回计数器中的 所有 元素。 计数值相等的元素按首次出现的顺序排序：</li>
 </ul>
-<pre><code class="language-python">Counter('abracadabra').most_common(3)
+<pre><code class="language-Python">Counter('abracadabra').most_common(3)
 [('a', 5), ('b', 2), ('r', 2)]
 </code></pre>
-<pre><code class="language-python">c = Counter(a=3, b=1)
+<pre><code class="language-Python">c = Counter(a=3, b=1)
 d = Counter(a=1, b=2)
 c + d                       # add two counters together:  c[x] + d[x]
 Counter({'a': 4, 'b': 3})
@@ -2802,12 +4286,105 @@ Counter({'a': 1, 'b': 1})
 c | d                       # union:  max(c[x], d[x])
 Counter({'a': 3, 'b': 2})
 </code></pre>
-<ul>
-<li><code>heap</code><br>
-这个模块提供了堆队列算法的实现，也称为优先队列算法。<br>
+<p><code>Counter</code> 支持三种初始化形式：</p>
+<pre><code class="language-Python">print(collections.Counter(['a', 'b', 'c', 'a', 'b', 'b']))
+print(collections.Counter({'a': 2, 'b': 3, 'c': 1}))
+print(collections.Counter(a=2, b=3, c=1))
+# output
+# Counter({'b': 3, 'a': 2, 'c': 1})
+# Counter({'b': 3, 'a': 2, 'c': 1})
+# Counter({'b': 3, 'a': 2, 'c': 1})
+</code></pre>
+<p><code>Counter</code> 初始化时也可以不传参数，然后通过<code>update()</code>方法更新。</p>
+<pre><code class="language-Python">c = collections.Counter()
+print('Initial :', c)    # Initial : Counter()
+c.update('abcdaab')
+print('Sequence:', c)    # Sequence: Counter({'a': 3, 'b': 2, 'c': 1, 'd': 1})
+c.update({'a': 1, 'd': 5})
+print('Dict    :', c)    # Dict    : Counter({'d': 6, 'a': 4, 'b': 2, 'c': 1})
+</code></pre>
+<p>计数值基于新数据而不是替换而增加。在上例中，计数<code>a</code>从3到 4。<br>
+<code>Counter</code> 中的值，可以使用字典 <code>API</code> 获取它的值。</p>
+<pre><code class="language-Python">c = collections.Counter('abcdaab')
+for letter in 'abcde':
+    print('{} : {}'.format(letter, c[letter]))
+# output
+# a : 3
+# b : 2
+# c : 1
+# d : 1
+# e : 0
+</code></pre>
+<p>对于 <code>Counter</code> 中没有的键，不会报 <code>KeyError</code>。如本例中的 <code>e</code>，将其计数为0。<br>
+<code>elements()</code>方法返回一个迭代器，遍历它可以获得 <code>Counter</code> 中的值。</p>
+<pre><code class="language-Python">c = collections.Counter('extremely')
+c['z'] = 0
+print(c)    # Counter({'e': 3, 'x': 1, 't': 1, 'r': 1, 'm': 1, 'l': 1, 'y': 1, 'z': 0})
+print(list(c.elements()))    # ['e', 'e', 'e', 'x', 't', 'r', 'm', 'l', 'y']
+</code></pre>
+<p>不保证元素的顺序，并且不包括计数小于或等于零的值。<br>
+使用<code>most_common()</code>产生序列最常遇到的输入值和它们各自的计数。</p>
+<pre><code class="language-Python">c = collections.Counter()
+with open('/usr/share/dict/words', 'rt') as f:
+    for line in f:
+        c.update(line.rstrip().lower())
+print('Most common:')
+for letter, count in c.most_common(3):
+    print('{}: {:&gt;7}'.format(letter, count))
+
+# output
+# Most common:
+# e:  235331
+# i:  201032
+# a:  199554
+</code></pre>
+<p>此示例计算在系统字典所有单词中的字母生成频率分布，然后打印三个最常见的字母。如果没有参数的话，会按频率顺序生成所有项目的列表。<br>
+<code>Counter</code>实例支持算术和聚合结果。这个例子显示了标准的操作符计算新的<code>Counter</code>实例，就地操作符 <code>+=</code>，<code>-=</code>，<code>&amp;=</code>，和<code>|=</code>也支持。</p>
+<pre><code class="language-Python">c1 = collections.Counter(['a', 'b', 'c', 'a', 'b', 'b'])
+c2 = collections.Counter('alphabet')
+
+print('C1:', c1)
+print('C2:', c2)
+
+print('\nCombined counts:')
+print(c1 + c2)
+
+print('\nSubtraction:')
+print(c1 - c2)
+
+print('\nIntersection (taking positive minimums):')
+print(c1 &amp; c2)
+
+print('\nUnion (taking maximums):')
+print(c1 | c2)
+
+# output
+# C1: Counter({'b': 3, 'a': 2, 'c': 1})
+# C2: Counter({'a': 2, 'l': 1, 'p': 1, 'h': 1, 'b': 1, 'e': 1, 't': 1})
+# 
+# Combined counts:
+# Counter({'a': 4, 'b': 4, 'c': 1, 'l': 1, 'p': 1, 'h': 1, 'e': 1, 't': 1})
+# 
+# Subtraction:
+# Counter({'b': 2, 'c': 1})
+# 
+# Intersection (taking positive minimums):
+# Counter({'a': 2, 'b': 1})
+# 
+# Union (taking maximums):
+# Counter({'b': 3, 'a': 2, 'c': 1, 'l': 1, 'p': 1, 'h': 1, 'e': 1, 't': 1})
+</code></pre>
+<p>每次<code>Counter</code>通过操作产生新的时，任何具有零或负计数的项目都将被丢弃。计数<code>a</code>在<code>c1</code>和<code>c2</code>中是相同的，因此相减之后变为零。</p>
+<h3 id="heapq"><code>heapq</code></h3>
+<p>这个模块提供了堆队列算法的实现，也称为优先队列算法。<br>
 堆是一个二叉树，它的每个父节点的值都只会小于或大于所有孩子节点（的值）。它使用了数组来实现：从零开始计数，对于所有的 <code>k</code> ，都有 <code>heap[k]</code> &lt;= <code>heap[2*k+1]</code> 和 <code>heap[k] &lt;= heap[2*k+2]</code>。 为了便于比较，不存在的元素被认为是无限大。 堆最有趣的特性在于最小的元素总是在根结点：<code>heap[0]</code>。<br>
-这个<code>API</code>与教材的堆算法实现有所不同，具体区别有两方面：（a）我们使用了从零开始的索引。这使得节点和其孩子节点索引之间的关系不太直观但更加适合，因为 <code>Python</code> 使用从零开始的索引。 （b）我们的 <code>pop</code> 方法返回最小的项而不是最大的项（这在教材中称为“最小堆”；而“最大堆”在教材中更为常见，因为它更适用于原地排序）。但是可以通过取反来实现最大堆。<br>
+这个<code>API</code>与教材的堆算法实现有所不同，具体区别有两方面：</p>
+<ol>
+<li>我们使用了从零开始的索引。这使得节点和其孩子节点索引之间的关系不太直观但更加适合，因为 <code>Python</code> 使用从零开始的索引。</li>
+<li>我们的 <code>pop</code> 方法返回最小的项而不是最大的项（这在教材中称为“最小堆”；而“最大堆”在教材中更为常见，因为它更适用于原地排序）。但是可以通过取反来实现最大堆。<br>
 要创建一个堆，可以使用<code>list</code>来初始化为 <code>[]</code> ，或者你可以通过一个函数 <code>heapify()</code> ，来把一个<code>list</code>转换成堆。</li>
+</ol>
+<ul>
 <li><code>heapq.heappush(heap, item)</code>:将 <code>item</code> 的值加入 <code>heap</code> 中，保持堆的不变性。</li>
 <li><code>heapq.heappop(heap)</code>:弹出并返回 <code>heap</code> 的最小的元素，保持堆的不变性。如果堆为空，抛出 <code>IndexError</code> 。使用 <code>heap[0]</code> ，可以只访问最小的元素而不弹出它。</li>
 <li><code>heapq.heappushpop(heap, item)</code>:将 <code>item</code> 放入堆中，然后弹出并返回 <code>heap</code> 的最小元素。该组合操作比先调用  <code>heappush()</code> 再调用 <code>heappop()</code> 运行起来更有效率。</li>
@@ -2824,7 +4401,7 @@ Counter({'a': 3, 'b': 2})
 堆排序:<br>
 堆排序 可以通过将所有值推入堆中然后每次弹出一个最小值项来实现。</li>
 </ul>
-<pre><code class="language-python">def heapsort(iterable):
+<pre><code class="language-Python">def heapsort(iterable):
     h = []
     for value in iterable:
         heappush(h, value)
@@ -2834,7 +4411,7 @@ heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
 </code></pre>
 <p>如果我们想要<code>heapq</code>排序的是一个对象。那么heapq并不知道应该依据对象当中的哪个参数来作为排序的衡量标准，所以这个时候，需要我们自己定义一个获取关键字的函数，传递给<code>heapq</code>，这样才可以完成排序。<br>
 比如说，我们现在有一批电脑，我们希望<code>heapq</code>能够根据电脑的价格排序：</p>
-<pre><code class="language-python">laptops = [
+<pre><code class="language-Python">laptops = [
     {'name': 'ThinkPad', 'amount': 100, 'price': 91.1},
     {'name': 'Mac', 'amount': 50, 'price': 543.22},
     {'name': 'Surface', 'amount': 200, 'price': 21.09},
@@ -2846,7 +4423,47 @@ cheap = heapq.nsmallest(3, portfolio, key=lambda s: s['price'])
 expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
 </code></pre>
 <p>在调用<code>nlargest</code>和<code>nsmallest</code>的时候，我们额外传递了一个参数<code>key</code>，我们传入的是一个匿名函数，它返回的结果是这个对象的<code>price</code>，也就是说我们希望<code>heapq</code>根据对象的<code>price</code>来进行排序。<br>
-这类似于 <code>sorted(iterable)</code>，但与 <code>sorted()</code> 不同的是这个实现是不稳定的。</p>
+这类似于 <code>sorted(iterable)</code>，但与 <code>sorted()</code> 不同的是这个实现是不稳定的。<br>
+优先队列 是堆的常用场合，并且它的实现包含了多个挑战：</p>
+<ol>
+<li>排序稳定性：你该如何令相同优先级的两个任务按它们最初被加入时的顺序返回？</li>
+<li>如果优先级相同且任务没有默认比较顺序，则 (priority, task) 对的元组比较将会中断。<br>
+针对前两项挑战的一种解决方案是将条目保存为包含优先级、条目计数和任务对象 3 个元素的列表。 条目计数可用来打破平局，这样具有相同优先级的任务将按它们的添加顺序返回。 并且由于没有哪两个条目计数是相同的，元组比较将永远不会直接比较两个任务。<br>
+下面的类利用 <code>heapq</code> 模块实现了一个简单的优先级队列：</li>
+</ol>
+<pre><code class="language-python">import heapq
+class PriorityQueue:
+    def __init__(self):
+        self._queue = []
+        self._index = 0
+
+    def push(self, item, priority):
+        heapq.heappush(self._queue, (-priority, self._index, item))
+        self._index += 1
+
+    def pop(self):
+        return heapq.heappop(self._queue)[-1]
+</code></pre>
+<p>下面是它的使用方式：</p>
+<pre><code class="language-python">class Item:
+    def __init__(self, name):
+        self.name = name
+    def __repr__(self):
+        return 'Item({!r})'.format(self.name)
+q = PriorityQueue()
+q.push(Item('foo'), 1)
+q.push(Item('bar'), 5)
+q.push(Item('spam'), 4)
+q.push(Item('grok'), 1)
+q.pop()
+Item('bar')
+q.pop()
+('spam')
+q.pop()
+Item('foo')
+q.pop()
+Item('grok')
+</code></pre>
 <h3 id="bisect"><code>bisect</code></h3>
 <ul>
 <li><code>bisect.bisect_left(a, x, lo=0, hi=len(a))</code><br>
@@ -2863,7 +4480,7 @@ expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
 类似于 <code>insort_left()</code>，但是把 <code>x</code> 插入到 <code>a</code> 中已存在元素 <code>x</code>的右侧。<br>
 函数 <code>bisect()</code> 还可以用于数字表查询。这个例子是使用 <code>bisect()</code> 从一个给定的考试成绩集合里，通过一个有序数字表，查出其对应的字母等级：<code>90</code> 分及以上是 <code>'A'</code>，<code>80</code> 到 <code>89</code> 是 <code>'B'</code>，以此类推</li>
 </ul>
-<pre><code class="language-python">def grade(score, breakpoints=[60, 70, 80, 90], grades='FDCBA'):
+<pre><code class="language-Python">def grade(score, breakpoints=[60, 70, 80, 90], grades='FDCBA'):
     i = bisect(breakpoints, score)
     return grades[i]
 [grade(score) for score in [33, 99, 77, 70, 89, 90, 100]]
@@ -2873,7 +4490,7 @@ expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
 <ul>
 <li><code>itertools.count(start=0,step=1)</code>:创建一个迭代器，生成从 <code>n</code> 开始的连续整数，如果忽略 <code>n</code>，则从 <code>0</code> 开始计算。</li>
 </ul>
-<pre><code class="language-python">for n in itertools.count():
+<pre><code class="language-Python">for n in itertools.count():
     if 100000 &lt; n &lt; 100010:
         print n
     if n &gt; 1000000:
@@ -2891,7 +4508,7 @@ expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
 <ul>
 <li><code>itertools.cycle(iterable)</code>:把传入的一个序列无限重复下去。</li>
 </ul>
-<pre><code class="language-python">for c in itertools.cycle(&quot;AB&quot;):
+<pre><code class="language-Python">for c in itertools.cycle(&quot;AB&quot;):
     if count &gt; 4:
         break
     print c
@@ -2905,7 +4522,7 @@ A
 <ul>
 <li><code>itertools.repeat(object [,times])</code>:创建一个迭代器，重复生成 <code>object</code>，<code>times</code>（如果已提供）指定重复计数，如果未提供 <code>times</code>，将无止尽返回该对象。</li>
 </ul>
-<pre><code class="language-python">for x in itertools.repeat(&quot;hello world&quot;, 5):
+<pre><code class="language-Python">for x in itertools.repeat(&quot;hello world&quot;, 5):
     print x    
 hello world
 hello world
@@ -2916,7 +4533,7 @@ hello world
 <ul>
 <li><code>itertools.chain(*iterables)</code>:把一组迭代对象串联起来，形成一个更大的迭代器。</li>
 </ul>
-<pre><code class="language-python">for c in itertools.chain('ABC', 'XYZ'):
+<pre><code class="language-Python">for c in itertools.chain('ABC', 'XYZ'):
     print c    
 A
 B
@@ -2928,7 +4545,7 @@ Z
 <ul>
 <li><code>itertools.permutations(iterable[, r])：返回</code>iterable<code>中任意取</code>r<code>个元素做排列的元组的迭代器，如果不指定</code>r<code>，那么序列的长度与</code>iterable` 中的项目数量相同。</li>
 </ul>
-<pre><code class="language-python">for elem in itertools.permutations('abc', 2):
+<pre><code class="language-Python">for elem in itertools.permutations('abc', 2):
     print elem
 ('a', 'b')
 ('a', 'c')
@@ -2948,7 +4565,7 @@ for elem in itertools.permutations('abc'):
 <ul>
 <li><code>itertools.combinations(iterable, r)</code>:组合，如果 <code>iterable</code> 为 <code>&quot;abc&quot;</code>，<code>r</code> 为 2 时，<code>ab</code> 和 <code>ba</code> 则视为重复，此时只放回 <code>ab</code>. 示例：</li>
 </ul>
-<pre><code class="language-python">for elem in itertools.combinations('abc', 2):
+<pre><code class="language-Python">for elem in itertools.combinations('abc', 2):
     print elem   
 ('a', 'b')
 ('a', 'c')
@@ -2959,7 +4576,7 @@ for elem in itertools.permutations('abc'):
 <li><code>itertools.compress(data, selectors)</code>:<br>
 相当于 <code>bool</code> 选取，只有当 <code>selectors</code> 对应位置的元素为 <code>true</code> 时，才保留 <code>data</code> 中相应位置的元素，否则去除。</li>
 </ul>
-<pre><code class="language-python">list(itertools.compress('abcdef', [1, 1, 0, 1, 0, 1]))
+<pre><code class="language-Python">list(itertools.compress('abcdef', [1, 1, 0, 1, 0, 1]))
 ['a', 'b', 'd', 'f']
 list(itertools.compress('abcdef', [True, False, True]))
 ['a', 'c']
@@ -2967,7 +4584,7 @@ list(itertools.compress('abcdef', [True, False, True]))
 <ul>
 <li><code>itertools.groupby(iterable[, keyfunc])</code>:对<code>iterable</code>中的元素进行分组。<code>keyfunc</code> 是分组函数，用于对 <code>iterable</code> 的连续项进行分组，如果不指定，则默认对 <code>iterable</code> 中的连续相同项进行分组，返回一个 <code>(key, sub-iterator)</code> 的迭代器。</li>
 </ul>
-<pre><code class="language-python">for key, value_iter in itertools.groupby('aaabbbaaccd'):
+<pre><code class="language-Python">for key, value_iter in itertools.groupby('aaabbbaaccd'):
     print key, list(value_iter)  
 a ['a', 'a', 'a']
 b ['b', 'b', 'b']
@@ -2986,7 +4603,7 @@ for key, value_iter in itertools.groupby(data, len):
 <ul>
 <li><code>itertools.islice(iterable, [start,] stop [, step])</code>:切片选择，<code>start</code> 是开始索引，<code>stop</code> 是结束索引，<code>step</code> 是步长，<code>start</code>和 <code>step</code> 可选。</li>
 </ul>
-<pre><code class="language-python">list(itertools.islice([10, 6, 2, 8, 1, 3, 9], 5))
+<pre><code class="language-Python">list(itertools.islice([10, 6, 2, 8, 1, 3, 9], 5))
 [10, 6, 2, 8, 1]
 list(itertools.islice(itertools.count(), 6))
 [0, 1, 2, 3, 4, 5]
@@ -2998,7 +4615,7 @@ list(itertools.islice(itertools.count(), 3, 10, 2))
 <ul>
 <li><code>itertools.tee(iterable, n=2)</code>:从 <code>iterable</code> 创建 <code>n</code> 个独立的迭代器，以元组的形式返回。</li>
 </ul>
-<pre><code class="language-python">itertools.tee(&quot;abcedf&quot;)
+<pre><code class="language-Python">itertools.tee(&quot;abcedf&quot;)
 (&lt;itertools.tee at 0x7fed7b8f59e0&gt;, &lt;itertools.tee at 0x7fed7b8f56c8&gt;)
 iter1, iter2 = itertools.tee(&quot;abcedf&quot;)
 list(iter1)
@@ -3013,7 +4630,7 @@ list(iter2)
 要计算可迭代对象自身的笛卡尔积，将可选参数 <code>repeat</code> 设定为要重复的次数。例如，<code>product(A, repeat=4)</code> 和 <code>product(A, A, A, A)</code> 是一样的。</li>
 <li><code>itertools.dropwhile</code></li>
 </ul>
-<pre><code class="language-python"> x = itertools.dropwhile(lambda e: e &lt; 5, range(10))
+<pre><code class="language-Python"> x = itertools.dropwhile(lambda e: e &lt; 5, range(10))
 print(list(x))
 [5, 6, 7, 8, 9]
 </code></pre>
@@ -3021,7 +4638,7 @@ print(list(x))
 <li><code>itertools.filterfalse</code>:<br>
 保留对应真值为<code>False</code>的元素</li>
 </ul>
-<pre><code class="language-python">x = itertools.filterfalse(lambda e: e &lt; 5, (1, 5, 3, 6, 9, 4))
+<pre><code class="language-Python">x = itertools.filterfalse(lambda e: e &lt; 5, (1, 5, 3, 6, 9, 4))
 print(list(x))
 [5, 6, 9]
 </code></pre>
@@ -3047,22 +4664,22 @@ print(list(x))
 结构化时间（<code>struct_time</code>）：一个包含了年月日时分秒的多元元组，例如<code>time.struct_time(tm_year=2017, tm_mon=9, tm_mday=26, tm_hour=9, tm_min=14, tm_sec=50, tm_wday=1, tm_yday=269, tm_isdst=0)</code>，可以通过<code>time.localtime()</code>获得。</li>
 <li>利用<code>time.strftime('%Y-%m-%d %H:%M:%S')</code>等方法可以获得一个格式化时间字符串。</li>
 </ul>
-<pre><code class="language-python">time.strftime('%Y-%m-%d %H:%M:%S')
+<pre><code class="language-Python">time.strftime('%Y-%m-%d %H:%M:%S')
 '2017-09-26 10:04:28'
 </code></pre>
 <p><code>time.strptime(string[,format])</code><br>
 将格式化时间字符串转化成结构化时间。该方法是<code>time.strftime()</code>方法的逆操作。<code>time.strptime()</code>方法根据指定的格式把一个时间字符串解析为时间元组。要注意的是，你提供的字符串要和 <code>format</code> 参数的格式一一对应，如果 <code>string</code> 中日期间使用<code>“-”</code>分隔，<code>format</code> 中也必须使用<code>“-”</code>分隔，时间中使用冒号<code>“:”</code>分隔，后面也必须使用冒号分隔，否则会报格式不匹配的错误。并且值也要在合法的区间范围内。</p>
-<pre><code class="language-python">stime = &quot;2017-09-26 12:11:30&quot;
+<pre><code class="language-Python">stime = &quot;2017-09-26 12:11:30&quot;
 st = time.strptime(stime,&quot;%Y-%m-%d %H:%M:%S&quot;)
 </code></pre>
 <figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200321211914.png" alt="" loading="lazy"></figure>
 <ul>
 <li><code>time.time()</code>:返回当前系统时间戳。时间戳可以做算术运算。</li>
 </ul>
-<pre><code class="language-python">time.time()
+<pre><code class="language-Python">time.time()
 1506391907.020303
 该方法经常用于计算程序运行时间：
-```python
+```Python
 import time
 def func():
     time.sleep(1.14)
@@ -3074,7 +4691,7 @@ t2 = time.time()
 print(t2 - t1)
 </code></pre>
 <h3 id="datetime"><code>datetime</code></h3>
-<pre><code class="language-python">from datetime import datetime, date, time
+<pre><code class="language-Python">from datetime import datetime, date, time
 dt = datetime(2011, 10, 29, 20, 30, 21)
 dt.day
 29
@@ -3084,7 +4701,7 @@ dt.minute
 <ul>
 <li>根据<code>datetime</code>实例，你可以用<code>date</code>和<code>time</code>提取出各自的对象：</li>
 </ul>
-<pre><code class="language-python">dt.date()
+<pre><code class="language-Python">dt.date()
 datetime.date(2011, 10, 29)
 dt.time()
 datetime.time(20, 30, 21)
@@ -3092,19 +4709,19 @@ datetime.time(20, 30, 21)
 <ul>
 <li><code>strftime</code>方法可以将<code>datetime</code>格式化为字符串：</li>
 </ul>
-<pre><code class="language-python">dt.strftime('%m/%d/%Y %H:%M')
+<pre><code class="language-Python">dt.strftime('%m/%d/%Y %H:%M')
 '10/29/2011 20:30'
 </code></pre>
 <ul>
 <li><code>strptime</code>可以将字符串转换成<code>datetime</code>对象：</li>
 </ul>
-<pre><code class="language-python">datetime.strptime('20091031', '%Y%m%d')
+<pre><code class="language-Python">datetime.strptime('20091031', '%Y%m%d')
 datetime.datetime(2009, 10, 31, 0, 0)
 </code></pre>
 <ul>
 <li>计算差值</li>
 </ul>
-<pre><code class="language-python">now = date.today()
+<pre><code class="language-Python">now = date.today()
 birthday = date(1964, 7, 31)
 age = now - birthday
 age.days
@@ -3123,23 +4740,23 @@ age.days
 </ul>
 <h2 id="path"><code>Path</code></h2>
 <p>在过去，文件的路径是纯字符串，现在它会是一个<code>pathlib.Path</code>对象:</p>
-<pre><code class="language-python">from pathlib import Path
+<pre><code class="language-Python">from pathlib import Path
 p = Path('/home/ubuntu')
 PosixPath('/home/ubuntu')
 str(p)
 '/home/ubuntu'
 </code></pre>
 <p>过去路径拼接最正确的方法是用<code>os.path.join</code>:</p>
-<pre><code class="language-python">os.path.join('/', 'home', 'dongwm/code')
+<pre><code class="language-Python">os.path.join('/', 'home', 'dongwm/code')
 '/home/dongwm/code'
 os.path.join('/home', 'dongwm/code')
 '/home/dongwm/code'
 现在可以用`pathlib.Path`提供的`joinpath`来拼接:
-```python
+```Python
 Path('/').joinpath('home', 'dongwm/code')
 PosixPath('/home/dongwm/code')
 但是更简单和方便的方法是用`/`运算符:
-```python
+```Python
 Path('/') / 'home' / 'dongwm/code'
 PosixPath('/home/dongwm/code')
 Path('/') / Path('home') / 'dongwm/code'
@@ -3148,7 +4765,7 @@ PosixPath('/home/dongwm/code')
 PosixPath('/home/dongwm/code')
 </code></pre>
 <p>使用<code>Path</code>对象的<code>parents</code>属性可以拿到各级目录列表(索引值越大越接近<code>root</code>)，而<code>parent</code>就表示父级目录:</p>
-<pre><code class="language-python">p = Path('/Users/dongweiming/test')
+<pre><code class="language-Python">p = Path('/Users/dongweiming/test')
 p.parents[0]
 PosixPath('/Users/dongweiming')
 p.parents[1]
@@ -3161,12 +4778,12 @@ p.parent.parent
 PosixPath('/Users')
 </code></pre>
 <p>获得文件后缀名:</p>
-<pre><code class="language-python">p = Path('/usr/local/etc/my.cnf')
+<pre><code class="language-Python">p = Path('/usr/local/etc/my.cnf')
 p.suffix, p.stem
 ('.cnf', 'my')
 </code></pre>
 <p>当文件有多个后缀，可以用<code>suffixes</code>返回文件所有后缀列表:</p>
-<pre><code class="language-python">Path('my.tar.bz2').suffixes
+<pre><code class="language-Python">Path('my.tar.bz2').suffixes
 ['.tar', '.bz2']
 Path('my.tar').suffixes
 ['.tar']
@@ -3174,17 +4791,17 @@ Path('my').suffixes
 []
 </code></pre>
 <p>Python语言没有内置创建文件的方法(<code>linux</code>下的<code>touch</code>命令)，过去这么做:</p>
-<pre><code class="language-python">with open('new.txt', 'a') as f:
+<pre><code class="language-Python">with open('new.txt', 'a') as f:
 </code></pre>
 <p>现在可以直接用<code>Path</code>的<code>touch</code>方法:</p>
-<pre><code class="language-python">Path('new.txt').touch()
+<pre><code class="language-Python">Path('new.txt').touch()
 </code></pre>
 <p><code>touch</code>接受<code>mode</code>参数，能够在创建时确认文件权限，还能通过<code>exist_ok</code>参数方式确认是否可以重复<code>touch</code>(默认可以重复创建，会更新文件的<code>mtime</code>)</p>
 <ul>
 <li><code>filename.exists()</code>；路径是否存在</li>
 <li>打开文件：</li>
 </ul>
-<pre><code class="language-python">data_folder = Path(&quot;source_data/text_files/&quot;)
+<pre><code class="language-Python">data_folder = Path(&quot;source_data/text_files/&quot;)
 file_to_open = data_folder / &quot;raw_data.txt&quot;
 print(file_to_open.read_text())
 </code></pre>
@@ -3194,21 +4811,21 @@ print(file_to_open.read_text())
 </ul>
 <h2 id="第三方库">第三方库</h2>
 <h3 id="h5py"><code>h5py</code></h3>
-<p>h5py文件是存放两类对象的容器，数据集(<code>dataset</code>)和组(<code>group</code>)，<code>dataset</code>类似数组类的数据集合，和<code>numpy</code>的数组差不多。<code>group</code>是像文件夹一样的容器，它好比<code>python</code>中的字典，有键(<code>key</code>)和值(<code>value</code>)。<code>group</code>中可以存放<code>dataset</code>或者其他的<code>group</code>。”键”就是组成员的名称，”值”就是组成员对象本身(组或者数据集)</p>
-<pre><code class="language-python">import h5py
+<p>h5py文件是存放两类对象的容器，数据集(<code>dataset</code>)和组(<code>group</code>)，<code>dataset</code>类似数组类的数据集合，和<code>numpy</code>的数组差不多。<code>group</code>是像文件夹一样的容器，它好比<code>Python</code>中的字典，有键(<code>key</code>)和值(<code>value</code>)。<code>group</code>中可以存放<code>dataset</code>或者其他的<code>group</code>。”键”就是组成员的名称，”值”就是组成员对象本身(组或者数据集)</p>
+<pre><code class="language-Python">import h5py
 </code></pre>
 <h4 id="创建">创建</h4>
-<pre><code class="language-python">with h5py.File('test.h5','w') as f:
+<pre><code class="language-Python">with h5py.File('test.h5','w') as f:
 </code></pre>
 <h4 id="读取">读取</h4>
-<pre><code class="language-python">with h5py.File('test.h5','r') as f:
+<pre><code class="language-Python">with h5py.File('test.h5','r') as f:
 </code></pre>
 <p><code>h5py</code>文件就像一个 <code>Python</code> 字典，因此我们可以检查<code>key</code>,</p>
-<pre><code class="language-python">list(f.keys())
+<pre><code class="language-Python">list(f.keys())
 ['mydataset']
 </code></pre>
 <p>文件中有一个数据集，即<code>mydataset</code>:</p>
-<pre><code class="language-python">dset = f['mydataset']
+<pre><code class="language-Python">dset = f['mydataset']
 dset.shape
 (100,)
 dset.dtype
@@ -3223,7 +4840,7 @@ array([ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90])
 data = f['mydataset'][:]
 </code></pre>
 <h4 id="创建数据集">创建数据集：</h4>
-<pre><code class="language-python">d1=f.create_dataset(&quot;dset1&quot;, (20,), 'i')
+<pre><code class="language-Python">d1=f.create_dataset(&quot;dset1&quot;, (20,), 'i')
 for key in f.keys():
     print(key)
     print(f[key].name)
@@ -3234,10 +4851,10 @@ dset1
 (20,)
 [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
 </code></pre>
-<pre><code class="language-python">dset3 = f.create_dataset('subgroup2/dataset_three', (10,), dtype='i')
+<pre><code class="language-Python">dset3 = f.create_dataset('subgroup2/dataset_three', (10,), dtype='i')
 </code></pre>
 <h4 id="赋值">赋值</h4>
-<pre><code class="language-python">d1=f.create_dataset(&quot;dset1&quot;,(20,),'i')
+<pre><code class="language-Python">d1=f.create_dataset(&quot;dset1&quot;,(20,),'i')
 d1[...]=np.arange(20)
 #或者我们可以直接按照下面的方式创建数据集并赋值
 f[&quot;dset2&quot;]=np.arange(15)
@@ -3250,7 +4867,7 @@ for key in f.keys():
 [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
 </code></pre>
 <p>如果我们有现成的<code>numpy</code>数组，那么可以在创建数据集的时候就赋值，这个时候就不必指定数据的类型和形状了，只需要把数组名传给参数<code>data</code>。</p>
-<pre><code class="language-python">a=np.arange(20)
+<pre><code class="language-Python">a=np.arange(20)
 d1=f.create_dataset(&quot;dset1&quot;,data=a)
 for key in f.keys():
     print(f[key].name)
@@ -3259,7 +4876,7 @@ for key in f.keys():
 [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19]
 </code></pre>
 <h4 id="综合示例1">综合示例1</h4>
-<pre><code class="language-python">#分别创建dset1,dset2,dset3这三个数据集
+<pre><code class="language-Python">#分别创建dset1,dset2,dset3这三个数据集
 a=np.arange(20)
 d1=f.create_dataset(&quot;dset1&quot;,data=a)
 
@@ -3281,10 +4898,10 @@ for key in f.keys():
 [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
 </code></pre>
 <h4 id="创建group需要首先以append模式打开文件">创建<code>group</code>,需要首先以<code>append</code>模式打开文件</h4>
-<pre><code class="language-python">f = h5py.File('mydataset.hdf5', 'a')
+<pre><code class="language-Python">f = h5py.File('mydataset.hdf5', 'a')
 grp = f.create_group(&quot;subgroup&quot;)
 </code></pre>
-<pre><code class="language-python">g1=f.create_group(&quot;bar&quot;)
+<pre><code class="language-Python">g1=f.create_group(&quot;bar&quot;)
 #在bar这个组里面分别创建name为dset1,dset2的数据集并赋值。
 g1[&quot;dset1&quot;]=np.arange(10)
 g1[&quot;dset2&quot;]=np.arange(12).reshape((3,4))
@@ -3300,7 +4917,7 @@ for key in g1.keys():
  [ 8  9 10 11]]
 </code></pre>
 <p>注意观察数据集<code>dset1</code>和<code>dset2</code>的名字是不是有点和前面的不一样，如果是直接创建的数据集，不在任何组里面，那么它的名字就是<code>/+名字</code>，现在这两个数据集都在<code>bar</code>这个<code>group</code>(组)里面，名字就变成了<code>/bar+/</code>名字，是不是有点文件夹的感觉！继续看下面的代码，你会对<code>group</code>和<code>dataset</code>的关系进一步了解。</p>
-<pre><code class="language-python">#创建组bar1,组bar2，数据集dset
+<pre><code class="language-Python">#创建组bar1,组bar2，数据集dset
 g1=f.create_group(&quot;bar1&quot;)
 g2=f.create_group(&quot;bar2&quot;)
 d=f.create_dataset(&quot;dset&quot;,data=np.arange(10))
@@ -3339,7 +4956,7 @@ print(c2.keys())
 <ul>
 <li>综合示例2</li>
 </ul>
-<pre><code class="language-python">#遍历文件中的一级组
+<pre><code class="language-Python">#遍历文件中的一级组
 for group in f.keys():
     print (group)
     #根据一级组名获得其下面的组
@@ -3367,14 +4984,14 @@ for group in f.keys():
 <li><code>complevel</code>：<code>int</code>型，用于控制<code>h5</code>文件的压缩水平，取值范围在0-9之间，越大则文件的压缩程度越大，占用的空间越小，但相对应的在读取文件时需要付出更多解压缩的时间成本，默认为<code>0</code>，代表不压缩<br>
 创建一个<code>HDF5 IO</code>对象<code>store</code>：</li>
 </ul>
-<pre><code class="language-python">store = pd.HDFStore('demo.h5')
+<pre><code class="language-Python">store = pd.HDFStore('demo.h5')
 s = pd.Series(np.random.randn(5), index=['a', 'b', 'c', 'd', 'e'])
 df = pd.DataFrame(np.random.randn(8, 3),
                  columns=['A', 'B', 'C'])
 store['s'],store['df'] = s,df
 </code></pre>
 <p>从<code>pandas</code>中的数据结构直接导出到本地<code>h5</code>文件中：</p>
-<pre><code class="language-python">#创建新的数据框
+<pre><code class="language-Python">#创建新的数据框
 df_ = pd.DataFrame(np.random.randn(5,5))
 #导出到已存在的h5文件中，这里需要指定key
 df_.to_hdf(path_or_buf='demo.h5',key='df_')
@@ -3390,34 +5007,34 @@ print(store.keys())
 <li><code>format</code>：字符型输入，用于指定写出的模式，<code>'fixed'</code>对应的模式速度快，但是不支持追加也不支持检索；<code>'table'</code>对应的模式以表格的模式写出，速度稍慢，但是支持直接通过<code>store</code>对象进行追加和表格查询操作<br>
 使用<code>put()</code>方法将数据存入<code>store</code>对象中：</li>
 </ul>
-<pre><code class="language-python">store.put(key='s',value=s);store.put(key='df',value=df)
+<pre><code class="language-Python">store.put(key='s',value=s);store.put(key='df',value=df)
 </code></pre>
 <p>既然是键值对的格式，那么可以查看<code>store</code>的<code>items</code>属性（注意这里<code>store</code>对象只有<code>items</code>和<code>keys</code>属性，没有<code>values</code>属性）：</p>
-<pre><code class="language-python">store.items
+<pre><code class="language-Python">store.items
 </code></pre>
 <p>调用<code>store</code>对象中的数据直接用对应的键名来索引即可：</p>
-<pre><code class="language-python">store['df']
+<pre><code class="language-Python">store['df']
 </code></pre>
 <p>删除<code>store</code>对象中指定数据的方法有两种，一是使用<code>remove()</code>方法，传入要删除数据对应的键：</p>
-<pre><code class="language-python">store.remove('s')
+<pre><code class="language-Python">store.remove('s')
 print(store.keys())
 </code></pre>
 <p>二是使用<code>Python</code>中的关键词<code>del</code>来删除指定数据：</p>
-<pre><code class="language-python">del store['s']
+<pre><code class="language-Python">del store['s']
 </code></pre>
 <h5 id="读取-2">读取</h5>
-<pre><code class="language-python">store = pd.HDFStore('demo.h5')
+<pre><code class="language-Python">store = pd.HDFStore('demo.h5')
 '''方式1'''
 df1 = store['df']
 '''方式2'''
 df2 = store.get('df')
 </code></pre>
-<pre><code class="language-python">df = pd.read_hdf('demo.h5',key='df')
+<pre><code class="language-Python">df = pd.read_hdf('demo.h5',key='df')
 </code></pre>
 <ul>
 <li>删除对象</li>
 </ul>
-<pre><code class="language-python">del subgroup[&quot;MyDataset&quot;]
+<pre><code class="language-Python">del subgroup[&quot;MyDataset&quot;]
 </code></pre>
 ]]></content>
     </entry>
