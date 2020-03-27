@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-27T18:51:21.523Z</updated>
+    <updated>2020-03-27T18:52:35.857Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -6279,7 +6279,7 @@ df2 = store.get('df')
         <link href="https://bailingnan.github.io/post/leetcode26-shan-chu-pai-xu-shu-zu-zhong-de-chong-fu-xiang/">
         </link>
         <updated>2020-02-22T08:23:59.000Z</updated>
-        <content type="html"><![CDATA[<pre><code class="language-python3">class Solution:
+        <content type="html"><![CDATA[<pre><code class="language-python">class Solution:
     def removeDuplicates(self, nums: List[int]) -&gt; int:
         cnt=len(set(nums))
         j=0
