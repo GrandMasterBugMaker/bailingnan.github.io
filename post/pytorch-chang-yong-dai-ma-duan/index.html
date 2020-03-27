@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585333207652">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585333261443">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -33,7 +33,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="remixicon-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585333207652" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585333261443" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -54,7 +54,9 @@
 </li>
 <li><a href="#2%E5%BC%A0%E9%87%8Ftensor%E5%A4%84%E7%90%86">2.张量(Tensor)处理</a>
 <ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F">创建张量</a></li>
 <li><a href="#%E5%BC%A0%E9%87%8F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF">张量基本信息</a></li>
+<li><a href="#%E5%88%87%E7%89%87%E4%B8%8E%E7%B4%A2%E5%BC%95">切片与索引</a></li>
 <li><a href="#%E5%91%BD%E5%90%8D%E5%8F%98%E9%87%8F">命名变量</a></li>
 <li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">数据类型转换</a></li>
 <li><a href="#torchtensor%E4%B8%8Enpndarray%E8%BD%AC%E6%8D%A2">torch.Tensor与np.ndarray转换</a></li>
@@ -82,6 +84,11 @@
 </li>
 <li><a href="#4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E6%B5%8B%E8%AF%95">4.模型训练和测试</a>
 <ul>
+<li><a href="#modeleval%E5%92%8Cwith-torchno_grad%E7%9A%84%E5%8C%BA%E5%88%AB"><code>model.eval()</code>和<code>with torch.no_grad()</code>的区别</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">使用场景</a></li>
+</ul>
+</li>
 <li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89loss">自定义loss</a></li>
 <li><a href="#%E6%A0%87%E7%AD%BE%E5%B9%B3%E6%BB%91label-smoothing">标签平滑（label smoothing）</a></li>
 <li><a href="#l1-%E6%AD%A3%E5%88%99%E5%8C%96">L1 正则化</a></li>
@@ -94,7 +101,12 @@
 <li><a href="#%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%8A%A0%E8%BD%BD%E6%96%AD%E7%82%B9">保存与加载断点</a></li>
 </ul>
 </li>
-<li><a href="#5%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">5.其他注意事项</a></li>
+<li><a href="#5%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">5.其他注意事项</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96">数据读取</a></li>
+<li><a href="#tricks">Tricks</a></li>
+</ul>
+</li>
 </ul>
 
           </div>
@@ -143,7 +155,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">PyTorch常用代码段</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-01-31 / 17 min read
+          2020-01-31 / 20 min read
         </div>
         
         <div class="post-content yue">
@@ -193,11 +205,56 @@ kill -9 [pid]
 <pre><code class="language-python">torch.backends.cudnn.deterministic = True
 </code></pre>
 <h1 id="2张量tensor处理">2.张量(Tensor)处理</h1>
+<h2 id="创建张量">创建张量</h2>
+<pre><code class="language-python">#data只能是已知的数据，不能是数据的维度
+torch.tensor(data)
+#可以是data，也可以是维度
+#data:
+torch.Tensor(data)
+#维度,维度为(1,2,3)
+torch.Tensor(1,2,3)
+</code></pre>
 <h2 id="张量基本信息">张量基本信息</h2>
 <pre><code class="language-Python">tensor = torch.randn(3,4,5)
 print(tensor.type())  # 数据类型
 print(tensor.size())  # 张量的shape，是个元组
 print(tensor.dim())   # 维度的数量
+</code></pre>
+<h2 id="切片与索引">切片与索引</h2>
+<p>将图片设定为[batch_size, channel, height, width]的四维矩阵。</p>
+<pre><code class="language-python">a = torch.rand(4, 3, 28, 28)
+</code></pre>
+<p>对第一维进行索引,可以认为是第一个图片的三个维度通道的28*28的像素点。:</p>
+<pre><code class="language-python">print(a[0].size())
+torch.Size([3, 28, 28])
+</code></pre>
+<p>第一个图片的第一个维度通道的28*28的像素点:</p>
+<pre><code class="language-python">print(a[0, 0].size())
+torch.Size([28, 28])
+</code></pre>
+<p>具体到某一个像素点时:</p>
+<pre><code class="language-python">print(a[0, 0, 2, 3])
+tensor(0.4736)
+</code></pre>
+<p>取连续的索引:</p>
+<pre><code class="language-python">print(a[:2].shape)
+torch.Size([2, 3, 28, 28])
+</code></pre>
+<p>同理：</p>
+<pre><code class="language-python"># 1写在：前面，表明从1个通道开始到末尾，,不包括1
+print(a[:2, 1:, :, :].shape)
+</code></pre>
+<p>当索引出现-1时，要提到一个知识点:</p>
+<pre><code class="language-python"># 默认索引的顺序为[0, 1, 2]，当倒着写时变为[-3, -2, -1]。由于这里取-1，因此为最后一位。
+print(a[:2, -1:, :, :].shape)
+torch.Size([2, 1, 28, 28])
+</code></pre>
+<p>当想隔点取样输出时:</p>
+<pre><code class="language-python">#输出全部batch和channel，对每个高和宽间隔2个点采样
+print(a[:, :, 0:28:2, 0:28:2].shape)
+torch.Size([4, 3, 14, 14])
+#可简化为：
+print(a[:, :, ::2, ::2].shape)
 </code></pre>
 <h2 id="命名变量">命名变量</h2>
 <pre><code class="language-Python"># 在PyTorch 1.3之前，需要使用注释
@@ -347,6 +404,17 @@ for layer in model.named_modules():
 <pre><code class="language-python">model.load_state_dict(torch.load('model.pth'), strict=False)
 </code></pre>
 <h1 id="4模型训练和测试">4.模型训练和测试</h1>
+<h2 id="modeleval和with-torchno_grad的区别"><code>model.eval()</code>和<code>with torch.no_grad()</code>的区别</h2>
+<p>在PyTorch中进行validation时，会使用<code>model.eval()</code>切换到测试模式，在该模式下，</p>
+<ul>
+<li>主要用于通知dropout层和batchnorm层在train和val模式间切换<br>
+在train模式下，dropout网络层会按照设定的参数p设置保留激活单元的概率（保留概率=p); batchnorm层会继续计算数据的mean和var等参数并更新。<br>
+在val模式下，dropout层会让所有的激活单元都通过，而batchnorm层会停止计算和更新mean和var，直接使用在训练阶段已经学出的mean和var值。</li>
+<li>该模式不会影响各层的gradient计算行为，即gradient计算和存储与training模式一样，只是不进行反传（backprobagation）<br>
+而<code>with torch.zero_grad()</code>则主要是用于停止autograd模块的工作，以起到加速和节省显存的作用，具体行为就是停止gradient计算，从而节省了GPU算力和显存，但是并不会影响dropout和batchnorm层的行为。</li>
+</ul>
+<h3 id="使用场景">使用场景</h3>
+<p>如果不在意显存大小和计算时间的话，仅仅使用<code>model.eval()</code>已足够得到正确的validation的结果；而<code>with torch.zero_grad()</code>则是更进一步加速和节省gpu空间（因为不用计算和存储gradient），从而可以更快计算，也可以跑更大的batch来测试。</p>
 <h2 id="自定义loss">自定义loss</h2>
 <p>继承torch.nn.Module类写自己的loss。</p>
 <pre><code class="language-python">class MyLoss(torch.nn.Moudle):
@@ -585,6 +653,9 @@ for epoch in range(start_epoch, num_epochs):
         shutil.copy(model_path, best_model_path)
 </code></pre>
 <h1 id="5其他注意事项">5.其他注意事项</h1>
+<h2 id="数据读取">数据读取</h2>
+<p>使用<code>read_csv</code>读取一次原始文件，将<code>dataframe</code>存储为<code>HDF</code>或者<code>feather</code>格式。一般情况下<code>HDF</code>的读取比读取<code>csv</code>文件快几十倍，但<code>HDF</code>文件在大小上会稍微大一些。</p>
+<h2 id="tricks">Tricks</h2>
 <ol>
 <li>建议有参数的层和汇合（pooling）层使用<code>torch.nn</code>模块定义，激活函数直接使用<code>torch.nn.functional。torch.nn</code>模块和<code>torch.nn.functional</code>的区别在于，<code>torch.nn</code>模块在计算时底层调用了<code>torch.nn.functional</code>，但<code>torch.nn</code>模块包括该层参数，还可以应对训练和测试两种网络状态。使用<code>torch.nn.functional</code>时要注意网络状态，如</li>
 </ol>
@@ -635,8 +706,25 @@ with torchsnooper.snoop():
     原本的代码
 </code></pre>
 <ol start="19">
-<li>模型可解释性，使用captum库</li>
+<li>训练过程记录及可视化:</li>
 </ol>
+<ul>
+<li><code>wandb</code></li>
+<li><code>comet_ml</code></li>
+<li><code>mlflow</code></li>
+</ul>
+<ol start="20">
+<li>一些扩展包：</li>
+</ol>
+<ul>
+<li><code>torch-optimizer</code>:实现了最新的一些优化器.</li>
+<li><code>fastai</code>:有一些评价指标</li>
+<li><code>numba</code>:<code>import numba as nb</code>,纯<code>python</code>或<code>numpy</code>函数加装饰器,加速计算，加@nb.njit或@nb.jit(nopython=True)</li>
+<li><code>swifter</code>:<code>df.apply()</code>→<code>df.swifter.apply()</code>，加速<code>pandas</code></li>
+<li><code>captum</code>:可解释性</li>
+<li><code>cupy</code>:加速<code>pandas</code>,1000万以上数据更快</li>
+<li><code>modin</code>:<code>import modin.pandas as mdpd</code>,用<code>mdpd</code>代替<code>pd</code>即可，加速<code>pandas</code>,加载数据和查询数据更快,统计方法<code>pandas</code>更快</li>
+</ul>
 
         </div>
 
