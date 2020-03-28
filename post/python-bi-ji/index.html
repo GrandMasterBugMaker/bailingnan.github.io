@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585335195196">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585404321095">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585335195196" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585404321095" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -1624,10 +1624,9 @@ a(10)
 20
 b(10)
 30
-&gt;&gt;&gt;
-在这里列出来的问题是新手很容易犯的错误，有些新手可能会不恰当的使用`lambda`表达式。 比如，通过在一个循环或列表推导中创建一个`lambda`表达式列表，并期望函数能在定义时就记住每次的迭代值。例如：
-```python
-funcs = [lambda x: x+n for n in range(5)]
+</code></pre>
+<p>在这里列出来的问题是新手很容易犯的错误，有些新手可能会不恰当的使用<code>lambda</code>表达式。 比如，通过在一个循环或列表推导中创建一个<code>lambda</code>表达式列表，并期望函数能在定义时就记住每次的迭代值。例如：</p>
+<pre><code class="language-python">funcs = [lambda x: x+n for n in range(5)]
 for f in funcs:
     print(f(0))
 4
