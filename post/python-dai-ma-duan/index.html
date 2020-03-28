@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585404321095">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585414261334">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585404321095" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585414261334" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -115,7 +115,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">Python代码段</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-03-28 / 52 min read
+          2020-03-28 / 53 min read
         </div>
         
         <div class="post-content yue">
@@ -487,6 +487,13 @@ r
 d
 </code></pre>
 <ul>
+<li>排序</li>
+</ul>
+<pre><code class="language-python">s=['ab','abc','a','djkj']
+b=sorted(s,key=lambda x:len(x))# 有返回值
+s.sort(key=len)# 原地排序
+</code></pre>
+<ul>
 <li>排序不支持原生比较的对象<br>
 内置的 <code>sorted()</code> 函数有一个关键字参数 <code>key</code> ，可以传入一个 <code>callable</code> 对象给它， 这个 <code>callable</code> 对象对每个传入的对象返回一个值，这个值会被 <code>sorted</code> 用来排序这些对象。 比如，如果你在应用程序里面有一个 <code>User</code> 实例序列，并且你希望通过他们的 <code>user_id</code> 属性进行排序， 你可以提供一个以 <code>User</code> 实例作为输入并输出对应 <code>user_id</code> 值的 <code>callable</code> 对象。比如：</li>
 </ul>
@@ -624,6 +631,24 @@ dict_to_stock(b)
 Stock(name='ACME', shares=100, price=123.45, date='12/17/2012', time=None)
 </code></pre>
 <p>最后要说的是，如果你的目标是定义一个需要更新很多实例属性的高效数据结构，那么命名元组并不是你的最佳选择。 这时候你应该考虑定义一个包含 <code>__slots__</code> 方法的类。</p>
+<ul>
+<li><code>x=&quot;abc&quot;</code>,<code>y=&quot;def&quot;</code>,<code>z=[&quot;d&quot;,&quot;e&quot;,&quot;f&quot;]</code>,分别求出<code>x.join(y)</code>和<code>x.join(z)</code>返回的结果</li>
+</ul>
+<pre><code class="language-python">x=&quot;abc&quot;
+y=&quot;def&quot;
+z=[&quot;d&quot;,&quot;e&quot;,&quot;f&quot;]
+print(x.join(y),x.join(z))
+dabceabcf dabceabcf
+</code></pre>
+<p><code>join()</code>括号里面的是可迭代对象，<code>x</code>插入可迭代对象中间，形成字符串，结果一致。</p>
+<ul>
+<li>去空格的两种方法</li>
+</ul>
+<pre><code class="language-python">str=&quot;hello world ha ha&quot;
+res=str.replace(&quot; &quot;,&quot;&quot;)
+list=str.split(&quot; &quot;)
+res=&quot;&quot;.join(list)
+</code></pre>
 <h2 id="运算符">运算符</h2>
 <ul>
 <li>链式对比,我们可以在一行代码中使用不同的运算符对比多个不同的元素。</li>
