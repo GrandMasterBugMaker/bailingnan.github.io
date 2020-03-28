@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585414261334">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585420159825">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585414261334" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585420159825" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -1171,8 +1171,10 @@ print({2, 2, 2, 1, 3, 3})
 {1, 2, 3}
 </code></pre>
 <ul>
-<li>通过<code>add(key)</code>方法可以添加元素到set中</li>
-<li>通过<code>remove(key)</code>方法可以删除元素：</li>
+<li>花括号只能用于初始化包含值的集合。使用不包含值的花括号是初始化字典（<code>dict</code>）的方法之一，而不是初始化集合的方法。</li>
+<li>通过<code>add(key)</code>方法可以添加元素到<code>set</code>中,只能将不可变的值（例如一个字符串或一个元组）加入到集合中。如果试图将一个列表（<code>list</code>）添加到集合中，系统会返回类型错误<code>TyprError</code>。</li>
+<li>通过<code>remove(key)</code>方法可以删除元素,如果你想要删除一个集合中不存在的值，系统会返回一个键值错误<code>KeyError</code>。</li>
+<li>可以使用<code>discard</code>方法从集合中删除一个值。这种方法相对于<code>remove</code>方法的好处是，如果你试图删除一个集合中不存在的值，系统不会返回<code>KeyError</code>。</li>
 <li>合并是取两个集合中不重复的元素。可以用<code>union</code>方法，或者<code>|</code>运算符：</li>
 </ul>
 <pre><code class="language-Python">a = {1, 2, 3, 4, 5}
@@ -1193,7 +1195,8 @@ print(a &amp; b)
 <ul>
 <li>
 <p>常用集合方法</p>
-<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317202703.png" alt="" loading="lazy"></figure>
+<p><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317202703.png" alt="" loading="lazy"><br>
+<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200329021757.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>所有逻辑集合操作都有另外的原地实现方法，可以直接用结果替代集合的内容。对于大的集合，这么做效率更高：</p>
@@ -3306,7 +3309,7 @@ g.score = 9999
 </code></pre>
 <p>除非在子类中也定义<code>__slots__</code>，这样，子类实例允许定义的属性就是自身的<code>__slots__</code>加上父类的<code>__slots__</code>。</p>
 <h4 id="多重继承">多重继承</h4>
-<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200318023741.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200318023741.png" alt="" loading="lazy"></figure>
 <pre><code class="language-Python">class Animal(object):
     pass
 # 大类:
@@ -5080,7 +5083,7 @@ def fib(n)
 <pre><code class="language-Python">stime = &quot;2017-09-26 12:11:30&quot;
 st = time.strptime(stime,&quot;%Y-%m-%d %H:%M:%S&quot;)
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200321211914.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200321211914.png" alt="" loading="lazy"></figure>
 <ul>
 <li><code>time.time()</code>:返回当前系统时间戳。时间戳可以做算术运算。</li>
 </ul>
@@ -5138,7 +5141,7 @@ age.days
 <ul>
 <li>格式化命令</li>
 </ul>
-<figure data-type="image" tabindex="5"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317190745.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317190745.png" alt="" loading="lazy"></figure>
 <h2 id="os"><code>os</code></h2>
 <ul>
 <li><code>os.path.exists(path)</code>:路径存在则返回<code>True</code>,路径损坏返回<code>False</code></li>
