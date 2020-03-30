@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/Java/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585420159825">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1585599817279">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585420159825" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1585599817279" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -422,7 +422,14 @@ np.sort(np.array([1,4,3,2,5,6]))  # 排序
 <li><code>np.clip(array,min,max))</code>:限制数组中最小值为<code>min</code>,最大值为<code>max</code></li>
 <li><code>np.append(array,element/array)</code>:将元素或者新数组的每一个元素添加至新数组</li>
 <li><code>np.diff(array,n=num)</code>:求取该数组两个元素之间的差，可用于计算相对误差，差分数组比原来少n个元素</li>
+<li><code>np.extract(condition, array)</code>:按条件选取元素</li>
+<li><code>np.setdiff1d(a,b)</code>:返回数组中不在另一个数组中的独有元素。这等价于两个数组元素集合的差集。</li>
 </ul>
+<pre><code class="language-python">a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+b = np.array([3,4,7,6,7,8,11,12,14])
+c = np.setdiff1d(a,b)
+array([1, 2, 5, 9])
+</code></pre>
 <h3 id="基本索引及切片">基本索引及切片</h3>
 <p>当有些维度没有指定索引时，空缺的维度被默认为取所有元素。<br>
 <code>NumPy</code>还允许使用 <code>dots (...)</code> 表示足够多的冒号来构建完整的索引元组。<br>
