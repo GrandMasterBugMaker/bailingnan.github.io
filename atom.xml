@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-03-30T20:23:41.009Z</updated>
+    <updated>2020-03-30T21:11:33.029Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
-    <subtitle>DM/DL/RecSys/Python/Java/INTJ</subtitle>
+    <subtitle>DM/DL/RecSys/Python/XJTU/INTJ</subtitle>
     <logo>https://bailingnan.github.io/images/avatar.png</logo>
     <icon>https://bailingnan.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 白凌南</rights>
