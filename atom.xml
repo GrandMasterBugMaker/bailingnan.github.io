@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-04-01T06:57:17.945Z</updated>
+    <updated>2020-04-01T07:27:36.292Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -6436,7 +6436,7 @@ df2 = store.get('df')
         <link href="https://bailingnan.github.io/post/numpy-bi-ji/">
         </link>
         <updated>2020-02-15T14:58:47.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="numpy常用函数"><code>NumPy</code>常用函数</h1>
+        <content type="html"><![CDATA[<h1 id="numpy笔记"><code>NumPy</code>笔记</h1>
 <pre><code class="language-python">import numpy as np
 </code></pre>
 <h2 id="numpy基础数据结构">Numpy基础数据结构</h2>
