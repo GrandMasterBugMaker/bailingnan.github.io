@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-04-03T10:19:56.785Z</updated>
+    <updated>2020-04-03T23:50:47.920Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -6060,11 +6060,8 @@ min_shares = min(portfolio, key=lambda s: s['shares'])
 <li><a href="#%E6%8C%89%E9%94%AE%E5%80%BC%E6%8E%92%E5%BA%8F">按键值排序</a></li>
 <li><a href="#%E5%85%B6%E4%BB%96%E6%8A%80%E5%B7%A7">其他技巧</a>
 <ul>
-<li><a href="#argmin-%E5%92%8C-argmax"><code>argmin</code> 和 <code>argmax</code></a>
-<ul>
+<li><a href="#argmin-%E5%92%8C-argmax"><code>argmin</code> 和 <code>argmax</code></a></li>
 <li><a href="#%E8%BD%AC%E7%BD%AE%E4%BA%8C%E7%BB%B4%E5%88%97%E8%A1%A8">转置二维列表</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -6906,7 +6903,7 @@ print(d1)
 {'a': 'some value', 'b': [1, 2, 3, 4], 7: 'an integer'}
 </code></pre>
 <ul>
-<li>`popitem():返回并删除字典中的最后一对键和值。</li>
+<li><code>popitem()</code>:返回并删除字典中的最后一对键和值。</li>
 </ul>
 <h4 id="更新字典">更新字典</h4>
 <ul>
@@ -7010,7 +7007,7 @@ TypeError: unhashable type: 'list'
 argmin = min(range(len(items)), key=items.__getitem__)
 </code></pre>
 <p><code>argmax</code>同理。</p>
-<h6 id="转置二维列表">转置二维列表</h6>
+<h5 id="转置二维列表">转置二维列表</h5>
 <pre><code class="language-python">A = [['a11', 'a12'], ['a21', 'a22'], ['a31', 'a32']]
 A_transpose = list(zip(*A))  # list of tuple
 A_transpose = list(list(col) for col in zip(*A))  # list of list
@@ -7164,16 +7161,16 @@ print(d)
 {'a': 10, 'b': 20}
 </code></pre>
 <p>想一想, 最后的结果为什么还是<code>{'a': 10, 'b': 20}</code>?<br>
-首先在全局创建一个空字典,并将<code>d</code>贴上:<br>
-<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/v2-5d4d7a9c04d8feac54b3350d8c5b1435_1440w.jpg" alt="" loading="lazy"><br>
-将 <code>d</code> 传入到函数<code>func</code>中,在函数中局部的形参变量也为<code>d</code>,它同样贴在空字典对象上<br>
-<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174500.png" alt="" loading="lazy"><br>
-在函数中前两句,为字典赋值.因为字典是可变的,这一操作对全局的 <code>d</code> 也会产生同样的影响.因为此时全局的<code>d</code>与函数内部的<code>d</code>贴向的是同一个对象<br>
-<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174540.png" alt="" loading="lazy"><br>
-函数最后一句,本质上是将函数内部的<code>d</code>贴向另外一个字典对象,全局的<code>d</code>当然还是贴向原来的字典对象.<br>
-<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174823.png" alt="" loading="lazy"><br>
-函数结束,函数内部的<code>d</code>被回收,而且最后打印结果如下所示<br>
-<img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174908.png" alt="" loading="lazy"></p>
+首先在全局创建一个空字典,并将<code>d</code>贴上:</p>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/v2-5d4d7a9c04d8feac54b3350d8c5b1435_1440w.jpg" alt="" loading="lazy"></figure>
+<p>将 <code>d</code> 传入到函数<code>func</code>中,在函数中局部的形参变量也为<code>d</code>,它同样贴在空字典对象上</p>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174500.png" alt="" loading="lazy"></figure>
+<p>在函数中前两句,为字典赋值.因为字典是可变的,这一操作对全局的 <code>d</code> 也会产生同样的影响.因为此时全局的<code>d</code>与函数内部的<code>d</code>贴向的是同一个对象</p>
+<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174540.png" alt="" loading="lazy"></figure>
+<p>函数最后一句,本质上是将函数内部的<code>d</code>贴向另外一个字典对象,全局的<code>d</code>当然还是贴向原来的字典对象.</p>
+<figure data-type="image" tabindex="5"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174823.png" alt="" loading="lazy"></figure>
+<p>函数结束,函数内部的<code>d</code>被回收,而且最后打印结果如下所示</p>
+<figure data-type="image" tabindex="6"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200323174908.png" alt="" loading="lazy"></figure>
 <ul>
 <li>函数可以有一些位置参数(<code>positional</code>)和一些关键字参数(<code>keyword</code>)。关键字参数通常用于指定默认值或可选参数</li>
 </ul>
@@ -7316,11 +7313,11 @@ person('Jack', 24, city=extra['city'], job=extra['job'])
 name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 </code></pre>
 <p>上面复杂的调用可以用简化的写法：</p>
-<pre><code>extra = {'city': 'Beijing', 'job': 'Engineer'}
+<pre><code class="language-python">extra = {'city': 'Beijing', 'job': 'Engineer'}
 person('Jack', 24, **extra)
 name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 </code></pre>
-<p><code>**extra</code>表示把<code>extra</code>这个<code>dict</code>的所有<code>key-value</code>用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个<code>dict</code>，注意``kw<code>获得的</code>dict<code>是</code>extra<code>的一份拷贝，对</code>kw<code>的改动不会影响到函数外的</code>extra`。</p>
+<p><code>**extra</code>表示把<code>extra</code>这个<code>dict</code>的所有<code>key-value</code>用关键字参数传入到函数的<code>**kw</code>参数，<code>kw</code>将获得一个<code>dict</code>，注意<code>kw</code>获得的<code>dict</code>是<code>extra</code>的一份拷贝，对<code>kw</code>的改动不会影响到函数外的<code>extra</code>。</p>
 <h4 id="命名关键字参数">命名关键字参数</h4>
 <ul>
 <li>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过<code>kw</code>检查。<br>
@@ -7363,9 +7360,9 @@ Traceback (most recent call last):
 TypeError: person() takes 2 positional arguments but 4 were given
 </code></pre>
 <ul>
-<li>由于调用时缺少参数名<code>city</code>和<code>job</code>，<code>Python</code>解释器把这4个参数均视为位置参数，但<code>person()</code>函数仅接受2个位置参数。<br>
-命名关键字参数可以有缺省值，从而简化调用：</li>
+<li>由于调用时缺少参数名<code>city</code>和<code>job</code>，<code>Python</code>解释器把这4个参数均视为位置参数，但<code>person()</code>函数仅接受2个位置参数。</li>
 </ul>
+<p>命名关键字参数可以有缺省值，从而简化调用：</p>
 <pre><code class="language-Python">def person(name, age, *, city='Beijing', job):
     print(name, age, city, job)
 </code></pre>
@@ -7469,12 +7466,12 @@ b VAR_KEYWORD
   print(f'a:{a},b:{b}')
 </code></pre>
 <p>查看参数类型：</p>
-<p>In [24]: for name,val in signature(f).parameters.items():<br>
-...:     print(name,val.kind)<br>
-...:<br>
-a POSITIONAL_OR_KEYWORD<br>
-b VAR_POSITIONAL<br>
-可以看到参数a既可以是位置参数也可是关键字参数。</p>
+<pre><code class="language-python">for name,val in signature(f).parameters.items():
+    print(name,val.kind)
+a POSITIONAL_OR_KEYWORD
+b VAR_POSITIONAL
+</code></pre>
+<p>可以看到参数<code>a</code>既可以是位置参数也可是关键字参数。</p>
 <h4 id="匿名lambda函数">匿名(lambda)函数</h4>
 <ul>
 <li><code>lambda</code> 函数拥有自己的命名空间，且不能访问自己参数列表之外或全局命名空间里的参数。</li>
@@ -9221,7 +9218,7 @@ g.score = 9999
 </code></pre>
 <p>除非在子类中也定义<code>__slots__</code>，这样，子类实例允许定义的属性就是自身的<code>__slots__</code>加上父类的<code>__slots__</code>。</p>
 <h4 id="多重继承">多重继承</h4>
-<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200318023741.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200318023741.png" alt="" loading="lazy"></figure>
 <pre><code class="language-Python">class Animal(object):
     pass
 # 大类:
@@ -11034,7 +11031,7 @@ def fib(n)
 <pre><code class="language-Python">stime = &quot;2017-09-26 12:11:30&quot;
 st = time.strptime(stime,&quot;%Y-%m-%d %H:%M:%S&quot;)
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200321211914.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200321211914.png" alt="" loading="lazy"></figure>
 <ul>
 <li><code>time.time()</code>:返回当前系统时间戳。时间戳可以做算术运算。</li>
 </ul>
@@ -11092,7 +11089,7 @@ age.days
 <ul>
 <li>格式化命令</li>
 </ul>
-<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317190745.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200317190745.png" alt="" loading="lazy"></figure>
 <h2 id="os"><code>os</code></h2>
 <ul>
 <li><code>os.path.exists(path)</code>:路径存在则返回<code>True</code>,路径损坏返回<code>False</code></li>
