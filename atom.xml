@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-04-03T23:50:47.920Z</updated>
+    <updated>2020-04-04T00:15:17.028Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -7681,7 +7681,7 @@ print(next(myiter))
 </code></pre>
 <p><code>StopIteration</code> 异常用于标识迭代的完成，防止出现无限循环的情况，在 <code>__next__()</code> 方法中我们可以设置在完成指定循环次数后触发 <code>StopIteration</code> 异常来结束迭代。<br>
 在 20 次迭代后停止执行：</p>
-<pre><code>class MyNumbers:
+<pre><code class="language-Python">class MyNumbers:
   def __iter__(self):
     self.a = 1
     return self
