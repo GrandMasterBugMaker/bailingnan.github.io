@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-04-04T02:30:57.244Z</updated>
+    <updated>2020-04-06T15:56:41.387Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -10,6 +10,46 @@
     <logo>https://bailingnan.github.io/images/avatar.png</logo>
     <icon>https://bailingnan.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 白凌南</rights>
+    <entry>
+        <title type="html"><![CDATA[数学]]></title>
+        <id>https://bailingnan.github.io/post/shu-xue/</id>
+        <link href="https://bailingnan.github.io/post/shu-xue/">
+        </link>
+        <updated>2020-04-06T15:56:27.000Z</updated>
+        <content type="html"><![CDATA[<!-- TOC -->
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E7%AC%A6%E5%8F%B7%E8%A1%A8">常用符号表</a>
+<ul>
+<li><a href="#nndl">nndl</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0">线性代数</a>
+<ul>
+<li><a href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2">线性映射/线性变换</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="常用符号表">常用符号表</h1>
+<h2 id="nndl">nndl</h2>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/bailingnan/PicGo/master/20200406222643.png" alt="" loading="lazy"></figure>
+<h1 id="线性代数">线性代数</h1>
+<h2 id="线性映射线性变换">线性映射/线性变换</h2>
+<p>线性映射（Linear Mapping）线性映射也称为线性变换．是指从线性空间𝒳到线性空间𝒴的一个映射函数𝑓 ∶ 𝒳 → 𝒴，并满足：对于𝒳中任何两个向量𝒖和𝒗以及任何标量𝑐，有:</p>
+<ol>
+<li>𝑓(𝒖 + 𝒗) = 𝑓(𝒖) + 𝑓(𝒗)</li>
+<li>𝑓(𝑐𝒗) = 𝑐𝑓(𝒗)</li>
+</ol>
+<p>两个有限维欧氏空间的映射函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><msup><mi mathvariant="double-struck">R</mi><mi>N</mi></msup><mo>→</mo><msup><mi mathvariant="double-struck">R</mi><mi>M</mi></msup></mrow><annotation encoding="application/x-tex">f: \mathbb{R}^{N} \rightarrow \mathbb{R}^{M}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span></span></span></span></span></span></span></span></span></span></span></span>可以表示为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">y</mi><mo>=</mo><mrow><mi mathvariant="bold-italic">A</mi><mi mathvariant="bold-italic">x</mi></mrow><mo>≜</mo><mrow><mo fence="true">[</mo><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msub><mi>a</mi><mn>11</mn></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>12</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mo>⋯</mo><mo>+</mo><msub><mi>a</mi><mrow><mn>1</mn><mi>N</mi></mrow></msub><msub><mi>x</mi><mi>N</mi></msub></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msub><mi>a</mi><mn>21</mn></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>22</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mo>⋯</mo><mo>+</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>N</mi></mrow></msub><msub><mi>x</mi><mi>N</mi></msub></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mi mathvariant="normal">⋮</mi><mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msub><mi>a</mi><mrow><mi>M</mi><mn>1</mn></mrow></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mrow><mi>M</mi><mn>2</mn></mrow></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mo>⋯</mo><mo>+</mo><msub><mi>a</mi><mrow><mi>M</mi><mi>N</mi></mrow></msub><msub><mi>x</mi><mi>N</mi></msub></mrow></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">\boldsymbol{y}=\boldsymbol{A x} \triangleq\left[\begin{array}{c}
+a_{11} x_{1}+a_{12} x_{2}+\cdots+a_{1 N} x_{N} \\
+a_{21} x_{1}+a_{22} x_{2}+\cdots+a_{2 N} x_{N} \\
+\vdots \\
+a_{M 1} x_{1}+a_{M 2} x_{2}+\cdots+a_{M N} x_{N}
+\end{array}\right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">y</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.99865em;vertical-align:-0.08198em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">A</span><span class="mord boldsymbol">x</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel amsrm">≜</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:5.459999999999999em;vertical-align:-2.4799999999999995em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.953005em;"><span style="top:-1.3499850000000007em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:-2.5049850000000005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-3.1059850000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-3.7069850000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-4.953005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4500349999999997em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.9799999999999995em;"><span style="top:-5.8275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-4.6275em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.7674999999999996em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord">⋮</span><span class="mord rule" style="border-right-width:0em;border-top-width:1.5em;bottom:0em;"></span></span></span></span><span style="top:-1.5675000000000006em;"><span class="pstrut" style="height:3.6875em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4799999999999995em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.953005em;"><span style="top:-1.3499850000000007em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:-2.5049850000000005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-3.1059850000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-3.7069850000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-4.953005em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.4500349999999997em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pandas笔记]]></title>
         <id>https://bailingnan.github.io/post/pandas-bi-ji/</id>
@@ -13583,364 +13623,6 @@ with torchsnooper.snoop():
 <li><code>captum</code>:可解释性</li>
 <li><code>cupy</code>:加速<code>pandas</code>,1000万以上数据更快</li>
 <li><code>modin</code>:<code>import modin.pandas as mdpd</code>,用<code>mdpd</code>代替<code>pd</code>即可，加速<code>pandas</code>,加载数据和查询数据更快,统计方法<code>pandas</code>更快</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Linux笔记]]></title>
-        <id>https://bailingnan.github.io/post/linux-chang-yong-ming-ling/</id>
-        <link href="https://bailingnan.github.io/post/linux-chang-yong-ming-ling/">
-        </link>
-        <updated>2020-01-22T08:16:23.000Z</updated>
-        <content type="html"><![CDATA[<!-- TOC -->
-<ul>
-<li><a href="#%E4%B8%80linux%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95">一、Linux文件与目录</a>
-<ul>
-<li><a href="#11-linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E6%A6%82%E5%BF%B5">1.1 Linux文件权限概念</a></li>
-<li><a href="#12-linux%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE">1.2 Linux目录配置</a></li>
-<li><a href="#13-%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86">1.3 文件与目录管理</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%8Cpip">二、pip</a></li>
-<li><a href="#%E4%B8%89conda">三、conda</a></li>
-<li><a href="#%E5%9B%9Bvim">四、Vim</a></li>
-<li><a href="#%E4%BA%94%E5%85%B6%E4%BB%96">五、其他</a></li>
-</ul>
-<!-- /TOC -->
-<h1 id="一-linux文件与目录">一、Linux文件与目录</h1>
-<h2 id="11-linux文件权限概念">1.1 Linux文件权限概念</h2>
-<ul>
-<li>切换至root身份:<code>su -</code></li>
-<li>离开root身份:<code>exit</code></li>
-<li>文件名第一个字符为.的文件为隐藏文件</li>
-</ul>
-<h2 id="12-linux目录配置">1.2 Linux目录配置</h2>
-<ul>
-<li>
-<p>FHS针对目录树架构仅定义出三层目录下面应该放置什么数据而已，分别是下面这三个目录的定义：</p>
-<ul>
-<li><code>/</code>（root, 根目录）:与开机系统有关；</li>
-<li><code>/usr</code> （unix software resource）:与软件安装/执行有关；</li>
-<li><code>/var</code>（variable）:与系统运行过程有关。</li>
-</ul>
-</li>
-<li>
-<p>FHS要求根目录中必须存在的目录:</p>
-<ul>
-<li>
-<p><code>/bin</code>:系统有很多放置可执行文件的目录，但<code>/bin</code>比较特殊。因为<code>/bin</code>放置的是在 单人维护模式下还能够被操作的指令。 在<code>/bin</code>下面的指令可以被root与一般帐号所使用，主要有：cat, chmod, chown, date, mv, mkdir, cp, bash等等常用的指令。</p>
-</li>
-<li>
-<p><code>/boot</code>:主要在放置开机会使用到的文件，包括 Linux 核心文件以及开机菜单与开机所需配置文件等等Linux kernel 常用的文件名为：vmlinuz，如果使用的是 grub2 这个开机管理程序， 则还会存在<code>/boot/grub2/</code>这个目录。</p>
-</li>
-<li>
-<p><code>/dev</code>:存放硬件相关的文件。在 Linux 系统上，任何设备与周边设备都是以文件的型态存在于这个目录当中的。你只要通过存取这个目录下面的某个文件，就等于存取某个设备。比要重要的文件有<code>/dev/null</code>, <code>/dev/zero</code>, <code>/dev/tty</code>, <code>/dev/loop</code>, <code>/dev/sd</code>等等。</p>
-</li>
-<li>
-<p><code>/etc</code>:存放配置文件的目录。系统主要的配置文件几乎都放置在这个目录内，例如人员的帐号密码档、各种服务的启始档等等。一般来说，这个目录下的各文件属性是可以让一般使用者查阅的，但是只有 root 有权力修改。FHS建议不要放置可执行文件 （binary）在这个目录中喔。比较重要的文件有： <code>/etc/modprobe.d/</code>, <code>/etc/passwd</code>, <code>/etc/fstab</code>, <code>/etc/issue</code>等等。另外 FHS 还规范几个重要的目录最好要存在 <code>/etc/</code>目录下：</p>
-<ul>
-<li><code>/etc/opt</code>（必要）：这个目录在放置第三方协力软件 <code>/opt</code> 的相关配置文件。</li>
-<li><code>/etc/X11/</code>（建议）：与 X Window 有关的各种配置文件都在这里，尤其是 xorg.conf 这个 X Server 的配置文件。</li>
-<li><code>/etc/sgml/</code>（建议）：与 SGML 格式有关的各项配置文件。</li>
-<li><code>/etc/xml/</code>（建议）：与 XML 格式有关的各项配置文件。</li>
-</ul>
-</li>
-<li>
-<p><code>/lib</code>:系统的函数库非常的多，而<code>/lib</code>放置的则是在开机时会用到的函数库， 以及 在<code>/bin</code>或<code>/sbin</code>下面的指令会调用的函数库而已。 什么是函数库呢？你可以将 他想成是“外挂”，某些指令必须要有这些“外挂”才能够顺利完成程序的执行 之意。 另外 FSH 还要求下面的目录必须要存在：<code>/lib/modules/</code>：这个目录 主要放置可抽换式的核心相关模块（驱动程序）</p>
-</li>
-<li>
-<p><code>/media</code>:media是“媒体”的英文，顾名思义，这个<code>/media</code>下面放置的就是可移除的设备！ 包括软盘、光盘、DVD等等设备都暂时挂载于此。常见的文件名 有：<code>/media/floppy</code>, <code>/media/cdrom</code>等等。</p>
-</li>
-<li>
-<p><code>/mnt</code>:如果你想要暂时挂载某些额外的设备，一般建议你可以放置到这个目录中。 在古早时候，这个目录的用途与<code>/media</code>相同啦！只是有了<code>/media</code>之后，这个 目录就用来暂时挂载用了。</p>
-</li>
-<li>
-<p><code>/opt</code>:这个是给第三方协力软件放置的目录。什么是第三方协力软件啊？ 举例来说，KDE 这个桌面管理系统是一个独立的计划，不过他可以安装到 Linux 系统中，因此KDE的软件就建议放置到此目录下了。 另外，如果你想要自行安装额外的软件（非原本的 distribution 提供的），那么也能够将你的软件安装到这里来。 不过，以前的 Linux 系统中，我们还是习惯放置在<code>/usr/local</code>目录下呢！</p>
-</li>
-<li>
-<p><code>/run</code>:早期的 FHS 规定系统开机后所产生的各项信息应该要放置到 <code>/var/run</code> 目录下，新版的 FHS 则规范到 <code>/run</code> 下面。 由于 <code>/run</code> 可以使用内存来仿真，因此性能上会好很多！</p>
-</li>
-<li>
-<p><code>/sbin</code>:存放管理员root可以执行的命令。Linux 有非常多指令是用来设置系统环境的，这些指令只有 root 才能够利用 来“设置”系统，其他使用者最多只能用来“查询”而已。放在<code>/sbin</code>下面的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。至于某些服务器软件程序，一般则放置到<code>/usr/sbin/</code>当中。至于本机自行安装的软件所产生的系统可执行文件（system binary）， 则放置到<code>/usr/local/sbin/</code> 当中了。常见的指令包括：fdisk, fsck, ifconfig, mkfs等等。</p>
-</li>
-<li>
-<p><code>/srv</code>:srv 可以视为“service”的缩写，是一些网络服务启动之后，这些服务所需要取用的数据目录。 常见的服务例如 WWW, FTP 等等。举例来说，WWW 服务器需要的网页数据就可以放置在<code>/srv/www/</code>里面。 不过，系统的服务数据 如果尚未要提供给网际网络任何人浏览的话，默认还是建议放置到 <code>/var/lib</code>下面即可。</p>
-</li>
-<li>
-<p><code>tem</code>:这是让一般使用者或者是正在执行的程序暂时放置文件的地方。 这个目录是任何人都能够存取的，所以你需要定期的清理一下。当然，重要数据不可放置在此目录啊！ 因为FHS甚至建议在开机时，应该要将<code>/tmp</code>下的数据都删除唷!</p>
-</li>
-<li>
-<p><code>/var</code>:第二层 FHS 设置，主要为放置变动性的数据，后续介绍。</p>
-</li>
-<li>
-<p><code>/usr</code>:第二层 FHS 设置，后续介绍。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>FHS 建议根目录中可以存在的目录：</p>
-<ul>
-<li><code>/home</code>：这是系统默认的使用者主文件夹（home directory）。在你新增一个一般使 用者帐号时，默认的使用者主文件夹都会规范到这里来。</li>
-<li><code>/lib&lt;equal&gt;</code>:用来存放与 <code>/lib</code> 不同的格式的二进制函数库，例如支持 64 位的 <code>/lib64</code> 函数库等。</li>
-<li><code>/root</code>:系统管理员（root）的主文件夹。之所以放在这里，是因为如果进入单人维护模式而仅挂载根目录时， 该目录就能够拥有 root 的主文件夹，所以我们会 希望 root 的主文件夹与根目录放置在同一个分区中。</li>
-<li><code>/lost+found</code>:这个目录是使用标准的 ext2/ext3/ext4 文件系统格式才会产生的一个目录， 目的在于当文件系统发生错误时， 将一些遗失的片段放置到这个目录下。 不过如果使用的是 xfs 文件系统的话，就不会存在这个目录了！</li>
-<li><code>/proc</code>:这个目录本身是一个“虚拟文件系统（virtual filesystem）”喔！他放置的数据都是在内存当中， 例如系统核心、行程信息（process）、周边设备的状态及网络状态等等。因为这个目录下的数据都是在内存当中， 所以本身不占任何硬盘空间啊！比较重要的文件例如：<code>/proc/cpuinfo</code>, <code>/proc/dma</code>, <code>/proc/interrupts</code>, <code>/proc/ioports</code>, <code>/proc/net/*</code> 等等。</li>
-<li><code>/sys</code>:这个目录其实跟/proc非常类似，也是一个虚拟的文件系统，主要也是记录 核心与系统硬件信息较相关的信息。 包括目前已载入的核心模块与核心侦测到的硬件设备信息等等。这个目录同样不占硬盘容量喔！</li>
-</ul>
-</li>
-<li>
-<p>因为是所有系统默认的软件（distribution发布者提供的软件）都会放置到<code>/usr</code>下面，因此这个目录有点类似 Windows 系统的“C:\Windows\ （当中的一部份） + C:\Program files\”这两个目 录的综合体，系统刚安装完毕时，这个目录会占用最多的硬盘容量。一般来说，<code>/usr</code>的次目录 建议有下面这些：</p>
-</li>
-<li>
-<p>FHS 要求必须要存在的目录:</p>
-<ul>
-<li><code>/usr/bin/</code>:所有一般用户能够使用的指令都放在这里！<code>/usr/bin</code> 与 <code>/bin</code> 是一模一样了！另外，FHS 要求在此目录下不应该有子目录！</li>
-<li><code>/usr/lib/</code>:基本上，与 <code>/lib</code> 功能相同，所以 <code>/lib</code> 就是链接到此目录中的！</li>
-<li><code>/usr/local/</code>:系统管理员在本机自行安装自己下载的软件（非 distribution 默认提供者），建议安装到此目录， 这样会比较便于管理。举例来说，你的 distribution 提供的软件较旧，你想安装较新的软件但又不想移除旧版，此时你可以将新版软件安装于<code>/usr/local/</code>目录下，可与原先的旧版软件有分别啦！ 你可以自行到<code>/usr/local</code>去看看，该目录下也是具有bin, etc, include, lib...的次目录喔！</li>
-<li><code>/usr/sbin/</code>:非系统正常运行所需要的系统指令。最常见的就是某些网络服务器软件 的服务指令（daemon）啰！不过基本功能与 <code>/sbin</code> 也差不多， 因此目前 <code>/sbin</code> 就是链接到此目录中的。</li>
-<li><code>/usr/share/</code>:主要放置只读架构的数据文件，当然也包括共享文件。在这个目录下放置的数据几乎是不分硬件架构均可读取的数据，因为几乎都是文字文件嘛！在此目录下常见的还有这些次目录：
-<ul>
-<li><code>/usr/share/man</code>：线上说明文档。</li>
-<li><code>/usr/share/doc</code>：软件杂项的文件说明。</li>
-<li><code>/usr/share/zoneinfo</code>：与时区有关的时区文件。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>FHS 建议可以存在的目录：</p>
-<ul>
-<li><code>/usr/games/</code>:与游戏比较相关的数据放置处。</li>
-<li><code>/usr/include/</code>:c/c++等程序语言的文件开始（header）与包含档（include）放置处， 当我们以tarball方式 （*.tar.gz 的方式安装软件）安装某些数据时，会使用到里头的许多包含档喔！</li>
-<li><code>/usr/libexec/</code>:某些不被一般使用者惯用的可执行文件或脚本（script）等等，都会放 置在此目录中。例如大部分的 X 窗口下面的操作指令， 很多都是放在此目录下的。</li>
-<li><code>/usr/lib&lt;qual&gt;/</code>:与 <code>/lib&lt;qual&gt;/</code>功能相同，因此目前 <code>/lib&lt;qual&gt;</code> 就是链接到此目录中。</li>
-<li><code>/usr/src/</code>:一般源代码建议放置到这里，src有source的意思。至于核心源代码则建议放置到<code>/usr/src/linux/</code>目录下。</li>
-</ul>
-</li>
-<li>
-<p>如果<code>/usr</code>是安装时会占用较大硬盘容量的目录，那么<code>/var</code>就是在系统运行后才会渐渐占用硬盘容量的目录。 因为<code>/var</code>目录主要针对常态性变动的文件，包括高速缓存（cache）、登录文件 （log file）以及某些软件运行所产生的文件， 包括程序文件（lock file, run file），或者例如 MySQL数据库的文件等等。常见的次目录有：</p>
-</li>
-<li>
-<p>FHS 要求必须要存在的目录:</p>
-<ul>
-<li><code>/var/cache/</code>:应用程序本身运行过程中会产生的一些暂存盘；</li>
-<li><code>/var/lib/</code>:程序本身执行的过程中，需要使用到的数据文件放置的目录。在此目录下各自的软件应该要有各自的目录。举例来说，MySQL的数据库放置 到<code>/var/lib/mysql/</code>而rpm的数据库则放到<code>/var/lib/rpm</code>去！</li>
-<li><code>/var/lock/</code>:某些设备或者是文件资源一次只能被一个应用程序所使用，如果同时有两个程序使用该设备时，就可能产生一些错误的状况，因此就得要将该设备上锁（lock），以确保该设备只会给单一软件所使用。目前此目录也已经挪到 <code>/run/lock</code>中！</li>
-<li><code>/var/log/</code>:重要到不行！这是登录文件放置的目录！里面比较重要的文件 如<code>/var/log/messages</code>, <code>/var/log/wtmp</code>（记录登陆者的信息）等。</li>
-<li><code>/var/mail/</code>:放置个人电子邮件信箱的目录，不过这个目录也被放置到<code>/var/spool/mail/</code> 目录中！ 通常这两个目录是互为链接文件啦！</li>
-<li><code>/var/run/</code>:某些程序或者是服务启动后，会将他们的PID放置在这个目录下喔！至于 PID的意义我们会在后续章节提到的。与 <code>/run</code> 相同，这个目录链接到 <code>/run</code> 去了！</li>
-<li><code>/var/spool/</code>:这个目录通常放置一些伫列数据，所谓的“伫列”就是排队等待其他程序使用的数据啦！ 这些数据被使用后通常都会被删除。举例来说，系统收到新信会放置到<code>/var/spool/mail/</code>中， 但使用者收下该信件后该封信原则上就会 被删除。信件如果暂时寄不出去会被放到<code>/var/spool/mqueue/</code>中， 等到被送出后就被删除。如果是工作调度数据（crontab），就会被放置到<code>/var/spool/cron/</code>目录中！</li>
-</ul>
-</li>
-</ul>
-<h2 id="13-文件与目录管理">1.3 文件与目录管理</h2>
-<ul>
-<li>
-<p>网络文件常常提到类似“./run.sh”之类的数据，这个指令的意义为何？答：由于指令的执行需要变量（bash章节才会提到）的支持，若你的可执行文件放置在本目录，并且本目录并非正规的可执行文件目录（/bin, /usr/bin等为正规），此时要执行指令就得要严格指定该可执行文件。“./”代表“本目录”的意思，所以“./run.sh”代表“执行本目录下，名为run.sh的文件”。</p>
-</li>
-<li>
-<p>cd （change directory, 变换目录）</p>
-<ul>
-<li><code>cd ~dmtsai</code>: 代表去到 dmtsai 这个使用者的主文件夹，亦即 <code>/home/dmtsai</code></li>
-<li><code>cd ~</code>:表示回到自己的主文件夹，亦即是 <code>/root</code> 这个目录</li>
-<li><code>cd</code>:没有加上任何路径，也还是代表回到自己主文件夹的意思</li>
-<li><code>cd ..</code>:表示去到目前的上层目录</li>
-<li><code>cd -</code>:表示回到刚刚的那个目录</li>
-<li><code>cd ../postfix</code>:由<code>/var/spool/mail</code> 去到<code>/var/spool/postfix</code></li>
-</ul>
-</li>
-<li>
-<p>一登陆Linux系统后，每个帐号都会在自己帐号的主文件夹中(<code>/home</code>)。</p>
-</li>
-<li>
-<p>pwd （显示目前所在的目录）</p>
-<ul>
-<li><code>pwd [-P]</code>😛 ：显示出确实的路径，而非使用链接 （link） 路径。加上 <code>pwd -P</code> 的选项后，会不以链接文件的数据显示，而是显示正确的完整路径。</li>
-<li><code>pwd</code>:单纯显示出目前的工作目录。</li>
-</ul>
-</li>
-<li>
-<p>mkdir （创建新目录）</p>
-<ul>
-<li><code>mkdir [-mp] 目录名称</code>:
-<ul>
-<li><code>-m</code> ：设置文件的权限喔！直接设置，不需要看默认权限 （umask） 的脸色～</li>
-<li><code>-p</code> ：帮助你直接将所需要的目录（包含上层目录）递回创建起来！</li>
-<li>示例:
-<ul>
-<li><code>mkdir test1/test2/test3/test4</code>:错误。mkdir: cannot create directory ‘test1/test2/test3/test4’: No such file or directory</li>
-<li><code>mkdir -p test1/test2/test3/test4</code>:正确。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>rmdir （删除“空”的目录）
-<ul>
-<li><code>rmdir [-p] 目录名称</code>:
-<ul>
-<li><code>-p</code> ：连同“上层”“空的”目录也一起删除。</li>
-</ul>
-</li>
-<li>示例:
-<ul>
-<li><code>rmdir test1</code>:rmdir: failed to remove ‘test1’: Directory not empty</li>
-<li><code>rmdir -p test1/test2/test3/test4</code>:利用 <code>-p</code> 这个选项，立刻就可以将 <code>test1/test2/test3/test4</code> 一次删除,包括test1</li>
-<li>如果要将非空目录下的东西都杀掉呢？！ 这个时候就必须使用<code>rm -r 目录名称</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>文件与目录的检视： ls</p>
-<ul>
-<li><code>ls [-aAdfFhilnrRSt] 文件名或目录名称</code>
-<ul>
-<li><code>-a</code> ：全部的文件，连同隐藏文件（ 开头为 . 的文件） 一起列出来（常用）</li>
-<li><code>-d</code> ：仅列出目录本身，而不是列出目录内的文件数据（常用）</li>
-<li><code>-l</code> ：长数据串行出，包含文件的属性与权限等等数据（常用）</li>
-<li>示例：
-<ul>
-<li><code>ls -al ~</code>: 将主文件夹下的所有文件列出来（含属性与隐藏文件）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>cp （复制文件或目录）</p>
-<ul>
-<li><code>cp [-adfilprsu] 来源文件（source） 目标文件（destination）</code></li>
-<li><code>cp [options] source1 source2 source3 .... directory</code>
-<ul>
-<li><code>-a</code> ：相当于 -dr --preserve=all 的意思，至于 dr 请参考下列说明；（常用）</li>
-<li><code>-i</code> ：若目标文件（destination）已经存在时，在覆盖时会先询问动作的进行（常用）</li>
-<li><code>-r</code> ：递回持续复制，用于目录的复制行为；（常用）</li>
-<li><code>-p</code> ：连同文件的属性（权限、用户、时间）一起复制过去，而非使用默认属性（备份常用）；</li>
-<li><code>--preserve=all</code> ：除了 -p 的权限相关参数外，还加入 SELinux 的属性, links, xattr 等也复制了。</li>
-<li>如果来源文件有两个以上，则最后一个目的文件一定要是“目录”才行！</li>
-<li>如果目标目录或者目标文件不存在，则相当于重命名。</li>
-<li>示例
-<ul>
-<li><code>cp ~/.bashrc /tmp/bashrc</code>:将主文件夹下的 .bashrc 复制到 <code>/tmp</code> 下，并更名为 bashrc</li>
-<li><code>cp -i ~/.bashrc /tmp/bashrc</code>:cp: overwrite <code>/tmp/bashrc'? n不覆盖，y为覆盖，重复作两次动作，由于</code>/tmp<code>下面已经存在 bashrc 了，加上</code>-i` 选项后，则在覆盖前会询问使用者是否确定！可以按下 n 或者 y 来二次确认</li>
-<li><code>cp /var/log/wtmp .</code>:复制到当前目录</li>
-<li><code>cp /etc/ /tmp</code>:复制 <code>/etc/</code> 这个目录下的所有内容到 <code>/tmp</code> 下面，cp: omitting directory <code>/etc</code>，如果是目录则不能直接复制，要加上 <code>-r</code> 的选项</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>rm （移除文件或目录）</p>
-<ul>
-<li><code>rm [-fir] 文件或目录</code>：
-<ul>
-<li><code>-f</code> ：就是 force 的意思，忽略不存在的文件，不会出现警告讯息；</li>
-<li><code>-r</code> ：递回删除啊！最常用在目录的删除了！这是非常危险的选项！！！</li>
-<li><code>-rf</code>: 如子目录里面还有子目录时，那就要使用 -r 这个选项</li>
-<li><code>-rf/</code>: 会将系统文件全部删除，非常危险  <s>删库跑路</s></li>
-<li>示例：
-<ul>
-<li><code>rm bashrc*</code>:通过万用字符*的帮忙，将<code>/tmp</code>下面开头为bashrc的文件名通通删除</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>mv （移动文件与目录，或更名）</p>
-<ul>
-<li><code>mv [-fiu] source destination</code></li>
-<li><code>mv [options] source1 source2 source3 .... directory</code>
-<ul>
-<li><code>-f</code> ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；</li>
-<li><code>-i</code> ：若目标文件 （destination） 已经存在时，就会询问是否覆盖！</li>
-<li><code>-u</code> ：若目标文件已经存在，且 source 比较新，才会更新 （update）</li>
-<li>示例:
-<ul>
-<li>复制一文件，创建一目录，将文件移动到目录中：
-<ul>
-<li><code>cd /tmp</code></li>
-<li><code>cp ~/.bashrc bashrc</code></li>
-<li><code>mkdir mvtest</code></li>
-<li><code>mv bashrc mvtest</code></li>
-</ul>
-</li>
-<li>文件改名：
-<ul>
-<li><code>mv mvtest mvtest2</code></li>
-</ul>
-</li>
-<li>再创建两个文件，再全部移动到 <code>/tmp/mvtest2</code> 当中:
-<ul>
-<li><code>cp ~/.bashrc bashrc1</code></li>
-<li><code>cp ~/.bashrc bashrc2</code></li>
-<li><code>mv bashrc1 bashrc2 mvtest2</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="二-pip">二、pip</h1>
-<ul>
-<li><code>pip install --upgrade pip</code>或<code>pip install -U pip</code>:升级pip自身</li>
-<li><code>pip list</code>：查看已经通过pip安装的包</li>
-<li><code>pip install &lt;包名&gt; --upgrade</code>或<code>pip install -U &lt;包名&gt;</code>:升级包</li>
-<li><code>pip install &lt;包名&gt; -i https://mirrors.aliyun.com/pypi/simple</code>:指定单次安装源</li>
-<li><code>pip install SomePackage==1.0.4</code>:指定版本</li>
-<li><code>pip-review --auto/pip-review --local --interactive</code>:自动更新所有包</li>
-</ul>
-<h1 id="三-conda">三、conda</h1>
-<ul>
-<li><code>conda --version</code>:查看conda版本，验证是否安装</li>
-<li><code>conda update conda</code>:更新至最新版本，也会更新其它相关包</li>
-<li><code>conda update --all</code>:更新所有包</li>
-<li><code>conda update package_name</code>:更新指定的包</li>
-<li><code>conda create -n env_name package_name</code>:创建名为 env_name 的新环境，并在该环境下安装名为 package_name 的包，可以指定新环境的版本号，例如：<code>conda create -n python2 python=python2.7 numpy pandas</code>，创建了python2环境，python版本为2.7，同时还安装了numpy pandas包</li>
-<li><code>conda activate env_name</code>:切换至env_name环境</li>
-<li><code>conda deactivate</code>:退出环境</li>
-<li><code>conda info -e</code>:显示所有已经创建的环</li>
-<li><code>conda create -n new_env_name --clone old_env_name</code>:复制old_env_name为new_env_name</li>
-<li><code>conda remove -n env_name –-all</code>:删除环境</li>
-<li><code>conda list</code>:查看所有已经安装的包</li>
-<li><code>conda install -n env_name package_name</code>:在指定环境中安装包</li>
-<li><code>conda remove -n env_name package</code>:删除指定环境中的包</li>
-<li><code>rm -rf 虚拟环境所在路径</code>:删除空环境</li>
-</ul>
-<h1 id="四-vim">四、Vim</h1>
-<ul>
-<li><code>shift+g</code>:移至文件末尾</li>
-</ul>
-<h1 id="五-其他">五、其他</h1>
-<ul>
-<li><code>sudo nautilus /home</code>:打开图形化文件夹</li>
-<li><code>top</code>或<code>htop</code>：查看当前进程</li>
-<li><code>ifconfig</code>：查看IP地址</li>
-<li><code>kill 进程号</code>:终止进程</li>
-<li><code>kill -9 进程号</code>:强制终止进程</li>
-<li><code>tar -zxvf xxx.tar.gz</code>:解压缩</li>
-<li><code>chmod u+x file</code>:对文件 file 增加文件主可执行权限（u表示文件主）</li>
-<li><code>sudo apt-get install package</code>:安装包</li>
-<li><code>sudo apt-get install package --reinstall</code>:重新安装包</li>
-<li><code>sudo apt-get -f install</code>:修复安装</li>
-<li><code>sudo apt-get remove package</code>:删除包</li>
-<li><code>sudo apt-get remove package --purge</code>:删除包，包括删除配置文件等</li>
-<li><code>sudo apt-get update</code>:更新源</li>
-<li><code>sudo apt-get upgrade</code>:更新已安装的包</li>
-<li><code>sudo apt-get dist-upgrade</code>:`升级系统</li>
-<li><code>sudo apt-get autoclean</code>:清理旧版本软件缓存</li>
-<li><code>sudo dpkg -i package.deb</code>:所有deb文件的安装</li>
-<li><code>sudo dpkg -r package</code>：所有deb文件的卸载</li>
-<li><code>sudo dpkg -P package</code>:彻底的卸载，包括软件的配置文件</li>
 </ul>
 ]]></content>
     </entry>
