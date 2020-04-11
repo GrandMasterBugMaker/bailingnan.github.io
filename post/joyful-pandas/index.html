@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1586625662802">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1586630036738">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1586625662802" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1586630036738" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -6520,8 +6520,8 @@ b	5
 <li><code>on</code>：对应列名或者行索引的名字，如果要在<code>DataFrame</code>相同的列索引做对齐，用这个参数；</li>
 <li><code>left_on</code>, <code>right_on</code>, <code>left_index</code>, <code>right_index</code>：
 <ul>
-<li><code>on</code>对应列名或者行索引的名字（所以行索引一般要跟列一样看待，有自己的名字），用这俩参数；</li>
-<li><code>index</code>对应要使用的<code>index</code>,不建议使用，会搞晕。</li>
+<li><code>on</code>对应列名或者行索引的名字（所以行索引一般要跟列一样看待，有自己的名字），用这俩参数；<code>DataFrame</code>中用作连接键的列名;这个参数中左右列名不相同，但代表的含义相同时非常有用。</li>
+<li><code>index</code>对应要使用的<code>index</code>,不建议使用，会搞晕。使用<code>DataFrame</code>中的行索引做为连接键，用到这个参数时，就有点类似于<code>JOIN</code>函数了</li>
 </ul>
 </li>
 <li><code>sort</code>: <code>True</code> or <code>False</code>，是否按字典序重新排序。</li>
