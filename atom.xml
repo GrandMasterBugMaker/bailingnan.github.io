@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bailingnan.github.io/</id>
     <title>白凌南</title>
-    <updated>2020-04-18T13:47:44.292Z</updated>
+    <updated>2020-04-18T13:48:55.173Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bailingnan.github.io/"/>
     <link rel="self" href="https://bailingnan.github.io/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://bailingnan.github.io/post/mldl/">
         </link>
         <updated>2020-04-18T13:47:21.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="决策树机器学习">决策树(机器学习)</h1>
+        <content type="html"><![CDATA[<h1 id="决策树机器学习">决策树(《机器学习》)</h1>
 <h2 id="基本流程">基本流程</h2>
 <p>一般的，一棵决策树包含一个根结点、若干个内部结点和若干个叶结点；叶结点对应于决策结果，其他每个结点则对应于一个属性测试；每个结点包含的样本集合根据属性测试的结果被划分到子结点中；根结点包含样本全集。从根结点到每个叶结点的路径对应了一个判定测试序列。决策树学习的目的是为了产生一棵泛化能力强，即处理未见示例能力强的决策树，其基本流程遵循简单且直观的“分而治之”（divide-and-conquer）策略。</p>
 <p>决策树的构造是一个递归的过程，有三种情形会导致递归返回：</p>
