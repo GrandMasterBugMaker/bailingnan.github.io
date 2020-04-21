@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1587443757440">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1587475271538">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1587443757440" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1587475271538" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -310,7 +310,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">Python笔记</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-03-22 / 206 min read
+          2020-03-22 / 210 min read
         </div>
         
         <div class="post-content yue">
@@ -4633,7 +4633,82 @@ q.count(x)# 计算x的个数
 q.remove(value)#移除找到的第一个 value。
 q.reverse()#逆序排列
 </code></pre>
-<p><code>deque</code>除了实现<code>list</code>的<code>append()</code>和<code>pop()</code>外，还支持<code>appendleft()</code>和<code>popleft()</code>，这样就可以非常高效地往头部添加或删除元素。</p>
+<p><code>deque</code>除了实现<code>list</code>的<code>append()</code>和<code>pop()</code>外，还支持<code>appendleft()</code>和<code>popleft()</code>，这样就可以非常高效地往头部添加或删除元素。<br>
+<code>class collections.deque([iterable[, maxlen]])</code><br>
+返回一个新的双向队列对象，从左到右初始化(用方法<code>append()</code>) ，从 <code>iterable</code>(迭代对象) 数据创建。如果 <code>iterable</code> 没有指定，新队列为空。</p>
+<p><code>Deque</code>队列是由栈或者<code>queue</code>队列生成的（发音是 “deck”，”double-ended queue”的简称）。<code>Deque</code> 支持线程安全，内存高效添加(<code>append</code>)和弹出(<code>pop</code>)，从两端都可以，两个方向的大概开销都是 <code>O(1)</code> 复杂度。</p>
+<p>虽然 <code>list</code> 对象也支持类似操作，不过这里优化了定长操作和 <code>pop(0)</code> 和 <code>insert(0, v)</code> 的开销。它们引起 <code>O(n)</code> 内存移动的操作，改变底层数据表达的大小和位置。</p>
+<p>如果 <code>maxlen</code> 没有指定或者是 <code>None</code> ，<code>deques</code> 可以增长到任意长度。否则，<code>deque</code>就限定到指定最大长度。一旦限定长度的<code>deque</code>满了，当新项加入时，同样数量的项就从另一端弹出。限定长度<code>deque</code>提供类似Unix filter tail 的功能。它们同样可以用与追踪最近的交换和其他数据池活动。</p>
+<p>双向队列(<code>deque</code>)对象支持以下方法：</p>
+<ul>
+<li><code>append(x)</code>:添加 <code>x</code> 到右端。</li>
+<li><code>appendleft(x)</code>:添加 <code>x</code> 到左端。</li>
+<li><code>clear()</code>:移除所有元素，使其长度为<code>0</code>.</li>
+<li><code>copy()</code>:创建一份浅拷贝。</li>
+<li><code>count(x)</code>:计算 <code>deque</code> 中元素等于 <code>x</code> 的个数。</li>
+<li><code>extend(iterable)</code>:扩展<code>deque</code>的右侧，通过添加<code>iterable</code>参数中的元素。</li>
+<li><code>extendleft(iterable)</code>:扩展<code>deque</code>的左侧，通过添加<code>iterable</code>参数中的元素。注意，左添加时，在结果中<code>iterable</code>参数中的顺序将被反过来添加。</li>
+<li><code>index(x[, start[, stop]])</code>:返回 <code>x</code> 在 <code>deque</code> 中的位置（在索引 <code>start</code> 之后，索引 <code>stop</code> 之前）。 返回第一个匹配项，如果未找到则引发 <code>ValueError</code>。</li>
+<li><code>insert(i, x)</code>:在位置 <code>i</code> 插入 <code>x</code> 。如果插入会导致一个限长 <code>deque</code> 超出长度 <code>maxlen</code> 的话，就引发一个 <code>IndexError</code>。</li>
+<li><code>pop()</code>:移去并且返回一个元素，<code>deque</code> 最右侧的那一个。 如果没有元素的话，就引发一个 <code>IndexError</code>。</li>
+<li><code>popleft()</code>:移去并且返回一个元素，<code>deque</code> 最左侧的那一个。 如果没有元素的话，就引发 <code>IndexError</code>。</li>
+<li><code>remove(value)</code>:移除找到的第一个 <code>value</code>。 如果没有的话就引发 <code>ValueError</code>。</li>
+<li><code>reverse()</code>:将<code>deque</code>逆序排列。返回 <code>None</code> 。</li>
+<li><code>rotate(n=1)</code>:向右循环移动 <code>n</code> 步。 如果 <code>n</code> 是负数，就向左循环。如果<code>deque</code>不是空的，向右循环移动一步就等价于 <code>d.appendleft(d.pop())</code> ， 向左循环一步就等价于 <code>d.append(d.popleft())</code> 。</li>
+</ul>
+<p><code>Deque</code>对象同样提供了一个只读属性:</p>
+<ul>
+<li><code>maxlen</code>:<code>Deque</code>的最大尺寸，如果没有限定的话就是 <code>None</code> 。</li>
+</ul>
+<p>除了以上操作，<code>deque</code> 还支持迭代、封存、<code>len(d)</code>、<code>reversed(d)</code>、<code>copy.copy(d)</code>、<code>copy.deepcopy(d)</code>、成员检测运算符 <code>in</code> 以及下标引用例如通过 <code>d[0]</code> 访问首个元素等。 索引访问在两端的复杂度均为 <code>O(1)</code> 但在中间则会低至 <code>O(n)</code>。 如需快速随机访问，请改用列表。</p>
+<p><code>Deque</code>支持 <code>__add__()</code>, <code>__mul__()</code>, 和 <code>__imul__()</code> 。</p>
+<pre><code class="language-python">from collections import deque
+d = deque('ghi')                 # make a new deque with three items
+for elem in d:                   # iterate over the deque's elements
+    print(elem.upper())
+G
+H
+I
+d.append('j')                    # add a new entry to the right side
+d.appendleft('f')                # add a new entry to the left side
+d                                # show the representation of the deque
+deque(['f', 'g', 'h', 'i', 'j'])
+d.pop()                          # return and remove the rightmost item
+'j'
+d.popleft()                      # return and remove the leftmost item
+'f'
+list(d)                          # list the contents of the deque
+['g', 'h', 'i']
+d[0]                             # peek at leftmost item
+'g'
+d[-1]                            # peek at rightmost item
+'i'
+list(reversed(d))                # list the contents of a deque in reverse
+['i', 'h', 'g']
+'h' in d                         # search the deque
+True
+d.extend('jkl')                  # add multiple elements at once
+d
+deque(['g', 'h', 'i', 'j', 'k', 'l'])
+d.rotate(1)                      # right rotation
+d
+deque(['l', 'g', 'h', 'i', 'j', 'k'])
+d.rotate(-1)                     # left rotation
+d
+deque(['g', 'h', 'i', 'j', 'k', 'l'])
+deque(reversed(d))               # make a new deque in reverse order
+deque(['l', 'k', 'j', 'i', 'h', 'g'])
+d.clear()                        # empty the deque
+d.pop()                          # cannot pop from an empty deque
+Traceback (most recent call last):
+    File &quot;&lt;pyshell#6&gt;&quot;, line 1, in -toplevel-
+        d.pop()
+IndexError: pop from an empty deque
+
+d.extendleft('abc')              # extendleft() reverses the input order
+d
+deque(['c', 'b', 'a'])
+</code></pre>
 <h4 id="defaultdict"><code>defaultdict</code></h4>
 <p>使用<code>dict</code>时，如果引用的<code>Key</code>不存在，就会抛出<code>KeyError</code>。如果希望<code>key</code>不存在时，返回一个默认值，就可以用<code>defaultdict</code>：</p>
 <pre><code class="language-Python">from collections import defaultdict
