@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>白凌南</title>
 <meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
-<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1587396981913">
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1587439833896">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -32,7 +32,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://bailingnan.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1587396981913" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1587439833896" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
       </div>
@@ -166,35 +166,35 @@ all_unique(y) # True
     return list(common)
 </code></pre>
 <ul>
-<li>压缩<br>
-这个方法可以将布尔型的值去掉，例如<code>(False，None，0，“”)</code>，它使用 <code>filter()</code> 函数。</li>
+<li>压缩</li>
 </ul>
+<p>这个方法可以将布尔型的值去掉，例如<code>(False，None，0，“”)</code>，它使用 <code>filter()</code> 函数。</p>
 <pre><code class="language-Python">def compact(lst):
     return list(filter(bool, lst))
 compact([0, 1, False, 2, '', 3, 'a', 's', 34])
 # [ 1, 2, 3, 'a', 's', 34 ]
 </code></pre>
 <ul>
-<li>解包<br>
-如下代码段可以将打包好的成对列表解开成两组不同的元组。</li>
+<li>解包</li>
 </ul>
+<p>如下代码段可以将打包好的成对列表解开成两组不同的元组。</p>
 <pre><code class="language-Python">array = [['a', 'b'], ['c', 'd'], ['e', 'f']]
 transposed = zip(*array)
 print(transposed)
 # [('a', 'c', 'e'), ('b', 'd', 'f')]
 </code></pre>
 <ul>
-<li>逗号连接<br>
-下面的代码可以将列表连接成单个字符串，且每一个元素间的分隔方式设置为了逗号。</li>
+<li>逗号连接</li>
 </ul>
+<p>下面的代码可以将列表连接成单个字符串，且每一个元素间的分隔方式设置为了逗号。</p>
 <pre><code class="language-Python">hobbies = [&quot;basketball&quot;, &quot;football&quot;, &quot;swimming&quot;]
 print(&quot;My hobbies are: &quot; + &quot;, &quot;.join(hobbies))
 # My hobbies are: basketball, football, swimming
 </code></pre>
 <ul>
-<li>展开列表<br>
-该方法将通过递归的方式将列表的嵌套展开为单个列表。</li>
+<li>展开列表</li>
 </ul>
+<p>该方法将通过递归的方式将列表的嵌套展开为单个列表。</p>
 <pre><code class="language-Python">def spread(arg):
     ret = []
     for i in arg:
@@ -203,24 +203,12 @@ print(&quot;My hobbies are: &quot; + &quot;, &quot;.join(hobbies))
         else:
             ret.append(i)
     return ret
-
 def deep_flatten(lst):
     result = []
     result.extend(
         spread(list(map(lambda x: deep_flatten(x) if type(x) == list else x, lst))))
     return result
 deep_flatten([1, [2], [[3], 4], 5]) # [1,2,3,4,5]
-</code></pre>
-<p>非递归：</p>
-<pre><code class="language-Python">def spread(arg):
-    ret = []
-    for i in arg:
-        if isinstance(i, list):
-            ret.extend(i)
-        else:
-            ret.append(i)
-    return ret
-spread([1,2,3,[4,5,6],[7],8,9]) # [1,2,3,4,5,6,7,8,9]
 </code></pre>
 <p>可以写一个包含 <code>yield from</code> 语句的递归生成器来轻松解决这个问题。比如：</p>
 <pre><code class="language-python">from collections import Iterable
@@ -258,9 +246,9 @@ Lewis
 <p>尽管只改了一点点，但是 <code>yield from</code> 语句看上去感觉更好，并且也使得代码更简洁清爽。<br>
 之前提到的对于字符串和字节的额外检查是为了防止将它们再展开成单个字符。 如果还有其他你不想展开的类型，修改参数 <code>ignore_types</code> 即可。</p>
 <ul>
-<li>列表的差<br>
-该方法将返回第一个列表的元素，其不在第二个列表内。如果同时要反馈第二个列表独有的元素，还需要加一句 <code>set_b.difference(set_a)</code>。</li>
+<li>列表的差</li>
 </ul>
+<p>该方法将返回第一个列表的元素，其不在第二个列表内。如果同时要反馈第二个列表独有的元素，还需要加一句 <code>set_b.difference(set_a)</code>。</p>
 <pre><code class="language-Python">def difference(a, b):
     set_a = set(a)
     set_b = set(b)
@@ -269,9 +257,9 @@ Lewis
 difference([1,2,3], [1,2,4]) # [3]
 </code></pre>
 <ul>
-<li>通过函数取差<br>
-如下方法首先会应用一个给定的函数，然后再返回应用函数后结果有差别的列表元素。</li>
+<li>通过函数取差</li>
 </ul>
+<p>如下方法首先会应用一个给定的函数，然后再返回应用函数后结果有差别的列表元素。</p>
 <pre><code class="language-Python">def difference_by(a, b, fn):
     b = set(map(fn, b))
     return [item for item in a if fn(item) not in b]
@@ -281,15 +269,15 @@ difference_by([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], lambda v : v['x'])
 # [ { x: 2 } ]
 </code></pre>
 <ul>
-<li>Given a list of N numbers。<br>
-给定一个含有<code>N</code>个数字的列表。<br>
+<li>Given a list of N numbers。</li>
+</ul>
+<p>给定一个含有<code>N</code>个数字的列表。<br>
 使用单一的列表生成式来产生一个新的列表，该列表只包含满足以下条件的值：<br>
 (a)偶数值<br>
 (b)元素为原始列表中偶数切片。<br>
 例如，如果<code>list[2]</code>包含的值是偶数。那么这个值应该被包含在新的列表当中。因为这个数字同时在原始列表的偶数序列（2为偶数）上。然而，如果<code>list[3]</code>包含一个偶数，<br>
 那个数字不应该被包含在新的列表当中，因为它在原始列表的奇数序列上。<br>
-对此问题的简单解决方法如下：</li>
-</ul>
+对此问题的简单解决方法如下：</p>
 <pre><code class="language-Python">[x for x in list[::2] if x%2 == 0]
 </code></pre>
 <p>例如，给定列表如下：</p>
@@ -311,7 +299,7 @@ print(f'更长的列表是{r}')  # [4, 5, 6, 7]
 <ul>
 <li>求众数</li>
 </ul>
-<pre><code>def top1(lst):
+<pre><code class="language-Python">def top1(lst):
     return max(lst, default='列表为空', key=lambda v: lst.count(v))
 lst = [1, 3, 3, 2, 1, 1, 2]
 r = top1(lst)
@@ -334,9 +322,9 @@ records = [25,89,31,34]
 bif_by(records, lambda x: x&lt;80) # [[25, 31, 34], [89]]
 </code></pre>
 <ul>
-<li>解压可迭代对象赋值给多个变量<br>
-Python 的星号表达式可以用来解决这个问题。比如，你在学习一门课程，在学期末的时候， 你想统计下家庭作业的平均成绩，但是排除掉第一个和最后一个分数。如果只有四个分数，你可能就直接去简单的手动赋值， 但如果有 24 个呢？这时候星号表达式就派上用场了：</li>
+<li>解压可迭代对象赋值给多个变量</li>
 </ul>
+<p><code>Python</code> 的星号表达式可以用来解决这个问题。比如，你在学习一门课程，在学期末的时候， 你想统计下家庭作业的平均成绩，但是排除掉第一个和最后一个分数。如果只有四个分数，你可能就直接去简单的手动赋值， 但如果有 24 个呢？这时候星号表达式就派上用场了：</p>
 <pre><code class="language-Python">def drop_first_last(grades):
     first, *middle, last = grades
     return avg(middle)
@@ -351,7 +339,7 @@ email
 phone_numbers
 ['773-555-1212', '847-555-1212']
 </code></pre>
-<p>值得注意的是上面解压出的 <code>phone_numbers</code> 变量永远都是列表类型，不管解压的电话号码数量是多少（包括 0 个）。 所以，任何使用到 <code>phone_numbers</code> 变量的代码就不需要做多余的类型检查去确认它是否是列表类型了。<br>
+<p>值得注意的是上面解压出的 <code>phone_numbers</code> 变量永远都是列表类型，不管解压的电话号码数量是多少（包括 <code>0</code> 个）。 所以，任何使用到 <code>phone_numbers</code> 变量的代码就不需要做多余的类型检查去确认它是否是列表类型了。<br>
 星号表达式也能用在列表的开始部分。比如，你有一个公司前 8 个月销售数据的序列， 但是你想看下最近一个月数据和前面 7 个月的平均值的对比。你可以这样做：</p>
 <pre><code class="language-Python">*trailing_qtrs, current_qtr = sales_record
 trailing_avg = sum(trailing_qtrs) / len(trailing_qtrs)
@@ -420,9 +408,9 @@ sum(items)
 </code></pre>
 <p>然后，由于语言层面的限制，递归并不是 <code>Python</code> 擅长的。 因此，最后那个递归演示仅仅是个好奇的探索罢了，对这个不要太认真了。</p>
 <ul>
-<li>删除序列相同元素并保持顺序<br>
-如果序列上的值都是 <code>hashable</code> 类型，那么可以很简单的利用集合或者生成器来解决这个问题。比如：</li>
+<li>删除序列相同元素并保持顺序</li>
 </ul>
+<p>如果序列上的值都是 <code>hashable</code> 类型，那么可以很简单的利用集合或者生成器来解决这个问题。比如：</p>
 <pre><code class="language-python">def dedupe(items):
     seen = set()
     for item in items:
@@ -461,14 +449,14 @@ set(a)
 <p>然而，这种方法不能维护元素的顺序，生成的结果中的元素位置被打乱。而上面的方法可以避免这种情况。<br>
 在本节中我们使用了生成器函数让我们的函数更加通用，不仅仅是局限于列表处理。 比如，如果如果你想读取一个文件，消除重复行，你可以很容易像这样做：</p>
 <pre><code class="language-python">with open(somefile,'r') as f:
-for line in dedupe(f):
-    ...
+    for line in dedupe(f):
+        ...
 </code></pre>
 <p>上述key函数参数模仿了 <code>sorted()</code> , <code>min()</code> 和 <code>max()</code> 等内置函数的相似功能。</p>
 <ul>
-<li>命名切片<br>
-假定你要从一个记录（比如文件或其他类似格式）中的某些固定位置提取字段：</li>
+<li>命名切片</li>
 </ul>
+<p>假定你要从一个记录（比如文件或其他类似格式）中的某些固定位置提取字段：</p>
 <pre><code class="language-python">######    0123456789012345678901234567890123456789012345678901234567890'
 record = '....................100 .......513.25 ..........'
 cost = int(record[20:23]) * float(record[31:37])
@@ -521,9 +509,9 @@ b=sorted(s,key=lambda x:len(x))# 有返回值
 s.sort(key=len)# 原地排序
 </code></pre>
 <ul>
-<li>排序不支持原生比较的对象<br>
-内置的 <code>sorted()</code> 函数有一个关键字参数 <code>key</code> ，可以传入一个 <code>callable</code> 对象给它， 这个 <code>callable</code> 对象对每个传入的对象返回一个值，这个值会被 <code>sorted</code> 用来排序这些对象。 比如，如果你在应用程序里面有一个 <code>User</code> 实例序列，并且你希望通过他们的 <code>user_id</code> 属性进行排序， 你可以提供一个以 <code>User</code> 实例作为输入并输出对应 <code>user_id</code> 值的 <code>callable</code> 对象。比如：</li>
+<li>排序不支持原生比较的对象</li>
 </ul>
+<p>内置的 <code>sorted()</code> 函数有一个关键字参数 <code>key</code> ，可以传入一个 <code>callable</code> 对象给它， 这个 <code>callable</code> 对象对每个传入的对象返回一个值，这个值会被 <code>sorted</code> 用来排序这些对象。 比如，如果你在应用程序里面有一个 <code>User</code> 实例序列，并且你希望通过他们的 <code>user_id</code> 属性进行排序， 你可以提供一个以 <code>User</code> 实例作为输入并输出对应 <code>user_id</code> 值的 <code>callable</code> 对象。比如：</p>
 <pre><code class="language-python">class User:
     def __init__(self, user_id):
         self.user_id = user_id
@@ -561,18 +549,18 @@ first,*middle,end = (1,2,3,4,5,6)
 </code></pre>
 <h2 id="字符串">字符串</h2>
 <ul>
-<li>字符元素组成判定<br>
-检查两个字符串的组成元素是不是一样的。</li>
+<li>字符元素组成判定</li>
 </ul>
+<p>检查两个字符串的组成元素是不是一样的。</p>
 <pre><code class="language-Python">from collections import Counter
 def anagram(first, second):
     return Counter(first) == Counter(second)
 anagram(&quot;abcd3&quot;, &quot;3acdb&quot;) # True
 </code></pre>
 <ul>
-<li>N 次字符串<br>
-该代码块不需要循环语句</li>
+<li>N 次字符串</li>
 </ul>
+<p>该代码块不需要循环语句</p>
 <pre><code class="language-Python">n = 2;
 s =&quot;Programming&quot;
 print(s * n)
@@ -586,9 +574,9 @@ name_str = '&amp;'.join(name_list) # &amp;为列表元素之间分隔符
 print(type(name_str), name_str)
 </code></pre>
 <ul>
-<li>映射名称到序列元素<br>
-<code>collections.namedtuple()</code> 函数通过使用一个普通的元组对象来帮你解决这个问题。 这个函数实际上是一个返回 <code>Python</code> 中标准元组类型子类的一个工厂方法。 你需要传递一个类型名和你需要的字段给它，然后它就会返回一个类，你可以初始化这个类，为你定义的字段传递值等。 代码示例：</li>
+<li>映射名称到序列元素</li>
 </ul>
+<p><code>collections.namedtuple()</code> 函数通过使用一个普通的元组对象来帮你解决这个问题。 这个函数实际上是一个返回 <code>Python</code> 中标准元组类型子类的一个工厂方法。 你需要传递一个类型名和你需要的字段给它，然后它就会返回一个类，你可以初始化这个类，为你定义的字段传递值等。 代码示例：</p>
 <pre><code class="language-python">from collections import namedtuple
 Subscriber = namedtuple('Subscriber', ['addr', 'joined'])
 sub = Subscriber('jonesy@example.com', '2012-10-19')
@@ -692,9 +680,9 @@ print(1 == a &lt; 2) # False
 </code></pre>
 <h2 id="函数">函数</h2>
 <ul>
-<li>链式函数调用<br>
-你可以在一行代码内调用多个函数。</li>
+<li>链式函数调用</li>
 </ul>
+<p>你可以在一行代码内调用多个函数。</p>
 <pre><code class="language-Python">def add(a, b):
     return a + b
 def subtract(a, b):
@@ -715,7 +703,7 @@ b = { 'y': 3, 'z': 4}
 print(merge_two_dicts(a, b))
 # {'y': 3, 'x': 1, 'z': 4}
 </code></pre>
-<p>在 Python 3.5 或更高版本中，我们也可以用以下方式合并字典：</p>
+<p>在 <code>Python 3.5</code> 或更高版本中，我们也可以用以下方式合并字典：</p>
 <pre><code class="language-Python">def merge_dictionaries(a, b)
    return {**a, **b}
 a = { 'x': 1, 'y': 2}
@@ -818,9 +806,9 @@ merged['x'] # Notice change to merged dicts
 42
 </code></pre>
 <ul>
-<li>将两个列表转化为字典<br>
-如下方法将会把两个列表转化为单个字典。</li>
+<li>将两个列表转化为字典</li>
 </ul>
+<p>如下方法将会把两个列表转化为单个字典。</p>
 <pre><code class="language-Python">def to_dictionary(keys, values):
     return dict(zip(keys, values))
 keys = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]    
@@ -880,9 +868,9 @@ c = {key:a[key] for key in a.keys() - {'z', 'w'}}
 字典的 <code>items()</code> 方法返回一个包含 <code>(键，值)</code> 对的元素视图对象。 这个对象同样也支持集合操作，并且可以被用来查找两个字典有哪些相同的键值对。<br>
 尽管字典的 <code>values()</code> 方法也是类似，但是它并不支持这里介绍的集合操作。 某种程度上是因为值视图不能保证所有的值互不相同，这样会导致某些集合操作会出现问题。 不过，如果你硬要在值上面执行这些集合操作的话，你可以先将值集合转换成<code>set</code>，然后再执行集合运算就行了。</p>
 <ul>
-<li>字典的运算<br>
-考虑下面的股票名和价格映射字典：</li>
+<li>字典的运算</li>
 </ul>
+<p>考虑下面的股票名和价格映射字典：</p>
 <pre><code class="language-python">prices = {
     'ACME': 45.23,
     'AAPL': 612.78,
@@ -933,9 +921,9 @@ max(zip(prices.values(), prices.keys()))
 (45.23, 'ZZZ')
 </code></pre>
 <ul>
-<li>通过某个关键字排序一个字典列表<br>
-通过使用 <code>operator</code> 模块的 <code>itemgetter</code> 函数，可以非常容易的排序这样的数据结构。 假设你从数据库中检索出来网站会员信息列表，并且以下列的数据结构返回：</li>
+<li>通过某个关键字排序一个字典列表</li>
 </ul>
+<p>通过使用 <code>operator</code> 模块的 <code>itemgetter</code> 函数，可以非常容易的排序这样的数据结构。 假设你从数据库中检索出来网站会员信息列表，并且以下列的数据结构返回：</p>
 <pre><code class="language-python">rows = [
     {'fname': 'Brian', 'lname': 'Jones', 'uid': 1003},
     {'fname': 'David', 'lname': 'Beazley', 'uid': 1002},
@@ -984,9 +972,9 @@ max(rows, key=itemgetter('uid'))
 {'fname': 'Big', 'lname': 'Jones', 'uid': 1004}
 </code></pre>
 <ul>
-<li>字典中提取子集<br>
-最简单的方式是使用字典推导。比如：</li>
+<li>字典中提取子集</li>
 </ul>
+<p>最简单的方式是使用字典推导。比如：</p>
 <pre><code class="language-python">prices = {
     'ACME': 45.23,
     'AAPL': 612.78,
@@ -1012,9 +1000,9 @@ p2 = { key:prices[key] for key in prices.keys() &amp; tech_names }
 <p>但是，运行时间测试结果显示这种方案大概比第一种方案慢 1.6 倍。 如果对程序运行性能要求比较高的话，需要花点时间去做计时测试。</p>
 <h2 id="集合">集合</h2>
 <ul>
-<li>元素频率<br>
-下面的方法会根据元素频率取列表中最常见的元素。</li>
+<li>元素频率</li>
 </ul>
+<p>下面的方法会根据元素频率取列表中最常见的元素。</p>
 <pre><code class="language-Python">def most_frequent(list):
     return max(set(list), key = list.count)
 list = [1,2,1,2,3,2,1,4,2]
@@ -1023,9 +1011,9 @@ most_frequent(list)
 <h2 id="collections"><code>collections</code></h2>
 <h3 id="deque"><code>deque</code></h3>
 <ul>
-<li>保留最后 <code>N</code> 个元素<br>
-使用 <code>deque(maxlen=N)</code> 构造函数会新建一个固定大小的队列。当新的元素加入并且这个队列已满的时候， 最老的元素会自动被移除掉。</li>
+<li>保留最后 <code>N</code> 个元素</li>
 </ul>
+<p>使用 <code>deque(maxlen=N)</code> 构造函数会新建一个固定大小的队列。当新的元素加入并且这个队列已满的时候， 最老的元素会自动被移除掉。</p>
 <pre><code class="language-Python">q = deque(maxlen=3)
 q.append(1)
 q.append(2)
@@ -1060,10 +1048,10 @@ q.popleft()
 <p>在队列两端插入或删除元素时间复杂度都是 <code>O(1)</code> ，区别于列表，在列表的开头插入或删除元素的时间复杂度为 <code>O(N)</code> 。</p>
 <h3 id="counter"><code>Counter</code></h3>
 <ul>
-<li>序列中出现次数最多的元素<br>
-<code>collections.Counter</code> 类就是专门为这类问题而设计的， 它甚至有一个有用的 <code>most_common()</code> 方法直接给了你答案。<br>
-为了演示，先假设你有一个单词列表并且想找出哪个单词出现频率最高。你可以这样做：</li>
+<li>序列中出现次数最多的元素</li>
 </ul>
+<p><code>collections.Counter</code> 类就是专门为这类问题而设计的， 它甚至有一个有用的 <code>most_common()</code> 方法直接给了你答案。<br>
+为了演示，先假设你有一个单词列表并且想找出哪个单词出现频率最高。你可以这样做：</p>
 <pre><code class="language-python">words = [
     'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
     'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
@@ -1117,9 +1105,9 @@ Counter({'eyes': 7, 'the': 5, 'look': 4, 'into': 3, 'my': 2, 'around': 2,
 <p>毫无疑问， <code>Counter</code> 对象在几乎所有需要制表或者计数数据的场合是非常有用的工具。 在解决这类问题的时候你应该优先选择它，而不是手动的利用字典去实现。</p>
 <h2 id="heapq"><code>heapq</code></h2>
 <ul>
-<li>查找最大或最小的 <code>N</code> 个元素<br>
-<code>heapq</code> 模块有两个函数：<code>nlargest()</code> 和 <code>nsmallest()</code> 可以完美解决这个问题。</li>
+<li>查找最大或最小的 <code>N</code> 个元素</li>
 </ul>
+<p><code>heapq</code> 模块有两个函数：<code>nlargest()</code> 和 <code>nsmallest()</code> 可以完美解决这个问题。</p>
 <pre><code class="language-python">import heapq
 nums = [1, 8, 2, 23, 7, -4, 18, 23, 42, 37, 2]
 print(heapq.nlargest(3, nums)) # Prints [42, 37, 23]
@@ -1156,9 +1144,9 @@ heapq.heappop(heap)
 </code></pre>
 <p>当要查找的元素个数相对比较小的时候，函数 <code>nlargest()</code> 和 <code>nsmallest()</code> 是很合适的。 如果你仅仅想查找唯一的最小或最大（<code>N=1</code>）的元素的话，那么使用 <code>min()</code> 和 <code>max()</code> 函数会更快些。 类似的，如果 <code>N</code> 的大小和集合大小接近的时候，通常先排序这个集合然后再使用切片操作会更快点 （ <code>sorted(items)[:N]</code> 或者是 <code>sorted(items)[-N:]</code> ）。 需要在正确场合使用函数 <code>nlargest()</code> 和 <code>nsmallest()</code> 才能发挥它们的优势 （如果 <code>N</code> 快接近集合大小了，那么使用排序操作会更好些）。</p>
 <ul>
-<li>实现优先级队列<br>
-下面的类利用 <code>heapq</code> 模块实现了一个简单的优先级队列：</li>
+<li>实现优先级队列</li>
 </ul>
+<p>下面的类利用 <code>heapq</code> 模块实现了一个简单的优先级队列：</p>
 <pre><code class="language-python">import heapq
 class PriorityQueue:
     def __init__(self):
@@ -1228,9 +1216,9 @@ True
 <h2 id="itertools"><code>itertools</code></h2>
 <h3 id="groupby"><code>groupby</code></h3>
 <ul>
-<li>通过某个字段将记录分组<br>
-<code>itertools.groupby()</code> 函数对于这样的数据分组操作非常实用。 为了演示，假设你已经有了下列的字典列表：</li>
+<li>通过某个字段将记录分组</li>
 </ul>
+<p><code>itertools.groupby()</code> 函数对于这样的数据分组操作非常实用。 为了演示，假设你已经有了下列的字典列表：</p>
 <pre><code class="language-python">rows = [
     {'address': '5412 N CLARK', 'date': '07/01/2012'},
     {'address': '5148 N CLARK', 'date': '07/04/2012'},
@@ -1285,9 +1273,9 @@ for row in rows:
 <p>在上面这个例子中，我们没有必要先将记录排序。因此，如果对内存占用不是很关心， 这种方式会比先排序然后再通过 <code>groupby()</code> 函数迭代的方式运行得快一些。</p>
 <h2 id="迭代器与生成器">迭代器与生成器</h2>
 <ul>
-<li>过滤序列元素<br>
-最简单的过滤序列元素的方法就是使用列表推导。比如：</li>
+<li>过滤序列元素</li>
 </ul>
+<p>最简单的过滤序列元素的方法就是使用列表推导。比如：</p>
 <pre><code class="language-python">mylist = [1, 4, -5, 10, -7, 2, 3, -1]
 [n for n in mylist if n &gt; 0]
 [1, 4, 10, 2, 3]
@@ -1357,9 +1345,9 @@ list(compress(addresses, more5))
 <p>这里的关键点在于先创建一个 <code>Boolean</code> 序列，指示哪些元素符合条件。 然后 <code>compress()</code> 函数根据这个序列去选择输出对应位置为 <code>True</code> 的元素。<br>
 和 <code>filter()</code> 函数类似， <code>compress()</code> 也是返回的一个迭代器。因此，如果你需要得到一个列表， 那么你需要使用 <code>list()</code> 来将结果转换为列表类型。</p>
 <ul>
-<li>转换并同时计算数据<br>
-一个非常优雅的方式去结合数据计算与转换就是使用一个生成器表达式参数。 比如，如果你想计算平方和，可以像下面这样做：</li>
+<li>转换并同时计算数据</li>
 </ul>
+<p>一个非常优雅的方式去结合数据计算与转换就是使用一个生成器表达式参数。 比如，如果你想计算平方和，可以像下面这样做：</p>
 <pre><code class="language-python">nums = [1, 2, 3, 4, 5]
 s = sum(x * x for x in nums)
 </code></pre>
