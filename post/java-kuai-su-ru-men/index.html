@@ -1,0 +1,1651 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1588077631255">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157390001-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157390001-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1588077631255" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#java%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><code>Java</code>快速入门</a>
+<ul>
+<li><a href="#java%E7%AE%80%E4%BB%8B"><code>Java</code>简介</a>
+<ul>
+<li><a href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E4%B8%AAjava%E7%A8%8B%E5%BA%8F">第一个Java程序</a></li>
+<li><a href="#java%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80">Java程序基础</a>
+<ul>
+<li><a href="#java%E7%A8%8B%E5%BA%8F%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">Java程序基本结构</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">变量和数据类型</a>
+<ul>
+<li><a href="#%E5%8F%98%E9%87%8F">变量</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">基本数据类型</a>
+<ul>
+<li><a href="#%E6%95%B4%E5%9E%8B">整型</a>
+<ul>
+<li><a href="#%E6%BA%A2%E5%87%BA">溢出</a></li>
+<li><a href="#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F">自增/自减</a></li>
+<li><a href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97">移位运算</a></li>
+<li><a href="#%E4%BD%8D%E8%BF%90%E7%AE%97">位运算</a></li>
+<li><a href="#%E8%BF%90%E7%AE%97%E4%BC%98%E5%85%88%E7%BA%A7">运算优先级</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E8%87%AA%E5%8A%A8%E6%8F%90%E5%8D%87%E4%B8%8E%E5%BC%BA%E5%88%B6%E8%BD%AC%E5%9E%8B">类型自动提升与强制转型</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%AE%E7%82%B9%E5%9E%8B">浮点型</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%8F%90%E5%8D%87">类型提升</a></li>
+<li><a href="#%E6%BA%A2%E5%87%BA-2">溢出</a></li>
+<li><a href="#%E5%BC%BA%E5%88%B6%E8%BD%AC%E5%9E%8B">强制转型</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B">布尔类型</a>
+<ul>
+<li><a href="#%E7%9F%AD%E8%B7%AF%E8%BF%90%E7%AE%97">短路运算</a></li>
+<li><a href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6">三元运算符</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E7%B1%BB%E5%9E%8B">字符类型</a>
+<ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B">字符串类型</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5">字符串连接</a></li>
+<li><a href="#%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2">多行字符串</a></li>
+<li><a href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%89%B9%E6%80%A7">不可变特性</a></li>
+<li><a href="#%E7%A9%BA%E5%80%BCnull">空值<code>null</code></a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B">引用类型</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B">数组类型</a>
+<ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E7%BB%84">字符串数组</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E9%87%8F">常量</a></li>
+<li><a href="#var%E5%85%B3%E9%94%AE%E5%AD%97"><code>var</code>关键字</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4">变量的作用范围</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6">流程控制</a>
+<ul>
+<li><a href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA">输入和输出</a>
+<ul>
+<li><a href="#%E8%BE%93%E5%87%BA">输出</a>
+<ul>
+<li><a href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA">格式化输出</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BE%93%E5%85%A5">输入</a></li>
+</ul>
+</li>
+<li><a href="#if%E5%88%A4%E6%96%AD"><code>if</code>判断</a>
+<ul>
+<li><a href="#%E5%88%A4%E6%96%AD%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9B%B8%E7%AD%89">判断引用类型相等</a></li>
+</ul>
+</li>
+<li><a href="#switch%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9"><code>switch</code>多重选择</a>
+<ul>
+<li><a href="#switch%E8%A1%A8%E8%BE%BE%E5%BC%8F"><code>switch</code>表达式</a></li>
+<li><a href="#yield"><code>yield</code></a></li>
+</ul>
+</li>
+<li><a href="#while%E5%BE%AA%E7%8E%AF"><code>while</code>循环</a></li>
+<li><a href="#for%E5%BE%AA%E7%8E%AF"><code>for</code>循环</a>
+<ul>
+<li><a href="#for-each%E5%BE%AA%E7%8E%AF"><code>for each</code>循环</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C">数组操作</a>
+<ul>
+<li><a href="#%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84">遍历数组</a>
+<ul>
+<li><a href="#%E6%89%93%E5%8D%B0%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9">打印数组内容</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F">数组排序</a></li>
+<li><a href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84">多维数组</a>
+<ul>
+<li><a href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84">二维数组</a></li>
+<li><a href="#%E4%B8%89%E7%BB%B4%E6%95%B0%E7%BB%84">三维数组</a></li>
+</ul>
+</li>
+<li><a href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0">命令行参数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Java快速入门</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-04-28 / 48 min read
+        </div>
+        
+        <div class="post-content yue">
+          <!-- TOC -->
+<ul>
+<li><a href="#java%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><code>Java</code>快速入门</a>
+<ul>
+<li><a href="#java%E7%AE%80%E4%BB%8B"><code>Java</code>简介</a>
+<ul>
+<li><a href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E4%B8%AAjava%E7%A8%8B%E5%BA%8F">第一个Java程序</a></li>
+<li><a href="#java%E7%A8%8B%E5%BA%8F%E5%9F%BA%E7%A1%80">Java程序基础</a>
+<ul>
+<li><a href="#java%E7%A8%8B%E5%BA%8F%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">Java程序基本结构</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">变量和数据类型</a>
+<ul>
+<li><a href="#%E5%8F%98%E9%87%8F">变量</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">基本数据类型</a>
+<ul>
+<li><a href="#%E6%95%B4%E5%9E%8B">整型</a>
+<ul>
+<li><a href="#%E6%BA%A2%E5%87%BA">溢出</a></li>
+<li><a href="#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F">自增/自减</a></li>
+<li><a href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97">移位运算</a></li>
+<li><a href="#%E4%BD%8D%E8%BF%90%E7%AE%97">位运算</a></li>
+<li><a href="#%E8%BF%90%E7%AE%97%E4%BC%98%E5%85%88%E7%BA%A7">运算优先级</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E8%87%AA%E5%8A%A8%E6%8F%90%E5%8D%87%E4%B8%8E%E5%BC%BA%E5%88%B6%E8%BD%AC%E5%9E%8B">类型自动提升与强制转型</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%AE%E7%82%B9%E5%9E%8B">浮点型</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%8F%90%E5%8D%87">类型提升</a></li>
+<li><a href="#%E6%BA%A2%E5%87%BA-1">溢出</a></li>
+<li><a href="#%E5%BC%BA%E5%88%B6%E8%BD%AC%E5%9E%8B">强制转型</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B">布尔类型</a>
+<ul>
+<li><a href="#%E7%9F%AD%E8%B7%AF%E8%BF%90%E7%AE%97">短路运算</a></li>
+<li><a href="#%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6">三元运算符</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E7%B1%BB%E5%9E%8B">字符类型</a>
+<ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B">字符串类型</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5">字符串连接</a></li>
+<li><a href="#%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2">多行字符串</a></li>
+<li><a href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%89%B9%E6%80%A7">不可变特性</a></li>
+<li><a href="#%E7%A9%BA%E5%80%BCnull">空值<code>null</code></a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B">引用类型</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B">数组类型</a>
+<ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E7%BB%84">字符串数组</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E9%87%8F">常量</a></li>
+<li><a href="#var%E5%85%B3%E9%94%AE%E5%AD%97"><code>var</code>关键字</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4">变量的作用范围</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6">流程控制</a>
+<ul>
+<li><a href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA">输入和输出</a>
+<ul>
+<li><a href="#%E8%BE%93%E5%87%BA">输出</a>
+<ul>
+<li><a href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA">格式化输出</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BE%93%E5%85%A5">输入</a></li>
+</ul>
+</li>
+<li><a href="#if%E5%88%A4%E6%96%AD"><code>if</code>判断</a>
+<ul>
+<li><a href="#%E5%88%A4%E6%96%AD%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9B%B8%E7%AD%89">判断引用类型相等</a></li>
+</ul>
+</li>
+<li><a href="#switch%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9"><code>switch</code>多重选择</a>
+<ul>
+<li><a href="#switch%E8%A1%A8%E8%BE%BE%E5%BC%8F"><code>switch</code>表达式</a></li>
+<li><a href="#yield"><code>yield</code></a></li>
+</ul>
+</li>
+<li><a href="#while%E5%BE%AA%E7%8E%AF"><code>while</code>循环</a></li>
+<li><a href="#for%E5%BE%AA%E7%8E%AF"><code>for</code>循环</a>
+<ul>
+<li><a href="#for-each%E5%BE%AA%E7%8E%AF"><code>for each</code>循环</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C">数组操作</a>
+<ul>
+<li><a href="#%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84">遍历数组</a>
+<ul>
+<li><a href="#%E6%89%93%E5%8D%B0%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9">打印数组内容</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F">数组排序</a></li>
+<li><a href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84">多维数组</a>
+<ul>
+<li><a href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84">二维数组</a></li>
+<li><a href="#%E4%B8%89%E7%BB%B4%E6%95%B0%E7%BB%84">三维数组</a></li>
+</ul>
+</li>
+<li><a href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0">命令行参数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="java快速入门"><code>Java</code>快速入门</h1>
+<h2 id="java简介"><code>Java</code>简介</h2>
+<p>Java介于编译型语言和解释型语言之间。编译型语言如C、C++，代码是直接编译成机器码执行，但是不同的平台（x86、ARM等）CPU的指令集不同，因此，需要编译出每一种平台的对应机器码。解释型语言如Python、Ruby没有这个问题，可以由解释器直接加载源码然后运行，代价是运行效率太低。而Java是将代码编译成一种“字节码”，它类似于抽象的CPU指令，然后，针对不同平台编写虚拟机，不同平台的虚拟机负责加载字节码并执行，这样就实现了“一次编写，到处运行”的效果。当然，这是针对Java开发者而言。对于虚拟机，需要为每个平台分别开发。为了保证不同平台、不同公司开发的虚拟机都能正确执行Java字节码，SUN公司制定了一系列的Java虚拟机规范。从实践的角度看，JVM的兼容性做得非常好，低版本的Java字节码完全可以正常运行在高版本的JVM上。</p>
+<h3 id="名词解释">名词解释</h3>
+<ul>
+<li>JDK：Java Development Kit</li>
+<li>JRE：Java Runtime Environment</li>
+</ul>
+<p>JRE就是运行Java字节码的虚拟机。但是，如果只有Java源码，要编译成Java字节码，就需要JDK，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具。</p>
+<p>二者关系如下：</p>
+<figure data-type="image" tabindex="1"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200425222226.png" alt="" loading="lazy"></figure>
+<ul>
+<li>JSR规范：Java Specification Request</li>
+<li>JCP组织：Java Community Process</li>
+</ul>
+<p>为了保证Java语言的规范性，SUN公司搞了一个JSR规范，凡是想给Java平台加一个功能，比如说访问数据库的功能，大家要先创建一个JSR规范，定义好接口，这样，各个数据库厂商都按照规范写出Java驱动程序，开发者就不用担心自己写的数据库代码在MySQL上能跑，却不能跑在PostgreSQL上。</p>
+<p>所以JSR是一系列的规范，从JVM的内存模型到Web程序接口，全部都标准化了。而负责审核JSR的组织就是JCP。</p>
+<p>一个JSR规范发布时，为了让大家有个参考，还要同时发布一个“参考实现”，以及一个“兼容性测试套件”：</p>
+<ul>
+<li>RI：Reference Implementation</li>
+<li>TCK：Technology Compatibility Kit</li>
+</ul>
+<p>比如有人提议要搞一个基于Java开发的消息服务器，这个提议很好啊，但是光有提议还不行，得贴出真正能跑的代码，这就是RI。如果有其他人也想开发这样一个消息服务器，如何保证这些消息服务器对开发者来说接口、功能都是相同的？所以还得提供TCK。</p>
+<h2 id="第一个java程序">第一个Java程序</h2>
+<pre><code class="language-java">public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, world!&quot;);
+    }
+}
+</code></pre>
+<p>在一个Java程序中，你总能找到一个类似：</p>
+<pre><code class="language-java">public class Hello {
+    ...
+}
+</code></pre>
+<p>的定义，这个定义被称为<code>class</code>（类），这里的类名是<code>Hello</code>，大小写敏感，<code>class</code>用来定义一个类，<code>public</code>表示这个类是公开的，<code>public</code>、<code>class</code>都是Java的关键字，必须小写，<code>Hello</code>是类的名字，按照习惯，首字母H要大写。而花括号<code>{}</code>中间则是类的定义。</p>
+<p>注意到类的定义中，我们定义了一个名为<code>main</code>的方法：</p>
+<pre><code class="language-java">public static void main(String[] args) {
+        ...
+    }
+</code></pre>
+<p>方法是可执行的代码块，一个方法除了方法名<code>main</code>，还有用<code>()</code>括起来的方法参数，这里的<code>main</code>方法有一个参数，参数类型是<code>String[]</code>，参数名是<code>args</code>，<code>public</code>、<code>static</code>用来修饰方法，这里表示它是一个公开的静态方法，<code>void</code>是方法的返回类型，而花括号<code>{}</code>中间的就是方法的代码。</p>
+<p>方法的代码每一行用<code>;</code>结束，这里只有一行代码，就是：</p>
+<pre><code class="language-java">System.out.println(&quot;Hello, world!&quot;);
+</code></pre>
+<p>Java规定，某个类定义的<code>public static void main(String[] args)</code>是Java程序的固定入口方法，因此，Java程序总是从<code>main</code>方法开始执行。</p>
+<p>当我们把代码保存为文件时，文件名必须是<code>Hello.java</code>，而且文件名也要注意大小写，因为要和我们定义的类名<code>Hello</code>完全保持一致。</p>
+<h2 id="java程序基础">Java程序基础</h2>
+<h3 id="java程序基本结构">Java程序基本结构</h3>
+<p>因为Java是面向对象的语言，一个程序的基本单位就是<code>class</code>，<code>class</code>是关键字，这里定义的<code>class</code>名字就是Hello：</p>
+<pre><code class="language-java">public class Hello { // 类名是Hello
+    // ...
+} // class定义结束
+</code></pre>
+<p>类名要求：</p>
+<ol>
+<li>类名必须以英文字母开头，后接字母，数字和下划线的组合</li>
+<li>习惯以大写字母开头</li>
+</ol>
+<p>注意到<code>public</code>是访问修饰符，表示该<code>class</code>是公开的。不写<code>public</code>，也能正确编译，但是这个类将无法从命令行执行。</p>
+<p>在<code>class</code>内部，可以定义若干方法（method）：</p>
+<pre><code class="language-java">public class Hello {
+    public static void main(String[] args) { // 方法名是main
+        // 方法代码...
+    } // 方法定义结束
+}
+</code></pre>
+<p>方法定义了一组执行语句，方法内部的代码将会被依次顺序执行。</p>
+<p>这里的方法名是<code>main</code>，返回值是<code>void</code>，表示没有任何返回值。</p>
+<p>我们注意到<code>public</code>除了可以修饰<code>class</code>外，也可以修饰方法。而关键字<code>static</code>是另一个修饰符，它表示静态方法，目前，我们只需要知道，Java入口程序规定的方法必须是静态方法，方法名必须为<code>main</code>，括号内的参数必须是<code>String</code>数组。</p>
+<p>方法名也有命名规则，命名和<code>class</code>一样，但是首字母小写。</p>
+<p>在方法内部，语句才是真正的执行代码。Java的每一行语句必须以分号结束：</p>
+<pre><code class="language-java">public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, world!&quot;); // 语句
+    }
+}
+</code></pre>
+<p>在Java程序中，注释是一种给人阅读的文本，不是程序的一部分，所以编译器会自动忽略注释。</p>
+<p>Java有3种注释，第一种是单行注释，以双斜线开头，直到这一行的结尾结束：</p>
+<pre><code class="language-java">// 这是注释...
+</code></pre>
+<p>而多行注释以<code>/*</code>星号开头，以<code>*/</code>结束，可以有多行：</p>
+<pre><code class="language-java">/*
+这是注释
+blablabla...
+这也是注释
+*/
+</code></pre>
+<p>还有一种特殊的多行注释，以<code>/**</code>开头，以<code>*/</code>结束，如果有多行，每行通常以星号开头：</p>
+<pre><code class="language-java">/**
+ * 可以用来自动创建文档的注释
+ * 
+ * @auther liaoxuefeng
+ */
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, world!&quot;);
+    }
+}
+</code></pre>
+<p>这种特殊的多行注释需要写在类和方法的定义处，可以用于自动创建文档。</p>
+<h3 id="变量和数据类型">变量和数据类型</h3>
+<h4 id="变量">变量</h4>
+<p>在Java中，变量分为两种：基本类型的变量和引用类型的变量。</p>
+<p>在Java中，变量必须先定义后使用，在定义变量的时候，可以给它一个初始值。例如：</p>
+<pre><code class="language-java">int x = 1;
+</code></pre>
+<p>上述语句定义了一个整型<code>int</code>类型的变量，名称为<code>x</code>，初始值为<code>1</code>。不写初始值，就相当于给它指定了默认值。默认值总是<code>0</code>。</p>
+<p>变量的一个重要特点是可以重新赋值。第一次定义变量x的时候，需要指定变量类型。而第二次重新赋值的时候，变量已经存在了，不能再重复定义，因此不能指定变量类型。</p>
+<p>变量不但可以重新赋值，还可以赋值给其他变量。</p>
+<h4 id="基本数据类型">基本数据类型</h4>
+<p>基本数据类型是CPU可以直接进行运算的类型。Java定义了以下几种基本数据类型：</p>
+<ul>
+<li>
+<p>整数类型：byte(1Byte)，short(2Byte)，int(4Byte)，long(8Byte)</p>
+</li>
+<li>
+<p>浮点数类型：float(4Byte)，double(8Byte)</p>
+</li>
+<li>
+<p>字符类型：char(2Byte)</p>
+</li>
+<li>
+<p>布尔类型：boolean</p>
+</li>
+</ul>
+<h5 id="整型">整型</h5>
+<p>对于整型类型，Java只定义了带符号的整型，因此，最高位的bit表示符号位（0表示正数，1表示负数）。各种整型能表示的最大范围如下：</p>
+<ul>
+<li>byte：-128 ~ 127</li>
+<li>short: -32768 ~ 32767</li>
+<li>int: -2147483648 ~ 2147483647</li>
+<li>long: -9223372036854775808 ~ 9223372036854775807<br>
+整数的数值表示不但是精确的，而且整数运算永远是精确的，即使是除法也是精确的，因为两个整数相除只能得到结果的整数部分，求余运算使用<code>%</code>。</li>
+</ul>
+<p>特别注意：整数的除法对于除数为0时运行时将报错，但编译不会报错。</p>
+<h6 id="溢出">溢出</h6>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int x = 2147483640;
+        int y = 15;
+        int sum = x + y;
+        System.out.println(sum); // -2147483641
+    }
+}
+</code></pre>
+<p>要特别注意，整数由于存在范围限制，如果计算结果超出了范围，就会产生溢出，而溢出不会出错，却会得到一个奇怪的结果。解决上面的问题，可以把<code>int</code>换成<code>long</code>类型，由于<code>long</code>可表示的整型范围更大，所以结果就不会溢出：</p>
+<pre><code class="language-java">long x = 2147483640;
+long y = 15;
+long sum = x + y;
+System.out.println(sum); // 2147483655
+</code></pre>
+<p>还有一种简写的运算符，即<code>+=</code>，<code>-=</code>，<code>*=</code>，<code>/=</code>，它们的使用方法如下：</p>
+<pre><code class="language-java">n += 100; // 3409, 相当于 n = n + 100;
+n -= 100; // 3309, 相当于 n = n - 100;
+</code></pre>
+<h6 id="自增自减">自增/自减</h6>
+<p>Java还提供了<code>++</code>运算和<code>--</code>运算，它们可以对一个整数进行加1和减1的操作,注意<code>++</code>写在前面和后面计算结果是不同的，<code>++n</code>表示先加1再引用n，<code>n++</code>表示先引用n再加1。不建议把<code>++</code>运算混入到常规运算中，容易自己把自己搞懵了。</p>
+<h6 id="移位运算">移位运算</h6>
+<p>可以对整数进行移位运算。对整数7左移1位将得到整数14，左移两位将得到整数28：</p>
+<pre><code class="language-java">int n = 7;       // 00000000 00000000 00000000 00000111 = 7
+int a = n &lt;&lt; 1;  // 00000000 00000000 00000000 00001110 = 14
+int b = n &lt;&lt; 2;  // 00000000 00000000 00000000 00011100 = 28
+int c = n &lt;&lt; 28; // 01110000 00000000 00000000 00000000 = 1879048192
+int d = n &lt;&lt; 29; // 11100000 00000000 00000000 00000000 = -536870912
+</code></pre>
+<p>左移29位时，由于最高位变成1，因此结果变成了负数。</p>
+<p>类似的，对整数28进行右移，结果如下：</p>
+<pre><code class="language-java">int n = 7;       // 00000000 00000000 00000000 00000111 = 7
+int a = n &gt;&gt; 1;  // 00000000 00000000 00000000 00000011 = 3
+int b = n &gt;&gt; 2;  // 00000000 00000000 00000000 00000001 = 1
+int c = n &gt;&gt; 3;  // 00000000 00000000 00000000 00000000 = 0
+</code></pre>
+<p>如果对一个负数进行右移，最高位的1不动，结果仍然是一个负数：</p>
+<pre><code class="language-java">int n = -536870912;
+int a = n &gt;&gt; 1;  // 11110000 00000000 00000000 00000000 = -268435456
+int b = n &gt;&gt; 2;  // 11111000 00000000 00000000 00000000 = -134217728
+int c = n &gt;&gt; 28; // 11111111 11111111 11111111 11111110 = -2
+int d = n &gt;&gt; 29; // 11111111 11111111 11111111 11111111 = -1
+</code></pre>
+<p>还有一种不带符号的右移运算，使用<code>&gt;&gt;&gt;</code>，它的特点是符号位跟着动，因此，对一个负数进行<code>&gt;&gt;&gt;</code>右移，它会变成正数，原因是最高位的1变成了0：</p>
+<pre><code class="language-java">int n = -536870912;
+int a = n &gt;&gt;&gt; 1;  // 01110000 00000000 00000000 00000000 = 1879048192
+int b = n &gt;&gt;&gt; 2;  // 00111000 00000000 00000000 00000000 = 939524096
+int c = n &gt;&gt;&gt; 29; // 00000000 00000000 00000000 00000111 = 7
+int d = n &gt;&gt;&gt; 31; // 00000000 00000000 00000000 00000001 = 1
+</code></pre>
+<p>对<code>byte</code>和<code>short</code>类型进行移位时，会首先转换为<code>int</code>再进行位移。仔细观察可发现，左移实际上就是不断地×2，右移实际上就是不断地÷2。</p>
+<h6 id="位运算">位运算</h6>
+<p>位运算是按位进行与、或、非和异或的运算。</p>
+<p>与运算的规则是，必须两个数同时为1，结果才为1：</p>
+<pre><code class="language-java">n = 0 &amp; 0; // 0
+n = 0 &amp; 1; // 0
+n = 1 &amp; 0; // 0
+n = 1 &amp; 1; // 1
+</code></pre>
+<p>或运算的规则是，只要任意一个为1，结果就为1：</p>
+<pre><code class="language-java">n = 0 | 0; // 0
+n = 0 | 1; // 1
+n = 1 | 0; // 1
+n = 1 | 1; // 1
+</code></pre>
+<p>非运算的规则是，0和1互换：</p>
+<pre><code class="language-java">n = ~0; // 1
+n = ~1; // 0
+</code></pre>
+<p>异或运算的规则是，如果两个数不同，结果为1，否则为0：</p>
+<pre><code class="language-java">n = 0 ^ 0; // 0
+n = 0 ^ 1; // 1
+n = 1 ^ 0; // 1
+n = 1 ^ 1; // 0
+</code></pre>
+<p>对两个整数进行位运算，实际上就是按位对齐，然后依次对每一位进行运算。例如：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int i = 167776589; // 00001010 00000000 00010001 01001101
+        int n = 167776512; // 00001010 00000000 00010001 00000000
+        System.out.println(i &amp; n); // 167776512
+    }
+}
+</code></pre>
+<p>上述按位与运算实际上可以看作两个整数表示的IP地址10.0.17.77和10.0.17.0，通过与运算，可以快速判断一个IP是否在给定的网段内。</p>
+<h6 id="运算优先级">运算优先级</h6>
+<p>在Java的计算表达式中，运算优先级从高到低依次是：</p>
+<ul>
+<li><code>()</code></li>
+<li><code>! ~ ++ --</code></li>
+<li><code>* / %</code></li>
+<li><code>+ -</code></li>
+<li><code>&lt;&lt; &gt;&gt; &gt;&gt;&gt;</code></li>
+<li><code>&amp;</code></li>
+<li><code>|</code></li>
+<li><code>+= -= *= /=</code></li>
+</ul>
+<h6 id="类型自动提升与强制转型">类型自动提升与强制转型</h6>
+<p>在运算过程中，如果参与运算的两个数类型不一致，那么计算结果为较大类型的整型。例如，<code>short</code>和<code>int</code>计算，结果总是<code>int</code>，原因是<code>short</code>首先自动被转型为<code>int</code>：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        short s = 1234;
+        int i = 123456;
+        int x = s + i; // s自动转型为int
+        short y = s + i; // 编译错误!
+    }
+}
+</code></pre>
+<p>也可以将结果强制转型，即将大范围的整数转型为小范围的整数。强制转型使用<code>(类型)</code>，例如，将<code>int</code>强制转型为<code>short</code>：</p>
+<pre><code class="language-java">int i = 12345;
+short s = (short) i; // 12345
+</code></pre>
+<p>要注意，超出范围的强制转型会得到错误的结果，原因是转型时，<code>int</code>的两个高位字节直接被扔掉，仅保留了低位的两个字节：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int i1 = 1234567;
+        short s1 = (short) i1; // -10617
+        System.out.println(s1);
+        int i2 = 12345678;
+        short s2 = (short) i2; // 24910
+        System.out.println(s2);
+    }
+}
+</code></pre>
+<p>因此，强制转型的结果很可能是错的。</p>
+<h5 id="浮点型">浮点型</h5>
+<pre><code class="language-java">float f1 = 3.14f;
+float f2 = 3.14e38f; // 科学计数法表示的3.14x10^38
+double d = 1.79e308;
+double d2 = -1.79e308;
+double d3 = 4.9e-324; // 科学计数法表示的4.9x10^-324
+</code></pre>
+<p>对于<code>float</code>类型，需要加上<code>f</code>后缀。浮点数可表示的范围非常大，<code>float</code>类型可最大表示3.4e38f，而double类型可最大表示1.79e308。</p>
+<p>浮点数运算和整数运算相比，只能进行加减乘除这些数值计算，不能做位运算和移位运算。在计算机中，浮点数虽然表示的范围大，但是，浮点数有个非常重要的特点，就是浮点数常常无法精确表示。</p>
+<p>如浮点数0.1在计算机中就无法精确表示，因为十进制的0.1换算成二进制是一个无限循环小数，很显然，无论使用<code>float</code>还是<code>double</code>，都只能存储一个0.1的近似值。但是，0.5这个浮点数又可以精确地表示。</p>
+<p>因为浮点数常常无法精确表示，因此，浮点数运算会产生误差：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        double x = 1.0 / 10;
+        double y = 1 - 9.0 / 10;
+        // 观察x和y是否相等:
+        System.out.println(x);//0.1
+        System.out.println(y);//0.09999999999999998
+    }
+}
+</code></pre>
+<p>由于浮点数存在运算误差，所以比较两个浮点数是否相等常常会出现错误的结果。正确的比较方法是判断两个浮点数之差的绝对值是否小于一个很小的数：</p>
+<pre><code class="language-java">// 比较x和y是否相等，先计算其差的绝对值:
+double r = Math.abs(x - y);
+// 再判断绝对值是否足够小:
+if (r &lt; 0.00001) {
+    // 可以认为相等
+} else {
+    // 不相等
+}
+</code></pre>
+<p>浮点数在内存的表示方法和整数比更加复杂。</p>
+<h6 id="类型提升">类型提升</h6>
+<p>如果参与运算的两个数其中一个是整型，那么整型可以自动提升到浮点型。</p>
+<p>需要特别注意，在一个复杂的四则运算中，两个整数的运算不会出现自动提升的情况。例如：</p>
+<pre><code class="language-java">double d = 1.2 + 24 / 5; // 5.2
+</code></pre>
+<p>计算结果为5.2，原因是编译器计算24 / 5这个子表达式时，按两个整数进行运算，结果仍为整数4。</p>
+<h6 id="溢出-2">溢出</h6>
+<p>整数运算在除数为0时会报错，而浮点数运算在除数为0时，不会报错，但会返回几个特殊值：</p>
+<ul>
+<li><code>NaN</code>表示Not a Number</li>
+<li><code>Infinity</code>表示无穷大</li>
+<li><code>-Infinity</code>表示负无穷大</li>
+</ul>
+<p>例如：</p>
+<pre><code class="language-java">double d1 = 0.0 / 0; // NaN
+double d2 = 1.0 / 0; // Infinity
+double d3 = -1.0 / 0; // -Infinity
+</code></pre>
+<h6 id="强制转型">强制转型</h6>
+<p>可以将浮点数强制转型为整数。在转型时，浮点数的小数部分会被丢掉。如果转型后超过了整型能表示的最大范围，将返回整型的最大值。例如：</p>
+<pre><code class="language-java">int n1 = (int) 12.3; // 12
+int n2 = (int) 12.7; // 12
+int n2 = (int) -12.7; // -12
+int n3 = (int) (12.7 + 0.5); // 13
+int n4 = (int) 1.2e20; // 2147483647
+</code></pre>
+<p>如果要进行四舍五入，可以对浮点数加上0.5再强制转型：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        double d = 2.6;
+        int n = (int) (d + 0.5);
+        System.out.println(n);
+    }
+}
+</code></pre>
+<h5 id="布尔类型">布尔类型</h5>
+<p>布尔类型<code>boolean</code>只有<code>true</code>和<code>false</code>两个值，布尔类型总是关系运算的计算结果。</p>
+<p>Java语言对布尔类型的存储并没有做规定，因为理论上存储布尔类型只需要1 bit，但是通常JVM内部会把<code>boolean</code>表示为4字节整数。</p>
+<p>布尔运算是一种关系运算，包括以下几类：</p>
+<ul>
+<li>比较运算符：<code>&gt;</code>，<code>&gt;=</code>，<code>&lt;</code>，<code>&lt;=</code>，<code>==</code>，<code>!=</code></li>
+<li>与运算 <code>&amp;&amp;</code></li>
+<li>或运算 <code>||</code></li>
+<li>非运算 <code>!</code></li>
+</ul>
+<p>关系运算符的优先级从高到低依次是：</p>
+<ul>
+<li><code>!</code></li>
+<li><code>&gt;</code>，<code>&gt;=</code>，<code>&lt;</code>，<code>&lt;=</code></li>
+<li><code>==</code>，<code>!=</code></li>
+<li><code>&amp;&amp;</code></li>
+<li><code>||</code></li>
+</ul>
+<h6 id="短路运算">短路运算</h6>
+<p>布尔运算的一个重要特点是短路运算。如果一个布尔运算的表达式能提前确定结果，则后续的计算不再执行，直接返回结果。</p>
+<p>因为<code>false &amp;&amp; x</code>的结果总是<code>false</code>，无论x是<code>true</code>还是<code>false</code>，因此，与运算在确定第一个值为<code>false</code>后，不再继续计算，而是直接返回<code>false</code></p>
+<p>考察以下代码：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        boolean b = 5 &lt; 3;
+        boolean result = b &amp;&amp; (5 / 0 &gt; 0);
+        System.out.println(result);
+    }
+}
+</code></pre>
+<p>如果没有短路运算，<code>&amp;&amp;</code>后面的表达式会由于除数为0而报错，但实际上该语句并未报错，原因在于与运算是短路运算符，提前计算出了结果<code>false</code>。</p>
+<p>如果变量b的值为<code>true</code>，则表达式变为<code>true &amp;&amp; (5 / 0 &gt; 0)</code>。因为无法进行短路运算，该表达式必定会由于除数为0而报错，可以自行测试。</p>
+<p>类似的，对于<code>||</code>运算，只要能确定第一个值为<code>true</code>，后续计算也不再进行，而是直接返回<code>true</code>：</p>
+<pre><code class="language-java">boolean result = true || (5 / 0 &gt; 0); // true
+</code></pre>
+<h6 id="三元运算符">三元运算符</h6>
+<p>Java还提供一个三元运算符<code>b ? x : y</code>，它根据第一个布尔表达式的结果，分别返回后续两个表达式之一的计算结果。示例：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int n = -100;
+        int x = n &gt;= 0 ? n : -n;
+        System.out.println(x);
+    }
+}
+</code></pre>
+<p>注意到三元运算<code>b ? x : y</code>会首先计算<code>b</code>，如果<code>b</code>为<code>true</code>，则只计算<code>x</code>，否则，只计算<code>y</code>。此外，<code>x</code>和<code>y</code>的类型必须相同，因为返回值不是<code>boolean</code>，而是<code>x</code>和<code>y</code>之一。</p>
+<h5 id="字符类型">字符类型</h5>
+<p>字符类型<code>char</code>表示一个字符。Java的<code>char</code>类型除了可表示标准的ASCII外，还可以表示一个Unicode字符：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        char a = 'A';
+        char zh = '中';
+        System.out.println(a);
+        System.out.println(zh);
+    }
+}
+</code></pre>
+<p>注意<code>char</code>类型使用单引号<code>'</code>，且仅有一个字符，要和双引号<code>&quot;</code>的字符串类型区分开。</p>
+<p>因为Java在内存中总是使用Unicode表示字符，所以，一个英文字符和一个中文字符都用一个<code>char</code>类型表示，它们都占用两个字节。要显示一个字符的Unicode编码，只需将<code>char</code>类型直接赋值给<code>int</code>类型即可：</p>
+<pre><code class="language-java">int n1 = 'A'; // 字母“A”的Unicodde编码是65
+int n2 = '中'; // 汉字“中”的Unicode编码是20013
+</code></pre>
+<p>还可以直接用转义字符<code>\u+Unicode编码</code>来表示一个字符：</p>
+<pre><code class="language-java">// 注意是十六进制:
+char c3 = '\u0041'; // 'A'，因为十六进制0041 = 十进制65
+char c4 = '\u4e2d'; // '中'，因为十六进制4e2d = 十进制20013
+</code></pre>
+<h6 id="字符串类型">字符串类型</h6>
+<p>和<code>char</code>类型不同，字符串类型<code>String</code>是引用类型，我们用双引号<code>&quot;...&quot;</code>表示字符串。一个字符串可以存储0个到任意个字符：</p>
+<pre><code class="language-java">String s = &quot;&quot;; // 空字符串，包含0个字符
+String s1 = &quot;A&quot;; // 包含一个字符
+String s2 = &quot;ABC&quot;; // 包含3个字符
+String s3 = &quot;中文 ABC&quot;; // 包含6个字符，其中有一个空格
+</code></pre>
+<p>因为字符串使用双引号<code>&quot;...&quot;</code>表示开始和结束，那如果字符串本身恰好包含一个<code>&quot;</code>字符怎么表示？例如，<code>&quot;abc&quot;xyz&quot;</code>，编译器就无法判断中间的引号究竟是字符串的一部分还是表示字符串结束。这个时候，我们需要借助转义字符<code>\</code>：</p>
+<pre><code class="language-java">String s = &quot;abc\&quot;xyz&quot;; // 包含7个字符: a, b, c, &quot;, x, y, z
+</code></pre>
+<p>因为<code>\</code>是转义字符，所以，两个<code>\\</code>表示一个<code>\</code>字符：</p>
+<pre><code class="language-java">String s = &quot;abc\\xyz&quot;; // 包含7个字符: a, b, c, \, x, y, z
+</code></pre>
+<p>常见的转义字符包括：</p>
+<ul>
+<li><code>\&quot;</code> 表示字符<code>&quot;</code></li>
+<li><code>\'</code> 表示字符<code>'</code></li>
+<li><code>\\</code> 表示字符<code>\</code></li>
+<li><code>\n</code> 表示换行符</li>
+<li><code>\r</code> 表示回车符</li>
+<li><code>\t</code> 表示<code>Tab</code></li>
+<li><code>\u####</code> 表示一个Unicode编码的字符</li>
+</ul>
+<p>例如：</p>
+<pre><code class="language-java">String s = &quot;ABC\n\u4e2d\u6587&quot;; // 包含6个字符: A, B, C, 换行符, 中, 文
+</code></pre>
+<h6 id="字符串连接">字符串连接</h6>
+<p>Java的编译器对字符串做了特殊照顾，可以使用<code>+</code>连接任意字符串和其他数据类型，这样极大地方便了字符串的处理。</p>
+<p>如果用<code>+</code>连接字符串和其他数据类型，会将其他数据类型先自动转型为字符串，再连接。</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int age = 25;
+        String s = &quot;age is &quot; + age;
+        System.out.println(s);
+    }
+}
+</code></pre>
+<h6 id="多行字符串">多行字符串</h6>
+<p>如果我们要表示多行字符串，使用+号连接会非常不方便：</p>
+<pre><code class="language-java">String s = &quot;first line \n&quot;
+         + &quot;second line \n&quot;
+         + &quot;end&quot;;
+</code></pre>
+<p>从Java 13开始，字符串可以用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>表示多行字符串（Text Blocks）了。举个例子：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String s = &quot;&quot;&quot;
+                   SELECT * FROM
+                     users
+                   WHERE id &gt; 100
+                   ORDER BY name DESC
+                   &quot;&quot;&quot;;
+        System.out.println(s);
+    }
+}
+</code></pre>
+<p>上述多行字符串实际上是5行，在最后一个DESC后面还有一个<code>\n</code>。如果我们不想在字符串末尾加一个<code>\n</code>，就需要这么写：</p>
+<pre><code class="language-java">String s = &quot;&quot;&quot; 
+           SELECT * FROM
+             users
+           WHERE id &gt; 100
+           ORDER BY name DESC&quot;&quot;&quot;;
+</code></pre>
+<p>还需要注意到，多行字符串前面共同的空格会被去掉，即：</p>
+<pre><code class="language-java">String s = &quot;&quot;&quot;
+...........SELECT * FROM
+...........  users
+...........WHERE id &gt; 100
+...........ORDER BY name DESC
+...........&quot;&quot;&quot;;
+</code></pre>
+<p>用<code>.</code>标注的空格都会被去掉。</p>
+<p>如果多行字符串的排版不规则，那么，去掉的空格就会变成这样：</p>
+<pre><code class="language-java">String s = &quot;&quot;&quot;
+.........  SELECT * FROM
+.........    users
+.........WHERE id &gt; 100
+.........  ORDER BY name DESC
+.........  &quot;&quot;&quot;;
+</code></pre>
+<p>即总是以最短的行首空格为基准。</p>
+<p>最后，由于多行字符串是作为预览特性（Preview Language Features）实现的，编译的时候，我们还需要给编译器加上参数：</p>
+<pre><code class="language-java">javac --source 14 --enable-preview Main.java
+</code></pre>
+<h6 id="不可变特性">不可变特性</h6>
+<p>Java的字符串除了是一个引用类型外，还有个重要特点，就是字符串不可变。考察以下代码：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String s = &quot;hello&quot;;
+        System.out.println(s); // 显示 hello
+        s = &quot;world&quot;;
+        System.out.println(s); // 显示 world
+    }
+}
+</code></pre>
+<p>观察执行结果，难道字符串s变了吗？其实变的不是字符串，而是变量s的“指向”。</p>
+<p>执行<code>String s = &quot;hello&quot;;</code>时，JVM虚拟机先创建字符串<code>&quot;hello&quot;</code>，然后，把字符串变量s指向它。</p>
+<p>紧接着，执行<code>s = &quot;world&quot;;</code>时，JVM虚拟机先创建字符串<code>&quot;world&quot;</code>，然后，把字符串变量s指向它。</p>
+<h6 id="空值null">空值<code>null</code></h6>
+<p>引用类型的变量可以指向一个空值<code>null</code>，它表示不存在，即该变量不指向任何对象。例如：</p>
+<pre><code class="language-java">String s1 = null; // s1是null
+String s2; // 没有赋初值值，s2也是null
+String s3 = s1; // s3也是null
+String s4 = &quot;&quot;; // s4指向空字符串，不是null
+</code></pre>
+<p>注意要区分空值<code>null</code>和空字符串<code>&quot;&quot;</code>，空字符串是一个有效的字符串对象，它不等于<code>null</code>。</p>
+<h5 id="引用类型">引用类型</h5>
+<p>除了基本类型的变量，剩下的都是引用类型。例如，引用类型最常用的就是<code>String</code>字符串：</p>
+<pre><code class="language-java">String s = &quot;hello&quot;;
+</code></pre>
+<p>引用类型的变量类似于C语言的指针，它内部存储一个“地址”，指向某个对象在内存的位置。</p>
+<h5 id="数组类型">数组类型</h5>
+<p>定义一个数组类型的变量，使用数组类型<code>“类型[]”</code>，例如，<code>int[]</code>。和单个基本类型变量不同，数组变量初始化必须使用<code>new int[5]</code>表示创建一个可容纳5个<code>int</code>元素的数组。</p>
+<p>Java的数组有几个特点：</p>
+<ul>
+<li>数组所有元素初始化为默认值，整型都是<code>0</code>，浮点型是<code>0.0</code>，布尔型是<code>false</code>；</li>
+<li>数组一旦创建后，大小就不可改变。</li>
+<li>要访问数组中的某一个元素，需要使用索引。数组索引从0开始，例如，5个元素的数组，索引范围是0~4。</li>
+</ul>
+<p>可以修改数组中的某一个元素，使用赋值语句，例如，<code>ns[1] = 79;</code>。</p>
+<p>可以用<code>数组变量.length</code>获取数组大小。</p>
+<p>也可以在定义数组时直接指定初始化的元素，这样就不必写出数组大小，而是由编译器自动推算数组大小。例如：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        // 5位同学的成绩:
+        int[] ns = new int[] { 68, 79, 91, 85, 62 };
+        System.out.println(ns.length); // 编译器自动推算数组大小为5
+    }
+}
+</code></pre>
+<p>还可以进一步简写为：</p>
+<pre><code class="language-java">int[] ns = { 68, 79, 91, 85, 62 };
+</code></pre>
+<p>注意数组是引用类型，并且数组大小不可变。我们观察下面的代码：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        // 5位同学的成绩:
+        int[] ns;
+        ns = new int[] { 68, 79, 91, 85, 62 };
+        System.out.println(ns.length); // 5
+        ns = new int[] { 1, 2, 3 };
+        System.out.println(ns.length); // 3
+    }
+}
+</code></pre>
+<p>数组大小变了吗？看上去好像是变了，但其实根本没变。</p>
+<p>对于数组<code>ns</code>来说，执行<code>ns = new int[] { 68, 79, 91, 85, 62 };</code>时，它指向一个5个元素的数组：<br>
+<img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428173806.png" alt="" loading="lazy"></p>
+<p>执行<code>ns = new int[] { 1, 2, 3 };</code>时，它指向一个新的3个元素的数组：<br>
+<img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428173849.png" alt="" loading="lazy"></p>
+<p>但是，原有的5个元素的数组并没有改变，只是无法通过变量<code>ns</code>引用到它们而已。</p>
+<h6 id="字符串数组">字符串数组</h6>
+<p>字符串是引用类型，因此我们先定义一个字符串数组：</p>
+<pre><code class="language-java">String[] names = {
+    &quot;ABC&quot;, &quot;XYZ&quot;, &quot;zoo&quot;
+};
+</code></pre>
+<p>对于<code>String[]</code>类型的数组变量<code>names</code>，它实际上包含3个元素，但每个元素都指向某个字符串对象：</p>
+<figure data-type="image" tabindex="2"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428174200.png" alt="" loading="lazy"></figure>
+<p>对<code>names[1]</code>进行赋值，例如<code>names[1] = &quot;cat&quot;;</code>，效果如下：<br>
+<img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428174225.png" alt="" loading="lazy"></p>
+<p>这里注意到原来<code>names[1]</code>指向的字符串<code>&quot;XYZ&quot;</code>并没有改变，仅仅是将<code>names[1]</code>的引用从指向<code>&quot;XYZ&quot;</code>改成了指向<code>&quot;cat&quot;</code>，其结果是字符串<code>&quot;XYZ&quot;</code>再也无法通过<code>names[1]</code>访问到了。</p>
+<h5 id="常量">常量</h5>
+<p>定义变量的时候，如果加上<code>final</code>修饰符，这个变量就变成了常量：</p>
+<pre><code class="language-java">final double PI = 3.14; // PI是一个常量
+double r = 5.0;
+double area = PI * r * r;
+PI = 300; // compile error!
+</code></pre>
+<p>常量在定义时进行初始化后就不可再次赋值，再次赋值会导致编译错误。常量的作用是用有意义的变量名来避免魔术数字（Magic number），例如，不要在代码中到处写3.14，而是定义一个常量。如果将来需要提高计算精度，我们只需要在常量的定义处修改，例如，改成3.1416，而不必在所有地方替换3.14。</p>
+<p>根据习惯，常量名通常全部大写。</p>
+<h5 id="var关键字"><code>var</code>关键字</h5>
+<p>有些时候，类型的名字太长，写起来比较麻烦。例如：</p>
+<pre><code class="language-java">StringBuilder sb = new StringBuilder();
+</code></pre>
+<p>这个时候，如果想省略变量类型，可以使用<code>var</code>关键字：</p>
+<pre><code class="language-java">var sb = new StringBuilder();
+</code></pre>
+<p>编译器会根据赋值语句自动推断出变量<code>sb</code>的类型是<code>StringBuilder</code>。对编译器来说，语句：</p>
+<pre><code class="language-java">var sb = new StringBuilder();
+</code></pre>
+<p>实际上会自动变成:</p>
+<pre><code class="language-java">StringBuilder sb = new StringBuilder();
+</code></pre>
+<p>因此，使用<code>var</code>定义变量，仅仅是少写了变量类型而已。</p>
+<h5 id="变量的作用范围">变量的作用范围</h5>
+<p>在Java中，多行语句用<code>{ }</code>括起来。很多控制语句，例如条件判断和循环，都以<code>{ }</code>作为它们自身的范围，例如：</p>
+<pre><code class="language-java">if (...) { // if开始
+    ...
+    while (...) { while 开始
+        ...
+        if (...) { // if开始
+            ...
+        } // if结束
+        ...
+    } // while结束
+    ...
+} // if结束
+</code></pre>
+<p>只要正确地嵌套这些<code>{ }</code>，编译器就能识别出语句块的开始和结束。而在语句块中定义的变量，它有一个作用域，就是从定义处开始，到语句块结束。超出了作用域引用这些变量，编译器会报错。举个例子：</p>
+<pre><code class="language-java">{
+    ...
+    int i = 0; // 变量i从这里开始定义
+    ...
+    {
+        ...
+        int x = 1; // 变量x从这里开始定义
+        ...
+        {
+            ...
+            String s = &quot;hello&quot;; // 变量s从这里开始定义
+            ...
+        } // 变量s作用域到此结束
+        ...
+        // 注意，这是一个新的变量s，它和上面的变量同名，
+        // 但是因为作用域不同，它们是两个不同的变量:
+        String s = &quot;hi&quot;;
+        ...
+    } // 变量x和s作用域到此结束
+    ...
+} // 变量i作用域到此结束
+</code></pre>
+<p>定义变量时，要遵循作用域最小化原则，尽量将变量定义在尽可能小的作用域，并且，不要重复使用变量名。</p>
+<h2 id="流程控制">流程控制</h2>
+<h3 id="输入和输出">输入和输出</h3>
+<h4 id="输出">输出</h4>
+<p><code>println</code>是<code>print line</code>的缩写，表示输出并换行。因此，如果输出后不想换行，可以用<code>print()</code>。</p>
+<h5 id="格式化输出">格式化输出</h5>
+<p>格式化输出使用<code>System.out.printf()</code>，通过使用占位符<code>%?</code>，<code>printf()</code>可以把后面的参数格式化成指定格式：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        double d = 3.1415926;
+        System.out.printf(&quot;%.2f\n&quot;, d); // 显示两位小数3.14
+        System.out.printf(&quot;%.4f\n&quot;, d); // 显示4位小数3.1416
+    }
+}
+</code></pre>
+<p>Java的格式化功能提供了多种占位符，可以把各种数据类型“格式化”成指定的字符串：</p>
+<ul>
+<li><code>%d</code>:格式化输出整数</li>
+<li><code>%x</code>:格式化输出十六进制整数</li>
+<li><code>%f</code>:格式化输出浮点数</li>
+<li><code>%e</code>:格式化输出科学计数法表示的浮点数</li>
+<li><code>%s</code>:格式化字符串</li>
+</ul>
+<p>注意，由于<code>%</code>表示占位符，因此，连续两个<code>%%</code>表示一个<code>%</code>字符本身。</p>
+<p>占位符本身还可以有更详细的格式化参数。下面的例子把一个整数格式化成十六进制，并用0补足8位：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int n = 12345000;
+        System.out.printf(&quot;n=%d, hex=%08x&quot;, n, n); // 注意，两个%占位符必须传入两个数
+    }
+}
+</code></pre>
+<h4 id="输入">输入</h4>
+<p>和输出相比，Java的输入就要复杂得多。我们先看一个从控制台读取一个字符串和一个整数的例子：</p>
+<pre><code class="language-java">import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in); // 创建Scanner对象
+        System.out.print(&quot;Input your name: &quot;); // 打印提示
+        String name = scanner.nextLine(); // 读取一行输入并获取字符串
+        System.out.print(&quot;Input your age: &quot;); // 打印提示
+        int age = scanner.nextInt(); // 读取一行输入并获取整数
+        System.out.printf(&quot;Hi, %s, you are %d\n&quot;, name, age); // 格式化输出
+    }
+}
+</code></pre>
+<p>首先，我们通过<code>import</code>语句导入<code>java.util.Scanner</code>，<code>import</code>是导入某个类的语句，必须放到<code>Java</code>源代码的开头。</p>
+<p>然后，创建<code>Scanner</code>对象并传入<code>System.in</code>。<code>System.out</code>代表标准输出流，而<code>System.in</code>代表标准输入流。直接使用<code>System.in</code>读取用户输入虽然是可以的，但需要更复杂的代码，而通过<code>Scanner</code>就可以简化后续的代码。</p>
+<p>有了<code>Scanner</code>对象后，要读取用户输入的字符串，使用<code>scanner.nextLine()</code>，要读取用户输入的整数，使用<code>scanner.nextInt()</code>。<code>Scanner</code>会自动转换数据类型，因此不必手动转换。</p>
+<h3 id="if判断"><code>if</code>判断</h3>
+<p>当<code>if</code>语句块只有一行语句时，可以省略花括号<code>{}</code>,在使用git这些版本控制系统自动合并时更容易出问题，所以不推荐忽略花括号的写法。</p>
+<h4 id="判断引用类型相等">判断引用类型相等</h4>
+<p>在Java中，判断值类型的变量是否相等，可以使用<code>==</code>运算符。但是，判断引用类型的变量是否相等，<code>==</code>表示“引用是否相等”，或者说，是否指向同一个对象。例如，下面的两个<code>String</code>类型，它们的内容是相同的，但是，分别指向不同的对象，用<code>==</code>判断，结果为<code>false</code>：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String s1 = &quot;hello&quot;;
+        String s2 = &quot;HELLO&quot;.toLowerCase();
+        System.out.println(s1);
+        System.out.println(s2);
+        if (s1 == s2) {
+            System.out.println(&quot;s1 == s2&quot;);
+        } else {
+            System.out.println(&quot;s1 != s2&quot;);//输出这一行
+        }
+    }
+}
+</code></pre>
+<p>要判断引用类型的变量内容是否相等，必须使用<code>equals()</code>方法：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String s1 = &quot;hello&quot;;
+        String s2 = &quot;HELLO&quot;.toLowerCase();
+        System.out.println(s1);
+        System.out.println(s2);
+        if (s1.equals(s2)) {
+            System.out.println(&quot;s1 equals s2&quot;);
+        } else {
+            System.out.println(&quot;s1 not equals s2&quot;);
+        }
+    }
+}
+</code></pre>
+<p>注意：执行语句<code>s1.equals(s2)</code>时，如果变量<code>s1</code>为<code>null</code>，会报<code>NullPointerException</code>：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String s1 = null;
+        if (s1.equals(&quot;hello&quot;)) {
+            System.out.println(&quot;hello&quot;);
+        }
+    }
+}
+</code></pre>
+<p>要避免<code>NullPointerException</code>错误，可以利用短路运算符<code>&amp;&amp;</code>：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String s1 = null;
+        if (s1 != null &amp;&amp; s1.equals(&quot;hello&quot;)) {
+            System.out.println(&quot;hello&quot;);
+        }
+    }
+}
+</code></pre>
+<p>还可以把一定不是<code>null</code>的对象<code>&quot;hello&quot;</code>放到前面：例如：<code>if (&quot;hello&quot;.equals(s)) { ... }</code>。</p>
+<h3 id="switch多重选择"><code>switch</code>多重选择</h3>
+<p><code>switch</code>语句根据<code>switch (表达式)</code>计算的结果，跳转到匹配的<code>case</code>结果，然后继续执行后续语句，直到遇到<code>break</code>结束执行。</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int option = 1;
+        switch (option) {
+        case 1:
+            System.out.println(&quot;Selected 1&quot;);
+            break;
+        case 2:
+            System.out.println(&quot;Selected 2&quot;);
+            break;
+        case 3:
+            System.out.println(&quot;Selected 3&quot;);
+            break;
+        }
+    }
+}
+</code></pre>
+<p>如果<code>option</code>的值没有匹配到任何<code>case</code>，例如<code>option = 99</code>，那么，<code>switch</code>语句不会执行任何语句。这时，可以给<code>switch</code>语句加一个<code>default</code>，当没有匹配到任何<code>case</code>时，执行<code>default</code>：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int option = 99;
+        switch (option) {
+        case 1:
+            System.out.println(&quot;Selected 1&quot;);
+            break;
+        case 2:
+            System.out.println(&quot;Selected 2&quot;);
+            break;
+        case 3:
+            System.out.println(&quot;Selected 3&quot;);
+            break;
+        default:
+            System.out.println(&quot;Not selected&quot;);
+            break;
+        }
+    }
+}
+</code></pre>
+<p>对于多个<code>==</code>判断的情况，使用<code>switch</code>结构更加清晰。</p>
+<p>同时注意，上述“翻译”只有在<code>switch</code>语句中对每个<code>case</code>正确编写了<code>break</code>语句才能对应得上。</p>
+<p>使用<code>switch</code>时，注意<code>case</code>语句并没有花括号<code>{}</code>，而且，<code>case</code>语句具有“穿透性”，漏写<code>break</code>将导致意想不到的结果：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int option = 2;
+        switch (option) {
+        case 1:
+            System.out.println(&quot;Selected 1&quot;);
+        case 2:
+            System.out.println(&quot;Selected 2&quot;);
+        case 3:
+            System.out.println(&quot;Selected 3&quot;);
+        default:
+            System.out.println(&quot;Not selected&quot;);
+        }
+    }
+}
+</code></pre>
+<p>当<code>option = 2</code>时，将依次输出<code>&quot;Selected 2&quot;</code>、<code>&quot;Selected 3&quot;</code>、<code>&quot;Not selected&quot;</code>，原因是从匹配到<code>case 2</code>开始，后续语句将全部执行，直到遇到<code>break</code>语句。因此，任何时候都不要忘记写<code>break</code>。</p>
+<p>如果有几个<code>case</code>语句执行的是同一组语句块，可以这么写：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int option = 2;
+        switch (option) {
+        case 1:
+            System.out.println(&quot;Selected 1&quot;);
+            break;
+        case 2:
+        case 3:
+            System.out.println(&quot;Selected 2, 3&quot;);
+            break;
+        default:
+            System.out.println(&quot;Not selected&quot;);
+            break;
+        }
+    }
+}
+</code></pre>
+<p>使用<code>switch</code>语句时，只要保证有<code>break</code>，<code>case</code>的顺序不影响程序逻辑：</p>
+<pre><code class="language-java">switch (option) {
+case 3:
+    ...
+    break;
+case 2:
+    ...
+    break;
+case 1:
+    ...
+    break;
+}
+</code></pre>
+<p><code>switch</code>语句还可以匹配字符串。字符串匹配时，是比较“内容相等”。例如：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String fruit = &quot;apple&quot;;
+        switch (fruit) {
+        case &quot;apple&quot;:
+            System.out.println(&quot;Selected apple&quot;);
+            break;
+        case &quot;pear&quot;:
+            System.out.println(&quot;Selected pear&quot;);
+            break;
+        case &quot;mango&quot;:
+            System.out.println(&quot;Selected mango&quot;);
+            break;
+        default:
+            System.out.println(&quot;No fruit selected&quot;);
+            break;
+        }
+    }
+}
+</code></pre>
+<h4 id="switch表达式"><code>switch</code>表达式</h4>
+<p>使用<code>switch</code>时，如果遗漏了<code>break</code>，就会造成严重的逻辑错误，而且不易在源代码中发现错误。从Java 12开始，<code>switch</code>语句升级为更简洁的表达式语法，使用类似模式匹配（Pattern Matching）的方法，保证只有一种路径会被执行，并且不需要<code>break</code>语句：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String fruit = &quot;apple&quot;;
+        switch (fruit) {
+        case &quot;apple&quot; -&gt; System.out.println(&quot;Selected apple&quot;);
+        case &quot;pear&quot; -&gt; System.out.println(&quot;Selected pear&quot;);
+        case &quot;mango&quot; -&gt; {
+            System.out.println(&quot;Selected mango&quot;);
+            System.out.println(&quot;Good choice!&quot;);
+        }
+        default -&gt; System.out.println(&quot;No fruit selected&quot;);
+        }
+    }
+}
+</code></pre>
+<p>注意新语法使用<code>-&gt;</code>，如果有多条语句，需要用<code>{}</code>括起来。不要写<code>break</code>语句，因为新语法只会执行匹配的语句，没有穿透效应。</p>
+<p>很多时候，我们还可能用<code>switch</code>语句给某个变量赋值。例如：</p>
+<pre><code class="language-java">int opt;
+switch (fruit) {
+case &quot;apple&quot;:
+    opt = 1;
+    break;
+case &quot;pear&quot;:
+case &quot;mango&quot;:
+    opt = 2;
+    break;
+default:
+    opt = 0;
+    break;
+}
+</code></pre>
+<p>使用新的<code>switch</code>语法，不但不需要<code>break</code>，还可以直接返回值。把上面的代码改写如下：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String fruit = &quot;apple&quot;;
+        int opt = switch (fruit) {
+            case &quot;apple&quot; -&gt; 1;
+            case &quot;pear&quot;, &quot;mango&quot; -&gt; 2;
+            default -&gt; 0;
+        }; // 注意赋值语句要以;结束
+        System.out.println(&quot;opt = &quot; + opt);
+    }
+}
+</code></pre>
+<h4 id="yield"><code>yield</code></h4>
+<p>大多数时候，在<code>switch</code>表达式内部，我们会返回简单的值。但是，如果需要复杂的语句，我们也可以写很多语句，放到<code>{...}</code>里，然后，用<code>yield</code>返回一个值作为<code>switch</code>语句的返回值：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String fruit = &quot;orange&quot;;
+        int opt = switch (fruit) {
+            case &quot;apple&quot; -&gt; 1;
+            case &quot;pear&quot;, &quot;mango&quot; -&gt; 2;
+            default -&gt; {
+                int code = fruit.hashCode();
+                yield code; // switch语句返回值
+            }
+        };
+        System.out.println(&quot;opt = &quot; + opt);
+    }
+}
+</code></pre>
+<h3 id="while循环"><code>while</code>循环</h3>
+<p>如果循环条件的逻辑写得有问题，也会造成意料之外的结果：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int sum = 0;
+        int n = 1;
+        while (n &gt; 0) {
+            sum = sum + n;
+            n ++;
+        }
+        System.out.println(n); // -2147483648
+        System.out.println(sum);
+    }
+}
+</code></pre>
+<p>表面上看，上面的<code>while</code>循环是一个死循环，但是，Java的<code>int</code>类型有最大值，达到最大值后，再加1会变成负数，结果，意外退出了<code>while</code>循环。</p>
+<h3 id="for循环"><code>for</code>循环</h3>
+<p>使用<code>for</code>循环时，计数器变量<code>i</code>要尽量定义在<code>for</code>循环中：</p>
+<pre><code class="language-java">int[] ns = { 1, 4, 9, 16, 25 };
+for (int i=0; i&lt;ns.length; i++) {
+    System.out.println(ns[i]);
+}
+// 无法访问i
+int n = i; // compile error!
+</code></pre>
+<p>如果变量<code>i</code>定义在<code>for</code>循环外：</p>
+<pre><code class="language-java">int[] ns = { 1, 4, 9, 16, 25 };
+int i;
+for (i=0; i&lt;ns.length; i++) {
+    System.out.println(ns[i]);
+}
+// 仍然可以使用i
+int n = i;
+</code></pre>
+<p>那么，退出<code>for</code>循环后，变量<code>i</code>仍然可以被访问，这就破坏了变量应该把访问范围缩到最小的原则。</p>
+<h4 id="for-each循环"><code>for each</code>循环</h4>
+<p><code>for</code>循环经常用来遍历数组，因为通过计数器可以根据索引来访问数组的每个元素：</p>
+<pre><code class="language-java">int[] ns = { 1, 4, 9, 16, 25 };
+for (int i=0; i&lt;ns.length; i++) {
+    System.out.println(ns[i]);
+}
+</code></pre>
+<p>但是，很多时候，我们实际上真正想要访问的是数组每个元素的值。Java还提供了另一种<code>for each</code>循环，它可以更简单地遍历数组：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 1, 4, 9, 16, 25 };
+        for (int n : ns) {
+            System.out.println(n);
+        }
+    }
+}
+</code></pre>
+<p>和<code>for</code>循环相比，<code>for each</code>循环的变量<code>n</code>不再是计数器，而是直接对应到数组的每个元素。<code>for each</code>循环的写法也更简洁。但是，<code>for each</code>循环无法指定遍历顺序，也无法获取数组的索引。</p>
+<p>除了数组外，<code>for each</code>循环能够遍历所有“可迭代”的数据类型，包括后面会介绍的<code>List</code>、<code>Map</code>等。</p>
+<h2 id="数组操作">数组操作</h2>
+<h3 id="遍历数组">遍历数组</h3>
+<p>通过<code>for</code>循环就可以遍历数组。因为数组的每个元素都可以通过索引来访问，因此，使用标准的<code>for</code>循环可以完成一个数组的遍历：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 1, 4, 9, 16, 25 };
+        for (int i=0; i&lt;ns.length; i++) {
+            int n = ns[i];
+            System.out.println(n);
+        }
+    }
+}
+</code></pre>
+<p>为了实现<code>for</code>循环遍历，初始条件为<code>i=0</code>，因为索引总是从<code>0</code>开始，继续循环的条件为<code>i&lt;ns.length</code>，因为当<code>i=ns.length</code>时，<code>i</code>已经超出了索引范围（索引范围是<code>0 ~ ns.length-1</code>），每次循环后，<code>i++</code>。</p>
+<p>第二种方式是使用<code>for each</code>循环，直接迭代数组的每个元素：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 1, 4, 9, 16, 25 };
+        for (int n : ns) {
+            System.out.println(n);
+        }
+    }
+}
+</code></pre>
+<p>注意：在<code>for (int n : ns)</code>循环中，变量<code>n</code>直接拿到<code>ns</code>数组的元素，而不是索引。</p>
+<p>显然<code>for each</code>循环更加简洁。但是，<code>for each</code>循环无法拿到数组的索引，因此，到底用哪一种<code>for</code>循环，取决于我们的需要。</p>
+<h4 id="打印数组内容">打印数组内容</h4>
+<p>直接打印数组变量，得到的是数组在JVM中的引用地址：</p>
+<pre><code class="language-java">int[] ns = { 1, 1, 2, 3, 5, 8 };
+System.out.println(ns); // 类似 [I@7852e922
+</code></pre>
+<p>这并没有什么意义，因为我们希望打印的数组的元素内容。因此，使用<code>for each</code>循环来打印它：</p>
+<pre><code class="language-java">int[] ns = { 1, 1, 2, 3, 5, 8 };
+for (int n : ns) {
+    System.out.print(n + &quot;, &quot;);
+}
+</code></pre>
+<p>使用<code>for each</code>循环打印也很麻烦。幸好Java标准库提供了<code>Arrays.toString()</code>，可以快速打印数组内容：</p>
+<pre><code class="language-java">import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 1, 1, 2, 3, 5, 8 };
+        System.out.println(Arrays.toString(ns));
+    }
+}
+</code></pre>
+<h3 id="数组排序">数组排序</h3>
+<pre><code class="language-java">//冒泡排序
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 28, 12, 89, 73, 65, 18, 96, 50, 8, 36 };
+        // 排序前:
+        System.out.println(Arrays.toString(ns));
+        for (int i = 0; i &lt; ns.length - 1; i++) {
+            for (int j = 0; j &lt; ns.length - i - 1; j++) {
+                if (ns[j] &gt; ns[j+1]) {
+                    // 交换ns[j]和ns[j+1]:
+                    int tmp = ns[j];
+                    ns[j] = ns[j+1];
+                    ns[j+1] = tmp;
+                }
+            }
+        }
+        // 排序后:
+        System.out.println(Arrays.toString(ns));
+    }
+}
+</code></pre>
+<p>实际上，Java的标准库已经内置了排序功能，我们只需要调用JDK提供的<code>Arrays.sort()</code>就可以排序：</p>
+<pre><code class="language-java">import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] ns = { 28, 12, 89, 73, 65, 18, 96, 50, 8, 36 };
+        Arrays.sort(ns);
+        System.out.println(Arrays.toString(ns));
+    }
+}
+</code></pre>
+<p>必须注意，对数组排序实际上修改了数组本身。例如，排序前的数组是：</p>
+<pre><code class="language-java">int[] ns = { 9, 3, 6, 5 };
+</code></pre>
+<p>在内存中，这个整型数组表示如下：</p>
+<figure data-type="image" tabindex="3"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428202519.png" alt="" loading="lazy"></figure>
+<p>当我们调用<code>Arrays.sort(ns);</code>后，这个整型数组在内存中变为：</p>
+<figure data-type="image" tabindex="4"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428202542.png" alt="" loading="lazy"></figure>
+<p>即变量<code>ns</code>指向的数组内容已经被改变了。</p>
+<p>如果对一个字符串数组进行排序，例如：</p>
+<pre><code class="language-java">String[] ns = { &quot;banana&quot;, &quot;apple&quot;, &quot;pear&quot; };
+</code></pre>
+<p>排序前，这个数组在内存中表示如下：</p>
+<figure data-type="image" tabindex="5"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428202627.png" alt="" loading="lazy"></figure>
+<p>调用<code>Arrays.sort(ns);</code>排序后，这个数组在内存中表示如下：</p>
+<figure data-type="image" tabindex="6"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428202645.png" alt="" loading="lazy"></figure>
+<p>原来的3个字符串在内存中均没有任何变化，但是<code>ns</code>数组的每个元素指向变化了。</p>
+<h3 id="多维数组">多维数组</h3>
+<h4 id="二维数组">二维数组</h4>
+<p>二维数组就是数组的数组。定义一个二维数组如下：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int[][] ns = {
+            { 1, 2, 3, 4 },
+            { 5, 6, 7, 8 },
+            { 9, 10, 11, 12 }
+        };
+        System.out.println(ns.length); // 3
+    }
+}
+</code></pre>
+<p>因为<code>ns</code>包含3个数组，因此，<code>ns.length</code>为3。实际上<code>ns</code>在内存中的结构如下：</p>
+<figure data-type="image" tabindex="7"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428203256.png" alt="" loading="lazy"></figure>
+<p>如果我们定义一个普通数组<code>arr0</code>，然后把<code>ns[0]</code>赋值给它：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        int[][] ns = {
+            { 1, 2, 3, 4 },
+            { 5, 6, 7, 8 },
+            { 9, 10, 11, 12 }
+        };
+        int[] arr0 = ns[0];
+        System.out.println(arr0.length); // 4
+    }
+}
+</code></pre>
+<p>实际上<code>arr0</code>就获取了<code>ns</code>数组的第<code>0</code>个元素。因为<code>ns</code>数组的每个元素也是一个数组，因此，<code>arr0</code>指向的数组就是<code>{ 1, 2, 3, 4 }</code>。在内存中，结构如下：</p>
+<figure data-type="image" tabindex="8"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428203404.png" alt="" loading="lazy"></figure>
+<p>访问二维数组的某个元素需要使用<code>array[row][col]</code>，例如：</p>
+<pre><code class="language-java">System.out.println(ns[1][2]); // 7
+</code></pre>
+<p>二维数组的每个数组元素的长度并不要求相同，例如，可以这么定义<code>ns</code>数组：</p>
+<pre><code class="language-java">int[][] ns = {
+    { 1, 2, 3, 4 },
+    { 5, 6 },
+    { 7, 8, 9 }
+};
+</code></pre>
+<p>这个二维数组在内存中的结构如下：</p>
+<figure data-type="image" tabindex="9"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428203520.png" alt="" loading="lazy"></figure>
+<p>要打印一个二维数组，可以使用两层嵌套的<code>for</code>循环：</p>
+<pre><code class="language-java">for (int[] arr : ns) {
+    for (int n : arr) {
+        System.out.print(n);
+        System.out.print(', ');
+    }
+    System.out.println();
+}
+</code></pre>
+<p>或者使用Java标准库的<code>Arrays.deepToString()</code>：</p>
+<pre><code class="language-java">import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[][] ns = {
+            { 1, 2, 3, 4 },
+            { 5, 6, 7, 8 },
+            { 9, 10, 11, 12 }
+        };
+        System.out.println(Arrays.deepToString(ns));
+    }
+}
+</code></pre>
+<h4 id="三维数组">三维数组</h4>
+<p>三维数组就是二维数组的数组。可以这么定义一个三维数组：</p>
+<pre><code class="language-java">int[][][] ns = {
+    {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    },
+    {
+        {10, 11},
+        {12, 13}
+    },
+    {
+        {14, 15, 16},
+        {17, 18}
+    }
+};
+</code></pre>
+<p>它在内存中的结构如下：</p>
+<figure data-type="image" tabindex="10"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200428203707.png" alt="" loading="lazy"></figure>
+<p>如果我们要访问三维数组的某个元素，例如，<code>ns[2][0][1]</code>，只需要顺着定位找到对应的最终元素15即可。理论上，我们可以定义任意的<code>N</code>维数组。但在实际应用中，除了二维数组在某些时候还能用得上，更高维度的数组很少使用。</p>
+<h3 id="命令行参数">命令行参数</h3>
+<p>Java程序的入口是<code>main</code>方法，而<code>main</code>方法可以接受一个命令行参数，它是一个<code>String[]</code>数组。</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        for (String arg : args) {
+            System.out.println(arg);
+        }
+    }
+}
+</code></pre>
+<p>我们可以利用接收到的命令行参数，根据不同的参数执行不同的代码。例如，实现一个<code>-version</code>参数，打印程序版本号：</p>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        for (String arg : args) {
+            if (&quot;-version&quot;.equals(arg)) {
+                System.out.println(&quot;v 1.0&quot;);
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+<p>上面这个程序必须在命令行执行，我们先编译它：</p>
+<pre><code>$ javac Main.java
+</code></pre>
+<p>然后，执行的时候，给它传递一个<code>-version</code>参数：</p>
+<pre><code>$ java Main -version
+v 1.0
+</code></pre>
+<p>这样，程序就可以根据传入的命令行参数，作出不同的响应。</p>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://bailingnan.github.io/tag/8F_3nrsTG/">
+            <span class="flex-auto">Java</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/m5-forecasting-accuracy/">
+                <h3 class="post-title">
+                  M5 Forecasting - Accuracy
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
