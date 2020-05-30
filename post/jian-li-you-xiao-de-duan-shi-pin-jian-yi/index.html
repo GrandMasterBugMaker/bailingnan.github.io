@@ -1,0 +1,342 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1590858981787">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157390001-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157390001-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1590858981787" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%BB%BA%E7%AB%8B%E6%9C%89%E6%95%88%E7%9A%84%E7%9F%AD%E8%A7%86%E9%A2%91%E5%BB%BA%E8%AE%AE">建立有效的短视频建议</a>
+<ul>
+<li><a href="#%E6%91%98%E8%A6%81">摘要</a>
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89">问题定义</a></li>
+<li><a href="#%E5%AE%A4%E9%AA%8C%E5%92%8C%E7%BB%93%E6%9E%9C">室验和结果</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">建立有效的短视频建议</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-05-31 / 9 min read
+        </div>
+        
+        <div class="post-content yue">
+          <!-- TOC -->
+<ul>
+<li><a href="#%E5%BB%BA%E7%AB%8B%E6%9C%89%E6%95%88%E7%9A%84%E7%9F%AD%E8%A7%86%E9%A2%91%E5%BB%BA%E8%AE%AE">建立有效的短视频建议</a>
+<ul>
+<li><a href="#%E6%91%98%E8%A6%81">摘要</a>
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89">问题定义</a></li>
+<li><a href="#%E5%AE%A4%E9%AA%8C%E5%92%8C%E7%BB%93%E6%9E%9C">室验和结果</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="建立有效的短视频建议">建立有效的短视频建议</h1>
+<h2 id="摘要">摘要</h2>
+<p>在社交媒体服务中，如何建立有效的个性化推荐系统是一个具有挑战性但极有价值的问题。本文着重于通过预测完成观看整个视频并按“赞”按钮的可能性，为短视频推荐构建通用框架。提出了四种新颖的技术来提高预测精度。首先，我们提出一种增量式多窗口扫描方法，以提取与用户行为有关的特征。此外，用户交互行为层次结构旨在捕获大量信息并减少计算时间。此外，模型转移能够将模型在其他数据集上学习到的知识转移到最终模型。最后，提出了一种基于AUC评价指标的基于等级的集成方法。在修订比赛规则之前，我们的方法长期以来在ICME短视频理解挑战赛（Track1）的最后阶段排名第一。</p>
+<h3 id="关键词">关键词</h3>
+<ul>
+<li>短视频推荐</li>
+<li>模型迁移</li>
+<li>融合方式</li>
+</ul>
+<h2 id="简介">简介</h2>
+<p>随着基于短视频的社交媒体平台的日益普及，针对视频的个性化推荐已成为迫切而又具有挑战性的需求。 它允许用户接收与他们的喜好有关的视频的直接推送，而不是手动搜索内容。 这有助于提高用户忠诚度，并有助于在平台上分发新上传的内容。 但是，如[1]所述，开发推荐算法的两个主要障碍是可伸缩性和质量。 首先，许多传统的推荐算法（例如k近邻算法）无法处理大规模的数据集，而这种数据集在当今的应用场景中很普遍。 其次，推荐精度低的推荐系统会降低用户对应用程序的满意度。</p>
+<p>TikTok也被称为Douyin，是基于短视频的社交媒体市场上的领先平台之一，每小时创建，上传和共享数百万内容。 为了使用户在启动TikTok时可以随时获得视频的娱乐和吸引，推荐策略必须基于用户的利益，这涉及用户的行为和对视频内容的理解，包括主题，编辑质量， 背景音乐和作者。</p>
+<p>在过去的三十年中，针对个性化推荐的两种代表性策略是协作过滤（CF）和基于内容的过滤（CBF）。 根据用户对商品的偏好，CF将其与具有相似偏好的用户喜欢的商品进行匹配[1]。 奇异向量分解（SVD）之所以流行，是因为它能够减小维度，同时发现项目之间的相似性。 在著名的Netflix奖挑战赛中，[2]通过合并基于SVD的潜在因子模型和邻域模型赢得了比赛。 在[3]中构造了一个用户视频图，从中可以推导出共视信息。 通过吸收算法，可以基于相邻偏好信息的传播来做出推荐。 但是，视频内容的属性在基于CF的推荐框架中经常被忽略。</p>
+<p>CBF不再关注用户，而是将重点放在项目本身的特征上。 在[4，5]中提出了一个在线视频推荐框架，该框架中获得了视频文档的多种模式的相关性，包括文本，视觉和听觉信息。 使用基于注意力的功能，融合了不同模式的相关性。 在[6]中，从视频中直接提取的低级视觉特征被包括在它们的模型中，以更好地理解内容。</p>
+<p>为了更好地捕捉用户和视频之间的复杂关系，像Google这样的公司正在尝试将深度学习引入其推荐系统。 例如，[7]提出了一个两阶段的推荐框架，该框架由候选人生成模块和深度排名模块组成，其中考虑了视频功能和历史点击率。</p>
+<p>在本文中，我们解决了短视频推荐问题，并提出了一个有效的通用框架。 为了提高预测精度，提出了四种新技术，即增量多窗口扫描，用户交互行为层次结构，模型传递和基于秩的集成方法。 其余论文的结构如下。 在以下部分中，首先给出问题定义。 然后，我们通过详细阐述四种提议的技术来介绍框架的概述。 在第4节中，介绍了实验设置和评估结果。</p>
+<h2 id="问题定义">问题定义</h2>
+<p>这项研究的总体目标是预测用户是否会完成观看特定视频以及是否会单击“喜欢”按钮。</p>
+<p>符号和问题定义如下：</p>
+<ul>
+<li>
+<p>符号：用户交互行为数据<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span></span></span>.用户交互行为记录可以分为与用户相关的功能，与视频相关的功能和与行为相关的数据。 与用户相关的功能包括用户的ID，城市和设备。 与视频相关的功能包括ID，作者，城市，频道，背景音乐和视频时长。 对于与行为有关的数据，包括用户是否完成观看和喜欢视频以及他们开始观看的时间。</p>
+</li>
+<li>
+<p>符号：文字特征<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span>。首先从视频标题中删除了数字和符号。 然后，标题被分割成单独的单词。 最后，计算每个单词的出现频率。</p>
+</li>
+<li>
+<p>符号：视觉特征<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span></span>。 这种类型的特征是由神经网络提取的，该神经网络将每个视频转换为128维向量。</p>
+</li>
+<li>
+<p>符号：音频特征<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span>。此特征集也由神经网络提取，并转换为128维向量。</p>
+</li>
+</ul>
+<p>问题：</p>
+<p>给定用户id<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>和视频id<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span>，基于用户交互行为数据<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span></span></span>，文本特征<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span>，视觉特征<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span></span></span></span>和音频特征<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span>构建机器学习模型，以预测用户是否会完成观看并喜欢特定的短视频。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mo separator="true">,</mo><mtext> finish </mtext></mrow></msub><mo>=</mo><mi>P</mi><mrow><mo fence="true">(</mo><mrow><mo fence="true">⟨</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>v</mi><mi>i</mi></msub><mo fence="true">⟩</mo></mrow><mi mathvariant="normal">∣</mi><mi>I</mi><mo separator="true">,</mo><mi>T</mi><mo separator="true">,</mo><mi>V</mi><mo separator="true">,</mo><mi>A</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">P_{i, \text { finish }}=P\left(\left\langle u_{i}, v_{i}\right\rangle | I, T, V, A\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord text mtight"><span class="mord mtight"> finish </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="minner"><span class="mopen delimcenter" style="top:0em;">⟨</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">⟩</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">A</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mo separator="true">,</mo><mtext> like </mtext></mrow></msub><mo>=</mo><mi>P</mi><mrow><mo fence="true">(</mo><mrow><mo fence="true">⟨</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>v</mi><mi>i</mi></msub><mo fence="true">⟩</mo></mrow><mi mathvariant="normal">∣</mi><mi>I</mi><mo separator="true">,</mo><mi>T</mi><mo separator="true">,</mo><mi>V</mi><mo separator="true">,</mo><mi>A</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">P_{i, \text { like }}=P\left(\left\langle u_{i}, v_{i}\right\rangle | I, T, V, A\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord text mtight"><span class="mord mtight"> like </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="minner"><span class="mopen delimcenter" style="top:0em;">⟨</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">⟩</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">A</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">⟨</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>v</mi><mi>i</mi></msub><mo fence="true">⟩</mo></mrow><annotation encoding="application/x-tex">\left\langle u_{i}, v_{i}\right\rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">⟨</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">⟩</span></span></span></span></span>表示用于预测的第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个用户视频对，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mo separator="true">,</mo><mtext> finish </mtext></mrow></msub></mrow><annotation encoding="application/x-tex">P_{i, \text { finish }}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord text mtight"><span class="mord mtight"> finish </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>是该用户完成观看短视频的概率，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mrow><mi>i</mi><mo separator="true">,</mo><mtext> like </mtext></mrow></msub></mrow><annotation encoding="application/x-tex">P_{i, \text { like }}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord text mtight"><span class="mord mtight"> like </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>是单击“like”按钮的概率。</p>
+<h2 id="室验和结果">室验和结果</h2>
+<p>我们根据ICME短视频理解挑战赛（Track1）的数据评估了我们提出的方法。该数据集包含大约2.7天的2.7亿个用户交互行为记录，其中1.6％与“喜欢”行为相对应，其中28％完成了观看视频。在测试集中，大约需要预测3900万对用户视频。对于用户交互数据，我们从多个角度设计了许多统计功能，包括用户，视频和作者。例如，用户历史记录中“喜欢”行为的总数。关于视觉和音频特征，利用PCA，截断SVD [12]和随机投影[13]来减少128维原始特征向量的维数。对于文本特征，使用TFIDF和Word2vec将词频信息转换为特征向量。最终，保留了具有384维特征的3000万个样本，并将其用于模型训练，其中最后20％用于脱机验证。由于Track 1的数据量很大，并且我们的计算资源有限（没有GPU，小内存和2.4Ghz时钟速率），我们只能训练一个LightGBM模型[14]，这对内存的需求较少。只要有更好的计算设备可用，DeepFM [15]之类的深度学习模型也值得利用和改进。表2和表3列出了不同模型的性能，其中AUC是比赛排行榜上的真实分数。</p>
+<p>应当指出，比赛组织者仅剩四天的时间，对比赛规则进行了重大修改，即从每个团队每天提交一份，到每个团队成员每天提交10份。 此外，比赛和团队合并的截止日期都被推迟了。 换句话说，一个由五个成员组成的团队一天最多可以提交50个提交内容。 在修改规则之前，我们以比其他团队更大的优势排名第一，我们提交的总数在一个月内为19，远远少于其他团队。</p>
+<figure data-type="image" tabindex="1"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530220151.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530220027.png" alt="" loading="lazy"></figure>
+<h2 id="结论">结论</h2>
+<p>本文研究了社交媒体服务中的短视频推荐问题。这项研究的主要贡献是第3节中介绍的四种技术。增量多窗口扫描方法使我们能够从不同的粒度中提取用户行为特征，并使我们的基准方法达到排行榜的前三名。但是，特征提取过程中的较大时间窗口可能会导致计算资源的大量消耗。参照计算机体系结构中的内存层次结构，建议的用户交互行为层次结构使基于核心用户交互行为可以提取具有较大时间窗口的用户行为特征。根据实验结果，该方法不仅速度提高了50倍以上，而且显着提高了预测准确性。通过模型转移，可以将多个基本模型组合在一起以产生更好的结果。在基于AUC评估指标的任务中，基于等级的集成方法明显优于传统的简单平均合奏方法。所提出的推荐框架不仅适用于本文中讨论的短视频推荐问题，而且适用于许多其他问题，例如地理位置推荐[16]。</p>
+<h2 id="参考文献">参考文献</h2>
+<figure data-type="image" tabindex="3"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530220557.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530220623.png" alt="" loading="lazy"></figure>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://bailingnan.github.io/tag/4n6vDlk_n/">
+            <span class="flex-auto">Rec</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://bailingnan.github.io/post/duan-shi-pin-tui-jian-zhong-xin-xing-rong-he-jie-gou-de-shi-jian/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  短视频推荐中新型融合结构的实践
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/duan-shi-pin-li-jie-he-tui-jian-de-duo-mo-tai-biao-shi-xue-xi/">
+                <h3 class="post-title">
+                  短视频理解和推荐的多模态表示学习
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>

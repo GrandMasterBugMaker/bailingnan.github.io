@@ -1,0 +1,390 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1590858981787">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157390001-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157390001-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1590858981787" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E7%9F%AD%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3%E5%92%8C%E6%8E%A8%E8%8D%90%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0">短视频理解和推荐的多模态表示学习</a>
+<ul>
+<li><a href="#%E6%91%98%E8%A6%81">摘要</a>
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E7%A0%94%E7%A9%B6">相关研究</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95">方法</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA">多模态表示</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%88%AB%E7%89%B9%E5%BE%81">类别特征</a></li>
+<li><a href="#%E5%AF%86%E9%9B%86%E5%AE%9E%E6%95%B0%E5%80%BC">密集实数值</a></li>
+<li><a href="#%E5%A4%9A%E5%AA%92%E4%BD%93">多媒体</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%82%B9%E5%87%BB%E5%8E%86%E5%8F%B2">用户点击历史</a></li>
+<li><a href="#%E7%A4%BE%E4%BC%9A%E5%9B%BE">社会图</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%A6%E4%B9%A0">学习</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C">实验</a>
+<ul>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94">模型对比</a></li>
+<li><a href="#%E4%B8%8D%E5%90%8C%E8%A1%A8%E5%BE%81%E7%9A%84%E5%BD%B1%E5%93%8D">不同表征的影响</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">短视频理解和推荐的多模态表示学习</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-05-31 / 12 min read
+        </div>
+        
+        <div class="post-content yue">
+          <!-- TOC -->
+<ul>
+<li><a href="#%E7%9F%AD%E8%A7%86%E9%A2%91%E7%90%86%E8%A7%A3%E5%92%8C%E6%8E%A8%E8%8D%90%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0">短视频理解和推荐的多模态表示学习</a>
+<ul>
+<li><a href="#%E6%91%98%E8%A6%81">摘要</a>
+<ul>
+<li><a href="#%E5%85%B3%E9%94%AE%E8%AF%8D">关键词</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E7%A0%94%E7%A9%B6">相关研究</a></li>
+<li><a href="#%E6%96%B9%E6%B3%95">方法</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E8%A1%A8%E7%A4%BA">多模态表示</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%88%AB%E7%89%B9%E5%BE%81">类别特征</a></li>
+<li><a href="#%E5%AF%86%E9%9B%86%E5%AE%9E%E6%95%B0%E5%80%BC">密集实数值</a></li>
+<li><a href="#%E5%A4%9A%E5%AA%92%E4%BD%93">多媒体</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%82%B9%E5%87%BB%E5%8E%86%E5%8F%B2">用户点击历史</a></li>
+<li><a href="#%E7%A4%BE%E4%BC%9A%E5%9B%BE">社会图</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%A6%E4%B9%A0">学习</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%AA%8C">实验</a>
+<ul>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E5%AF%B9%E6%AF%94">模型对比</a></li>
+<li><a href="#%E4%B8%8D%E5%90%8C%E8%A1%A8%E5%BE%81%E7%9A%84%E5%BD%B1%E5%93%8D">不同表征的影响</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="短视频理解和推荐的多模态表示学习">短视频理解和推荐的多模态表示学习</h1>
+<h2 id="摘要">摘要</h2>
+<p>我们研究了简短的视频理解和推荐任务，该任务根据多模式内容（包括视觉功能，文本功能，音频功能和用户互动历史记录）预测用户的偏好。 在本文中，我们提出了一种多模式表示学习方法，以提高推荐系统的性能。 该方法首先将多模式内容转换为嵌入空间中的向量，然后将这些向量连接起来作为多层感知器的输入以进行预测。 我们还提出了一种新颖的键-值存储器，用于将密集的实值映射到向量中，从而可以通过非线性方式获得更多的语义。 实验结果表明，在ICME 2019短视频理解和推荐挑战赛的数据集上，我们的表示法显着改善了几个基准并实现了卓越的性能。</p>
+<h3 id="关键词">关键词</h3>
+<ul>
+<li>多模态表示</li>
+<li>因子分解机</li>
+<li>键值记忆</li>
+<li>Word2Vec</li>
+<li>随机游走</li>
+</ul>
+<h2 id="简介">简介</h2>
+<p>简短的视频理解和推荐旨在通过视频和用户互动历史记录来模拟用户的兴趣，从而预测用户的点击行为，即预测点击率（CTR）。最近，基于神经网络的方法[1,2,3,4,5]在CTR预测中取得了令人鼓舞的性能。 这些方法主要提取分类特征交互或利用图嵌入进行CTR预测。 同时，其他现有作品往往主要集中于单模态特征。 在视频内容理解领域中，如果不考虑多媒体，用户点击历史记录和社交图等多模式功能，则推荐系统的性能将受到负面影响。</p>
+<p>在这项工作中，我们研究如何利用具有不同结构的多峰特征。 具体来说，我们的方法首先将多模式内容转换为嵌入空间中的向量，然后将这些向量连接起来作为多层感知器（MLP）的输入。 同时，我们提出了一种新颖的键-值存储器[6]，它将密集的实值映射到向量中，从而可以通过非线性方式获得更多的语义。 训练MLP的一个显着缺点是嵌入的分布随内容的不同而变化，这不利地减慢了训练速度。 为了解决这个问题，我们将批处理归一化到输入中。</p>
+<p>我们对ICME 2019短视频理解与推荐挑战赛的数据集进行实验。 这项挑战提供了多模式视频功能，包括视觉功能，文本功能，音频功能和用户交互历史。 根据用户交互的历史记录，我们现在能够在用户之间构建社交图。 该任务旨在预测每个用户完成观看并喜欢给定视频的可能性。 结果表明，通过将我们的多模式表示应用于推荐系统，可以进一步改进，提高了1.5％，明显证明了所提出的多模式表示学习的有效性</p>
+<h2 id="相关研究">相关研究</h2>
+<p>个性化推荐是机器学习中的一项基本任务，旨在学习预测用户认为哪些项目（即我们作品中的视频）有趣的能力。 近来，这些特征的尺寸和形式已经变得更大并且更加多样化。 同时，现有模型的结构已从浅到深演变。</p>
+<p>线性模型，例如使用FTRL的逻辑回归[7]，由于易于管理，维护和部署而被广泛采用。 但是，线性模型缺乏学习隐藏特征的能力，这需要大量的工程交叉特征才能获得更好的性能。 因此，一些研究人员利用增强决策树[8]来帮助构建特征转换[9]。 为了克服高维和稀疏特征的问题，分解机器[10，11]将每个特征嵌入到低维潜矢量中。 与非因式分解模型相比，由于能够通过两个潜在向量的乘积进行推荐，因此它们能够学习特征交互。</p>
+<p>最近，神经模型在推荐系统中被证明是有效的[1,2,3,4,5]。 这些方法试图从分类特征交互中自动学习模式。 与这些作品不同，我们考虑具有更复杂结构的多模式特征，例如多媒体，用户历史记录序列和社交图。 我们的方法将多模式内容转换为相同的方式（即嵌入），以增强推荐系统。</p>
+<h2 id="方法">方法</h2>
+<p>我们将首先概述我们的方法，然后描述一种多模式表示学习方法，该方法将各种类型的内容转换为嵌入空间中的潜在向量。</p>
+<h3 id="概述">概述</h3>
+<p>图1概述了我们的模型。 首先，给定多模式内容，我们利用各种方法将这些内容转换为嵌入。 由于嵌入的分布随内容的不同而变化，这不利地减慢了训练速度，因此使用批范数层对这些向量进行归一化。 最后，将这些向量的级联视为输入，以预测每个用户是否会按照Sigmoid函数完成观看并喜欢MLP的给定视频。</p>
+<figure data-type="image" tabindex="1"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530194432.png" alt="" loading="lazy"></figure>
+<h3 id="多模态表示">多模态表示</h3>
+<h4 id="类别特征">类别特征</h4>
+<p>类别功能非常稀疏，但有助于简短的视频理解和推荐[10]。 例如，用户通常会观看某些创作者的视频，这可以帮助我们预测用户是否会喜欢这些视频。 为了提取稀疏类别之间的交互特征，我们利用深度分解机来获取特征交互。 具体来说，首先将类别特征馈入嵌入层以获得相应的嵌入，然后使用压缩交互网络（CIN）[3]以显式方式在矢量方式上生成特征交互。</p>
+<h4 id="密集实数值">密集实数值</h4>
+<p><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530200345.png" alt="" loading="lazy"><br>
+使用密集实值的传统方法直接输入到神经网络中，或分为多个存储桶作为类别特征。 取而代之的是，我们提出了一种利用键值存储器[6]将密集的实值映射到向量中的新颖方法。 基本思想是对平均可训练向量嵌入进行加权。如图2所示，键值存储网络由两个阶段组成。 在第一阶段（即键寻址），我们根据给定的密集值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>计算可训练向量嵌入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">v_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的权重<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>w</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">w_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，如公式1所示。在第二阶段（即值读取），我们根据到目前为止的权重获得密集实值的最终表示形式v=\sum_{i=0}^{N-1} w_{i} v_{i}。</p>
+<figure data-type="image" tabindex="2"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530200838.png" alt="" loading="lazy"></figure>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>是可训练向量嵌入的数量，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">k_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个向量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">v_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的键，并且hyper参数在dev集上进行了调整。 我们将稠密值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>标准化为0到1，设置<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">k_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为\frac{2 i+1}{2 N}。</p>
+<h4 id="多媒体">多媒体</h4>
+<p>短视频推荐中的多媒体内容通常包括视频，音频和文本（例如图块），可提供有关推荐的短视频的高级信息。 我们采用Resnet [12]将视频和音频编码为嵌入。 另外，我们使用FastText [13]通过平均词嵌入来编码文本。</p>
+<h4 id="用户点击历史">用户点击历史</h4>
+<p>由于用户通常倾向于关注类似的作者或简短的视频，因此我们可以随后将其聚类。 我们描述了如何对短视频进行聚类并获得它们的嵌入。 作者嵌入的计算类似于短视频嵌入。用户<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">u</span></span></span></span>的点击历史是视频\left[x_{0}^{u}, x_{1}^{u}, \ldots, x_{n}<sup>{u}\right]的序列，其中用户单击x_{i-1}</sup>{u}后点击第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>个视频x_{i}^{u}。我们可以将序列视为句子，将视频视为单词。 然后，我们利用Word2Vec [14]来表示视频，它可以将类似的短视频聚集在嵌入空间中。 最后，我们提取用户点击的当前视频的嵌入作为历史特征，以进行最终预测。</p>
+<h4 id="社会图">社会图</h4>
+<p>社交图可以反映用户之间的社交关系，这有助于通过统计模型预测用户的偏好。 我们定义了一个用户视频社交图，其中包括两种顶点（分别是用户和视频）。 从用户顶点到视频顶点的边缘意味着用户单击视频一次。 然后，我们在该社交图上采用DeepWalk [15]（一种用于学习顶点的潜在表示）的方法来获得顶点的潜在向量。 这些潜在向量在嵌入空间中编码社交关系，可以将其馈入神经网络。 此外，我们还定义了一些社交图来改进我们的模型，例如用户-作者社交图。</p>
+<h3 id="学习">学习</h3>
+<p>在本节中，我们描述如何学习我们的多模式表示。 对于Word2Vec和DeepWalk，这些方法可以在无人监督的情况下学习用户点击历史和社交图的表示（有关学习的更多详细信息，请参见[14，15]）。 音频和视频的表示形式是从ResNet预训练中提取的。 其他嵌入将通过最大化地面真理的对数概率之和来进行有监督的训练。</p>
+<p>在这里，我们列出了培训的详细信息。 我们将分解因子机器和FastText的维度设置为16，将Word2Vec和Deepwalk的维度设置为64。这一挑战提供了预训练的ResNet嵌入。 在键值存储器中，每个字段的可训练嵌入数为100，维度为16，超参数\epsilon为e^{-15}。</p>
+<p>使用均匀分布初始化模型参数，并使用Adam优化器对其进行更新。 我们将学习率设置为0.0002，批量大小设置为4096。仅对模型训练了一个时期。</p>
+<h2 id="实验">实验</h2>
+<p>我们在ICME 2019短片视频理解与推荐挑战赛中进行了实验。 数据集由ByteDance提供，包括3百万个示例。每个示例均包含分类特征（例如作者和用户信息）和短视频的多媒体内容。 在本竞赛中，该任务旨在预测用户浏览视频时完成观看和喜欢短视频的可能性。 AUC（ROC曲线下的面积）用作评估指标。 最终得分通过加权平均完成度以及0.7和0.3之类的得分获得。</p>
+<h3 id="模型对比">模型对比</h3>
+<figure data-type="image" tabindex="3"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530212918.png" alt="" loading="lazy"></figure>
+<p>我们在数据集上报告了现有方法的结果，并证明了我们的多模式表示学习是提高当前推荐系统性能的有效方法。 我们实现了几种方法，包括FM [10]，这是一个分解因子的机器。 XdeepFM，先进的广泛深度神经网络，可用于CTR预测； Xgboost是可扩展的树增强系统。 基本的基本特征允许模型仅使用分类特征进行预测，而多峰特征是本文提出的多峰表示。 根据表1，我们可以看到，将多模式表示应用于Xgboost模型会产生进一步的改进，绝对增益为1％。 此外，我们通过提供多模式表示将MLP与批处理规范层结合使用，以80.00％的得分获得优异的性能，这表明我们的多模式表示可用于不同的模型。</p>
+<h3 id="不同表征的影响">不同表征的影响</h3>
+<p>我们进行消融分析，以更好地了解各种组件如何影响我们的表现的整体表现。 我们删除每个组件以分别分析它们的贡献。 表2显示，消融DeepWalk时，得分从80.00％下降至79.03％，这表明社交图在短视频推荐场景中的重要性。 删除ResNet后，得分下降至79.33％。 这与我们的直觉一致，即视频/音频的内容是为用户推荐更多简短视频的关键因素。 我们可以看到其他表示形式也带来了0.1％〜0.2％的改善。</p>
+<figure data-type="image" tabindex="4"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530213605.png" alt="" loading="lazy"></figure>
+<h2 id="结论">结论</h2>
+<p>在本文中，我们提出了一种将多模式内容转换为嵌入内容的多模式表示学习方法，以及一种通过键值存储器将密集的实值映射到向量的新方法。 我们表明，我们的多模式表示学习方法可以进一步改善推荐系统，并且我们提出的键值存储可以更好地利用密集的实值。</p>
+<h2 id="参考文献">参考文献</h2>
+<figure data-type="image" tabindex="5"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530213659.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530213732.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200530213741.png" alt="" loading="lazy"></figure>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://bailingnan.github.io/tag/4n6vDlk_n/">
+            <span class="flex-auto">Rec</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+            <div class="prev-post">
+              <a href="https://bailingnan.github.io/post/jian-li-you-xiao-de-duan-shi-pin-jian-yi/">
+                <h3 class="post-title">
+                  <i class="ri-arrow-left-line"></i>
+                  建立有效的短视频建议
+                </h3>
+              </a>
+            </div>
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/time-series-forecasting-with-deep-learning-a-survey/">
+                <h3 class="post-title">
+                  Time Series Forecasting With Deep Learning: A Survey
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
