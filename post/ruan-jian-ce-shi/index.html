@@ -1,0 +1,631 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>白凌南</title>
+<meta name="description" content="DM/DL/RecSys/Python/XJTU/INTJ" />
+<link rel="shortcut icon" href="https://bailingnan.github.io//favicon.ico?v=1591601740971">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://bailingnan.github.io//styles/main.css">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157390001-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157390001-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://bailingnan.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://bailingnan.github.io//images/avatar.png?v=1591601740971" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">白凌南</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li><a href="#%E5%8D%95%E5%85%83%E4%BD%9C%E4%B8%9A">单元作业</a>
+<ul>
+<li><a href="#%E7%AC%AC1%E5%91%A8-%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">第1周 软件质量保证基础知识</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E5%92%8C%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95">请比较软件质量保证和软件测试。</a></li>
+<li><a href="#%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E8%BD%AF%E4%BB%B6%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%87%E5%8F%96%E7%A9%B7%E5%B0%BD%E6%80%A7%E6%B5%8B%E8%AF%95%E6%9D%A5%E5%8F%91%E7%8E%B0%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%BC%BA%E9%99%B7%E4%B8%BA%E4%BB%80%E4%B9%88">给定一个软件，是否可以采取穷尽性测试来发现程序中的所有缺陷？为什么？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC2%E5%91%A8-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B">第2周 软件测试流程</a>
+<ul>
+<li><a href="#%E5%8F%AF%E4%BB%A5%E4%BB%8E%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6%E6%9D%A5%E5%8C%BA%E5%88%86%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E7%94%A8%E6%88%B7%E6%B5%8B%E8%AF%95user-testing-%E6%98%93%E7%94%A8%E6%80%A7%E6%B5%8B%E8%AF%95usability-testing%E5%92%8Cui%E6%B5%8B%E8%AF%95user-interface-testing%E5%AE%83%E4%BB%AC%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88">可以从哪些维度来区分测试技术？用户测试（User testing）、易用性测试（Usability testing）和UI测试（User Interface testing），它们的区别是什么？</a></li>
+<li><a href="#%E5%9C%A8%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E8%B7%9F%E9%9A%8F%E6%B5%8B%E8%AF%95%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B7%9F%E9%9A%8F%E6%B5%8B%E8%AF%95">在测试过程中，为什么要进行跟随测试？如何进行跟随测试？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC3%E5%91%A8-%E8%BE%B9%E7%95%8C%E5%80%BC%E4%B8%8E%E7%AD%89%E4%BB%B7%E7%B1%BB">第3周 边界值与等价类</a>
+<ul>
+<li><a href="#%E6%99%AE%E9%80%9A%E8%BE%B9%E7%95%8C%E5%80%BC%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">普通边界值测试技术测试用例</a></li>
+<li><a href="#%E5%BC%B1%E5%81%A5%E5%A3%AE%E7%AD%89%E4%BB%B7%E7%B1%BB%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">弱健壮等价类测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC4%E5%91%A8-%E5%86%B3%E7%AD%96%E8%A1%A8%E6%B5%8B%E8%AF%95">第4周 决策表测试</a>
+<ul>
+<li><a href="#%E5%86%B3%E7%AD%96%E8%A1%A8%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">决策表测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC5%E5%91%A8-%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%9F%BA%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95">第5周 路径测试与基路径测试</a>
+<ul>
+<li><a href="#%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">路径测试测试用例</a></li>
+<li><a href="#%E5%9F%BA%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">基路径测试测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC6%E5%91%A8-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B5%8B%E8%AF%95">第6周 数据流测试</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">数据流测试测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC7%E5%91%A8-%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">第7周 集成测试</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%E5%A2%9E%E9%87%8F%E5%BC%8F%E9%9B%86%E6%88%90%E4%B8%8E%E9%9D%9E%E5%A2%9E%E9%87%8F%E5%BC%8F%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">请比较增量式集成与非增量式集成测试。</a></li>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E9%9B%86%E6%88%90-%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E9%9B%86%E6%88%90%E4%BB%A5%E5%8F%8A%E4%B8%89%E6%98%8E%E6%B2%BB%E5%BC%8F%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">请比较自顶向下集成、自底向上集成以及三明治式集成测试。</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC8%E5%91%A8-%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95">第8周 系统测试</a>
+<ul>
+<li><a href="#%E8%AF%B7%E5%88%86%E6%9E%90%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%88%AB">请分析单元测试、集成测试以及系统测试的区别。</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E5%AE%9A%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88%E4%B8%BB%E8%A6%81%E6%9C%89%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">性能测试的定义是什么？主要有哪些性能指标？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC9%E5%91%A8-%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%8B%E8%AF%95">第9周 验收测试与面向对象测试</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%CE%B1%E6%B5%8B%E8%AF%95-%CE%B2%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E6%AD%A3%E5%BC%8F%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95">请比较α测试、β测试以及正式验收测试。</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%BB%99%E5%87%BA%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%88%E6%9C%AC%E7%9A%84nextdate%E7%A4%BA%E4%BE%8B%E7%BB%99%E5%87%BA2019%E5%B9%B412%E6%9C%8831%E6%97%A5%E7%9A%84mm%E8%B7%AF%E5%BE%84">针对课程中给出的面向对象版本的NextDate示例，给出2019年12月31日的MM路径。</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC10%E5%91%A8-%E5%8F%98%E5%BC%82%E6%B5%8B%E8%AF%95">第10周 变异测试</a>
+<ul>
+<li><a href="#%E7%94%9F%E6%88%90%E7%A8%8B%E5%BA%8F%E5%8F%98%E4%BD%93">生成程序变体</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC11%E5%91%A8-%E7%BB%84%E5%90%88%E6%B5%8B%E8%AF%95%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7">第11周 组合测试与软件测试工具</a>
+<ul>
+<li><a href="#samna%E5%AF%B9%E5%81%B6%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95">SAMNA对偶设计方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700"></div>
+    <a class="rss" href="https://bailingnan.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">软件测试</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-06-08 / 17 min read
+        </div>
+        
+        <div class="post-content yue">
+          <!-- TOC -->
+<ul>
+<li><a href="#%E5%8D%95%E5%85%83%E4%BD%9C%E4%B8%9A">单元作业</a>
+<ul>
+<li><a href="#%E7%AC%AC1%E5%91%A8-%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">第1周 软件质量保证基础知识</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E4%BF%9D%E8%AF%81%E5%92%8C%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95">请比较软件质量保证和软件测试。</a></li>
+<li><a href="#%E7%BB%99%E5%AE%9A%E4%B8%80%E4%B8%AA%E8%BD%AF%E4%BB%B6%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%87%E5%8F%96%E7%A9%B7%E5%B0%BD%E6%80%A7%E6%B5%8B%E8%AF%95%E6%9D%A5%E5%8F%91%E7%8E%B0%E7%A8%8B%E5%BA%8F%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%BC%BA%E9%99%B7%E4%B8%BA%E4%BB%80%E4%B9%88">给定一个软件，是否可以采取穷尽性测试来发现程序中的所有缺陷？为什么？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC2%E5%91%A8-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B">第2周 软件测试流程</a>
+<ul>
+<li><a href="#%E5%8F%AF%E4%BB%A5%E4%BB%8E%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6%E6%9D%A5%E5%8C%BA%E5%88%86%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E7%94%A8%E6%88%B7%E6%B5%8B%E8%AF%95user-testing%E6%98%93%E7%94%A8%E6%80%A7%E6%B5%8B%E8%AF%95usability-testing%E5%92%8Cui%E6%B5%8B%E8%AF%95user-interface-testing%E5%AE%83%E4%BB%AC%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88">可以从哪些维度来区分测试技术？用户测试（User testing）、易用性测试（Usability testing）和UI测试（User Interface testing），它们的区别是什么？</a></li>
+<li><a href="#%E5%9C%A8%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E8%B7%9F%E9%9A%8F%E6%B5%8B%E8%AF%95%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%B7%9F%E9%9A%8F%E6%B5%8B%E8%AF%95">在测试过程中，为什么要进行跟随测试？如何进行跟随测试？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC3%E5%91%A8-%E8%BE%B9%E7%95%8C%E5%80%BC%E4%B8%8E%E7%AD%89%E4%BB%B7%E7%B1%BB">第3周 边界值与等价类</a>
+<ul>
+<li><a href="#%E6%99%AE%E9%80%9A%E8%BE%B9%E7%95%8C%E5%80%BC%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">普通边界值测试技术测试用例</a></li>
+<li><a href="#%E5%BC%B1%E5%81%A5%E5%A3%AE%E7%AD%89%E4%BB%B7%E7%B1%BB%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">弱健壮等价类测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC4%E5%91%A8-%E5%86%B3%E7%AD%96%E8%A1%A8%E6%B5%8B%E8%AF%95">第4周 决策表测试</a>
+<ul>
+<li><a href="#%E5%86%B3%E7%AD%96%E8%A1%A8%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">决策表测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC5%E5%91%A8-%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%9F%BA%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95">第5周 路径测试与基路径测试</a>
+<ul>
+<li><a href="#%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">路径测试测试用例</a></li>
+<li><a href="#%E5%9F%BA%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">基路径测试测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC6%E5%91%A8-%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B5%8B%E8%AF%95">第6周 数据流测试</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E6%B5%81%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">数据流测试测试用例</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC7%E5%91%A8-%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">第7周 集成测试</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%E5%A2%9E%E9%87%8F%E5%BC%8F%E9%9B%86%E6%88%90%E4%B8%8E%E9%9D%9E%E5%A2%9E%E9%87%8F%E5%BC%8F%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">请比较增量式集成与非增量式集成测试。</a></li>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E9%9B%86%E6%88%90%E8%87%AA%E5%BA%95%E5%90%91%E4%B8%8A%E9%9B%86%E6%88%90%E4%BB%A5%E5%8F%8A%E4%B8%89%E6%98%8E%E6%B2%BB%E5%BC%8F%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95">请比较自顶向下集成、自底向上集成以及三明治式集成测试。</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC8%E5%91%A8-%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95">第8周 系统测试</a>
+<ul>
+<li><a href="#%E8%AF%B7%E5%88%86%E6%9E%90%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95%E7%9A%84%E5%8C%BA%E5%88%AB">请分析单元测试、集成测试以及系统测试的区别。</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%84%E5%AE%9A%E4%B9%89%E6%98%AF%E4%BB%80%E4%B9%88%E4%B8%BB%E8%A6%81%E6%9C%89%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87">性能测试的定义是什么？主要有哪些性能指标？</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC9%E5%91%A8-%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%8B%E8%AF%95">第9周 验收测试与面向对象测试</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%AF%94%E8%BE%83%CE%B1%E6%B5%8B%E8%AF%95%CE%B2%E6%B5%8B%E8%AF%95%E4%BB%A5%E5%8F%8A%E6%AD%A3%E5%BC%8F%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95">请比较α测试、β测试以及正式验收测试。</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%BB%99%E5%87%BA%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%88%E6%9C%AC%E7%9A%84nextdate%E7%A4%BA%E4%BE%8B%E7%BB%99%E5%87%BA2019%E5%B9%B412%E6%9C%8831%E6%97%A5%E7%9A%84mm%E8%B7%AF%E5%BE%84">针对课程中给出的面向对象版本的NextDate示例，给出2019年12月31日的MM路径。</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC10%E5%91%A8-%E5%8F%98%E5%BC%82%E6%B5%8B%E8%AF%95">第10周 变异测试</a>
+<ul>
+<li><a href="#%E7%94%9F%E6%88%90%E7%A8%8B%E5%BA%8F%E5%8F%98%E4%BD%93">生成程序变体</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC11%E5%91%A8-%E7%BB%84%E5%90%88%E6%B5%8B%E8%AF%95%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7">第11周 组合测试与软件测试工具</a>
+<ul>
+<li><a href="#samna%E5%AF%B9%E5%81%B6%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95">SAMNA对偶设计方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="单元作业">单元作业</h1>
+<h2 id="第1周-软件质量保证基础知识">第1周 软件质量保证基础知识</h2>
+<h3 id="请比较软件质量保证和软件测试">请比较软件质量保证和软件测试。</h3>
+<p><strong>回答</strong>：</p>
+<p>首先，都是为了保证和改进软件的质量。其次，SQA面向过程，注重减少开发过程中的错误做法；软件测试面向产品，注重发现产品中的缺陷。最后，SQA一般通过改进开发过程来改进产品。因此，软件质量保证和软件测试都是非常必要的。</p>
+<h3 id="给定一个软件是否可以采取穷尽性测试来发现程序中的所有缺陷为什么">给定一个软件，是否可以采取穷尽性测试来发现程序中的所有缺陷？为什么？</h3>
+<p><strong>回答</strong>:</p>
+<p>采取穷尽性测试通常是不现实和不可行的。首先，如果采用黑盒测试技术，我们通常无法对所有的输入及其组合进行穷尽性测试；因为，程序的输入通常有非常多的取值。其次，如果采用白盒测试技术，我们通常无法对所有的路径进行穷尽性测试；因为，程序通常包含大量路径。再次，即使我们可以采取穷尽性路径测试，程序中也可能会存在错误。例如：用户要求的是一个排序程序，但开发的是一个查询软件；开发的软件遗漏了某些路径；等等。因此，无法采取穷尽性测试来发现程序中的所有缺陷。此外，通常，无论采用什么测试技术，都不能发现软件中的所有缺陷。</p>
+<h2 id="第2周-软件测试流程">第2周 软件测试流程</h2>
+<h3 id="可以从哪些维度来区分测试技术用户测试user-testing-易用性测试usability-testing和ui测试user-interface-testing它们的区别是什么">可以从哪些维度来区分测试技术？用户测试（User testing）、易用性测试（Usability testing）和UI测试（User Interface testing），它们的区别是什么？</h3>
+<p><strong>回答</strong>：</p>
+<p>可以从5个维度来区分测试技术。</p>
+<ul>
+<li>测试者：谁执行测试工作？</li>
+<li>内容/覆盖：要测什么？</li>
+<li>潜在的问题：期望发现哪类问题？</li>
+<li>活动：如何执行测试？</li>
+<li>评估：如何判断测试用例是否通过？</li>
+</ul>
+<p>用户测试、易用性测试和UI测试，它们看起来相似，但实际上它们并不相同。可以使用上述维度来区分。</p>
+<ul>
+<li>用户测试关注的是谁来执行测试，而不关心如何测试、测试什么、要发现哪类问题、如何判断测试是否通过。</li>
+<li>易用性测试关注软件使用起来是否便捷、用户体验是否良好——关注的是潜在的问题；易用性测试不关心谁来测试、如何测试、测试什么、如何判断是否通过</li>
+<li>UI测试关注要测试哪些事物，而不关心谁来测试、如何测试、要发现什么问题、如何判断是否通过等。</li>
+</ul>
+<h3 id="在测试过程中为什么要进行跟随测试如何进行跟随测试">在测试过程中，为什么要进行跟随测试？如何进行跟随测试？</h3>
+<p><strong>回答</strong>：</p>
+<p>当我们执行一个测试用例并发现了失效，此时我们看到的可能是一个表象，并没有找到由该缺陷所导致失效的最佳测试用例。因此，采用跟随测试来尝试着说明这个缺陷比一开始看到的更加严重和更加容易出现。跟随测试是一种探索性测试，有助于帮助开发人员理解缺陷并加快缺陷的修复。有4种类型的跟随测试：改变测试行为、改变程序的选项和配置、改变运行环境、改变测试数据。</p>
+<h2 id="第3周-边界值与等价类">第3周 边界值与等价类</h2>
+<h3 id="普通边界值测试技术测试用例">普通边界值测试技术测试用例</h3>
+<p>案例描述：某公司根据年终考核给员工发放年终奖，年终考核包括三个指标：本年度工作完成情况、工作能力、工作态度，根据这三个指标的得分计算出某位员工的总得分。其中：本年度工作完成情况占总成绩的50%，本年度工作完成情况最高得分为100分；工作能力总分为20分；工作态度总分为30分。根据员工的总得分，将员工分为如下等级：A--[85,100]、B--[60,85)、C--[40,60)、D--[0, 40)。对于评分等级为A的员工，其年终奖额外奖励10%；对于等级为B的员工，其年终奖正常得到；对于等级为C的员工，扣除20%的年终奖；对于等级为D的员工，则进行辞退、不发年终奖。假定该公司给每位员工的基础年终奖都相同，为Total。</p>
+<p>问题：请根据课上所学边界值测试相关知识，采用普通边界值测试技术，设计本案例的测试用例。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="1"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200608152124.png" alt="" loading="lazy"></figure>
+<h3 id="弱健壮等价类测试用例">弱健壮等价类测试用例</h3>
+<p>案例描述：某公司根据年终考核给员工发放年终奖，年终考核包括三个指标：本年度工作完成情况、工作能力、工作态度，根据这三个指标的得分计算出某位员工的总得分。其中：本年度工作完成情况占总成绩的50%，本年度工作完成情况最高得分为100分；工作能力总分为20分；工作态度总分为30分。根据员工的总得分，将员工分为如下等级：A--[85,100]、B--[60,85)、C--[40,60)、D--[0, 40)。对于评分等级为A的员工，其年终奖额外奖励10%；对于等级为B的员工，其年终奖正常得到；对于等级为C的员工，扣除20%的年终奖；对于等级为D的员工，则进行辞退、不发年终奖。假定该公司给每位员工的基础年终奖都相同，为Total。</p>
+<p>问题：请结合课上所学等价类测试相关知识设计测试用例。请设计弱健壮等价类测试用例。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="2"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005306.png" alt="" loading="lazy"></figure>
+<h2 id="第4周-决策表测试">第4周 决策表测试</h2>
+<h3 id="决策表测试用例">决策表测试用例</h3>
+<p>案例描述：某公司根据年终考核给员工发放年终奖，年终考核包括三个指标：本年度工作完成情况、工作能力、工作态度，根据这三个指标的得分计算出某位员工的总得分。其中：本年度工作完成情况占总成绩的50%，本年度工作完成情况最高得分为100分；工作能力总分为20分；工作态度总分为30分。根据员工的总得分，将员工分为如下等级：A--[85,100]、B--[60,85)、C--[40,60)、D--[0, 40)。对于评分等级为A的员工，其年终奖额外奖励10%；对于等级为B的员工，其年终奖正常得到；对于等级为C的员工，扣除20%的年终奖；对于等级为D的员工，则进行辞退、不发年终奖。假定该公司给每位员工的基础年终奖都相同，为Total。</p>
+<p>问题：请根据课上所学决策表相关知识，设计本案例的测试用例。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="3"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005435.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005456.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005512.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005525.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005534.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005543.png" alt="" loading="lazy"></figure>
+<h2 id="第5周-路径测试与基路径测试">第5周 路径测试与基路径测试</h2>
+<h3 id="路径测试测试用例">路径测试测试用例</h3>
+<p>案例描述：某公司根据年终考核给员工发放年终奖，年终考核包括三个指标：本年度工作完成情况、工作能力、工作态度，根据这三个指标的得分计算出某位员工的总得分。其中：本年度工作完成情况占总成绩的50%，本年度工作完成情况最高得分为100分；工作能力总分为20分；工作态度总分为30分。根据员工的总得分，将员工分为如下等级：A--[85,100]、B--[60,85)、C--[40,60)、D--[0, 40)。对于评分等级为A的员工，其年终奖额外奖励10%；对于等级为B的员工，其年终奖正常得到；对于等级为C的员工，扣除20%的年终奖；对于等级为D的员工，则进行辞退、不发年终奖。假定该公司给每位员工的基础年终奖都相同，为Total。</p>
+<p>问题：请结合课上所学路径测试相关知识设计测试用例。请给出本案例的伪代码，根据伪代码给出DD路径和DD路径图，然后针对逻辑覆盖给出的6种指标设计测试用例。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="9"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005720.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005731.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005740.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005748.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005757.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005806.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005829.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514005847.png" alt="" loading="lazy"></figure>
+<h3 id="基路径测试测试用例">基路径测试测试用例</h3>
+<p>案例描述：某公司根据年终考核给员工发放年终奖，年终考核包括三个指标：本年度工作完成情况、工作能力、工作态度，根据这三个指标的得分计算出某位员工的总得分。其中：本年度工作完成情况占总成绩的50%，本年度工作完成情况最高得分为100分；工作能力总分为20分；工作态度总分为30分。根据员工的总得分，将员工分为如下等级：A--[85,100]、B--[60,85)、C--[40,60)、D--[0, 40)。对于评分等级为A的员工，其年终奖额外奖励10%；对于等级为B的员工，其年终奖正常得到；对于等级为C的员工，扣除20%的年终奖；对于等级为D的员工，则进行辞退、不发年终奖。假定该公司给每位员工的基础年终奖都相同，为Total。</p>
+<p>问题：请根据课上所学基路径测试方法，设计本案例的测试用例。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="17"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010018.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010040.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010053.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010105.png" alt="" loading="lazy"></figure>
+<h2 id="第6周-数据流测试">第6周 数据流测试</h2>
+<h3 id="数据流测试测试用例">数据流测试测试用例</h3>
+<p>案例描述：某公司根据年终考核给员工发放年终奖，年终考核包括三个指标：本年度工作完成情况、工作能力、工作态度，根据这三个指标的得分计算出某位员工的总得分。其中：本年度工作完成情况占总成绩的50%，本年度工作完成情况最高得分为100分；工作能力总分为20分；工作态度总分为30分。根据员工的总得分，将员工分为如下等级：A--[85,100]、B--[60,85)、C--[40,60)、D--[0, 40)。对于评分等级为A的员工，其年终奖额外奖励10%；对于等级为B的员工，其年终奖正常得到；对于等级为C的员工，扣除20%的年终奖；对于等级为D的员工，则进行辞退、不发年终奖。假定该公司给每位员工的基础年终奖都相同，为Total。</p>
+<p>问题：请根据课上所学数据流测试相关知识，设计本案例的测试用例。请列出本案例各个变量的定义节点和使用节点，列出它们的定义—使用路径，并根据全定义、全使用准则进行测试用例设计。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="21"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010210.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="22"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010220.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="23"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010235.png" alt="" loading="lazy"></figure>
+<h2 id="第7周-集成测试">第7周 集成测试</h2>
+<h3 id="请比较增量式集成与非增量式集成测试">请比较增量式集成与非增量式集成测试。</h3>
+<p><strong>回答</strong>：</p>
+<ul>
+<li>非增量式集成也称为大爆炸式（Big-Bang）集成，在对每个单元进行充分测试之后，将所有单元全部集成起来一次性地进行集成测试。其优点是减少了测试工作量。缺点是可能会同时发现很多问题，难以定位和解决。</li>
+<li>增量式集成在对每个单元测试之后，并不一下子将所有单元一次性集成起来；而是按照某种测试依次将单元集成进来。其优点是集成过程中如果发现问题，很容易进行定位和解决。缺点是集成过程需要较多的测试工作。</li>
+</ul>
+<p><strong>自己的答案</strong>：</p>
+<ul>
+<li>非增量式集成测试：
+<ul>
+<li>对每个单元进行充分测试，测试的顺序可以任意。</li>
+<li>在对单元进行测试的过程中,需要开发桩和/或驱动器。</li>
+<li>将所有单元综合在一起，一下子进行集成测试。</li>
+<li>优点：
+<ul>
+<li>减少测试工作量</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>难以定位和解決问题；可能会同时发现很多错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>增量式集成测试：
+<ul>
+<li>增量式集成测试是逐步集成和逐步测试的方法，把可能出现的错误分散暴露出来，便于找出问题和修改</li>
+<li>优点：
+<ul>
+<li>更早地发现模块间的接口错误，有利于错误定位；</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>需要编写驱动模块和桩模块；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="请比较自顶向下集成-自底向上集成以及三明治式集成测试">请比较自顶向下集成、自底向上集成以及三明治式集成测试。</h3>
+<p><strong>回答</strong>：</p>
+<ul>
+<li>自顶向下集成、自底向上集成和三明治式集成都属于非增量式集成。</li>
+<li>自顶向下集成能够较早地验证主要的控制和判断点；驱动器开发工作量少；如果采用深度优先策略，可以能够对较为完整的功能进行检验，从而带来信心。但自顶向下集成需要较多的桩开发工作，对于底层的验证被推迟、可能带来底层组件测试的不充分。</li>
+<li>自底向上集成能够对底层组件进行较早地验证，集成测试工作初期可以并行进行，需要较少的桩的开发工作。但自底向上集成需要较多的驱动器开发工作，对上层组件的验证被推迟，设计上的错误不能被及时发现。</li>
+<li>三明治式集成是结合了自顶向下和自底向上的混合式增量测试，减少了桩和驱动器的的开发工作量。但三明治式集成实际上是中等规模的大爆炸集成，增加了缺陷定位的难度。</li>
+</ul>
+<p><strong>自己的答案</strong>：</p>
+<ul>
+<li>
+<p>自顶向下集成测试：</p>
+<ul>
+<li>优点：
+<ul>
+<li>较早地验证了主要控制和判断点</li>
+<li>按深度优先可以首先实现和验证一个完整的软件功能</li>
+<li>功能较早证实，带来信心</li>
+<li>只需一个驱动，减少驱动器开发的费用</li>
+<li>支持故障隔离</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>桩的开发量大</li>
+<li>底层验证被推迟</li>
+<li>底层组件测试不充分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>自底向上集成测试：</p>
+<ul>
+<li>优点：
+<ul>
+<li>对底层组件行为较早验证</li>
+<li>工作最初可以并行集成，比自顶向下效率高</li>
+<li>减少了桩的工作量</li>
+<li>支持故障隔离</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>驱动的开发工作量大</li>
+<li>对高层的验证被推迟</li>
+<li>设计上的错误不能被及时发现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>三明治式集成测试：</p>
+<ul>
+<li>结合自顶向下和自底向上的混合式增量测试</li>
+<li>中等规模的大爆炸</li>
+<li>减少了桩和驱动器的开发工作量，增加了缺陷定位的难度。</li>
+</ul>
+</li>
+</ul>
+<h2 id="第8周-系统测试">第8周 系统测试</h2>
+<h3 id="请分析单元测试-集成测试以及系统测试的区别">请分析单元测试、集成测试以及系统测试的区别。</h3>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="24"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010632.png" alt="" loading="lazy"></figure>
+<h3 id="性能测试的定义是什么主要有哪些性能指标">性能测试的定义是什么？主要有哪些性能指标？</h3>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="25"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010705.png" alt="" loading="lazy"></figure>
+<h2 id="第9周-验收测试与面向对象测试">第9周 验收测试与面向对象测试</h2>
+<h3 id="请比较α测试-β测试以及正式验收测试">请比较α测试、β测试以及正式验收测试。</h3>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="26"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010750.png" alt="" loading="lazy"></figure>
+<p><strong>自己的答案</strong>：</p>
+<ul>
+<li>α测试：
+<ul>
+<li>测试环境：开发环境或模拟实际使用环境</li>
+<li>测试人员：最终用户或开发团队人员</li>
+<li>错误处理：遇到问题在测试现场立刻反馈给开发人员</li>
+<li>优点：与正式验收测试相比，α测试可能会发现更多的缺陷</li>
+<li>缺点：最终用户参与较少，与用户相关的缺陷可能发现较少</li>
+<li>测试时间：系统测试之后</li>
+</ul>
+</li>
+<li>β测试：
+<ul>
+<li>测试环境：实际使用环境</li>
+<li>测试人员：最终用户或受邀用户</li>
+<li>错误处理：记录碰到的各类问题，定期将试用报告反馈给开发公司</li>
+<li>优点：与α测试相比，参与试用的用户变多，可能发现更多的问题</li>
+<li>缺点：难以对试用用户的测试过程进行监测和评价；试用用户考虑的方面较少；试用用户即使发现问题，但不一定会反馈给开发公司</li>
+<li>测试时间：α测试之后</li>
+</ul>
+</li>
+<li>正式验收测试：
+<ul>
+<li>测试环境：实际使用环境</li>
+<li>测试人员：最终用户组织开发团队协助</li>
+<li>错误处理：用户按合同中的需求条款检验软件是否满足要求，碰到问题记录下来</li>
+<li>优点：按合同条款展开测试，测试过程严格、正式的测试过程</li>
+<li>缺点：需要较多的准备工作以及资源；需要确定验收时间、测试地点、测试环境准备以及参与人员安排</li>
+<li>测试时间：β测试之后</li>
+</ul>
+</li>
+</ul>
+<h3 id="针对课程中给出的面向对象版本的nextdate示例给出2019年12月31日的mm路径">针对课程中给出的面向对象版本的NextDate示例，给出2019年12月31日的MM路径。</h3>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="27"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514010818.png" alt="" loading="lazy"></figure>
+<h2 id="第10周-变异测试">第10周 变异测试</h2>
+<h3 id="生成程序变体">生成程序变体</h3>
+<p>针对如下C语言程序，应用语句变异算子STRP生成程序变体。</p>
+<pre><code class="language-C">while(n&gt;0)
+{
+   x = x*n;
+   if(n%2 == 0)
+     x = x-n;
+   n--;
+}
+</code></pre>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="28"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514011043.png" alt="" loading="lazy"></figure>
+<h2 id="第11周-组合测试与软件测试工具">第11周 组合测试与软件测试工具</h2>
+<h3 id="samna对偶设计方法">SAMNA对偶设计方法</h3>
+<p>有一个软件接受4个参数：性别（取值为男或女）、是否成年（取值为是或否）、职业（取值为固定或自由）以及使用习惯（取值为左手或右手）。请采用SAMNA对偶设计方法进行测试用例设计。</p>
+<p><strong>回答</strong>：</p>
+<figure data-type="image" tabindex="29"><img src="https://picgp.oss-cn-beijing.aliyuncs.com/img/20200514011153.png" alt="" loading="lazy"></figure>
+
+        </div>
+
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://bailingnan.github.io/post/duan-shi-pin-tui-jian-zhong-xin-xing-rong-he-jie-gou-de-shi-jian/">
+                <h3 class="post-title">
+                  短视频推荐中新型融合结构的实践
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'f4bd8cbd743b58235644',
+    clientSecret: 'df6eff6e7836378726d917c527c47e86f1c30f8b',
+    repo: 'bailingnan.github.io',
+    owner: 'bailingnan',
+    admin: ['bailingnan'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://bailingnan.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
